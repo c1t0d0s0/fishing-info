@@ -1,5 +1,6 @@
 import { RigGuide } from "@/types/species";
 import { Anchor, Sparkles, Crosshair } from "lucide-react";
+import RigDiagram from "./RigDiagram";
 
 interface RigGuideCardProps {
   rig: RigGuide;
@@ -7,6 +8,7 @@ interface RigGuideCardProps {
 
 export default function RigGuideCard({ rig }: RigGuideCardProps) {
   const {
+    id,
     name,
     category,
     description,
@@ -36,6 +38,20 @@ export default function RigGuideCard({ rig }: RigGuideCardProps) {
       <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
         {description}
       </p>
+
+      {/* Visual Rig Illustration */}
+      <div className="space-y-1.5">
+        <div className="flex items-center justify-between text-xs font-bold text-slate-800 dark:text-slate-200">
+          <span className="flex items-center gap-1.5 text-ocean-600 dark:text-ocean-400">
+            <Sparkles className="w-3.5 h-3.5" />
+            仕掛け・タックル構成図解
+          </span>
+          <span className="text-[11px] font-normal text-slate-400">
+            全体バランス & 接続図
+          </span>
+        </div>
+        <RigDiagram rigId={id} name={name} />
+      </div>
 
       {/* Tackle Specs Table */}
       <div className="space-y-2 text-xs">

@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import { FishingSpot, SpotCategory } from "@/types/spot";
 import { MapPin, Filter, Check, ExternalLink, Info } from "lucide-react";
 import "leaflet/dist/leaflet.css";
@@ -16,6 +17,7 @@ export default function SpotMap({
   selectedSpot,
   onSelectSpot,
 }: SpotMapProps) {
+  const router = useRouter();
   const [categoryFilter, setCategoryFilter] = useState<SpotCategory | "all">("all");
   const [filterParking, setFilterParking] = useState(false);
   const [filterToilet, setFilterToilet] = useState(false);
@@ -137,32 +139,42 @@ export default function SpotMap({
         <div style="margin-top: 6px; font-size: 11px; color: #334155;">
           <strong>主な対象魚:</strong> ${spot.targetFish.slice(0, 4).join(", ")}
         </div>
-        <button id="btn-select-${spot.id}" style="
+        <a id="btn-detail-${spot.id}" href="/spots/${spot.id}" style="
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 6px;
           margin-top: 8px;
           width: 100%;
+          box-sizing: border-box;
           background: #0284c7;
           color: white;
-          padding: 6px 10px;
-          border-radius: 6px;
-          border: none;
-          font-weight: 600;
+          padding: 7px 10px;
+          border-radius: 8px;
+          font-weight: 700;
+          font-size: 12px;
+          text-decoration: none;
           cursor: pointer;
-        ">この釣り場を選択</button>
+        ">
+          <span>この釣り場の詳細</span>
+          <span style="font-size: 13px;">→</span>
+        </a>
       `;
 
       marker.bindPopup(popupContent);
 
       marker.on("popupopen", () => {
-        const btn = document.getElementById(`btn-select-${spot.id}`);
+        onSelectSpot(spot);
+        const btn = document.getElementById(`btn-detail-${spot.id}`);
         if (btn) {
-          btn.onclick = () => {
-            onSelectSpot(spot);
-            marker.closePopup();
+          btn.onclick = (e) => {
+            e.preventDefault();
+            router.push(`/spots/${spot.id}`);
           };
         }
       });
     });
-  }, [filteredSpots, selectedSpot, mapInstance, L]);
+  }, [filteredSpots, selectedSpot, mapInstance, L, router]);
 
   // Pan to selected spot when selectedSpot changes
   useEffect(() => {
