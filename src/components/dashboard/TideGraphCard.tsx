@@ -482,15 +482,28 @@ export default function TideGraphCard({
                 strokeWidth="1.5"
                 strokeDasharray="3 3"
               />
+              {/* Ripple animation centered on hovered point */}
               <circle
                 cx={hoveredData.x}
                 cy={hoveredData.y}
-                r="6"
+                r="5"
                 fill="#6366f1"
-                stroke="#ffffff"
-                strokeWidth="2.5"
-                className="animate-ping opacity-75"
-              />
+                opacity="0.6"
+              >
+                <animate
+                  attributeName="r"
+                  values="5;13"
+                  dur="1.2s"
+                  repeatCount="indefinite"
+                />
+                <animate
+                  attributeName="opacity"
+                  values="0.6;0"
+                  dur="1.2s"
+                  repeatCount="indefinite"
+                />
+              </circle>
+              {/* Main point */}
               <circle
                 cx={hoveredData.x}
                 cy={hoveredData.y}
