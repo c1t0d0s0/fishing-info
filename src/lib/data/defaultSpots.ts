@@ -3767,5 +3767,820 @@ export const DEFAULT_SPOTS: FishingSpot[] = [
     },
     "tips": "春の流氷明け（海明け）のホッケや肉厚クロガシラガレイ、秋の20cm超の大チカ入れ食いが名物。オホーツク海の豊かな恵みを気軽に楽しめる好スポットです。"
   },
+  {
+    "id": "tokyo-akatsuki-park",
+    "name": "東京 お台場 暁ふ頭公園 護岸",
+    "kana": "あかつきふとうこうえん",
+    "region": "kanto",
+    "prefecture": "東京都",
+    "address": "東京都江東区青海4丁目",
+    "lat": 35.6084,
+    "lng": 139.7897,
+    "category": "park",
+    "description": "お台場最南端の青海ふ頭先端に位置する海浜公園。東京港を出入りする大型貨物船やレインボーブリッジ・東京ゲートブリッジを望み、安全柵完備。夜釣りのシーバス・クロダイ、秋のサビキでのアジ・サヨリが狙えます。",
+    "accessInfo": "新交通ゆりかもめ「テレコムセンター駅」より徒歩約20分。首都高速湾岸線「臨海副都心出入口」より約10分。",
+    "depthRange": "4m〜8m",
+    "bottomType": "砂泥・基礎ケーソン・敷石",
+    "facilities": {
+      "hasParking": true,
+      "hasToilet": true,
+      "hasSafetyFence": true,
+      "isFamilyFriendly": true,
+      "hasNightLight": true,
+      "hasConvenienceStoreNearby": false,
+      "hasTackleShopNearby": false,
+      "isFeeRequired": false,
+      "isNightFishingAllowed": true,
+      "openingHours": "24時間常時開放"
+    },
+    "targetFish": [
+      "シーバス",
+      "クロダイ",
+      "アジ",
+      "サヨリ",
+      "ハゼ",
+      "メバル",
+      "カサゴ"
+    ],
+    "bestSeasons": {
+      "spring": [
+        "バチ抜けシーバス",
+        "クロダイ",
+        "メバル"
+      ],
+      "summer": [
+        "ハゼ",
+        "クロダイ",
+        "シーバス"
+      ],
+      "autumn": [
+        "アジ",
+        "サヨリ",
+        "シーバス",
+        "クロダイ"
+      ],
+      "winter": [
+        "メバル",
+        "カサゴ",
+        "セイゴ"
+      ]
+    },
+    "recommendedRigs": [
+      "ウキ釣り / ヘチ釣り（クロダイ）",
+      "ルアー（シーバス / メバリング）",
+      "トリックサビキ",
+      "チョイ投げ仕掛け"
+    ],
+    "localRules": [
+      "オーバースロー（大遠投）による投げ釣り禁止（アンダースロー・足元推奨）",
+      "バーベキューエリア以外での火気使用禁止",
+      "ゴミ・仕掛け・コマセ汚れの完全持ち帰り・清掃"
+    ],
+    "parkingDetails": {
+      "capacity": "暁ふ頭公園有料駐車場 約30台",
+      "fee": "最初の1時間200円 / 以後30分毎100円（普通車）",
+      "hours": "24時間利用可能",
+      "notes": "公園直結で便利。夜間釣行にも利用できます。"
+    },
+    "tips": "角付近や常夜灯の明暗境界がシーバスやメバルの好ポイント。秋はサヨリ専用仕掛けやトリックサビキでアジ・サッパが狙えます。"
+  },
+  {
+    "id": "tokyo-shibaura-south-park",
+    "name": "東京 港区 芝浦南ふ頭公園",
+    "kana": "しばうらみなみふとうこうえん",
+    "region": "kanto",
+    "prefecture": "東京都",
+    "address": "東京都港区海岸3丁目",
+    "lat": 35.6371,
+    "lng": 139.7603,
+    "category": "park",
+    "description": "レインボーブリッジの巨大な橋脚真下に位置する海上公園。水深があり潮通し抜群で、ヘチ釣りでのクロダイやルアーでのシーバス、秋のアジ・サッパサビキに人気の絶景夜景スポット。",
+    "accessInfo": "新交通ゆりかもめ「芝浦ふ頭駅」より徒歩約10分。JR山手線「田町駅」東口より徒歩約20分。",
+    "depthRange": "5m〜10m",
+    "bottomType": "砂泥・敷石・基礎ケーソン",
+    "facilities": {
+      "hasParking": false,
+      "hasToilet": true,
+      "hasSafetyFence": true,
+      "isFamilyFriendly": true,
+      "hasNightLight": true,
+      "hasConvenienceStoreNearby": true,
+      "hasTackleShopNearby": false,
+      "isFeeRequired": false,
+      "isNightFishingAllowed": false,
+      "openingHours": "8:00〜21:00（運動広場・園路開放時間）※夜間閉鎖"
+    },
+    "targetFish": [
+      "シーバス",
+      "クロダイ",
+      "アジ",
+      "サッパ",
+      "メバル",
+      "ハゼ",
+      "コノシロ"
+    ],
+    "bestSeasons": {
+      "spring": [
+        "シーバス",
+        "クロダイ",
+        "メバル"
+      ],
+      "summer": [
+        "ハゼ",
+        "クロダイ（落とし込み）",
+        "サッパ"
+      ],
+      "autumn": [
+        "アジ",
+        "シーバス",
+        "コノシロ",
+        "クロダイ"
+      ],
+      "winter": [
+        "メバル",
+        "カサゴ"
+      ]
+    },
+    "recommendedRigs": [
+      "ヘチ釣り / 落とし込み（クロダイ）",
+      "サビキ釣り",
+      "ルアーキャスティング",
+      "ジグヘッドリグ"
+    ],
+    "localRules": [
+      "公園開園時間（8:00〜21:00）外の立ち入り禁止",
+      "投げ釣り禁止（足元・ヘチ推奨）",
+      "運動広場（少年野球等）利用時は周囲の安全に十分配慮すること"
+    ],
+    "parkingDetails": {
+      "capacity": "専用駐車場なし（近隣コインパーキング利用）",
+      "fee": "近隣タイムズ等 30分300円前後",
+      "hours": "24時間利用可能",
+      "notes": "公共交通機関（ゆりかもめ芝浦ふ頭駅）の利用が便利です。"
+    },
+    "tips": "レインボーブリッジの橋脚周りは潮が効いて大型クロダイやシーバスの格好のストラクチャー。足元のケーソン隙間をヘチ釣りで探ると好釣果。"
+  },
+  {
+    "id": "tokyo-shibaura-canal",
+    "name": "東京 港区 芝浦運河・新芝運河 親水遊歩道",
+    "kana": "しばうらうんが",
+    "region": "kanto",
+    "prefecture": "東京都",
+    "address": "東京都港区芝浦3丁目・4丁目",
+    "lat": 35.6485,
+    "lng": 139.7569,
+    "category": "pier",
+    "description": "田町駅・芝浦ふ頭周辺に広がる都市型運河の親水遊歩道。橋脚の明暗部や護岸のスリットに居着くシーバスやクロダイの落とし込み・前打ち釣りのメッカとして知られます。",
+    "accessInfo": "JR山手線・京浜東北線「田町駅」芝浦口（東口）より徒歩約5分。都営地下鉄「三田駅」より徒歩約7分。",
+    "depthRange": "2m〜5m",
+    "bottomType": "砂泥・ヘドロ・コンクリート護岸",
+    "facilities": {
+      "hasParking": false,
+      "hasToilet": true,
+      "hasSafetyFence": true,
+      "isFamilyFriendly": false,
+      "hasNightLight": true,
+      "hasConvenienceStoreNearby": true,
+      "hasTackleShopNearby": false,
+      "isFeeRequired": false,
+      "isNightFishingAllowed": true,
+      "openingHours": "24時間利用可能（住宅街遊歩道）"
+    },
+    "targetFish": [
+      "シーバス",
+      "クロダイ",
+      "ハゼ",
+      "ボラ"
+    ],
+    "bestSeasons": {
+      "spring": [
+        "バチ抜けシーバス（名物）",
+        "乗っ込みクロダイ"
+      ],
+      "summer": [
+        "ハゼ",
+        "クロダイ（ヘチ・イガイ）",
+        "シーバス"
+      ],
+      "autumn": [
+        "落ちアユ・コノシロパターン シーバス",
+        "ハゼ"
+      ],
+      "winter": [
+        "温排水周りシーバス",
+        "底生ハゼ"
+      ]
+    },
+    "recommendedRigs": [
+      "ヘチ釣り（カニ・フジツボ・イガイ）",
+      "シンキングペンシル / ワーム",
+      "ハゼミャク釣り"
+    ],
+    "localRules": [
+      "周辺は閑静なオフィス・住宅街のため夜間の大声・騒音厳禁",
+      "遊歩道の歩行者・ジョギングランナーへの仕掛け接触事故防止",
+      "水上タクシー・観光船の運航路のためキャスト注意"
+    ],
+    "parkingDetails": {
+      "capacity": "専用駐車場なし（近隣コインパーキング利用）",
+      "fee": "近隣コインパーキング多数あり",
+      "hours": "24時間利用可能",
+      "notes": "田町駅・三田駅から徒歩すぐの電車釣行がベスト。"
+    },
+    "tips": "春（3〜5月）の大潮・後中潮の夜間に発生する「バチ抜け」パターンでは表層引きのシンキングペンシルでシーバスが連発します。"
+  },
+  {
+    "id": "tokyo-toyosu-gururi-park",
+    "name": "東京 湾奥 豊洲ぐるり公園 (豊洲ふ頭内海親水護岸)",
+    "kana": "とよすぐるりこうえん",
+    "region": "kanto",
+    "prefecture": "東京都",
+    "address": "東京都江東区豊洲6丁目1番先",
+    "lat": 35.6412,
+    "lng": 139.7784,
+    "category": "park",
+    "description": "豊洲市場をぐるりと取り囲む全長約4.5kmの開放的な親水海上公園。全面安全柵完備・足場良好で都内トップクラスの人気を誇り、秋のタチウオ（テンヤ・ワインド）、サビキのアジ・イワシ、ヘチ釣りのクロダイで大賑わい。",
+    "accessInfo": "新交通ゆりかもめ「市場前駅」より徒歩約10分。首都高速10号晴海線「豊洲出入口」より約5分。",
+    "depthRange": "4m〜8m",
+    "bottomType": "砂泥・敷石・基礎ケーソン",
+    "facilities": {
+      "hasParking": true,
+      "hasToilet": true,
+      "hasSafetyFence": true,
+      "isFamilyFriendly": true,
+      "hasNightLight": true,
+      "hasConvenienceStoreNearby": true,
+      "hasTackleShopNearby": false,
+      "isFeeRequired": false,
+      "isNightFishingAllowed": true,
+      "openingHours": "24時間常時開放"
+    },
+    "targetFish": [
+      "タチウオ",
+      "シーバス",
+      "クロダイ",
+      "アジ",
+      "サッパ",
+      "コノシロ",
+      "サヨリ",
+      "イワシ",
+      "ハゼ"
+    ],
+    "bestSeasons": {
+      "spring": [
+        "シーバス",
+        "クロダイ",
+        "バチ抜け"
+      ],
+      "summer": [
+        "ハゼ",
+        "サッパ",
+        "クロダイ",
+        "アジ"
+      ],
+      "autumn": [
+        "タチウオ（大人気）",
+        "アジ",
+        "サヨリ",
+        "シーバス",
+        "コノシロ"
+      ],
+      "winter": [
+        "カサゴ",
+        "メバル",
+        "シーバス"
+      ]
+    },
+    "recommendedRigs": [
+      "タチウオテンヤ / ワインド",
+      "トリックサビキ / サビキ釣り",
+      "ヘチ釣り（クロダイ）",
+      "ルアーキャスティング"
+    ],
+    "localRules": [
+      "背後のランニングコース利用者への配慮徹底（キャスト時の後方確認）",
+      "オーバースローによる大遠投禁止（足元・アンダースロー推奨）",
+      "ゴミの完全持ち帰り、タチウオの血痕・コマセ汚れは必ず海水で洗い流すこと"
+    ],
+    "parkingDetails": {
+      "capacity": "豊洲ぐるり公園自動車駐車場 約100台",
+      "fee": "1時間400円 / 以後30分毎200円",
+      "hours": "24時間利用可能",
+      "notes": "週末や秋のタチウオシーズン夜間は満車になりやすいため早めの確保推奨。"
+    },
+    "tips": "秋（9〜11月）の夕マズメから夜間にかけて湾奥に接岸するタチウオの回遊は都内随一の盛り上がり。キビナゴを巻いた発光タチウオテンヤの引き釣りやワインドが鉄板。"
+  },
+  {
+    "id": "tokyo-keihinjima-tsubasa-park",
+    "name": "東京 大田区 京浜島つばさ公園 護岸",
+    "kana": "けいひんじまつばさこうえん",
+    "region": "kanto",
+    "prefecture": "東京都",
+    "address": "東京都大田区京浜島2丁目",
+    "lat": 35.5691,
+    "lng": 139.7689,
+    "category": "park",
+    "description": "羽田空港B滑走路の対岸に位置し、ジャンボジェット機の離着陸を大迫力で望める長大な海浜公園。前面に敷石・ゴロタ帯が沈んでおり、夜釣りのメバリング・カサゴ、ウキフカセでのクロダイ、ルアーシーバスの好ポイント。",
+    "accessInfo": "JR大森駅・京急平和島駅より京浜島循環バス「京浜島二丁目」下車徒歩約3分。首都高速湾岸線「大井南出入口」より約10分。",
+    "depthRange": "3m〜7m",
+    "bottomType": "敷石・ゴロタ石・砂泥",
+    "facilities": {
+      "hasParking": true,
+      "hasToilet": true,
+      "hasSafetyFence": true,
+      "isFamilyFriendly": true,
+      "hasNightLight": true,
+      "hasConvenienceStoreNearby": false,
+      "hasTackleShopNearby": false,
+      "isFeeRequired": false,
+      "isNightFishingAllowed": true,
+      "openingHours": "24時間常時開放"
+    },
+    "targetFish": [
+      "シーバス",
+      "クロダイ",
+      "メバル",
+      "カサゴ",
+      "ハゼ",
+      "アジ",
+      "サヨリ"
+    ],
+    "bestSeasons": {
+      "spring": [
+        "メバル",
+        "カサゴ",
+        "クロダイ",
+        "シーバス"
+      ],
+      "summer": [
+        "ハゼ",
+        "クロダイ",
+        "シーバス"
+      ],
+      "autumn": [
+        "サヨリ",
+        "アジ",
+        "シーバス",
+        "クロダイ"
+      ],
+      "winter": [
+        "メバル",
+        "カサゴ",
+        "アイナメ"
+      ]
+    },
+    "recommendedRigs": [
+      "ライトロックフィッシュ（ジグヘッド＋ワーム）",
+      "ウキフカセ釣り",
+      "前打ち仕掛け",
+      "チョイ投げ釣り"
+    ],
+    "localRules": [
+      "投げ釣り（オーバースロー遠投）禁止",
+      "バーベキュー禁止区域での火気使用禁止",
+      "ゴミの完全持ち帰り"
+    ],
+    "parkingDetails": {
+      "capacity": "京浜島つばさ公園専用無料駐車場 約18台",
+      "fee": "無料（利用時間制限あり：日中のみ開門の場合あり）",
+      "hours": "夜間閉鎖の場合あり（近隣路上駐車厳禁）",
+      "notes": "台数が少ないため週末は近隣パーキングの確認を。"
+    },
+    "tips": "手前の敷石スリット周りにメバルやカサゴがびっしり潜んでいます。暗くなってから1〜1.5gのジグヘッドワームで敷石際をスローリトリーブすると好釣果。"
+  },
+  {
+    "id": "tokyo-tokai-pier-park",
+    "name": "東京 大田区 東海ふ頭公園 人工磯・運河護岸",
+    "kana": "とうかいふとうこうえん",
+    "region": "kanto",
+    "prefecture": "東京都",
+    "address": "東京都大田区東海2丁目",
+    "lat": 35.5782,
+    "lng": 139.7566,
+    "category": "park",
+    "description": "京浜運河沿いに位置し、都内では貴重な人工磯（ゴロタ石・砂浜エリア）を備えた隠れ家的海浜公園。春〜秋のハゼ釣りやルアーシーバス、クロダイが狙えます。",
+    "accessInfo": "東京モノレール「流通センター駅」より徒歩約15分。首都高速湾岸線「大井南出入口」より約5分。",
+    "depthRange": "1.5m〜4m",
+    "bottomType": "ゴロタ石・砂泥・人工干潟",
+    "facilities": {
+      "hasParking": true,
+      "hasToilet": true,
+      "hasSafetyFence": true,
+      "isFamilyFriendly": true,
+      "hasNightLight": true,
+      "hasConvenienceStoreNearby": true,
+      "hasTackleShopNearby": false,
+      "isFeeRequired": false,
+      "isNightFishingAllowed": true,
+      "openingHours": "24時間常時開放"
+    },
+    "targetFish": [
+      "ハゼ",
+      "シーバス",
+      "クロダイ",
+      "カサゴ"
+    ],
+    "bestSeasons": {
+      "spring": [
+        "バチ抜けシーバス",
+        "カサゴ"
+      ],
+      "summer": [
+        "ハゼ（数釣り）",
+        "クロダイ"
+      ],
+      "autumn": [
+        "良型ハゼ",
+        "シーバス",
+        "クロダイ"
+      ],
+      "winter": [
+        "メバル",
+        "カサゴ"
+      ]
+    },
+    "recommendedRigs": [
+      "ハゼウキ釣り / ミャク釣り",
+      "チョイ投げ仕掛け",
+      "ジグヘッドワーム",
+      "シーバスミノー"
+    ],
+    "localRules": [
+      "人工磯の濡れたゴロタ石は滑りやすいため滑り止めシューズ着用推奨",
+      "投げ釣り時は背後の散策者に注意",
+      "ゴミの完全持ち帰り"
+    ],
+    "parkingDetails": {
+      "capacity": "東海ふ頭公園無料駐車場 約12台",
+      "fee": "無料",
+      "hours": "24時間利用可能",
+      "notes": "大井埠頭トラックターミナル近くでアクセス良好。"
+    },
+    "tips": "人工磯の浅場は夏のハゼ釣りに最適。潮が満ちてくると運河側からシーバスやクロダイがエサを探して差してきます。"
+  },
+  {
+    "id": "tokyo-mizu-no-hiroba-park",
+    "name": "東京 お台場・有明 水の広場公園 親水護岸",
+    "kana": "みずのひろばこうえん",
+    "region": "kanto",
+    "prefecture": "東京都",
+    "address": "東京都江東区有明3丁目6-15",
+    "lat": 35.6275,
+    "lng": 139.7839,
+    "category": "park",
+    "description": "お台場パレットタウン跡地〜東京ビッグサイト〜夢の大橋周辺に広がる長大な運河沿い親水公園。安全柵完備で足場が良く、夜釣りの常夜灯下アジング・シーバス、クロダイの落とし込みに人気。",
+    "accessInfo": "ゆりかもめ「東京ビッグサイト駅」または「青海駅」より徒歩約3分。りんかい線「国際展示場駅」より徒歩約7分。",
+    "depthRange": "3m〜7m",
+    "bottomType": "砂泥・敷石・基礎ケーソン",
+    "facilities": {
+      "hasParking": false,
+      "hasToilet": true,
+      "hasSafetyFence": true,
+      "isFamilyFriendly": true,
+      "hasNightLight": true,
+      "hasConvenienceStoreNearby": true,
+      "hasTackleShopNearby": false,
+      "isFeeRequired": false,
+      "isNightFishingAllowed": true,
+      "openingHours": "24時間常時開放"
+    },
+    "targetFish": [
+      "シーバス",
+      "クロダイ",
+      "アジ",
+      "コノシロ",
+      "サッパ",
+      "ハゼ",
+      "メバル"
+    ],
+    "bestSeasons": {
+      "spring": [
+        "バチ抜けシーバス",
+        "メバル",
+        "クロダイ"
+      ],
+      "summer": [
+        "ハゼ",
+        "サッパ",
+        "クロダイ"
+      ],
+      "autumn": [
+        "アジ（アジング）",
+        "シーバス",
+        "コノシロ",
+        "サヨリ"
+      ],
+      "winter": [
+        "メバル",
+        "カサゴ",
+        "セイゴ"
+      ]
+    },
+    "recommendedRigs": [
+      "ジグ単アジング (0.8〜1.5g)",
+      "ヘチ釣り（クロダイ）",
+      "ルアーキャスティング",
+      "トリックサビキ"
+    ],
+    "localRules": [
+      "投げ釣り禁止（足元・アンダースロー推奨）",
+      "水上バス・観光船の発着桟橋周辺での釣り禁止",
+      "ゴミの完全持ち帰り、コマセ清掃徹底"
+    ],
+    "parkingDetails": {
+      "capacity": "専用駐車場なし（近隣有明・お台場コインパーキング利用）",
+      "fee": "近隣パーキング多数あり",
+      "hours": "24時間利用可能",
+      "notes": "駅近のため電車釣行が快適です。"
+    },
+    "tips": "夢の大橋やあけみ橋周辺の橋脚明暗部・常夜灯下は夜アジングやシーバスの一級ポイント。ワームをスローリトリーブするとアタリが頻発します。"
+  },
+  {
+    "id": "tokyo-ariake-west-park",
+    "name": "東京 有明 有明西ふ頭公園 (東京ビッグサイト南側護岸)",
+    "kana": "ありあけにしふとうこうえん",
+    "region": "kanto",
+    "prefecture": "東京都",
+    "address": "東京都江東区有明3丁目11",
+    "lat": 35.628,
+    "lng": 139.794,
+    "category": "park",
+    "description": "東京ビッグサイトの南側に広がる東京湾に面した眺望抜群の海上公園。水深があり潮通しが良く、秋のタチウオやアジサビキ、ヘチ釣りでのクロダイの実績が高い好釣り場。",
+    "accessInfo": "ゆりかもめ「東京ビッグサイト駅」より徒歩約5分。りんかい線「国際展示場駅」より徒歩約10分。",
+    "depthRange": "4m〜9m",
+    "bottomType": "砂泥・敷石・基礎ケーソン",
+    "facilities": {
+      "hasParking": false,
+      "hasToilet": true,
+      "hasSafetyFence": true,
+      "isFamilyFriendly": true,
+      "hasNightLight": true,
+      "hasConvenienceStoreNearby": true,
+      "hasTackleShopNearby": false,
+      "isFeeRequired": false,
+      "isNightFishingAllowed": true,
+      "openingHours": "24時間常時開放"
+    },
+    "targetFish": [
+      "シーバス",
+      "クロダイ",
+      "アジ",
+      "タチウオ",
+      "サヨリ",
+      "ハゼ"
+    ],
+    "bestSeasons": {
+      "spring": [
+        "シーバス",
+        "クロダイ"
+      ],
+      "summer": [
+        "ハゼ",
+        "サッパ",
+        "クロダイ"
+      ],
+      "autumn": [
+        "タチウオ",
+        "アジ",
+        "サヨリ",
+        "シーバス"
+      ],
+      "winter": [
+        "カサゴ",
+        "メバル"
+      ]
+    },
+    "recommendedRigs": [
+      "タチウオテンヤ / ワインド",
+      "サビキ釣り",
+      "ヘチ釣り（クロダイ）",
+      "ルアーキャスティング"
+    ],
+    "localRules": [
+      "客船ターミナル・水上バス発着所周辺での釣り禁止",
+      "投げ釣り禁止（アンダースロー推奨）",
+      "ゴミの完全持ち帰り"
+    ],
+    "parkingDetails": {
+      "capacity": "専用駐車場なし（有明パークビル・東京ビッグサイト周辺駐車場利用）",
+      "fee": "近隣タイムズ等 30分300円前後",
+      "hours": "24時間利用可能",
+      "notes": "ビッグサイトのイベント開催時は混雑に注意。"
+    },
+    "tips": "外海（東京港本船航路）に近いフェンス沿いは水深があり、秋にはタチウオやアジが回遊してきます。"
+  },
+  {
+    "id": "tokyo-kasai-rinkai-park",
+    "name": "東京 江戸川 葛西臨海公園 護岸・荒川河口",
+    "kana": "かさいりんかいこうえん",
+    "region": "kanto",
+    "prefecture": "東京都",
+    "address": "東京都江戸川区臨海町6丁目2-1",
+    "lat": 35.6431,
+    "lng": 139.8604,
+    "category": "park",
+    "description": "荒川と旧江戸川の河口に挟まれた広大な都立海浜公園。西なぎさ（人工干潟）や東京湾沿いの護岸で夏〜秋のハゼ釣り（チョイ投げ・ウキ釣り）、秋〜初冬の荒川河口シーバス・クロダイ狙いのメッカ。",
+    "accessInfo": "JR京葉線「葛西臨海公園駅」より徒歩約1分。首都高速湾岸線「葛西出入口」すぐ。",
+    "depthRange": "1.5m〜5m",
+    "bottomType": "砂泥・干潟・敷石",
+    "facilities": {
+      "hasParking": true,
+      "hasToilet": true,
+      "hasSafetyFence": true,
+      "isFamilyFriendly": true,
+      "hasNightLight": true,
+      "hasConvenienceStoreNearby": true,
+      "hasTackleShopNearby": false,
+      "isFeeRequired": false,
+      "isNightFishingAllowed": true,
+      "openingHours": "24時間常時開放（※西なぎさは9:00〜17:00開門）"
+    },
+    "targetFish": [
+      "シーバス",
+      "クロダイ",
+      "ハゼ",
+      "シロギス",
+      "カレイ",
+      "ボラ"
+    ],
+    "bestSeasons": {
+      "spring": [
+        "バチ抜けシーバス",
+        "クロダイ"
+      ],
+      "summer": [
+        "ハゼ（西なぎさ入食い）",
+        "クロダイ",
+        "キビレ"
+      ],
+      "autumn": [
+        "落ちハゼ",
+        "シーバス（ランカー狙い）",
+        "シロギス"
+      ],
+      "winter": [
+        "カレイ",
+        "シーバス"
+      ]
+    },
+    "recommendedRigs": [
+      "ハゼチョイ投げ仕掛け",
+      "ハゼウキ釣り",
+      "シーバスルアー（ミノー・バイブレーション）",
+      "ブッコミ釣り"
+    ],
+    "localRules": [
+      "西なぎさ干潟内への立ち入りは開園時間内のみ（夜間閉鎖）",
+      "鳥類園内および水路の一部は釣り禁止区域",
+      "ゴミの完全持ち帰り、安全第一での釣行"
+    ],
+    "parkingDetails": {
+      "capacity": "葛西臨海公園専用駐車場 約2700台",
+      "fee": "1時間300円 / 以後20分毎100円（普通車）",
+      "hours": "24時間利用可能",
+      "notes": "駅前直結・超大型駐車場完備でファミリーに最適。"
+    },
+    "tips": "夏（7〜9月）の西なぎさでは青イソメをエサにしたチョイ投げで束釣り（100匹以上）のハゼ入れ食いが体験できます。秋の荒川河口側はランカーシーバスの実績多数。"
+  },
+  {
+    "id": "tokyo-oi-central-seaside-park",
+    "name": "東京 品川 大井ふ頭中央海浜公園 (なぎさの森・しおじ磯)",
+    "kana": "おおいふとうちゅうおうかいひんこうえん",
+    "region": "kanto",
+    "prefecture": "東京都",
+    "address": "東京都品川区八潮4丁目1-19",
+    "lat": 35.5917,
+    "lng": 139.7525,
+    "category": "park",
+    "description": "京浜運河に面した「なぎさの森」内に人工磯（しおじ磯・夕やけなぎさ）を備えた緑豊かな自然公園。都内随一のハゼ釣り聖地としてファミリーに親しまれ、夜間のルアーシーバス・クロダイも人気。",
+    "accessInfo": "東京モノレール「大井競馬場前駅」より徒歩約8分。首都高速湾岸線「大井出入口」より約5分。",
+    "depthRange": "1m〜4m",
+    "bottomType": "ゴロタ石・砂泥・人工干潟",
+    "facilities": {
+      "hasParking": true,
+      "hasToilet": true,
+      "hasSafetyFence": true,
+      "isFamilyFriendly": true,
+      "hasNightLight": true,
+      "hasConvenienceStoreNearby": true,
+      "hasTackleShopNearby": false,
+      "isFeeRequired": false,
+      "isNightFishingAllowed": true,
+      "openingHours": "24時間常時開放（※なぎさの森の一部ゾーンは夜間閉鎖あり）"
+    },
+    "targetFish": [
+      "ハゼ",
+      "シーバス",
+      "クロダイ",
+      "キビレ",
+      "カレイ"
+    ],
+    "bestSeasons": {
+      "spring": [
+        "バチ抜けシーバス",
+        "クロダイ"
+      ],
+      "summer": [
+        "ハゼ（東京屈指の魚影）",
+        "テナガエビ",
+        "クロダイ"
+      ],
+      "autumn": [
+        "良型落ちハゼ",
+        "シーバス",
+        "クロダイ"
+      ],
+      "winter": [
+        "カレイ",
+        "セイゴ"
+      ]
+    },
+    "recommendedRigs": [
+      "ハゼミャク釣り / ウキ釣り（のべ竿3〜4.5m）",
+      "チョイ投げ仕掛け",
+      "シーバスルアー"
+    ],
+    "localRules": [
+      "しおじ磯の岩場は滑りやすいため足元注意",
+      "野鳥保護区（観察池等）への立ち入り・釣り禁止",
+      "ゴミ・仕掛けの完全持ち帰り"
+    ],
+    "parkingDetails": {
+      "capacity": "大井ふ頭中央海浜公園駐車場 約290台",
+      "fee": "1時間300円 / 以後30分毎100円",
+      "hours": "24時間利用可能",
+      "notes": "なぎさの森側に直結した駐車場あり。"
+    },
+    "tips": "初夏〜秋のハゼ釣りシーズンはのべ竿でのミャク釣りが手返し抜群で大漁確実。ホタテ貝柱や青イソメを小さく付けて岩の隙間を探るのがコツ。"
+  },
+  {
+    "id": "tokyo-shin-sakongawa-park",
+    "name": "東京 江戸川 新左近川親水公園 護岸",
+    "kana": "しんさこんがわしんすいこうえん",
+    "region": "kanto",
+    "prefecture": "東京都",
+    "address": "東京都江戸川区臨海町3丁目",
+    "lat": 35.6536,
+    "lng": 139.86,
+    "category": "park",
+    "description": "旧左近川を親水緑地として整備した波静かで穏やかな親水公園。足場が平坦で安全柵も整っており、初夏（5〜7月）のテナガエビ釣りや夏〜秋のハゼ釣りの超定番ファミリースポット。",
+    "accessInfo": "東京メトロ東西線「西葛西駅」より都営バス「新左近川親水公園前」下車。首都高速湾岸線「葛西出入口」より約5分。",
+    "depthRange": "1m〜2.5m",
+    "bottomType": "砂泥・ゴロタ石・護岸ブロック",
+    "facilities": {
+      "hasParking": true,
+      "hasToilet": true,
+      "hasSafetyFence": true,
+      "isFamilyFriendly": true,
+      "hasNightLight": true,
+      "hasConvenienceStoreNearby": true,
+      "hasTackleShopNearby": false,
+      "isFeeRequired": false,
+      "isNightFishingAllowed": true,
+      "openingHours": "24時間常時開放"
+    },
+    "targetFish": [
+      "ハゼ",
+      "テナガエビ",
+      "シーバス",
+      "クロダイ",
+      "コイ"
+    ],
+    "bestSeasons": {
+      "spring": [
+        "テナガエビ（5〜7月名物）",
+        "バチ抜けシーバス"
+      ],
+      "summer": [
+        "ハゼ（数釣り）",
+        "テナガエビ"
+      ],
+      "autumn": [
+        "良型ハゼ",
+        "シーバス"
+      ],
+      "winter": [
+        "底生ハゼ",
+        "コイ"
+      ]
+    },
+    "recommendedRigs": [
+      "テナガエビ専用仕掛け（極小ウキ・シモリウキ・エビ針2〜3号）",
+      "ハゼのべ竿ウキ釣り / ミャク釣り",
+      "チョイ投げ釣り"
+    ],
+    "localRules": [
+      "カヌー場やボート発着場周辺での釣り禁止",
+      "投げ釣り禁止（アンダースロー推奨）",
+      "ゴミの完全持ち帰り、水生生物の愛護"
+    ],
+    "parkingDetails": {
+      "capacity": "新左近川親水公園駐車場 約200台",
+      "fee": "最初の1時間200円 / 以後1時間毎100円",
+      "hours": "24時間利用可能",
+      "notes": "バーベキュー広場や遊具広場も併設。"
+    },
+    "tips": "初夏（5月〜7月）のテナガエビ釣りは消波ブロックや護岸スリットの隙間にアカムシを落とすと入れ食いに。ウキが横にスライドしたらゆっくり引き上げます。"
+  },
 
 ];
