@@ -100,6 +100,44 @@ export default function SpotsPage() {
           </div>
         </div>
 
+        {/* Category Filter Tabs */}
+        <div className="flex items-center gap-1.5 overflow-x-auto pb-1 scrollbar-none text-xs border-t border-slate-100 dark:border-slate-800/80 pt-3">
+          <span className="text-[11px] font-bold text-slate-400 dark:text-slate-500 mr-1 shrink-0 flex items-center gap-1">
+            <Filter className="w-3 h-3" /> タイプ:
+          </span>
+          {[
+            { id: "all", name: "全タイプ" },
+            { id: "park", name: "海釣り公園・施設" },
+            { id: "port", name: "漁港・防波堤" },
+            { id: "surf", name: "サーフ・砂浜" },
+            { id: "rock", name: "地磯・磯場" },
+            { id: "pier", name: "桟橋・岸壁" },
+          ].map((cat) => (
+            <button
+              key={cat.id}
+              onClick={() => setSelectedCategory(cat.id as SpotCategory | "all")}
+              className={`px-2.5 py-1 rounded-xl font-bold transition-colors shrink-0 ${
+                selectedCategory === cat.id
+                  ? cat.id === "surf"
+                    ? "bg-amber-600 text-white shadow-xs"
+                    : cat.id === "rock"
+                    ? "bg-purple-600 text-white shadow-xs"
+                    : cat.id === "park"
+                    ? "bg-emerald-600 text-white shadow-xs"
+                    : cat.id === "port"
+                    ? "bg-sky-600 text-white shadow-xs"
+                    : "bg-ocean-600 text-white shadow-xs"
+                  : "bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200"
+              }`}
+            >
+              {cat.name}
+            </button>
+          ))}
+          <span className="ml-auto text-[11px] text-slate-400 font-medium shrink-0 pl-2">
+            該当 <span className="font-bold text-ocean-600 dark:text-ocean-400">{filteredSpots.length}</span> 件
+          </span>
+        </div>
+
         {/* Spot Cards Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 pt-2">
           {filteredSpots.map((spot) => (

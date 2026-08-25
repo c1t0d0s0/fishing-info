@@ -164,7 +164,7 @@ export default function DashboardPage() {
               全国釣り場マップ
             </h4>
             <p className="text-xs text-slate-500 dark:text-slate-400">
-              50箇所以上の施設・足場・駐車場
+              100箇所の施設・堤防・サーフ・地磯
             </p>
           </div>
           <div className="w-10 h-10 rounded-2xl bg-ocean-500/10 text-ocean-600 dark:text-ocean-400 flex items-center justify-center group-hover:scale-110 transition-transform">
@@ -204,7 +204,7 @@ export default function DashboardPage() {
               魚種図鑑 & 仕掛けガイド
             </h4>
             <p className="text-xs text-slate-500 dark:text-slate-400">
-              全国65魚種のタナ・旬・タックル
+              全国74魚種のタナ・旬・タックル
             </p>
           </div>
           <div className="w-10 h-10 rounded-2xl bg-cyan-500/10 text-cyan-600 dark:text-cyan-400 flex items-center justify-center group-hover:scale-110 transition-transform">

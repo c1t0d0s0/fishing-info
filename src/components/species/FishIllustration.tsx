@@ -146,21 +146,21 @@ function renderFieldGuidePlate(id: string) {
 }
 
 function getPlateBackground(id: string) {
-  if (["taman", "gala", "mibai", "kuchinaji", "gurukun", "oyabiccha"].includes(id)) {
+  if (["taman", "gala", "mibai", "kuchinaji", "gurukun", "oyabiccha", "isomaguro"].includes(id)) {
     return "url(#oceanTropical)";
   }
-  if (["nishin", "hokke", "kurosoi", "chika", "ainame", "kyuriuo", "karafutomasu", "komai", "matsukawa", "hatahata", "donko", "ishigarei"].includes(id)) {
+  if (["nishin", "hokke", "kurosoi", "chika", "ainame", "kyuriuo", "karafutomasu", "komai", "matsukawa", "hatahata", "donko", "ishigarei", "sakuramasu"].includes(id)) {
     return "url(#oceanNorthern)";
   }
-  if (["kamasu", "sawara", "kanpachi", "aigo-poison", "oniokoze-poison", "mejina", "kijihata", "hiramasa", "soudagatsuo", "isaki", "kensakiika", "akahata", "shiira", "hirasuzuki", "takabe", "takenokomebaru"].includes(id)) {
+  if (["kamasu", "sawara", "kanpachi", "aigo-poison", "oniokoze-poison", "mejina", "kijihata", "hiramasa", "soudagatsuo", "isaki", "kensakiika", "akahata", "shiira", "hirasuzuki", "takabe", "takenokomebaru", "ishidai", "kue", "oonibe", "shimaaji", "korodai"].includes(id)) {
     return "url(#oceanDeep)";
   }
   return "url(#oceanShallow)";
 }
 
 function renderSeabedScenery(id: string) {
-  const isTropical = ["taman", "gala", "mibai", "kuchinaji", "gurukun", "oyabiccha"].includes(id);
-  const isRocky = ["kurosoi", "ainame", "hokke", "aigo-poison", "oniokoze-poison", "kyusen", "akahata", "donko", "takenokomebaru"].includes(id);
+  const isTropical = ["taman", "gala", "mibai", "kuchinaji", "gurukun", "oyabiccha", "isomaguro"].includes(id);
+  const isRocky = ["kurosoi", "ainame", "hokke", "aigo-poison", "oniokoze-poison", "kyusen", "akahata", "donko", "takenokomebaru", "ishidai", "kue", "korodai"].includes(id);
 
   if (isTropical) {
     return (
@@ -757,6 +757,15 @@ function renderFieldGuideLabel(id: string) {
     hedai: { ja: "ヘダイ（平鯛 / 白チヌ）", en: "Rhabdosargus sarba" },
     ishigarei: { ja: "イシガレイ（石鰈）", en: "Kareius bicoloratus" },
     takenokomebaru: { ja: "タケノコメバル（筍目張）", en: "Sebastes oblongus" },
+    ishidai: { ja: "イシダイ（石鯛 / クチグロ）", en: "Oplegnathus fasciatus" },
+    kue: { ja: "クエ（九絵 / アラ / モロコ）", en: "Epinephelus bruneus" },
+    oonibe: { ja: "オオニベ（大長魚）", en: "Nibea japonica" },
+    sakuramasu: { ja: "サクラマス（桜鱒 / 海アメ）", en: "Oncorhynchus masou" },
+    ishimochi: { ja: "イシモチ（石持 / シログチ）", en: "Pennahia argentata" },
+    shimaaji: { ja: "シマアジ（縞鯵）", en: "Pseudocaranx dentex" },
+    korodai: { ja: "コロダイ / シブダイ", en: "Diagramma pictum" },
+    isomaguro: { ja: "イソマグロ（磯鮪 / ドッグトゥース）", en: "Gymnosarda unicolor" },
+    datsu: { ja: "ダツ（駄津 / 針口魚）", en: "Strongylura anastomella", danger: true },
   };
 
   const item = titles[id];
