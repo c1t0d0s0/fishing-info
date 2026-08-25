@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import React, { useState, useRef } from "react";
 import { DayTideInfo } from "@/types/tide";
 import { getTideBadgeColor } from "@/lib/utils/formatters";
 import {
@@ -9,7 +9,6 @@ import {
   Sunset,
   ArrowUpRight,
   ArrowDownRight,
-  Moon,
   Sparkles,
 } from "lucide-react";
 
@@ -18,16 +17,54 @@ interface TideGraphCardProps {
   currentHour?: number;
 }
 
+interface Point2D {
+  x: number;
+  y: number;
+  hour: number;
+  height: number;
+}
+
+/**
+ * Converts an array of points into a smooth Catmull-Rom cubic bezier SVG path
+ */
+function getCatmullRomSplinePath(points: Point2D[], tension: number = 0.5): string {
+  if (points.length < 2) return "";
+  let path = `M ${points[0].x.toFixed(2)} ${points[0].y.toFixed(2)}`;
+
+  for (let i = 0; i < points.length - 1; i++) {
+    const p0 = i > 0 ? points[i - 1] : points[0];
+    const p1 = points[i];
+    const p2 = points[i + 1];
+    const p3 = i < points.length - 2 ? points[i + 2] : p2;
+
+    const cp1x = p1.x + ((p2.x - p0.x) / 6) * tension * 2;
+    const cp1y = p1.y + ((p2.y - p0.y) / 6) * tension * 2;
+    const cp2x = p2.x - ((p3.x - p1.x) / 6) * tension * 2;
+    const cp2y = p2.y - ((p3.y - p1.y) / 6) * tension * 2;
+
+    path += ` C ${cp1x.toFixed(2)} ${cp1y.toFixed(2)}, ${cp2x.toFixed(
+      2
+    )} ${cp2y.toFixed(2)}, ${p2.x.toFixed(2)} ${p2.y.toFixed(2)}`;
+  }
+  return path;
+}
+
 export default function TideGraphCard({
   tideInfo,
   currentHour = new Date().getHours() + new Date().getMinutes() / 60,
 }: TideGraphCardProps) {
-  const [hoveredHour, setHoveredHour] = useState<number | null>(null);
+  const [hoveredData, setHoveredData] = useState<{
+    hour: number;
+    height: number;
+    x: number;
+    y: number;
+  } | null>(null);
+
+  const svgRef = useRef<SVGSVGElement>(null);
 
   const {
     tideType,
     moonAge,
-    moonPhaseName,
     moonPhaseIcon,
     sunrise,
     sunset,
@@ -38,15 +75,18 @@ export default function TideGraphCard({
   } = tideInfo;
 
   // Calculate SVG Dimensions and scales
-  const heights = hourlyPoints.map((p) => p.height);
-  const minH = Math.max(0, Math.min(...heights) - 20);
-  const maxH = Math.max(...heights) + 25;
+  const allHeights = [
+    ...hourlyPoints.map((p) => p.height),
+    ...extremes.map((e) => e.height),
+  ];
+  const minH = Math.max(0, Math.min(...allHeights) - 15);
+  const maxH = Math.max(...allHeights) + 25;
   const rangeH = Math.max(1, maxH - minH);
 
-  const svgWidth = 600;
-  const svgHeight = 160;
-  const paddingX = 20;
-  const paddingY = 20;
+  const svgWidth = 640;
+  const svgHeight = 170;
+  const paddingX = 24;
+  const paddingY = 22;
   const plotWidth = svgWidth - paddingX * 2;
   const plotHeight = svgHeight - paddingY * 2;
 
@@ -55,28 +95,50 @@ export default function TideGraphCard({
   const getY = (hVal: number) =>
     paddingY + plotHeight - ((hVal - minH) / rangeH) * plotHeight;
 
-  // Build SVG path
-  const pathD = hourlyPoints.reduce((acc, pt, idx) => {
-    const hour = idx;
-    const x = getX(hour);
-    const y = getY(pt.height);
-    if (idx === 0) return `M ${x} ${y}`;
+  // Merge hourly points and exact extreme peaks in chronological order
+  const rawKeyPoints: { hour: number; height: number }[] = [];
+  hourlyPoints.forEach((p, idx) => {
+    rawKeyPoints.push({ hour: idx, height: p.height });
+  });
 
-    // Smooth cubic bezier curve
-    const prevPt = hourlyPoints[idx - 1];
-    const prevX = getX(idx - 1);
-    const prevY = getY(prevPt.height);
-    const cpX1 = prevX + (x - prevX) / 2;
-    const cpY1 = prevY;
-    const cpX2 = prevX + (x - prevX) / 2;
-    const cpY2 = y;
-    return `${acc} C ${cpX1} ${cpY1}, ${cpX2} ${cpY2}, ${x} ${y}`;
-  }, "");
+  extremes.forEach((ext) => {
+    const [h, m] = ext.time.split(":").map(Number);
+    rawKeyPoints.push({ hour: h + m / 60, height: ext.height });
+  });
 
-  // Area path (closed at bottom)
-  const areaD = `${pathD} L ${getX(24)} ${svgHeight - paddingY} L ${getX(0)} ${
+  rawKeyPoints.sort((a, b) => a.hour - b.hour);
+
+  // Filter out any duplicate or near-coincident points (< 10 minutes apart)
+  const keyPoints: { hour: number; height: number }[] = [];
+  for (const pt of rawKeyPoints) {
+    if (keyPoints.length === 0) {
+      keyPoints.push(pt);
+    } else {
+      const last = keyPoints[keyPoints.length - 1];
+      if (Math.abs(pt.hour - last.hour) < 0.15) {
+        // Keep the more accurate extreme value
+        keyPoints[keyPoints.length - 1] = pt;
+      } else {
+        keyPoints.push(pt);
+      }
+    }
+  }
+
+  // Convert key points to 2D screen coordinates
+  const screenPoints: Point2D[] = keyPoints.map((p) => ({
+    x: getX(p.hour),
+    y: getY(p.height),
+    hour: p.hour,
+    height: p.height,
+  }));
+
+  // Generate ultra-smooth Catmull-Rom cubic bezier curve
+  const pathD = getCatmullRomSplinePath(screenPoints, 0.5);
+
+  // Closed area path for gradient water fill
+  const areaD = `${pathD} L ${getX(24).toFixed(2)} ${(
     svgHeight - paddingY
-  } Z`;
+  ).toFixed(2)} L ${getX(0).toFixed(2)} ${(svgHeight - paddingY).toFixed(2)} Z`;
 
   // Parse sunrise & sunset hours for Mazume highlight zones
   const sunriseHour =
@@ -84,8 +146,65 @@ export default function TideGraphCard({
   const sunsetHour =
     parseInt(sunset.split(":")[0]) + parseInt(sunset.split(":")[1]) / 60;
 
-  // Current time X
+  // Current time X & Y
   const currentX = getX(currentHour);
+
+  // Function to interpolate tide height at arbitrary decimal hour
+  const interpolateHeight = (hour: number): number => {
+    if (screenPoints.length === 0) return 100;
+    if (hour <= screenPoints[0].hour) return screenPoints[0].height;
+    if (hour >= screenPoints[screenPoints.length - 1].hour)
+      return screenPoints[screenPoints.length - 1].height;
+
+    for (let i = 0; i < screenPoints.length - 1; i++) {
+      const p1 = screenPoints[i];
+      const p2 = screenPoints[i + 1];
+      if (hour >= p1.hour && hour <= p2.hour) {
+        const t = (hour - p1.hour) / (p2.hour - p1.hour);
+        // Cosine interpolation for smooth wave profile
+        const mu = (1 - Math.cos(t * Math.PI)) / 2;
+        return Math.round((p1.height * (1 - mu) + p2.height * mu) * 10) / 10;
+      }
+    }
+    return screenPoints[0].height;
+  };
+
+  // Mouse move handler for interactive inspection
+  const handleMouseMove = (e: React.MouseEvent<SVGSVGElement>) => {
+    if (!svgRef.current) return;
+    const rect = svgRef.current.getBoundingClientRect();
+    const clientX = e.clientX - rect.left;
+    const ratio = Math.max(
+      0,
+      Math.min(
+        1,
+        (clientX - (paddingX / svgWidth) * rect.width) /
+          ((plotWidth / svgWidth) * rect.width)
+      )
+    );
+    const hour = Math.max(0, Math.min(24, ratio * 24));
+    const h = interpolateHeight(hour);
+    setHoveredData({
+      hour,
+      height: Math.round(h),
+      x: getX(hour),
+      y: getY(h),
+    });
+  };
+
+  const handleMouseLeave = () => {
+    setHoveredData(null);
+  };
+
+  const formatHourMinute = (decimalHour: number) => {
+    const h = Math.floor(decimalHour);
+    const m = Math.round((decimalHour - h) * 60);
+    const safeH = h >= 24 ? 23 : h;
+    const safeM = h >= 24 ? 59 : m;
+    return `${safeH.toString().padStart(2, "0")}:${safeM
+      .toString()
+      .padStart(2, "0")}`;
+  };
 
   return (
     <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-5 sm:p-6 shadow-sm hover:shadow-md transition-shadow">
@@ -128,14 +247,14 @@ export default function TideGraphCard({
           return (
             <div
               key={i}
-              className={`p-2.5 rounded-2xl border flex items-center gap-2.5 ${
+              className={`p-2.5 rounded-2xl border flex items-center gap-2.5 transition-transform hover:scale-[1.02] ${
                 isHigh
                   ? "bg-sky-50/70 dark:bg-sky-950/30 border-sky-200 dark:border-sky-800/60"
                   : "bg-amber-50/70 dark:bg-amber-950/30 border-amber-200 dark:border-amber-800/60"
               }`}
             >
               <div
-                className={`w-8 h-8 rounded-xl flex items-center justify-center shrink-0 ${
+                className={`w-8 h-8 rounded-xl flex items-center justify-center shrink-0 shadow-2xs ${
                   isHigh
                     ? "bg-sky-500 text-white"
                     : "bg-amber-500 text-white"
@@ -163,7 +282,10 @@ export default function TideGraphCard({
                   </span>
                 </div>
                 <div className="text-sm font-black text-slate-900 dark:text-white">
-                  {ext.height} <span className="text-[10px] font-normal text-slate-400">cm</span>
+                  {ext.height}{" "}
+                  <span className="text-[10px] font-normal text-slate-400">
+                    cm
+                  </span>
                 </div>
               </div>
             </div>
@@ -172,24 +294,40 @@ export default function TideGraphCard({
       </div>
 
       {/* SVG Interactive Tide Chart */}
-      <div className="relative w-full overflow-hidden bg-gradient-to-b from-sky-50/30 to-ocean-50/60 dark:from-slate-950 dark:to-ocean-950/30 rounded-2xl border border-slate-100 dark:border-slate-800/80 p-2">
+      <div className="relative w-full overflow-hidden bg-gradient-to-b from-sky-50/30 via-slate-50/40 to-ocean-50/70 dark:from-slate-950 dark:via-slate-900/50 dark:to-ocean-950/40 rounded-2xl border border-slate-100 dark:border-slate-800/80 p-2 group">
         <svg
+          ref={svgRef}
           viewBox={`0 0 ${svgWidth} ${svgHeight}`}
-          className="w-full h-auto overflow-visible select-none"
+          className="w-full h-auto overflow-visible select-none cursor-crosshair"
+          onMouseMove={handleMouseMove}
+          onMouseLeave={handleMouseLeave}
         >
           <defs>
-            {/* Linear gradient for water area */}
-            <linearGradient id="tideGradient" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stopColor="#0ea5e9" stopOpacity="0.45" />
-              <stop offset="100%" stopColor="#0284c7" stopOpacity="0.05" />
+            {/* Linear gradient for smooth water area */}
+            <linearGradient id="tideWaterGradient" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stopColor="#0284c7" stopOpacity="0.38" />
+              <stop offset="60%" stopColor="#38bdf8" stopOpacity="0.14" />
+              <stop offset="100%" stopColor="#0284c7" stopOpacity="0.02" />
             </linearGradient>
 
-            {/* Pattern for Mazume golden hour zones */}
-            <linearGradient id="mazumeMorning" x1="0" y1="0" x2="1" y2="0">
+            {/* Pattern for Morning Mazume zone */}
+            <linearGradient id="mazumeMorningGrad" x1="0" y1="0" x2="1" y2="0">
               <stop offset="0%" stopColor="#f59e0b" stopOpacity="0.0" />
-              <stop offset="50%" stopColor="#f59e0b" stopOpacity="0.25" />
+              <stop offset="50%" stopColor="#f59e0b" stopOpacity="0.22" />
               <stop offset="100%" stopColor="#f59e0b" stopOpacity="0.0" />
             </linearGradient>
+
+            {/* Pattern for Evening Mazume zone */}
+            <linearGradient id="mazumeEveningGrad" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0%" stopColor="#f97316" stopOpacity="0.0" />
+              <stop offset="50%" stopColor="#f97316" stopOpacity="0.22" />
+              <stop offset="100%" stopColor="#f97316" stopOpacity="0.0" />
+            </linearGradient>
+
+            {/* Curve stroke shadow */}
+            <filter id="curveShadow" x="-10%" y="-10%" width="120%" height="120%">
+              <feDropShadow dx="0" dy="2" stdDeviation="2" floodColor="#0284c7" floodOpacity="0.25" />
+            </filter>
           </defs>
 
           {/* Morning Mazume Highlight Zone */}
@@ -198,7 +336,7 @@ export default function TideGraphCard({
             y={paddingY}
             width={getX(sunriseHour + 0.8) - getX(sunriseHour - 0.8)}
             height={plotHeight}
-            fill="url(#mazumeMorning)"
+            fill="url(#mazumeMorningGrad)"
             rx="4"
           />
 
@@ -208,12 +346,12 @@ export default function TideGraphCard({
             y={paddingY}
             width={getX(sunsetHour + 0.8) - getX(sunsetHour - 0.8)}
             height={plotHeight}
-            fill="url(#mazumeMorning)"
+            fill="url(#mazumeEveningGrad)"
             rx="4"
           />
 
-          {/* Grid lines (every 6 hours) */}
-          {[0, 6, 12, 18, 24].map((h) => (
+          {/* Grid lines (every 3 hours) */}
+          {[0, 3, 6, 9, 12, 15, 18, 21, 24].map((h) => (
             <line
               key={h}
               x1={getX(h)}
@@ -221,21 +359,28 @@ export default function TideGraphCard({
               x2={getX(h)}
               y2={svgHeight - paddingY}
               stroke="currentColor"
-              className="text-slate-200 dark:text-slate-800"
-              strokeDasharray="3 3"
+              className={
+                h % 6 === 0
+                  ? "text-slate-200 dark:text-slate-700/80"
+                  : "text-slate-100 dark:text-slate-800/40"
+              }
+              strokeDasharray={h % 6 === 0 ? "3 3" : "2 4"}
+              strokeWidth="1"
             />
           ))}
 
-          {/* Tide Area Fill */}
-          <path d={areaD} fill="url(#tideGradient)" />
+          {/* Tide Area Fill (Silky smooth closed bezier polygon) */}
+          <path d={areaD} fill="url(#tideWaterGradient)" />
 
-          {/* Tide Curve Stroke */}
+          {/* Tide Curve Stroke (Silky smooth Catmull-Rom cubic bezier) */}
           <path
             d={pathD}
             fill="none"
             stroke="#0284c7"
-            strokeWidth="3"
+            strokeWidth="3.2"
             strokeLinecap="round"
+            strokeLinejoin="round"
+            filter="url(#curveShadow)"
           />
 
           {/* Sunrise / Sunset vertical markers */}
@@ -258,7 +403,7 @@ export default function TideGraphCard({
             strokeDasharray="2 2"
           />
 
-          {/* High / Low peak marker circles */}
+          {/* High / Low peak marker circles with tags */}
           {extremes.map((ext, idx) => {
             const [h, m] = ext.time.split(":").map(Number);
             const hourDec = h + m / 60;
@@ -267,21 +412,33 @@ export default function TideGraphCard({
             const isHigh = ext.type === "high";
 
             return (
-              <g key={idx}>
+              <g key={idx} className="transition-transform hover:scale-110">
                 <circle
                   cx={cx}
                   cy={cy}
-                  r="5"
+                  r="5.5"
                   fill={isHigh ? "#0284c7" : "#f59e0b"}
                   stroke="#ffffff"
-                  strokeWidth="2"
-                  className="shadow-sm"
+                  strokeWidth="2.5"
+                  className="shadow-sm drop-shadow"
+                />
+                <rect
+                  x={cx - 24}
+                  y={isHigh ? cy - 24 : cy + 8}
+                  width="48"
+                  height="16"
+                  rx="6"
+                  className={
+                    isHigh
+                      ? "fill-sky-600/90 dark:fill-sky-700/90"
+                      : "fill-amber-600/90 dark:fill-amber-700/90"
+                  }
                 />
                 <text
                   x={cx}
-                  y={isHigh ? cy - 8 : cy + 14}
+                  y={isHigh ? cy - 12 : cy + 20}
                   textAnchor="middle"
-                  className="text-[9px] font-bold fill-slate-700 dark:fill-slate-200"
+                  className="text-[9px] font-black fill-white"
                 >
                   {ext.height}cm
                 </text>
@@ -312,7 +469,59 @@ export default function TideGraphCard({
           >
             現在
           </text>
+
+          {/* Interactive Hover inspection line & circle */}
+          {hoveredData && (
+            <g>
+              <line
+                x1={hoveredData.x}
+                y1={paddingY}
+                x2={hoveredData.x}
+                y2={svgHeight - paddingY}
+                stroke="#6366f1"
+                strokeWidth="1.5"
+                strokeDasharray="3 3"
+              />
+              <circle
+                cx={hoveredData.x}
+                cy={hoveredData.y}
+                r="6"
+                fill="#6366f1"
+                stroke="#ffffff"
+                strokeWidth="2.5"
+                className="animate-ping opacity-75"
+              />
+              <circle
+                cx={hoveredData.x}
+                cy={hoveredData.y}
+                r="5"
+                fill="#6366f1"
+                stroke="#ffffff"
+                strokeWidth="2"
+              />
+            </g>
+          )}
         </svg>
+
+        {/* Hover Floating Tooltip */}
+        {hoveredData && (
+          <div
+            className="absolute z-20 pointer-events-none transform -translate-x-1/2 -translate-y-full bg-slate-900/90 text-white text-[11px] font-bold px-2.5 py-1.5 rounded-xl shadow-lg border border-slate-700 backdrop-blur-xs flex items-center gap-2 transition-all duration-75"
+            style={{
+              left: `${(hoveredData.x / svgWidth) * 100}%`,
+              top: `${(hoveredData.y / svgHeight) * 100 - 4}%`,
+            }}
+          >
+            <span className="text-sky-300">
+              {formatHourMinute(hoveredData.hour)}
+            </span>
+            <span className="w-1 h-1 rounded-full bg-slate-500" />
+            <span className="text-white font-black">
+              {hoveredData.height}
+              <span className="text-[9px] font-normal text-slate-300 ml-0.5">cm</span>
+            </span>
+          </div>
+        )}
 
         {/* Time X-axis labels */}
         <div className="flex justify-between text-[11px] font-semibold text-slate-400 dark:text-slate-500 px-4 pt-1">

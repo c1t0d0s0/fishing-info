@@ -137,10 +137,10 @@ function getPlateBackground(id: string) {
   if (["taman", "gala", "mibai", "kuchinaji", "gurukun", "oyabiccha"].includes(id)) {
     return "url(#oceanTropical)";
   }
-  if (["nishin", "hokke", "kurosoi", "chika", "ainame"].includes(id)) {
+  if (["nishin", "hokke", "kurosoi", "chika", "ainame", "kyuriuo", "karafutomasu", "komai", "matsukawa", "hatahata"].includes(id)) {
     return "url(#oceanNorthern)";
   }
-  if (["kamasu", "sawara", "kanpachi", "aigo-poison", "oniokoze-poison"].includes(id)) {
+  if (["kamasu", "sawara", "kanpachi", "aigo-poison", "oniokoze-poison", "mejina", "kijihata", "hiramasa", "soudagatsuo", "isaki", "kensakiika"].includes(id)) {
     return "url(#oceanDeep)";
   }
   return "url(#oceanShallow)";
@@ -719,6 +719,19 @@ function renderFieldGuideLabel(id: string) {
     ainame: { ja: "アイナメ（鮎並 / アブラコ）", en: "Hexagrammos otakii" },
     "aigo-poison": { ja: "アイゴ（藍子）", en: "Siganus fuscescens", danger: true },
     "oniokoze-poison": { ja: "オニオコゼ（鬼虎魚）", en: "Inimicus japonicus", danger: true },
+    kyuriuo: { ja: "キュウリウオ（胡瓜魚）", en: "Osmerus dentex" },
+    karafutomasu: { ja: "カラフトマス（樺太鱒）", en: "Oncorhynchus gorbuscha" },
+    komai: { ja: "コマイ（氷下魚）", en: "Eleginus gracilis" },
+    matsukawa: { ja: "マツカワ（王鰈）", en: "Verasper moseri" },
+    mejina: { ja: "メジナ（グレ / 尾長）", en: "Girella punctata" },
+    kijihata: { ja: "キジハタ（アコウ）", en: "Epinephelus akaara" },
+    kawahagi: { ja: "カワハギ（皮剥）", en: "Stephanolepis cirrhifer" },
+    hiramasa: { ja: "ヒラマサ（平政）", en: "Seriola lalandi" },
+    soudagatsuo: { ja: "ソウダガツオ（宗田鰹）", en: "Auxis rochei" },
+    isaki: { ja: "イサキ（伊佐木）", en: "Parapristipoma trilineatum" },
+    hatahata: { ja: "ハタハタ（鰰 / 鱩）", en: "Arctoscopus japonicus" },
+    shiriyakeika: { ja: "シリヤケイカ / コウイカ", en: "Sepiella japonica" },
+    kensakiika: { ja: "ケンサキイカ（剣先烏賊）", en: "Uroteuthis edulis" },
   };
 
   const item = titles[id];

@@ -3126,5 +3126,646 @@ export const DEFAULT_SPOTS: FishingSpot[] = [
     dangerNotes: ["湾口部は潮流が極めて速く、外洋のうねりが入るため落水に厳重警戒してください。"],
     tips: "夏〜秋の朝マズメはメタルジグや泳がせ釣りでネイリ（カンパチ）が猛烈にヒット。砂底のチョイ投げでは良型のキスが数釣りできます。",
   },
-];
+  {
+    "id": "shizuoka-hamamatsu-arai",
+    "name": "静岡 浜松・浜名湖 新居弁天海釣公園 (今切口)",
+    "kana": "あらいべんてんうみづりこうえん",
+    "region": "tokai",
+    "prefecture": "静岡県",
+    "address": "静岡県湖西市新居町新居官有無番地",
+    "lat": 34.6813,
+    "lng": 137.5916,
+    "category": "park",
+    "description": "浜名湖と遠州灘が繋がる「今切口」に面したT字型突堤が並ぶ無料海釣り公園。潮通しが極めて良く、クロダイ・キビレ・アジ・サッパ・ギマ・ヒラメ・マゴチ・シーバス・タコと魚種の豊富さは東海屈指。",
+    "accessInfo": "東名高速「三ヶ日IC」より約30分、または国道1号浜名バイパス「新居弁天IC」よりすぐ。JR東海道本線「新居町駅」より徒歩約20分。",
+    "depthRange": "4m〜8m",
+    "bottomType": "砂泥・敷石・基礎ケーソン",
+    "facilities": {
+      "hasParking": true,
+      "hasToilet": true,
+      "hasSafetyFence": true,
+      "isFamilyFriendly": true,
+      "hasNightLight": true,
+      "hasConvenienceStoreNearby": true,
+      "hasTackleShopNearby": true,
+      "isFeeRequired": false,
+      "isNightFishingAllowed": true,
+      "openingHours": "24時間常時開放"
+    },
+    "targetFish": [
+      "クロダイ（チヌ）",
+      "キビレ",
+      "アジ",
+      "サッパ",
+      "ギマ",
+      "ヒラメ",
+      "マゴチ",
+      "シーバス",
+      "シロギス",
+      "マダコ"
+    ],
+    "bestSeasons": {
+      "spring": [
+        "クロダイ",
+        "キビレ",
+        "シーバス",
+        "シロギス"
+      ],
+      "summer": [
+        "ギマ",
+        "サッパ",
+        "アジ",
+        "マゴチ",
+        "タコ",
+        "キビレ"
+      ],
+      "autumn": [
+        "クロダイ",
+        "アジ",
+        "ヒラメ",
+        "マゴチ",
+        "シーバス"
+      ],
+      "winter": [
+        "カレイ",
+        "カサゴ",
+        "クロダイ"
+      ]
+    },
+    "recommendedRigs": [
+      "前打ち / ヘチ釣り（クロダイ・キビレ）",
+      "サビキ釣り",
+      "チョイ投げ仕掛け",
+      "ルアー（マゴチ・ヒラメ）",
+      "タコエギ"
+    ],
+    "localRules": [
+      "T字堤防は潮の流れが速いため、急流時の無理な仕掛け投入や立ち泳ぎ禁止",
+      "安全柵を乗り越えての釣り禁止",
+      "ゴミ・仕掛けの完全持ち帰り、コマセ汚れはバケツで洗い流すこと"
+    ],
+    "parkingDetails": {
+      "capacity": "海釣公園有料駐車場 約400台",
+      "fee": "1回 500円（普通車）※30分以内無料",
+      "hours": "24時間利用可能",
+      "notes": "T字堤防の目の前に駐車できアクセス抜群です。"
+    },
+    "tips": "今切口の激流がぶつかるT字堤のヨレに大型クロダイ・キビレが溜まります。夏はチョイ投げでギマやマゴチ、サビキでのアジ・サッパ数釣りがファミリーに大人気です。"
+  },
+  {
+    "id": "mie-shima-wagu",
+    "name": "三重 志摩 英虞湾・熊野灘 和具漁港",
+    "kana": "わぐぎょこう",
+    "region": "tokai",
+    "prefecture": "三重県",
+    "address": "三重県志摩市志摩町和具",
+    "lat": 34.2631,
+    "lng": 136.8119,
+    "category": "port",
+    "description": "志摩半島の南端、英虞湾口と熊野灘に面した三重県屈指の超大型港湾。黒潮が直接洗うため魚影が極めて濃く、アオリイカのエギング・ヤエン釣りの聖地として全国に知られ、尺アジ・青物・ロックフィッシュの実績多数。",
+    "accessInfo": "伊勢自動車道「伊勢西IC」より伊勢道路経由で約1時間。近鉄志摩線「鵜方駅」より三重交通バスで約40分。",
+    "depthRange": "6m〜15m",
+    "bottomType": "岩礁・基礎ケーソン・砂泥・藻場",
+    "facilities": {
+      "hasParking": true,
+      "hasToilet": true,
+      "hasSafetyFence": false,
+      "isFamilyFriendly": true,
+      "hasNightLight": true,
+      "hasConvenienceStoreNearby": true,
+      "hasTackleShopNearby": true,
+      "isFeeRequired": false,
+      "isNightFishingAllowed": true,
+      "openingHours": "24時間利用可能（市場荷役エリア除く）"
+    },
+    "targetFish": [
+      "アオリイカ",
+      "アジ（尺アジ）",
+      "クロダイ",
+      "メジナ（グレ）",
+      "ブリ（ワラサ）",
+      "カンパチ（シオ）",
+      "オオモンハタ",
+      "アカハタ"
+    ],
+    "bestSeasons": {
+      "spring": [
+        "親アオリイカ（2kg〜3kg超）",
+        "クロダイ",
+        "グレ",
+        "マダイ"
+      ],
+      "summer": [
+        "オオモンハタ",
+        "アカハタ",
+        "カンパチ（シオ）",
+        "アジ"
+      ],
+      "autumn": [
+        "新子アオリイカ",
+        "ブリ・ワラサ",
+        "シオ",
+        "アジ",
+        "カマス"
+      ],
+      "winter": [
+        "寒グレ",
+        "尺アジ",
+        "アオリイカ",
+        "メバル"
+      ]
+    },
+    "recommendedRigs": [
+      "エギング / ヤエン仕掛け",
+      "ライトショアジギング",
+      "ジグ単アジング",
+      "ウキフカセ釣り",
+      "ロックフィッシュテキサスリグ"
+    ],
+    "localRules": [
+      "漁業協同組合施設・魚市場周辺の荷揚げ作業エリアへの駐車・立ち入り禁止",
+      "大波止の外海側は足場が高いためライフジャケット着用必須・長柄タモ網（6m以上）必携",
+      "スミ跡やコマセは海水できれいに洗い流すこと"
+    ],
+    "parkingDetails": {
+      "capacity": "和具港周辺駐車スペース 約80台",
+      "fee": "無料",
+      "hours": "24時間利用可能",
+      "notes": "漁業関係者の作業動線を塞がないよう十分配慮して駐車してください。"
+    },
+    "tips": "春は3kg超えの巨大アオリイカが狙えるヤエン・エギングの超一級ポイント。大波止先端からのショアジギングではワラサやシオ、底狙いでオオモンハタやアカハタの高級魚が狙えます。"
+  },
+  {
+    "id": "niigata-joetsu-naoetsu",
+    "name": "新潟 上越 直江津港第3東防波堤 管理釣り場",
+    "kana": "なおえつこうだいさんひがしぼうはてい",
+    "region": "hokuriku",
+    "prefecture": "新潟県",
+    "address": "新潟県上越市八千浦4",
+    "lat": 37.1685,
+    "lng": 138.2581,
+    "category": "park",
+    "description": "日本海に突き出た全長約500mの有料メガ防波堤管理釣り場（ハッピーフィッシング運営）。水深10m以上・潮通し抜群で、40cm超のメガアジ・メーター級マダイ・イナダ・ワラサ・サゴシ・アオリイカが爆釣する超弩級ポイント。",
+    "accessInfo": "北陸自動車道「上越IC」より約15分。えちごトキめき鉄道・JR信越本線「直江津駅」より車で約15分。",
+    "depthRange": "8m〜15m",
+    "bottomType": "砂泥・基礎ケーソン・人工魚礁",
+    "facilities": {
+      "hasParking": true,
+      "hasToilet": true,
+      "hasSafetyFence": true,
+      "isFamilyFriendly": true,
+      "hasNightLight": false,
+      "hasConvenienceStoreNearby": true,
+      "hasTackleShopNearby": true,
+      "isFeeRequired": true,
+      "feeText": "大人 1,000円 / 65歳以上 800円 / 中学生 500円 / 小学生 400円",
+      "isNightFishingAllowed": false,
+      "openingHours": "季節変動（4月〜11月開園、日の出〜日没まで）※冬期閉鎖"
+    },
+    "targetFish": [
+      "アジ（メガアジ・尺アジ）",
+      "クロダイ",
+      "マダイ",
+      "ブリ（イナダ・ワラサ）",
+      "サワラ（サゴシ）",
+      "アオリイカ",
+      "ヒラメ",
+      "キジハタ"
+    ],
+    "bestSeasons": {
+      "spring": [
+        "乗っ込みマダイ",
+        "サゴシ",
+        "イナダ",
+        "メガアジ"
+      ],
+      "summer": [
+        "キジハタ",
+        "アジ",
+        "ヒラメ",
+        "クロダイ"
+      ],
+      "autumn": [
+        "アオリイカ",
+        "ワラサ",
+        "サゴシ",
+        "尺アジ",
+        "マダイ"
+      ],
+      "winter": [
+        "冬期閉鎖（12月〜3月）"
+      ]
+    },
+    "recommendedRigs": [
+      "カゴ釣り（マダイ・大アジ）",
+      "ショアジギング",
+      "エギング",
+      "ウキフカセ釣り",
+      "サビキ釣り"
+    ],
+    "localRules": [
+      "ライフジャケット着用必須（国土交通省型式承認Type A推奨・無料レンタルあり）",
+      "天候急変・高波警報時は即時退場指示に従うこと",
+      "防波堤外側への投げ釣り・仕掛け投入時は周囲確認徹底"
+    ],
+    "parkingDetails": {
+      "capacity": "管理釣り場専用駐車場 約150台",
+      "fee": "無料",
+      "hours": "開園時間に合わせて利用可能",
+      "notes": "週末や青物回遊時は開園前から整理券配布の列ができます。"
+    },
+    "tips": "沖向きカゴ釣りでの大マダイ（70〜80cm級）や40cm級メガアジは全国屈指の実績。春・秋のメタルジグでの青物乱舞やエギングのアオリイカ数釣りも圧倒的です。"
+  },
+  {
+    "id": "miyagi-kesennuma-port",
+    "name": "宮城 三陸 気仙沼港 コの字岸壁・観光桟橋",
+    "kana": "けせんぬまこう",
+    "region": "tohoku",
+    "prefecture": "宮城県",
+    "address": "宮城県気仙沼市魚市場前8-25",
+    "lat": 38.9008,
+    "lng": 141.5794,
+    "category": "port",
+    "description": "三陸を代表する巨大天然良港・気仙沼港の湾奥に位置する足場抜群の岸壁（通称「コの字岸壁」）。水深があり波静かで、大型アイナメ・クロソイ・ヒラメ・イワシ・サバ・チカ・ヤリイカ・ドンコが狙える三陸南部の定番スポット。",
+    "accessInfo": "三陸沿岸道路「気仙沼港IC」より約5分。JR大船渡線BRT「気仙沼市魚市場前駅」より徒歩約5分。",
+    "depthRange": "6m〜12m",
+    "bottomType": "砂泥・敷石・基礎ケーソン",
+    "facilities": {
+      "hasParking": true,
+      "hasToilet": true,
+      "hasSafetyFence": false,
+      "isFamilyFriendly": true,
+      "hasNightLight": true,
+      "hasConvenienceStoreNearby": true,
+      "hasTackleShopNearby": true,
+      "isFeeRequired": false,
+      "isNightFishingAllowed": true,
+      "openingHours": "24時間利用可能（魚市場作業岸壁除く）"
+    },
+    "targetFish": [
+      "アイナメ",
+      "クロソイ",
+      "ヒラメ",
+      "マイワシ",
+      "サバ",
+      "チカ",
+      "ヤリイカ",
+      "エゾアイナメ（ドンコ）"
+    ],
+    "bestSeasons": {
+      "spring": [
+        "アイナメ",
+        "クロソイ",
+        "カレイ"
+      ],
+      "summer": [
+        "マイワシ",
+        "サバ",
+        "ヒラメ"
+      ],
+      "autumn": [
+        "アイナメ",
+        "クロソイ",
+        "サバ",
+        "ヤリイカ"
+      ],
+      "winter": [
+        "ヤリイカ",
+        "ドンコ",
+        "チカ",
+        "クロソイ"
+      ]
+    },
+    "recommendedRigs": [
+      "テキサスリグ / ロックフィッシュ仕掛け",
+      "サビキ釣り",
+      "チョイ投げ仕掛け",
+      "テーラーウキ釣り / エギング"
+    ],
+    "localRules": [
+      "魚市場の水揚げ作業エリアおよび専用岸壁への立ち入り・駐車禁止",
+      "夜間の大声・騒音防止、ゴミの完全持ち帰り",
+      "コマセ汚れは必ず海水で洗い流すこと"
+    ],
+    "parkingDetails": {
+      "capacity": "海の市・魚市場周辺無料駐車場 約150台",
+      "fee": "無料",
+      "hours": "24時間利用可能",
+      "notes": "観光施設「みやすみプラザ・海の市」至近で利便性抜群。"
+    },
+    "tips": "岸壁のヘチや敷石周りをワーム（テキサスリグ）で探ると40cm超の良型アイナメやクロソイが飛び出します。秋〜冬の夜釣りは常夜灯下でのヤリイカやドンコ狙いが名物です。"
+  },
+  {
+    "id": "hokkaido-hakodate-greenisland",
+    "name": "北海道 函館 函館港 緑の島護岸・弁天台場",
+    "kana": "はこだてこうみどりのしま",
+    "region": "hokkaido",
+    "prefecture": "北海道",
+    "address": "北海道函館市大町15",
+    "lat": 41.7713,
+    "lng": 140.7141,
+    "category": "park",
+    "description": "函館山とベイエリア赤レンガ倉庫を望む函館港の人工島（緑の島）。安全フェンス完備の親水プロムナードで、イワシ・サバ・マメイカ（ヒイカ）・ヤリイカ・アブラコ（アイナメ）・クロソイ・マガレイが狙える道南屈指の快適スポット。",
+    "accessInfo": "函館市電「大町電停」より徒歩約5分。JR函館駅より車で約8分。函館江差自動車道「函館IC」より約20分。",
+    "depthRange": "5m〜9m",
+    "bottomType": "砂泥・敷石・基礎ケーソン",
+    "facilities": {
+      "hasParking": true,
+      "hasToilet": true,
+      "hasSafetyFence": true,
+      "isFamilyFriendly": true,
+      "hasNightLight": true,
+      "hasConvenienceStoreNearby": true,
+      "hasTackleShopNearby": true,
+      "isFeeRequired": false,
+      "isNightFishingAllowed": false,
+      "openingHours": "9:00〜20:00（4月〜9月） / 9:00〜17:00（10月〜3月）※夜間ゲート施錠閉鎖"
+    },
+    "targetFish": [
+      "マイワシ",
+      "サバ",
+      "マメイカ（ヒイカ）",
+      "ヤリイカ",
+      "アイナメ（アブラコ）",
+      "クロソイ",
+      "マガレイ",
+      "サクラマス"
+    ],
+    "bestSeasons": {
+      "spring": [
+        "サクラマス",
+        "マガレイ",
+        "アブラコ"
+      ],
+      "summer": [
+        "マイワシ",
+        "サバ",
+        "マメイカ"
+      ],
+      "autumn": [
+        "マメイカ（名物）",
+        "マイワシ",
+        "サバ",
+        "クロソイ",
+        "ヤリイカ"
+      ],
+      "winter": [
+        "クロソイ",
+        "ドンコ",
+        "カレイ"
+      ]
+    },
+    "recommendedRigs": [
+      "ライトエギング（1.5〜2.0号エギ / スッテ）",
+      "サビキ釣り",
+      "ブッコミ釣り / 投げ釣り",
+      "ジグヘッドロックフィッシュ"
+    ],
+    "localRules": [
+      "緑の島ゲート開放時間内のみ利用可能（時間外は車両・人ともに立ち入り不可）",
+      "公園内の芝生広場やイベントステージ周辺での釣り禁止",
+      "ゴミ・仕掛けの放置厳禁、イカスミは必ず水で洗い流すこと"
+    ],
+    "parkingDetails": {
+      "capacity": "緑の島内無料駐車場 約120台",
+      "fee": "無料",
+      "hours": "開島時間に連動（夜間閉鎖）",
+      "notes": "島内に直結した大型無料駐車場完備でファミリーに最適。"
+    },
+    "tips": "初夏と秋に回遊するマメイカ（ヒイカ）のライトエギングが大人気。夏〜秋のイワシ・サバのサビキ数釣りや、外海向きへの遠投でマガレイ・アブラコが狙えます。"
+  },
+  {
+    "id": "hokkaido-tomakomai-kirakira",
+    "name": "北海道 太平洋 苫小牧西港 キラキラ公園（北埠頭緑地）",
+    "kana": "とまこまいにしこうきらきらこうえん",
+    "region": "hokkaido",
+    "prefecture": "北海道",
+    "address": "北海道苫小牧市入船町3-1",
+    "lat": 42.6438,
+    "lng": 141.6234,
+    "category": "park",
+    "description": "太平洋側最大の国際拠点港・苫小牧西港の北埠頭に整備された親水緑地公園。全面安全柵・トイレ・駐車場完備で、冬〜春の名物「群来ニシン」をはじめ、チカ・マイワシ・キュウリウオ・クロソイ・アブラコ・幻の高級魚マツカワ（王鰈）が狙える超人気スポット。",
+    "accessInfo": "道央自動車道「苫小牧東IC」または「苫小牧西IC」より約20分。JR室蘭本線「苫小牧駅」より車で約10分。",
+    "depthRange": "6m〜11m",
+    "bottomType": "砂泥・敷石・基礎ケーソン",
+    "facilities": {
+      "hasParking": true,
+      "hasToilet": true,
+      "hasSafetyFence": true,
+      "isFamilyFriendly": true,
+      "hasNightLight": true,
+      "hasConvenienceStoreNearby": true,
+      "hasTackleShopNearby": true,
+      "isFeeRequired": false,
+      "isNightFishingAllowed": true,
+      "openingHours": "24時間常時開放（冬季積雪時一部閉鎖あり）"
+    },
+    "targetFish": [
+      "ニシン",
+      "チカ",
+      "マイワシ",
+      "キュウリウオ",
+      "クロソイ",
+      "アイナメ（アブラコ）",
+      "コマイ",
+      "マツカワ（王鰈）"
+    ],
+    "bestSeasons": {
+      "spring": [
+        "大ニシン（名物群来）",
+        "チカ",
+        "マツカワ"
+      ],
+      "summer": [
+        "マイワシ",
+        "サバ",
+        "アブラコ"
+      ],
+      "autumn": [
+        "マイワシ",
+        "チカ",
+        "サバ",
+        "クロソイ",
+        "マツカワ"
+      ],
+      "winter": [
+        "ニシン",
+        "チカ",
+        "キュウリウオ",
+        "コマイ"
+      ]
+    },
+    "recommendedRigs": [
+      "ニシン・チカ専用サビキ仕掛け（集魚ライト）",
+      "ブッコミ釣り / 投げ仕掛け",
+      "胴突きロックフィッシュ仕掛け"
+    ],
+    "localRules": [
+      "フェリーおよび貨物船の着岸・離岸作業時は指示に従い仕掛けを回収すること",
+      "投げ釣り時は背後の散策路利用者に十分注意すること",
+      "ゴミ・アミエビ等のコマセ汚れは必ず洗い流すこと"
+    ],
+    "parkingDetails": {
+      "capacity": "キラキラ公園専用無料駐車場 約80台",
+      "fee": "無料",
+      "hours": "24時間利用可能",
+      "notes": "ニシンの回遊期や秋のイワシ最盛期は夜間・早朝から満車になります。"
+    },
+    "tips": "冬から早春にかけて回遊する30cm超のオオニシンのサビキ釣り（集魚ライト付き）が道内屈指の人気。投げ釣りでは幻の高級カレイ「マツカワ」の実績も高く狙い目です。"
+  },
+  {
+    "id": "hokkaido-kushiro-westport",
+    "name": "北海道 道東 釧路港 耐震岸壁・副港護岸",
+    "kana": "くしろこうたいしんがんぺき",
+    "region": "hokkaido",
+    "prefecture": "北海道",
+    "address": "北海道釧路市南浜町",
+    "lat": 42.9858,
+    "lng": 144.3522,
+    "category": "port",
+    "description": "道東・太平洋岸を代表する大港湾・釧路港。水深が深く車横付け可能なエリアもあり、道東名物のコマイ（カンカイ）・大型チカ・キュウリウオ・ウサギアイナメ・クロソイ・オオマイが狙える道東屈指の好漁場。",
+    "accessInfo": "道東自動車道「阿寒IC」より国道38号経由で約40分。JR根室本線「釧路駅」より車で約10分。",
+    "depthRange": "7m〜14m",
+    "bottomType": "砂泥・敷石・基礎ケーソン",
+    "facilities": {
+      "hasParking": true,
+      "hasToilet": true,
+      "hasSafetyFence": false,
+      "isFamilyFriendly": true,
+      "hasNightLight": true,
+      "hasConvenienceStoreNearby": true,
+      "hasTackleShopNearby": true,
+      "isFeeRequired": false,
+      "isNightFishingAllowed": true,
+      "openingHours": "24時間利用可能（大型客船・貨物船荷役エリア除く）"
+    },
+    "targetFish": [
+      "コマイ",
+      "チカ",
+      "キュウリウオ",
+      "アイナメ（ウサギアイナメ）",
+      "クロソイ",
+      "オオマイ",
+      "カラフトマス",
+      "マツカワ"
+    ],
+    "bestSeasons": {
+      "spring": [
+        "大型チカ",
+        "キュウリウオ",
+        "クロガシラガレイ"
+      ],
+      "summer": [
+        "コマイ",
+        "ウサギアイナメ",
+        "マイワシ"
+      ],
+      "autumn": [
+        "コマイ（大漁期）",
+        "大型チカ",
+        "秋サケ・カラフトマス",
+        "クロソイ"
+      ],
+      "winter": [
+        "寒コマイ",
+        "キュウリウオ",
+        "チカ"
+      ]
+    },
+    "recommendedRigs": [
+      "コマイ専用胴突き・投げ仕掛け（イソメ・サンマ切り身）",
+      "チカ専用スピードサビキ",
+      "ロックフィッシュジグヘッド"
+    ],
+    "localRules": [
+      "大型観光クルーズ船・貨物船接岸時の立ち入り制限・指示厳守",
+      "港湾関係車両の通行路を塞ぐ駐車厳禁",
+      "極寒期の防寒対策およびライフジャケット着用必須"
+    ],
+    "parkingDetails": {
+      "capacity": "耐震岸壁周辺駐車スペース 約100台",
+      "fee": "無料",
+      "hours": "24時間利用可能",
+      "notes": "岸壁近くに駐車可能（作業エリア除く）。"
+    },
+    "tips": "夏〜秋の夜釣りで狙うコマイのブッコミ釣りは鈴なりでヒットする道東の風物詩。秋〜冬は20cm前後の大チカがサビキでクーラー満タンになることも珍しくありません。"
+  },
+  {
+    "id": "hokkaido-abashiri-port",
+    "name": "北海道 オホーツク 網走港 帽子岩・道の駅流氷街道裏護岸",
+    "kana": "あばしりこうぼうしいわ",
+    "region": "hokkaido",
+    "prefecture": "北海道",
+    "address": "北海道網走市南3条東4丁目",
+    "lat": 44.0242,
+    "lng": 144.2844,
+    "category": "port",
+    "description": "オホーツク海に面した流氷の街・網走港のシンボル「帽子岩」を望む好釣り場。道の駅流氷街道網走に隣接し、流氷明けの春から秋にかけて大型チカ・ニシン・クロガシラガレイ・マガレイ・コマイ・ホッケが狙えるオホーツクの拠点。",
+    "accessInfo": "女満別空港より車で約25分。JR石北本線・釧網本線「網走駅」より車で約8分。",
+    "depthRange": "5m〜10m",
+    "bottomType": "砂泥・岩礁・基礎ケーソン",
+    "facilities": {
+      "hasParking": true,
+      "hasToilet": true,
+      "hasSafetyFence": false,
+      "isFamilyFriendly": true,
+      "hasNightLight": true,
+      "hasConvenienceStoreNearby": true,
+      "hasTackleShopNearby": true,
+      "isFeeRequired": false,
+      "isNightFishingAllowed": true,
+      "openingHours": "24時間利用可能（秋サケ規制区域・流氷船おーろら発着場除く）"
+    },
+    "targetFish": [
+      "チカ",
+      "ニシン",
+      "クロガシラガレイ",
+      "マガレイ",
+      "コマイ",
+      "クロソイ",
+      "ホッケ",
+      "カラフトマス"
+    ],
+    "bestSeasons": {
+      "spring": [
+        "ホッケ",
+        "大チカ",
+        "クロガシラガレイ",
+        "マガレイ"
+      ],
+      "summer": [
+        "大チカ",
+        "コマイ",
+        "カラフトマス"
+      ],
+      "autumn": [
+        "大チカ",
+        "ニシン",
+        "コマイ",
+        "クロソイ",
+        "カレイ"
+      ],
+      "winter": [
+        "流氷接岸期（釣り不可・観光シーズン）"
+      ]
+    },
+    "recommendedRigs": [
+      "スピードサビキ（チカ・ニシン）",
+      "カレイ投げ仕掛け / ブッコミ釣り",
+      "ウキフカセ釣り（ホッケ）"
+    ],
+    "localRules": [
+      "秋サケ（アキアジ）採捕禁止区域およびライセンス船発着エリアのルール厳守",
+      "観光砕氷船「おーろら」専用桟橋周辺での釣り禁止",
+      "ゴミの完全持ち帰り徹底"
+    ],
+    "parkingDetails": {
+      "capacity": "道の駅流氷街道網走駐車場 約100台",
+      "fee": "無料",
+      "hours": "24時間利用可能",
+      "notes": "道の駅隣接でトイレ・売店が利用可能。"
+    },
+    "tips": "春の流氷明け（海明け）のホッケや肉厚クロガシラガレイ、秋の20cm超の大チカ入れ食いが名物。オホーツク海の豊かな恵みを気軽に楽しめる好スポットです。"
+  },
 
+];
