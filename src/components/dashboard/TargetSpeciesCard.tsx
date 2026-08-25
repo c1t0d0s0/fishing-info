@@ -149,16 +149,18 @@ export default function TargetSpeciesCard({ spot }: TargetSpeciesCardProps) {
               </p>
             </div>
 
-            <div className="space-y-1.5 pt-2 border-t border-slate-200/60 dark:border-slate-700/60 text-xs">
-              <div className="flex items-center justify-between text-slate-600 dark:text-slate-300">
-                <span className="text-slate-400 text-[11px]">推奨仕掛け:</span>
-                <span className="font-medium truncate max-w-[140px]">
-                  {sp.recommendedRig}
+            <div className="space-y-2 pt-2.5 border-t border-slate-200/60 dark:border-slate-700/60 text-xs">
+              <div className="space-y-1">
+                <span className="text-slate-400 dark:text-slate-500 text-[11px] font-medium block">
+                  推奨仕掛け:
                 </span>
+                <div className="font-bold text-[11px] text-ocean-700 dark:text-ocean-300 bg-ocean-50/80 dark:bg-ocean-950/60 px-2.5 py-1.5 rounded-xl border border-ocean-200/60 dark:border-ocean-900/50 leading-relaxed break-words">
+                  {sp.recommendedRig}
+                </div>
               </div>
-              <div className="flex items-center justify-between text-slate-600 dark:text-slate-300">
+              <div className="flex items-center justify-between text-slate-600 dark:text-slate-300 pt-0.5">
                 <span className="text-slate-400 text-[11px]">生息タナ:</span>
-                <span className="font-medium text-[11px]">
+                <span className="font-medium text-[11px] bg-slate-100 dark:bg-slate-800 px-2 py-0.5 rounded-lg">
                   {sp.waterLayer}
                 </span>
               </div>
