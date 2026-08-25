@@ -204,7 +204,7 @@ export default function DashboardPage() {
               魚種図鑑 & 仕掛けガイド
             </h4>
             <p className="text-xs text-slate-500 dark:text-slate-400">
-              人気30魚種のタナ・旬・タックル
+              全国65魚種のタナ・旬・タックル
             </p>
           </div>
           <div className="w-10 h-10 rounded-2xl bg-cyan-500/10 text-cyan-600 dark:text-cyan-400 flex items-center justify-center group-hover:scale-110 transition-transform">

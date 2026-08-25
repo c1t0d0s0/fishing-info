@@ -149,10 +149,10 @@ function getPlateBackground(id: string) {
   if (["taman", "gala", "mibai", "kuchinaji", "gurukun", "oyabiccha"].includes(id)) {
     return "url(#oceanTropical)";
   }
-  if (["nishin", "hokke", "kurosoi", "chika", "ainame", "kyuriuo", "karafutomasu", "komai", "matsukawa", "hatahata"].includes(id)) {
+  if (["nishin", "hokke", "kurosoi", "chika", "ainame", "kyuriuo", "karafutomasu", "komai", "matsukawa", "hatahata", "donko", "ishigarei"].includes(id)) {
     return "url(#oceanNorthern)";
   }
-  if (["kamasu", "sawara", "kanpachi", "aigo-poison", "oniokoze-poison", "mejina", "kijihata", "hiramasa", "soudagatsuo", "isaki", "kensakiika"].includes(id)) {
+  if (["kamasu", "sawara", "kanpachi", "aigo-poison", "oniokoze-poison", "mejina", "kijihata", "hiramasa", "soudagatsuo", "isaki", "kensakiika", "akahata", "shiira", "hirasuzuki", "takabe", "takenokomebaru"].includes(id)) {
     return "url(#oceanDeep)";
   }
   return "url(#oceanShallow)";
@@ -160,7 +160,7 @@ function getPlateBackground(id: string) {
 
 function renderSeabedScenery(id: string) {
   const isTropical = ["taman", "gala", "mibai", "kuchinaji", "gurukun", "oyabiccha"].includes(id);
-  const isRocky = ["kurosoi", "ainame", "hokke", "aigo-poison", "oniokoze-poison", "kyusen"].includes(id);
+  const isRocky = ["kurosoi", "ainame", "hokke", "aigo-poison", "oniokoze-poison", "kyusen", "akahata", "donko", "takenokomebaru"].includes(id);
 
   if (isTropical) {
     return (
@@ -744,6 +744,19 @@ function renderFieldGuideLabel(id: string) {
     hatahata: { ja: "ハタハタ（鰰 / 鱩）", en: "Arctoscopus japonicus" },
     shiriyakeika: { ja: "シリヤケイカ / コウイカ", en: "Sepiella japonica" },
     kensakiika: { ja: "ケンサキイカ（剣先烏賊）", en: "Uroteuthis edulis" },
+    tenagaebi: { ja: "テナガエビ（手長海老）", en: "Macrobrachium nipponense" },
+    bora: { ja: "ボラ（鰡 / 鮱）", en: "Mugil cephalus" },
+    akahata: { ja: "アカハタ（赤羽太）", en: "Epinephelus fasciatus" },
+    shiira: { ja: "シイラ（鱪 / 万力）", en: "Coryphaena hippurus" },
+    iidako: { ja: "イイダコ（飯蛸）", en: "Amphioctopus fangsiao" },
+    donko: { ja: "ドンコ（エゾイソアイナメ）", en: "Physiculus maximowiczi" },
+    umitanago: { ja: "ウミタナゴ（海鱮）", en: "Ditrema temminckii" },
+    hirasuzuki: { ja: "ヒラスズキ（平鱸）", en: "Lateolabrax latus" },
+    akame: { ja: "アカメ（赤目）", en: "Lates japonicus" },
+    takabe: { ja: "タカベ（高部 / 鰞）", en: "Labracoglossa argentiventris" },
+    hedai: { ja: "ヘダイ（平鯛 / 白チヌ）", en: "Rhabdosargus sarba" },
+    ishigarei: { ja: "イシガレイ（石鰈）", en: "Kareius bicoloratus" },
+    takenokomebaru: { ja: "タケノコメバル（筍目張）", en: "Sebastes oblongus" },
   };
 
   const item = titles[id];

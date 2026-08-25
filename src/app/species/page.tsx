@@ -61,7 +61,7 @@ export default function SpeciesPage() {
             <span>魚種図鑑 & 仕掛け・攻略ガイド</span>
           </h1>
           <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-1">
-            全国沿岸の全52魚種のデータ・タナ・生息域・釣期・仕掛け・食味 & 毒魚アラート
+            全国沿岸・汽水域の全{FISH_SPECIES_DATA.length}魚種のデータ・タナ・生息域・釣期・仕掛け・食味 & 毒魚アラート
           </p>
         </div>
 
