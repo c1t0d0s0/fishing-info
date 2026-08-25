@@ -12,6 +12,7 @@ import {
   Sparkles,
   Clock,
 } from "lucide-react";
+import FishIllustration from "./FishIllustration";
 
 interface SpeciesCardProps {
   species: FishSpecies;
@@ -22,6 +23,7 @@ export default function SpeciesCard({ species }: SpeciesCardProps) {
   const currentMonth = new Date().getMonth() + 1;
 
   const {
+    id,
     name,
     kana,
     scientificName,
@@ -112,6 +114,19 @@ export default function SpeciesCard({ species }: SpeciesCardProps) {
               ))}
             </div>
           </div>
+        </div>
+      </div>
+
+      {/* Field Guide Illustration Visual Banner */}
+      <div className="relative mb-3.5">
+        <FishIllustration speciesId={id} />
+        <div className="absolute bottom-2 left-2 flex items-center gap-1.5 flex-wrap pointer-events-none">
+          <span className="text-[10px] font-bold px-2 py-0.5 rounded-md bg-slate-900/80 text-white backdrop-blur-xs border border-white/10 shadow-xs">
+            サイズ: {averageSize}
+          </span>
+          <span className="text-[10px] font-bold px-2 py-0.5 rounded-md bg-slate-900/80 text-cyan-300 backdrop-blur-xs border border-white/10 shadow-xs">
+            {waterLayerText.split("（")[0]}
+          </span>
         </div>
       </div>
 
