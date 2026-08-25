@@ -8,7 +8,7 @@ interface FishIllustrationProps {
   className?: string;
 }
 
-// 13 watercolor field guide images
+// 24 watercolor field guide images
 const WATERCOLOR_IMAGE_SET = new Set([
   "aji",
   "madai",
@@ -23,6 +23,19 @@ const WATERCOLOR_IMAGE_SET = new Set([
   "saba",
   "shirogisu",
   "madako",
+  "iwashi",
+  "sayori",
+  "konoshiro",
+  "sappa",
+  "kamasu",
+  "oyabiccha",
+  "sawara",
+  "kanpachi",
+  "karei",
+  "magochi",
+  "gima",
+  "kyusen",
+  "mahaze",
 ]);
 
 export default function FishIllustration({ speciesId, className = "" }: FishIllustrationProps) {
@@ -38,8 +51,7 @@ export default function FishIllustration({ speciesId, className = "" }: FishIllu
     return `${prefix}images/species/${id}.jpg`;
   };
 
-  const hasWatercolorImage = WATERCOLOR_IMAGE_SET.has(speciesId);
-  const imageSrc = hasWatercolorImage ? getRelativeImagePath(speciesId) : null;
+  const imageSrc = getRelativeImagePath(speciesId);
 
   if (imageSrc && !imageError) {
     return (
@@ -47,16 +59,16 @@ export default function FishIllustration({ speciesId, className = "" }: FishIllu
         <img
           src={imageSrc}
           alt={speciesId}
-          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
+          className="w-full h-full object-contain p-2 group-hover:scale-105 transition-transform duration-500 ease-out bg-white dark:bg-slate-950"
           onError={() => setImageError(true)}
           loading="lazy"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-transparent to-transparent pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-t from-slate-950/40 via-transparent to-transparent pointer-events-none" />
       </div>
     );
   }
 
-  // Consistent Watercolor Field Guide Plate SVG for remaining 26 species
+  // Consistent Watercolor Field Guide Plate SVG fallback
   return (
     <div className={`relative w-full h-44 sm:h-52 rounded-2xl overflow-hidden select-none border border-slate-200 dark:border-slate-800 shadow-sm group ${className}`}>
       {renderFieldGuidePlate(speciesId)}
