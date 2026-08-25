@@ -41,6 +41,7 @@ jobs:
       - name: Build Next.js Static Export
         env:
           BASE_PATH: ${{ steps.pages.outputs.base_path }}
+          GTM_ID: ${{ vars.GTM_ID || secrets.GTM_ID }}
         run: npm run build
 
       - name: Upload artifact
