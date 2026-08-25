@@ -22,8 +22,8 @@ export const DEFAULT_SPOTS: FishingSpot[] = [
     region: "kanto",
     prefecture: "東京都",
     address: "東京都江東区若洲3-1-2",
-    lat: 35.6172,
-    lng: 139.8354,
+    lat: 35.6161,
+    lng: 139.8322,
     category: "park",
     description: "東京ゲートブリッジを望む都内最大級の無料海釣り公園（利用時間 6:00〜21:00）。安全柵完備でファミリーや初心者にも大人気。",
     accessInfo: "新木場駅より都営バス「木11甲」系統で「若洲キャンプ場前」下車すぐ。首都高湾岸線「新木場IC」より約8分。",
@@ -74,8 +74,8 @@ export const DEFAULT_SPOTS: FishingSpot[] = [
     region: "kanto",
     prefecture: "神奈川県",
     address: "神奈川県横浜市中区本牧ふ頭1番地",
-    lat: 35.4312,
-    lng: 139.6917,
+    lat: 35.4302,
+    lng: 139.6867,
     category: "park",
     description: "東京湾の潮流が直接当たる超一級ポイント。アジ・サバ・イワシの回遊魚から大型タチウオ・青物まで狙える名所。",
     accessInfo: "横浜駅・桜木町駅から横浜市営バス26系統「海づり桟橋」下車すぐ。首都高湾岸線「本牧ふ頭IC」より約5分。",
@@ -123,8 +123,8 @@ export const DEFAULT_SPOTS: FishingSpot[] = [
     region: "kanto",
     prefecture: "神奈川県",
     address: "神奈川県横浜市鶴見区大黒ふ頭20番地先",
-    lat: 35.4578,
-    lng: 139.6894,
+    lat: 35.4501,
+    lng: 139.6954,
     category: "park",
     description: "横浜ベイブリッジの真下に位置する人気釣り施設。水深があり黒潮の分流が差し込むため多彩な魚種が狙える。",
     accessInfo: "鶴見駅から横浜市営バス17系統「大黒海づり公園」下車。首都高湾岸線「大黒ふ頭IC」より約3分。",
@@ -171,8 +171,8 @@ export const DEFAULT_SPOTS: FishingSpot[] = [
     region: "kanto",
     prefecture: "神奈川県",
     address: "神奈川県三浦市三崎町城ヶ島",
-    lat: 35.1325,
-    lng: 139.6192,
+    lat: 35.1336,
+    lng: 139.6194,
     category: "rock",
     description: "三浦半島の最南端。潮通しが抜群で、地磯からのメジナ・クロダイフカセ釣り、岸壁からのアオリイカ・青物が有名。",
     accessInfo: "三浦海岸駅または三崎口駅から京急バス「城ヶ島」行き終点下車。横浜横須賀道路衣笠ICより三浦縦貫道経由約30分。",
@@ -219,8 +219,8 @@ export const DEFAULT_SPOTS: FishingSpot[] = [
     region: "kanto",
     prefecture: "茨城県",
     address: "茨城県東茨城郡大洗町港中央",
-    lat: 36.3094,
-    lng: 140.5744,
+    lat: 36.3061,
+    lng: 140.5715,
     category: "port",
     description: "太平洋に面した広大な港湾。車横付け可能なポイントもあり、サビキのアジ・イワシからヒラメ・タコ・青物まで多彩。",
     accessInfo: "大洗鹿島線「大洗駅」より徒歩約15分。北関東自動車道水戸大洗ICより約10分。",
@@ -314,8 +314,8 @@ export const DEFAULT_SPOTS: FishingSpot[] = [
     region: "kanto",
     prefecture: "千葉県",
     address: "千葉県浦安市高洲9-1",
-    lat: 35.6378,
-    lng: 139.9135,
+    lat: 35.632,
+    lng: 139.9212,
     category: "park",
     description: "浦安市の最南端に位置する広大な東京湾岸公園。開放的なテラス護岸に安全フェンスが整備され、東京湾を一望しながらサヨリやシーバス、クロダイが狙えます。",
     accessInfo: "JR京葉線「新浦安駅」より東京ベイシティバス19系統「高洲海浜公園」終点下車すぐ。首都高湾岸線「浦安IC」より約15分。",
@@ -361,8 +361,8 @@ export const DEFAULT_SPOTS: FishingSpot[] = [
     region: "kanto",
     prefecture: "神奈川県",
     address: "神奈川県川崎市川崎区東扇島94-1",
-    lat: 35.5042,
-    lng: 139.7670,
+    lat: 35.4885,
+    lng: 139.7422,
     category: "park",
     description: "川崎港京浜運河に面した神奈川県屈指の超人気海釣り公園。安全柵完備・24時間年中無休で開放されており、アジ・タチウオ・青物・クロダイの魚影が極めて濃厚。",
     accessInfo: "川崎駅東口より市営バス「川05系統」で「東扇島西公園前」下車すぐ。首都高湾岸線「東扇島IC」より約5分。",
@@ -452,6 +452,198 @@ export const DEFAULT_SPOTS: FishingSpot[] = [
     tips: "足元から水深があり、アジの魚影が濃い。コマセを針に直接擦り付ける「トリックサビキ」が圧倒的な釣果を叩き出します。夜間は常夜灯の明暗部にタチウオやアジが集まります。",
   },
   {
+    id: "kemigawahama-jetty",
+    name: "千葉 美浜 検見川浜突堤 (稲毛ヨットハーバー横)",
+    kana: "けみがわはまとってい",
+    region: "kanto",
+    prefecture: "千葉県",
+    address: "千葉県千葉市美浜区磯辺2-8",
+    lat: 35.6318,
+    lng: 140.046,
+    category: "pier",
+    description: "東京湾奥に突き出た全長約500mの無料突堤。転落防止柵（安全フェンス）が完備されており、イワシ・サッパ・コノシロ・サヨリ・アジ・ギマ・クロダイ・スズキなど多彩な魚種が狙える千葉屈指のファミリー＆ビギナースポット。",
+    accessInfo: "JR京葉線「新検見川駅」または「検見川浜駅」より千葉海浜交通バス「稲毛ヨットハーバー」行き終点下車すぐ。東関東自動車道「湾岸習志野IC」または「湾岸千葉IC」より約15分。",
+    depthRange: "3m〜7m",
+    bottomType: "砂泥・ヘドロ・基礎捨石",
+    facilities: {
+      hasParking: true,
+      hasToilet: true,
+      hasSafetyFence: true,
+      isFamilyFriendly: true,
+      hasNightLight: false,
+      hasConvenienceStoreNearby: false,
+      hasTackleShopNearby: false,
+      isFeeRequired: false,
+      isNightFishingAllowed: true,
+      openingHours: "突堤ゲート 24時間常時開放（駐車場は利用時間制限あり）",
+    },
+    targetFish: ["マイワシ", "サッパ", "コノシロ", "サヨリ", "ギマ", "アジ", "クロダイ", "シーバス", "シロギス", "タチウオ"],
+    bestSeasons: {
+      spring: ["サヨリ", "クロダイ", "シーバス", "ギマ"],
+      summer: ["ギマ", "マイワシ", "サッパ", "シロギス", "アジ"],
+      autumn: ["サヨリ", "マイワシ", "コノシロ", "タチウオ", "サッパ"],
+      winter: ["マコガレイ", "クロダイ", "ヒイカ"],
+    },
+    recommendedRigs: ["トリックサビキ", "サヨリカゴ仕掛け", "チョイ投げ仕掛け", "ヘチ・落とし込み"],
+    localRules: [
+      "突堤内への自転車・バイクの乗り入れ禁止",
+      "本格的なオーバースロー遠投投げ釣りは混雑時危険なため禁止（足元〜チョイ投げ推奨）",
+      "コマセの汚れはバケツの水で洗い流すこと",
+      "ゴミ・仕掛けの放置厳禁",
+    ],
+    parkingDetails: {
+      capacity: "稲毛ヨットハーバー有料駐車場 約270台",
+      fee: "1回 500円（普通車）",
+      hours: "7:30〜22:00（時期により変動あり、時間外施錠）",
+      notes: "夜間〜早朝入庫不可のため、早朝釣行時は近隣コインパーキング利用推奨。",
+    },
+    tips: "初夏（6〜7月）のギマ釣り（アオイソメのチョイ投げ）と秋のサヨリ（シモリウキ付きサヨリカゴ仕掛け）が名物。足元サビキは針にアミエビを擦り付けるトリックサビキが抜群の釣果を出します。",
+  },
+  {
+    id: "ichihara-umiduri-park",
+    name: "千葉 市原 オリジナルメーカー海づり公園 (市原市海づり施設)",
+    kana: "おりじなるめーかーうみづりこうえん",
+    region: "kanto",
+    prefecture: "千葉県",
+    address: "千葉県市原市五井南海岸1-12",
+    lat: 35.5425,
+    lng: 140.0605,
+    category: "park",
+    description: "養老川河口近くの東京湾に突き出た長大なT字型桟橋を持つ有料海釣り公園。潮流が良く水深もあり、アジ・イワシ・サバ・サヨリ・スズキ・クロダイ・シリヤケイカ・コノシロの実績が抜群。売店・食堂・貸竿完備。",
+    accessInfo: "館山自動車道「市原IC」より約15分。JR内房線「五井駅」西口よりタクシーで約15分（バス便あり）。",
+    depthRange: "5m〜10m",
+    bottomType: "砂泥・捨石・基礎パイル",
+    facilities: {
+      hasParking: true,
+      hasToilet: true,
+      hasSafetyFence: true,
+      isFamilyFriendly: true,
+      hasNightLight: false,
+      hasConvenienceStoreNearby: false,
+      hasTackleShopNearby: true,
+      isFeeRequired: true,
+      feeText: "大人 920円 / 65歳以上 460円 / 中学生以下 無料（見学 大人220円/子供110円）※7〜10月夕方割引あり",
+      isNightFishingAllowed: false,
+      openingHours: "4月〜10月 6:00〜19:00（7〜10月は21:00まで延長営業） / 11月〜3月 7:00〜17:00（毎週月曜休館・祝日営業）",
+    },
+    targetFish: ["アジ", "マイワシ", "サバ", "サヨリ", "コノシロ", "シーバス", "クロダイ", "シリヤケイカ", "マコガレイ"],
+    bestSeasons: {
+      spring: ["シリヤケイカ", "クロダイ", "シーバス", "サヨリ"],
+      summer: ["アジ", "マイワシ", "サバ", "クロダイ", "サッパ"],
+      autumn: ["アジ", "サヨリ", "コノシロ", "タチウオ", "シーバス"],
+      winter: ["マコガレイ", "シーバス", "メバル"],
+    },
+    recommendedRigs: ["サビキ釣り", "ウキフカセ釣り", "スッテ・エギ仕掛け", "チョイ投げ仕掛け"],
+    localRules: [
+      "安全管理のため入場定員制（満員時整理券配布）",
+      "投げ釣り（振りかぶり遠投）およびルアー釣りは指定エリア・時間外禁止（アンダースロー足元推奨）",
+      "竿出しは1人2本まで",
+      "小学生以下のお子様はライフジャケット着用必須（無料貸出あり）",
+    ],
+    parkingDetails: {
+      capacity: "施設専用無料駐車場 約330台",
+      fee: "無料",
+      hours: "開館30分前〜閉館30分後まで",
+      notes: "週末や青物・イカ回遊時は開場前から入場待ちの列ができる人気施設です。",
+    },
+    tips: "桟橋の支柱周りに大型クロダイやフッコが居着いています。春（5〜6月）のシリヤケイカ（スッテ仕掛け）と秋のアジ・サヨリが名物。足元直下のサビキで鈴なりに釣れます。",
+  },
+  {
+    id: "tateyama-port",
+    name: "千葉 南房総 館山港 (砂揚げ場・夕日桟橋)",
+    kana: "たてやまこう",
+    region: "kanto",
+    prefecture: "千葉県",
+    address: "千葉県館山市沼1686-17",
+    lat: 35.0034,
+    lng: 139.8665,
+    category: "port",
+    description: "南房総・館山湾の最奥に位置する超一級の天然良港。水深が10m以上あり黒潮の恩恵を受けるため、アジ・イワシ・ソウダガツオ・イナダ・ショゴ（カンパチ幼魚）・アオリイカ・タチウオ・カマス・クロダイと魚種の豊富さは関東屈指。車横付け可能なエリア（砂揚げ場）もあり大人気。",
+    accessInfo: "富津館山道路「富浦IC」より国道127号経由で約15分。JR内房線「館山駅」より徒歩約20分または館山日東バス「洲崎方面」行きで「館山港」下車。",
+    depthRange: "8m〜15m",
+    bottomType: "砂泥・基礎ケーソン・一部沈み根",
+    facilities: {
+      hasParking: true,
+      hasToilet: true,
+      hasSafetyFence: false,
+      isFamilyFriendly: true,
+      hasNightLight: true,
+      hasConvenienceStoreNearby: true,
+      hasTackleShopNearby: true,
+      isFeeRequired: false,
+      isNightFishingAllowed: true,
+      openingHours: "24時間常時開放（港湾作業中・フェンス閉鎖区域除く）",
+    },
+    targetFish: ["アジ", "カンパチ（ショゴ）", "ソウダガツオ", "ブリ（イナダ）", "アオリイカ", "タチウオ", "アカカマス", "シロギス", "クロダイ", "マイワシ"],
+    bestSeasons: {
+      spring: ["親アオリイカ", "クロダイ", "シロギス", "アジ"],
+      summer: ["ソウダガツオ", "カンパチ（ショゴ）", "アジ", "マイワシ", "シロギス"],
+      autumn: ["ブリ（イナダ）", "カンパチ（ショゴ）", "タチウオ", "アカカマス", "アオリイカ", "アジ"],
+      winter: ["アカカマス", "アジ", "ヒイカ", "メバル"],
+    },
+    recommendedRigs: ["ライトショアジギング", "サビキ釣り / トリックサビキ", "エギング", "カマス引っ掛け・ジグサビキ", "タチウオテンヤ"],
+    localRules: [
+      "港湾関係車両・大型船着岸作業時は速やかに場所を譲り立ち入らないこと",
+      "立入禁止区域（荷役専用エリア、突堤先端フェンス等）への侵入厳禁",
+      "ゴミ・コマセ汚れ・釣り糸の放置厳禁、スミ跡は必ず洗い流すこと",
+      "迷惑駐車禁止（指定の駐車スペースを利用）",
+    ],
+    parkingDetails: {
+      capacity: "館山港周辺・夕日桟橋駐車場 約150台",
+      fee: "無料",
+      hours: "24時間利用可能",
+      notes: "砂揚げ場岸壁への乗り入れ時は作業動線を塞がないよう十分ご注意ください。",
+    },
+    tips: "夏〜秋の回遊魚（ヒラソウダ・マルソウダ・ショゴ）の弓角・メタルジグが激アツ。夜釣りでは常夜灯周りのアジングやタチウオ、冬場は越冬カマス狙いで賑わいます。",
+  },
+  {
+    id: "kamogawa-fisherina",
+    name: "千葉 外房 フィッシャリーナ鴨川 (鴨川港)",
+    kana: "ふぃっしゃりーなかもがわ",
+    region: "kanto",
+    prefecture: "千葉県",
+    address: "千葉県鴨川市前原359-71",
+    lat: 35.0983,
+    lng: 140.1054,
+    category: "port",
+    description: "外房鴨川の前原海岸に隣接するマリーナ＆港湾親水施設。安全柵が整備された遊歩道護岸があり、外房特有の良型アジ回遊（夕マズメ〜夜間）やクロダイ・メジナ・アオリイカ・シロギス・ヒラメが狙える南房総の快適スポット。",
+    accessInfo: "JR外房線「安房鴨川駅」より徒歩約15分。館山自動車道「君津IC」より房総スカイライン・県道24号経由で約45分。",
+    depthRange: "4m〜8m",
+    bottomType: "砂泥・岩礁・テトラポッド",
+    facilities: {
+      hasParking: true,
+      hasToilet: true,
+      hasSafetyFence: true,
+      isFamilyFriendly: true,
+      hasNightLight: true,
+      hasConvenienceStoreNearby: true,
+      hasTackleShopNearby: true,
+      isFeeRequired: false,
+      isNightFishingAllowed: true,
+      openingHours: "24時間利用可能（マリーナ施設・浮桟橋内は立入禁止）",
+    },
+    targetFish: ["アジ（外房アジ）", "アオリイカ", "クロダイ", "シロギス", "アカカマス", "ヒラメ", "メバル", "メジナ"],
+    bestSeasons: {
+      spring: ["アオリイカ", "クロダイ", "シロギス"],
+      summer: ["アジ", "シロギス", "カンパチ（ショゴ）", "マイワシ"],
+      autumn: ["アジ", "アオリイカ", "アカカマス", "ヒラメ"],
+      winter: ["アジ（深場）", "メバル", "カサゴ"],
+    },
+    recommendedRigs: ["ジグ単アジング", "サビキ釣り（カゴサビキ）", "エギング", "チョイ投げ仕掛け", "ウキフカセ釣り"],
+    localRules: [
+      "マリーナ内浮桟橋およびプレジャーボート係留エリアへの立入禁止",
+      "遊歩道利用者の安全のため、仕掛けのキャスト時は後方確認徹底",
+      "ゴミ・仕掛けの持ち帰り厳守、コマセ汚れはきれいに洗い流すこと",
+    ],
+    parkingDetails: {
+      capacity: "フィッシャリーナ鴨川公営駐車場 約80台",
+      fee: "無料",
+      hours: "24時間利用可能",
+      notes: "観光シーズンやサーファーで混雑することがあります。",
+    },
+    tips: "外房特有の夕マズメのアジ時合が強烈で、20〜25cm超の良型アジがバタバタと釣れます。外向きテトラ周辺はエギングのアオリイカやフカセのクロダイ・メジナ、内向き砂地はシロギス・ヒラメ狙いが有望です。",
+  },
+  {
     id: "izu-oshima-motomachi",
     name: "伊豆大島 元町港 桟橋・防波堤",
     kana: "いずおおしまもとまちこう",
@@ -509,8 +701,8 @@ export const DEFAULT_SPOTS: FishingSpot[] = [
     region: "kansai",
     prefecture: "大阪府",
     address: "大阪市住之江区南港南6丁目9番3号",
-    lat: 34.6186,
-    lng: 135.3941,
+    lat: 34.6146,
+    lng: 135.4032,
     category: "park",
     description: "大阪湾の大型無料釣り施設。安全柵完備で南港沖の潮通しが良く、秋の青物・タチウオシーズンは大盛況。",
     accessInfo: "ニュートラム南港ポートタウン線「フェリーターミナル駅」よりバス。阪神高速湾岸線「南港南IC」より約5分。",
@@ -556,8 +748,8 @@ export const DEFAULT_SPOTS: FishingSpot[] = [
     region: "kansai",
     prefecture: "兵庫県",
     address: "兵庫県神戸市中央区港島2丁目",
-    lat: 34.6744,
-    lng: 135.2033,
+    lat: 34.6768,
+    lng: 135.2046,
     category: "park",
     description: "神戸大橋のライトアップを眺めながら釣りができる絶景ポイント。潮の流れが速く、大型青物やアオリイカ、タチウオの実績多数。",
     accessInfo: "ポートライナー「中公園駅」または「みなとじま駅」より徒歩約8分。阪神高速神戸線「京橋IC」より約5分。",
@@ -602,8 +794,8 @@ export const DEFAULT_SPOTS: FishingSpot[] = [
     region: "kansai",
     prefecture: "兵庫県",
     address: "兵庫県明石市大蔵海岸通",
-    lat: 34.6465,
-    lng: 135.0067,
+    lat: 34.6425,
+    lng: 135.0083,
     category: "pier",
     description: "明石海峡の激流に育まれた極上の明石鯛・明石タコ・青物・アオリイカが集まる関西最高峰の激アツエリア。",
     accessInfo: "JR朝霧駅または山陽電鉄大蔵谷駅より徒歩すぐ。第二神明道路「大蔵谷IC」より約10分。",
@@ -649,8 +841,8 @@ export const DEFAULT_SPOTS: FishingSpot[] = [
     region: "kansai",
     prefecture: "和歌山県",
     address: "和歌山県和歌山市毛見1527",
-    lat: 34.1539,
-    lng: 135.1764,
+    lat: 34.1542,
+    lng: 135.1768,
     category: "port",
     description: "黒潮の影響を色濃く受ける関西屈指の好漁場。大波止外側は潮通し抜群で、メーター級のシイラやブリ・カンパチも回遊。",
     accessInfo: "JR海南駅からバス「マリーナシティ」下車。阪和自動車道「海南IC」より約10分。",
@@ -688,6 +880,133 @@ export const DEFAULT_SPOTS: FishingSpot[] = [
     },
     tips: "春の親イカ狙い（キロアップ）はヤエン仕掛けやエギングで大人気。秋は夜のタチウオ数釣りが楽しめる。",
   },
+  {
+    id: "wakayama-shirahama-kawakyu",
+    name: "和歌山 南紀白浜 ホテル川久裏 護岸",
+    kana: "ほてるかわきゅううら",
+    region: "kansai",
+    prefecture: "和歌山県",
+    address: "和歌山県西牟婁郡白浜町3745",
+    lat: 33.6886,
+    lng: 135.3574,
+    category: "pier",
+    description: "南紀白浜のシンボル「ホテル川久」をぐるりと囲む全長約800mの広大な親水護岸。古賀浦湾内に位置するため波が穏やかで足場も平坦、アオリイカのエギング・ヤエン釣りやアジ、チヌ、グレ、タチウオ、青物、根魚が狙える南紀屈指の人気無料釣り場。",
+    accessInfo: "紀勢自動車道「南紀白浜IC」より約15分。JRきのくに線「白浜駅」より明光バスで約15分「古賀浦」下車すぐ。",
+    depthRange: "4m〜10m",
+    bottomType: "砂泥・岩礁・敷石・藻場",
+    facilities: {
+      hasParking: true,
+      hasToilet: false,
+      hasSafetyFence: false,
+      isFamilyFriendly: true,
+      hasNightLight: true,
+      hasConvenienceStoreNearby: true,
+      hasTackleShopNearby: true,
+      isFeeRequired: false,
+      isNightFishingAllowed: true,
+      openingHours: "24時間利用可能（ホテル私有地・船着場桟橋内は立入禁止）",
+    },
+    targetFish: ["アオリイカ", "アジ", "クロダイ", "メジナ", "タチウオ", "カンパチ（シオ）", "ブリ（ツバス・ハマチ）", "カサゴ", "ヒラメ", "シーバス"],
+    bestSeasons: {
+      spring: ["親アオリイカ（ヤエン・エギング）", "クロダイ", "メジナ", "アジ"],
+      summer: ["アジ", "カンパチ（シオ）", "ツバス", "カサゴ", "シロギス"],
+      autumn: ["新子アオリイカ", "タチウオ", "ハマチ", "アジ", "クロダイ"],
+      winter: ["メジナ", "カサゴ", "ヒラメ", "アジ"],
+    },
+    recommendedRigs: ["エギング / ヤエン仕掛け（アオリイカ）", "カゴサビキ / ライトかご釣り", "ライトショアジギング", "ウキフカセ釣り", "タチウオテンヤ / 電気ウキ"],
+    localRules: [
+      "ホテル川久敷地内および船着き場・専用桟橋への立入・釣りは禁止",
+      "夜間の大声・騒音厳禁（近隣ホテル・旅館・住宅街への配慮徹底）",
+      "イカスミ跡やコマセの汚れは海水で必ず洗い流して退去すること",
+      "ゴミ・仕掛けの放置厳禁",
+      "釣り場にトイレはないため、近隣の綱不知公園等の公衆トイレを利用すること",
+    ],
+    parkingDetails: {
+      capacity: "護岸周辺駐車スペース 約30台",
+      fee: "無料",
+      hours: "24時間利用可能",
+      notes: "ホテル専用駐車場や私有地への無断駐車厳禁。公道や通行の邪魔にならないスペースに駐車してください。",
+    },
+    tips: "南紀白浜を代表するアオリイカの超実績ポイント。春は2kg〜3kg超の親アオリイカのヤエン釣り、秋はエギングの数釣りが楽しめます。湾奥のため北西風などの冬の季節風にも比較的強く、夜釣りでは常夜灯周りのアジングやタチウオも狙い目です。",
+  },
+  {
+    "id": "kyoto-miyazu-fishingpark",
+    "name": "京都 丹後 宮津市海洋つり場 (栗田湾)",
+    "kana": "みやずしかいようつりば",
+    "region": "kansai",
+    "prefecture": "京都府",
+    "address": "京都府宮津市字小田宿野1006",
+    "lat": 35.5342,
+    "lng": 135.2415,
+    "category": "park",
+    "description": "日本三景・天橋立に近い波静かな栗田湾（くんだわん）に突き出た有料海釣り桟橋。安全柵・売店・トイレ・貸竿完備で、アジ・アオリイカ・チヌ・グレ・マダイ・サゴシが狙える京都府内唯一の本格海づり施設。",
+    "accessInfo": "京都縦貫自動車道「宮津天橋立IC」より国道178号経由で約15分。京都丹後鉄道「宮津駅」よりタクシー約15分。",
+    "depthRange": "6m〜12m",
+    "bottomType": "砂泥・魚礁・基礎パイル",
+    "facilities": {
+      "hasParking": true,
+      "hasToilet": true,
+      "hasSafetyFence": true,
+      "isFamilyFriendly": true,
+      "hasNightLight": false,
+      "hasConvenienceStoreNearby": false,
+      "hasTackleShopNearby": true,
+      "isFeeRequired": true,
+      "feeText": "大人 1,100円 / 小人(小中学生) 550円（見学 大人200円/小人100円）",
+      "isNightFishingAllowed": false,
+      "openingHours": "4月〜11月 7:00〜17:00（夏期延長あり・毎週木曜休園、祝日営業）"
+    },
+    "targetFish": [
+      "アジ",
+      "アオリイカ",
+      "クロダイ",
+      "メジナ",
+      "マダイ",
+      "サワラ（サゴシ）",
+      "シロギス"
+    ],
+    "bestSeasons": {
+      "spring": [
+        "クロダイ",
+        "メジナ",
+        "サゴシ",
+        "マダイ"
+      ],
+      "summer": [
+        "アジ",
+        "シロギス",
+        "キジハタ"
+      ],
+      "autumn": [
+        "アオリイカ",
+        "アジ",
+        "サゴシ",
+        "クロダイ"
+      ],
+      "winter": [
+        "休園期間（12月〜3月）"
+      ]
+    },
+    "recommendedRigs": [
+      "サビキ釣り",
+      "ウキフカセ釣り",
+      "エギング",
+      "胴突き仕掛け"
+    ],
+    "localRules": [
+      "安全のためライフジャケット着用必須（無料貸出あり）",
+      "投げ釣り（オーバースロー遠投）およびルアーの投げ釣り制限あり（足元・アンダースロー推奨）",
+      "竿出しは1人2本まで"
+    ],
+    "parkingDetails": {
+      "capacity": "海洋つり場専用無料駐車場 約80台",
+      "fee": "無料",
+      "hours": "開園時間に合わせて利用可能",
+      "notes": "釣り場直結で快適に利用できます。"
+    },
+    "tips": "桟橋周辺に魚礁が沈められており、サビキ釣りでアジの数釣りやウキフカセでチヌ・グレ・マダイが狙えます。秋はアオリイカのエギングも人気。"
+  },
+
 
   // --- 東海・中部エリア ---
   {
@@ -697,8 +1016,8 @@ export const DEFAULT_SPOTS: FishingSpot[] = [
     region: "tokai",
     prefecture: "静岡県",
     address: "静岡県静岡市清水区日の出町",
-    lat: 35.0116,
-    lng: 138.5022,
+    lat: 35.0068,
+    lng: 138.4949,
     category: "port",
     description: "水深の深い駿河湾に面した天然の良港。クロダイのかかり釣り（ダンゴ釣り）発祥の地として知られ、タチウオやアジも魚影濃厚。",
     accessInfo: "JR清水駅より徒歩または静鉄バス。東名高速「清水IC」より約15分。",
@@ -743,8 +1062,8 @@ export const DEFAULT_SPOTS: FishingSpot[] = [
     region: "tokai",
     prefecture: "静岡県",
     address: "静岡県沼津市千本",
-    lat: 35.0872,
-    lng: 138.8524,
+    lat: 35.0548,
+    lng: 138.884,
     category: "surf",
     description: "急深な駿河湾特有のサーフ。波打ち際から数十メートルで水深数十メートルに達し、遠投カゴ釣りやショアジギングの聖地。",
     accessInfo: "JR沼津駅より車で約10分。東名高速「愛鷹スマートIC」より約15分。",
@@ -783,6 +1102,167 @@ export const DEFAULT_SPOTS: FishingSpot[] = [
     dangerNotes: ["急深なため波足が長く引き波が強烈。絶対に波打ち際に近づきすぎないこと"],
     tips: "両軸リールを使った遠投カゴ釣り（ハリス6m）が伝統スタイル。夏のソウダガツオ・秋のイナダの引きは強烈。",
   },
+  {
+    "id": "aichi-chita-shinmaiko",
+    "name": "愛知 知多半島 新舞子マリンパーク 魚釣り施設",
+    "kana": "しんまいこまりんぱーく",
+    "region": "tokai",
+    "prefecture": "愛知県",
+    "address": "愛知県知多市緑浜町2",
+    "lat": 34.9548,
+    "lng": 136.8216,
+    "category": "park",
+    "description": "知多半島西海岸の人工島に整備された全長約740mの無料海釣り公園。全面安全フェンス・足場平坦で、アジ・イワシ・サッパ・ギマ・クロダイ・シーバス・マゴチ・シロギスが狙える愛知県内屈指の超人気スポット。",
+    "accessInfo": "西知多産業道路「日長IC」より約5分。名鉄常滑線「新舞子駅」より徒歩約15分。",
+    "depthRange": "3m〜7m",
+    "bottomType": "砂泥・敷石・基礎ケーソン",
+    "facilities": {
+      "hasParking": true,
+      "hasToilet": true,
+      "hasSafetyFence": true,
+      "isFamilyFriendly": true,
+      "hasNightLight": false,
+      "hasConvenienceStoreNearby": true,
+      "hasTackleShopNearby": true,
+      "isFeeRequired": false,
+      "isNightFishingAllowed": false,
+      "openingHours": "6:00〜20:00（夜間施錠閉鎖・夜釣り禁止）"
+    },
+    "targetFish": [
+      "アジ",
+      "マイワシ",
+      "サッパ",
+      "ギマ",
+      "クロダイ",
+      "シーバス",
+      "マゴチ",
+      "シロギス"
+    ],
+    "bestSeasons": {
+      "spring": [
+        "クロダイ",
+        "シーバス",
+        "ギマ"
+      ],
+      "summer": [
+        "ギマ（名物）",
+        "サッパ",
+        "マイワシ",
+        "アジ",
+        "シロギス",
+        "マゴチ"
+      ],
+      "autumn": [
+        "アジ",
+        "マイワシ",
+        "クロダイ",
+        "シーバス",
+        "タチウオ"
+      ],
+      "winter": [
+        "カレイ",
+        "カサゴ",
+        "アイナメ"
+      ]
+    },
+    "recommendedRigs": [
+      "サビキ釣り / トリックサビキ",
+      "チョイ投げ仕掛け",
+      "ヘチ・落とし込み",
+      "ルアー（マゴチ・シーバス）"
+    ],
+    "localRules": [
+      "利用時間は 6:00〜20:00（時間外の立ち入り・夜釣り禁止）",
+      "オーバースロー（上からの振りかぶり遠投）禁止（安全のためアンダースロー限定）",
+      "投げサビキ・ルアーの遠投禁止（足元〜チョイ投げ推奨）",
+      "竿出しは1人2本まで、ゴミ持ち帰り徹底"
+    ],
+    "parkingDetails": {
+      "capacity": "新舞子マリンパーク駐車場 約1,000台",
+      "fee": "無料（夏季プール・海水浴期間のみ有料 1回500円）",
+      "hours": "開門時間に連動",
+      "notes": "土日祝やイワシ回遊時は朝早くから満車になることがあります。"
+    },
+    "tips": "初夏（6〜8月）のギマ釣り（アオイソメのチョイ投げ）とサビキでのサッパ・イワシ・アジが名物。足元敷石周りの落とし込みで大型クロダイの釣果も多数。"
+  },
+  {
+    "id": "mie-yokkaichi-kasumigaura",
+    "name": "三重 四日市 霞ヶ浦緑地公園 霞釣り公園護岸",
+    "kana": "かすみがうらりょくちこうえん",
+    "region": "tokai",
+    "prefecture": "三重県",
+    "address": "三重県四日市市大字羽津甲5169",
+    "lat": 34.9914,
+    "lng": 136.6535,
+    "category": "park",
+    "description": "四日市ドーム隣接の海岸緑地に整備された無料の釣り公園護岸。安全フェンス・大型無料駐車場・トイレ完備で、シーバス・クロダイ・マゴチ・ハゼ・アジ・タチウオが狙える伊勢湾奥の定番スポット。",
+    "accessInfo": "伊勢湾岸自動車道「みえ川越IC」より約10分。近鉄名古屋線「霞ヶ浦駅」より徒歩約20分。",
+    "depthRange": "3m〜7m",
+    "bottomType": "砂泥・敷石",
+    "facilities": {
+      "hasParking": true,
+      "hasToilet": true,
+      "hasSafetyFence": true,
+      "isFamilyFriendly": true,
+      "hasNightLight": true,
+      "hasConvenienceStoreNearby": true,
+      "hasTackleShopNearby": true,
+      "isFeeRequired": false,
+      "isNightFishingAllowed": true,
+      "openingHours": "24時間常時開放"
+    },
+    "targetFish": [
+      "シーバス",
+      "クロダイ",
+      "マゴチ",
+      "マハゼ",
+      "アジ",
+      "タチウオ",
+      "サバ"
+    ],
+    "bestSeasons": {
+      "spring": [
+        "シーバス",
+        "クロダイ"
+      ],
+      "summer": [
+        "マハゼ",
+        "マゴチ",
+        "クロダイ",
+        "サッパ"
+      ],
+      "autumn": [
+        "シーバス",
+        "タチウオ",
+        "マハゼ",
+        "アジ"
+      ],
+      "winter": [
+        "カサゴ",
+        "メバル",
+        "カレイ"
+      ]
+    },
+    "recommendedRigs": [
+      "ルアー（シーバス・マゴチ）",
+      "チョイ投げ仕掛け（ハゼ）",
+      "前打ち / ヘチ釣り（クロダイ）",
+      "タチウオワインド / 電気ウキ"
+    ],
+    "localRules": [
+      "公園散策者・ランナーの後方安全確認徹底",
+      "四日市ドーム周辺および港湾立ち入り禁止エリアへの侵入厳禁",
+      "ゴミ・仕掛けの放置厳禁"
+    ],
+    "parkingDetails": {
+      "capacity": "霞ヶ浦緑地公園無料駐車場 約300台",
+      "fee": "無料",
+      "hours": "24時間利用可能",
+      "notes": "ドームでイベント開催時は混雑することがあります。"
+    },
+    "tips": "夏〜秋のハゼのチョイ投げ数釣りと夜釣りのシーバス・タチウオが人気。敷石沿いの前打ちでクロダイの魚影も濃いエリアです。"
+  },
+
 
   // --- 九州・沖縄エリア ---
   {
@@ -792,8 +1272,8 @@ export const DEFAULT_SPOTS: FishingSpot[] = [
     region: "kyushu",
     prefecture: "福岡県",
     address: "福岡県福岡市中央区港2丁目",
-    lat: 33.5991,
-    lng: 130.3842,
+    lat: 33.5946,
+    lng: 130.3803,
     category: "pier",
     description: "福岡市街地から至近の人気湾岸スポット。アジング・メバリング・タチウオ・シーバスが手軽に狙えるナイトゲームの名所。",
     accessInfo: "地下鉄空港線「大濠公園駅」または「赤坂駅」より徒歩15分。福岡都市高速「西公園ランプ」より約5分。",
@@ -838,8 +1318,8 @@ export const DEFAULT_SPOTS: FishingSpot[] = [
     region: "kyushu",
     prefecture: "長崎県",
     address: "長崎県長崎市神ノ島町",
-    lat: 32.7214,
-    lng: 129.8375,
+    lat: 32.7238,
+    lng: 129.8078,
     category: "port",
     description: "五島灘へ繋がる長崎港の出入口。潮流が激しく、ショアからヒラマサ・ブリ・大型アオリイカが狙える全国屈指の一級地。",
     accessInfo: "長崎駅より長崎バス「神ノ島教会下」方面行き。ながさき出島道路より女神大橋経由約15分。",
@@ -878,14 +1358,403 @@ export const DEFAULT_SPOTS: FishingSpot[] = [
     tips: "潮が川のように流れるため、ヘビーシンカーやジグが必要。潮止まり直前後の反転流に超大物が食ってきます。",
   },
   {
+    "id": "saga-karatsu-yobuko",
+    "name": "佐賀 唐津 呼子港 呼子大橋下・加部島波止",
+    "kana": "よぶここう",
+    "region": "kyushu",
+    "prefecture": "佐賀県",
+    "address": "佐賀県唐津市呼子町呼子",
+    "lat": 33.5412,
+    "lng": 129.8912,
+    "category": "port",
+    "description": "イカの聖地として全国に名高い玄界灘の超一級港湾。透明度抜群で潮通しが極めて良く、アオリイカ（ミズイカ）・ヤリイカ・メガアジ・サワラ・マダイ・根魚の実績が圧倒的な九州屈指の人気釣り場。",
+    "accessInfo": "西九州自動車道「唐津IC」より国道204号経由で約30分。JR唐津駅より昭和バスで約30分。",
+    "depthRange": "7m〜15m",
+    "bottomType": "岩礁・砂泥・海藻帯・基礎ケーソン",
+    "facilities": {
+      "hasParking": true,
+      "hasToilet": true,
+      "hasSafetyFence": false,
+      "isFamilyFriendly": true,
+      "hasNightLight": true,
+      "hasConvenienceStoreNearby": true,
+      "hasTackleShopNearby": true,
+      "isFeeRequired": false,
+      "isNightFishingAllowed": true,
+      "openingHours": "24時間常時開放"
+    },
+    "targetFish": [
+      "アジ（尺アジ）",
+      "アオリイカ（ミズイカ）",
+      "ヤリイカ",
+      "サワラ",
+      "マダイ",
+      "キジハタ",
+      "カサゴ"
+    ],
+    "bestSeasons": {
+      "spring": [
+        "親アオリイカ（キロアップ・2kg超）",
+        "マダイ",
+        "ヤリイカ"
+      ],
+      "summer": [
+        "キジハタ",
+        "アジ",
+        "カマス"
+      ],
+      "autumn": [
+        "新子アオリイカ",
+        "サワラ",
+        "アジ",
+        "青物"
+      ],
+      "winter": [
+        "ヤリイカ（ササイカ）",
+        "尺アジ",
+        "メバル"
+      ]
+    },
+    "recommendedRigs": [
+      "エギング / ヤエン仕掛け",
+      "ジグ単アジング",
+      "ショアジギング",
+      "ウキフカセ釣り",
+      "エサ巻きテーラー"
+    ],
+    "localRules": [
+      "呼子朝市通り周辺や定期観光船（ジーラ等）発着場での釣り禁止",
+      "イカスミ跡は必ずバケツの水で綺麗に洗い流して退去すること",
+      "漁具・係留ロープへの仕掛け引っ掛け禁止"
+    ],
+    "parkingDetails": {
+      "capacity": "呼子港周辺駐車場・臨港駐車場 計約150台",
+      "fee": "無料（一部有料駐車場あり）",
+      "hours": "24時間利用可能",
+      "notes": "漁業関係者の荷役エリアを避けて駐車してください。"
+    },
+    "tips": "春と秋のエギングは九州随一の人気。夜釣りでは常夜灯周りのアジングで25〜30cm超の尺アジが連発し、冬場はヤリイカ（ササイカ）のウキ釣りで賑わいます。"
+  },
+  {
+    "id": "kumamoto-amakusa-ushibuka",
+    "name": "熊本 天草 牛深港 ハイヤ大橋下・後浜岸壁",
+    "kana": "うしぶかこう",
+    "region": "kyushu",
+    "prefecture": "熊本県",
+    "address": "熊本県天草市牛深町",
+    "lat": 32.1938,
+    "lng": 130.0275,
+    "category": "port",
+    "description": "天草諸島の最南端に位置する黒潮分岐流が当たる超一級港湾。牛深ハイヤ大橋を望む足場の良い岸壁で、大型アオリイカ（ミズイカ）・尺アジ・ガラカブ（カサゴ）・キジハタ・チヌ・青物が狙える天草屈指の好釣り場。",
+    "accessInfo": "九州自動車道「松橋IC」より国道266号経由で約2時間。道の駅うしぶか海彩館すぐ。",
+    "depthRange": "6m〜14m",
+    "bottomType": "岩礁・敷石・砂泥",
+    "facilities": {
+      "hasParking": true,
+      "hasToilet": true,
+      "hasSafetyFence": false,
+      "isFamilyFriendly": true,
+      "hasNightLight": true,
+      "hasConvenienceStoreNearby": true,
+      "hasTackleShopNearby": true,
+      "isFeeRequired": false,
+      "isNightFishingAllowed": true,
+      "openingHours": "24時間利用可能"
+    },
+    "targetFish": [
+      "アジ",
+      "アオリイカ（ミズイカ）",
+      "カサゴ（ガラカブ）",
+      "キジハタ",
+      "クロダイ",
+      "ブリ（ヤズ）"
+    ],
+    "bestSeasons": {
+      "spring": [
+        "親アオリイカ",
+        "クロダイ",
+        "マダイ"
+      ],
+      "summer": [
+        "キジハタ",
+        "ガラカブ",
+        "アジ"
+      ],
+      "autumn": [
+        "アオリイカ",
+        "青物（ヤズ）",
+        "アジ",
+        "タチウオ"
+      ],
+      "winter": [
+        "尺アジ",
+        "ガラカブ",
+        "メバル"
+      ]
+    },
+    "recommendedRigs": [
+      "エギング",
+      "ジグ単アジング",
+      "胴突き探り釣り",
+      "ライトショアジギング",
+      "ウキフカセ釣り"
+    ],
+    "localRules": [
+      "道の駅うしぶか海彩館のフェリー発着桟橋での釣り禁止",
+      "ゴミ・仕掛けの放置厳禁",
+      "スミ跡やコマセは海水できれいに洗い流すこと"
+    ],
+    "parkingDetails": {
+      "capacity": "うしぶか海彩館・港湾無料駐車場 約120台",
+      "fee": "無料",
+      "hours": "24時間利用可能",
+      "notes": "足元近くに駐車可能でアクセス良好です。"
+    },
+    "tips": "暖流の恩恵で魚影が濃く、冬でも水温が高いため通年アオリイカやロックフィッシュが狙えます。常夜灯下のアジングでは尺アジの期待大。"
+  },
+  {
+    "id": "oita-saiki-tsurumi",
+    "name": "大分 豊後水道 佐伯 鶴見 間元港・地松浦波止",
+    "kana": "さいきつるみまもとこう",
+    "region": "kyushu",
+    "prefecture": "大分県",
+    "address": "大分県佐伯市鶴見大字地松浦",
+    "lat": 32.9625,
+    "lng": 132.0125,
+    "category": "port",
+    "description": "豊後水道の激流に育まれた日本有数の魚の宝庫・佐伯市鶴見半島。関アジにも匹敵する極上アジ（尺アジ・ギガアジ）やモイカ（アオリイカ）・クロ（メジナ）・ブリ・タチウオが狙える大分県内随一の好釣り場。",
+    "accessInfo": "東九州自動車道「佐伯IC」より車で約25分。佐伯市街地より鶴見半島方面へ約20分。",
+    "depthRange": "8m〜18m",
+    "bottomType": "岩礁・基礎ケーソン・砂泥",
+    "facilities": {
+      "hasParking": true,
+      "hasToilet": true,
+      "hasSafetyFence": false,
+      "isFamilyFriendly": true,
+      "hasNightLight": true,
+      "hasConvenienceStoreNearby": false,
+      "hasTackleShopNearby": true,
+      "isFeeRequired": false,
+      "isNightFishingAllowed": true,
+      "openingHours": "24時間利用可能"
+    },
+    "targetFish": [
+      "アジ（関アジ・尺アジ）",
+      "アオリイカ（モイカ）",
+      "メジナ（クロ）",
+      "ブリ",
+      "タチウオ",
+      "マダイ"
+    ],
+    "bestSeasons": {
+      "spring": [
+        "親モイカ（2kg〜3kg超）",
+        "クロ（メジナ）",
+        "マダイ"
+      ],
+      "summer": [
+        "イサキ",
+        "アジ",
+        "根魚"
+      ],
+      "autumn": [
+        "新子モイカ",
+        "ブリ・ハマチ",
+        "タチウオ",
+        "アジ"
+      ],
+      "winter": [
+        "尺アジ・ギガアジ",
+        "寒グレ",
+        "モイカ"
+      ]
+    },
+    "recommendedRigs": [
+      "ジグ単アジング / キャロ",
+      "ヤエン仕掛け / エギング",
+      "カゴ釣り",
+      "ウキフカセ釣り",
+      "ショアジギング"
+    ],
+    "localRules": [
+      "渡船乗船所・漁船係留エリアへの迷惑駐車および仕掛け投入禁止",
+      "波止が高いためライフジャケット着用必須・長柄タモ網（5m以上）必携",
+      "ゴミ・仕掛けの完全持ち帰り"
+    ],
+    "parkingDetails": {
+      "capacity": "港周辺無料駐車スペース 約40台",
+      "fee": "無料",
+      "hours": "24時間利用可能",
+      "notes": "漁業者作業の邪魔にならない場所に駐車してください。"
+    },
+    "tips": "豊後水道の急潮に揉まれたアジの引きと味は日本一級。アジングでの40cm超（ギガアジ）や、春の3kgクラスのモイカ（ヤエン釣り）の実績が多数あります。"
+  },
+  {
+    "id": "miyazaki-nichinan-aburatsu",
+    "name": "宮崎 日南 油津港 東波止・チョロ船乗り場",
+    "kana": "あぶらつこう",
+    "region": "kyushu",
+    "prefecture": "宮崎県",
+    "address": "宮崎県日南市油津",
+    "lat": 31.5782,
+    "lng": 131.4085,
+    "category": "port",
+    "description": "日南海岸・日向灘に面した南国情緒あふれる大型天然良港。黒潮が直接洗うため水温が高く、カンパチ（ネイゴ）・アオリイカ（ミズイカ）・アジ・タチウオ・シブダイ・オオモンハタが狙える宮崎屈指の好ポイント。",
+    "accessInfo": "宮崎自動車道「田野IC」より日南方面へ約45分。JR日南線「油津駅」より車で約5分。",
+    "depthRange": "7m〜15m",
+    "bottomType": "砂泥・岩礁・基礎ケーソン",
+    "facilities": {
+      "hasParking": true,
+      "hasToilet": true,
+      "hasSafetyFence": false,
+      "isFamilyFriendly": true,
+      "hasNightLight": true,
+      "hasConvenienceStoreNearby": true,
+      "hasTackleShopNearby": true,
+      "isFeeRequired": false,
+      "isNightFishingAllowed": true,
+      "openingHours": "24時間常時開放"
+    },
+    "targetFish": [
+      "カンパチ（ネイゴ）",
+      "アオリイカ（ミズイカ）",
+      "アジ",
+      "タチウオ",
+      "ハマダイ・シブダイ",
+      "オオモンハタ"
+    ],
+    "bestSeasons": {
+      "spring": [
+        "親ミズイカ",
+        "マダイ",
+        "クロダイ"
+      ],
+      "summer": [
+        "カンパチ（ネイゴ）",
+        "オオモンハタ",
+        "シブダイ（夜釣り）"
+      ],
+      "autumn": [
+        "ネイゴ",
+        "ミズイカ",
+        "タチウオ",
+        "アジ"
+      ],
+      "winter": [
+        "尺アジ",
+        "メジナ",
+        "カサゴ"
+      ]
+    },
+    "recommendedRigs": [
+      "ライトショアジギング",
+      "エギング / ヤエン仕掛け",
+      "カゴ釣り",
+      "アジング",
+      "ブッコミ釣り（夜シブダイ）"
+    ],
+    "localRules": [
+      "フェリー・大型貨物船発着エリアへの立ち入り禁止",
+      "イカスミ跡やコマセは海水できれいに洗い流すこと",
+      "ゴミの完全持ち帰り"
+    ],
+    "parkingDetails": {
+      "capacity": "油津港周辺無料駐車場 約100台",
+      "fee": "無料",
+      "hours": "24時間利用可能",
+      "notes": "岸壁近くに駐車可能なスペースあり。"
+    },
+    "tips": "夏〜秋のショアジギングでカンパチ幼魚（ネイゴ）の強烈な引きが味わえます。夏の夜釣りのブッコミでは幻の高級魚シブダイ、秋〜春はミズイカのエギングが盛んです。"
+  },
+  {
+    "id": "kagoshima-sakurajima-park",
+    "name": "鹿児島 錦江湾 桜島 桜島港海づり公園",
+    "kana": "さくらじまこううみづりこうえん",
+    "region": "kyushu",
+    "prefecture": "鹿児島県",
+    "address": "鹿児島県鹿児島市桜島横山町1722-48",
+    "lat": 31.5942,
+    "lng": 130.5968,
+    "category": "park",
+    "description": "雄大な桜島と錦江湾（鹿児島湾）を望む有料海づり公園。安全柵・トイレ完備で足場が良く、水深が深いためマダイ・カンパチ（ネイゴ）・アジ・アオリイカ・コロダイ・オオモンハタが狙える鹿児島屈指の快適スポット。",
+    "accessInfo": "鹿児島本港より桜島フェリー（24時間運航）で約15分、桜島港フェリーターミナルより徒歩約3分。",
+    "depthRange": "8m〜16m",
+    "bottomType": "溶岩岩礁・砂泥・基礎ケーソン",
+    "facilities": {
+      "hasParking": true,
+      "hasToilet": true,
+      "hasSafetyFence": true,
+      "isFamilyFriendly": true,
+      "hasNightLight": false,
+      "hasConvenienceStoreNearby": true,
+      "hasTackleShopNearby": true,
+      "isFeeRequired": true,
+      "feeText": "大人 200円 / 小人(小中学生) 100円（見学無料）",
+      "isNightFishingAllowed": false,
+      "openingHours": "6:00〜19:00（4月〜10月） / 7:00〜17:00（11月〜3月）年中無休"
+    },
+    "targetFish": [
+      "マダイ",
+      "カンパチ（ネイゴ）",
+      "アジ",
+      "アオリイカ",
+      "コロダイ",
+      "オオモンハタ",
+      "クロダイ"
+    ],
+    "bestSeasons": {
+      "spring": [
+        "マダイ",
+        "アオリイカ",
+        "クロダイ"
+      ],
+      "summer": [
+        "カンパチ（ネイゴ）",
+        "オオモンハタ",
+        "アジ"
+      ],
+      "autumn": [
+        "マダイ",
+        "カンパチ",
+        "アオリイカ",
+        "コロダイ"
+      ],
+      "winter": [
+        "マダイ",
+        "カサゴ",
+        "メジナ"
+      ]
+    },
+    "recommendedRigs": [
+      "カゴ釣り",
+      "サビキ釣り",
+      "エギング",
+      "ライトショアジギング",
+      "胴突き仕掛け"
+    ],
+    "localRules": [
+      "利用時間外の立ち入り・夜釣り禁止",
+      "ライフジャケット着用推奨（無料貸出あり）",
+      "竿出しは1人2本まで、フェリー航路への投げ釣り厳禁"
+    ],
+    "parkingDetails": {
+      "capacity": "桜島港周辺駐車場 約100台",
+      "fee": "1時間無料（以後1時間毎100円）",
+      "hours": "24時間利用可能",
+      "notes": "桜島フェリーターミナルから徒歩すぐ。"
+    },
+    "tips": "錦江湾の深海と直結しているため、防波堤からでも50cm〜70cm級のマダイやコロダイがヒットします。夏〜秋はネイゴ（カンパチ幼魚）の回遊やエギングのアオリイカが有望です。"
+  },
+
+  {
     id: "okinawa-naha",
     name: "沖縄 那覇港・三重城タワー護岸",
     kana: "おきなわなはこう",
     region: "okinawa",
     prefecture: "沖縄県",
     address: "沖縄県那覇市西3丁目",
-    lat: 26.2167,
-    lng: 127.6652,
+    lat: 26.2146,
+    lng: 127.6666,
     category: "port",
     description: "南国の熱帯魚から大型回遊魚GT（ロウニンアジ）、タマン（ハマフエフキ）、ガーラが狙える沖縄の代表的フィッシングスポット。",
     accessInfo: "那覇空港より車で約10分。ゆいレール「旭橋駅」より徒歩約20分。",
@@ -932,8 +1801,8 @@ export const DEFAULT_SPOTS: FishingSpot[] = [
     region: "hokkaido",
     prefecture: "北海道",
     address: "北海道小樽市港町",
-    lat: 43.2052,
-    lng: 141.0113,
+    lat: 43.2017,
+    lng: 141.0085,
     category: "port",
     description: "車横付け可能でファミリーに愛される北海道の超有名スポット。ニシン・チカ・マイワシのサビキからマメイカ、ロックフィッシュまで。",
     accessInfo: "札樽自動車道「小樽IC」より約10分。JR小樽駅より中央バス。",
@@ -978,8 +1847,8 @@ export const DEFAULT_SPOTS: FishingSpot[] = [
     region: "tohoku",
     prefecture: "宮城県",
     address: "宮城県仙台市宮城野区港",
-    lat: 38.2711,
-    lng: 141.0189,
+    lat: 38.2716,
+    lng: 140.9978,
     category: "port",
     description: "東北最大級の港湾釣り場。シャローから深場まで揃い、大型アイナメやベッコウゾイ、ヒラメ・マゴチのフラットフィッシュが狙える。",
     accessInfo: "JR仙石線「中野栄駅」より車で約10分。仙台東部道路「仙台港IC」より約5分。",
@@ -1018,14 +1887,410 @@ export const DEFAULT_SPOTS: FishingSpot[] = [
     tips: "晩秋〜冬のアイナメは大型が狙えるベストシーズン。敷石の隙間やブレイクラインをテキサスリグで丁寧に探るのが吉。",
   },
   {
+    "id": "aomori-port-aspam",
+    "name": "青森 青森港 アスパム裏・新中央埠頭",
+    "kana": "あおもりこうあすぱむうら",
+    "region": "tohoku",
+    "prefecture": "青森県",
+    "address": "青森県青森市安方1-1-40",
+    "lat": 40.8322,
+    "lng": 140.7412,
+    "category": "pier",
+    "description": "青森観光物産館アスパムの裏手に広がる青い海公園・新中央埠頭護岸。陸奥湾の穏やかな内海に面し、アジ・イワシ・サバのサビキ釣りからクロソイ・メバル・ヒラメ・ヤリイカまで狙える県内屈指の足場良好スポット。",
+    "accessInfo": "JR青森駅東口より徒歩約8分。青森自動車道「青森中央IC」より約15分。",
+    "depthRange": "5m〜9m",
+    "bottomType": "砂泥・基礎ケーソン",
+    "facilities": {
+      "hasParking": true,
+      "hasToilet": true,
+      "hasSafetyFence": true,
+      "isFamilyFriendly": true,
+      "hasNightLight": true,
+      "hasConvenienceStoreNearby": true,
+      "hasTackleShopNearby": true,
+      "isFeeRequired": false,
+      "isNightFishingAllowed": true,
+      "openingHours": "24時間常時開放（イベント開催時・客船接岸時制限あり）"
+    },
+    "targetFish": [
+      "マイワシ",
+      "アジ",
+      "サバ",
+      "クロソイ",
+      "メバル",
+      "ヒラメ",
+      "アイナメ",
+      "ヤリイカ"
+    ],
+    "bestSeasons": {
+      "spring": [
+        "クロソイ",
+        "アイナメ",
+        "ヤリイカ"
+      ],
+      "summer": [
+        "マイワシ",
+        "アジ",
+        "サバ",
+        "ヒラメ"
+      ],
+      "autumn": [
+        "アジ",
+        "サバ",
+        "マイワシ",
+        "クロソイ",
+        "ヒラメ"
+      ],
+      "winter": [
+        "ヤリイカ",
+        "クロソイ",
+        "チカ"
+      ]
+    },
+    "recommendedRigs": [
+      "サビキ釣り",
+      "ジグヘッドリグ（ロックフィッシュ）",
+      "チョイ投げ仕掛け",
+      "エギング / テーラー仕掛け"
+    ],
+    "localRules": [
+      "青い海公園プロムナード内の歩行者・観光客の往来に十分配慮すること",
+      "大型観光客船接岸時およびフェンス規制エリアへの立ち入り禁止",
+      "ゴミ・仕掛けの放置厳禁、コマセ汚れは必ず海水で洗い流すこと"
+    ],
+    "parkingDetails": {
+      "capacity": "アスパム駐車場・青い海公園有料駐車場 計約200台",
+      "fee": "最初の1時間 220円 / 以後30分毎 110円",
+      "hours": "24時間利用可能",
+      "notes": "アスパム利用での駐車割引あり。路上駐車は厳禁。"
+    },
+    "tips": "夏〜秋のイワシ・アジの回遊時はファミリーサビキで大漁が狙えます。夜間は常夜灯下でクロソイやメバルのライトロックフィッシュ、冬場はヤリイカのテーラーウキ釣りが名物です。"
+  },
+  {
+    "id": "iwate-miyako-dezaki",
+    "name": "岩手 三陸 宮古港 出崎埠頭",
+    "kana": "みやここうでざきふとう",
+    "region": "tohoku",
+    "prefecture": "岩手県",
+    "address": "岩手県宮古市臨港通2-1",
+    "lat": 39.6458,
+    "lng": 141.9682,
+    "category": "pier",
+    "description": "三陸リアス海岸の天然良港・宮古港に位置する広大な出崎埠頭。道の駅シートピアなあどに隣接し、アイナメ・クロソイ・ヒラメ・チカ・イワシ・ヤリイカが狙える三陸屈指の快適釣り場。",
+    "accessInfo": "JR山田線・三陸鉄道「宮古駅」より車で約10分。東北横断自動車道「宮古港IC」より約5分。",
+    "depthRange": "6m〜12m",
+    "bottomType": "砂泥・敷石・基礎ケーソン",
+    "facilities": {
+      "hasParking": true,
+      "hasToilet": true,
+      "hasSafetyFence": false,
+      "isFamilyFriendly": true,
+      "hasNightLight": true,
+      "hasConvenienceStoreNearby": true,
+      "hasTackleShopNearby": true,
+      "isFeeRequired": false,
+      "isNightFishingAllowed": true,
+      "openingHours": "24時間利用可能（荷役岸壁・作業エリア除く）"
+    },
+    "targetFish": [
+      "アイナメ",
+      "クロソイ",
+      "ヒラメ",
+      "チカ",
+      "マイワシ",
+      "サバ",
+      "ヤリイカ",
+      "エゾアイナメ（ドンコ）"
+    ],
+    "bestSeasons": {
+      "spring": [
+        "アイナメ",
+        "クロソイ",
+        "チカ"
+      ],
+      "summer": [
+        "マイワシ",
+        "サバ",
+        "ヒラメ",
+        "アイナメ"
+      ],
+      "autumn": [
+        "アイナメ",
+        "クロソイ",
+        "ヤリイカ",
+        "マイワシ"
+      ],
+      "winter": [
+        "ドンコ",
+        "ヤリイカ",
+        "チカ",
+        "クロソイ"
+      ]
+    },
+    "recommendedRigs": [
+      "テキサスリグ / ロックフィッシュ仕掛け",
+      "サビキ釣り",
+      "胴突き探り釣り",
+      "ヤエン / テーラー仕掛け"
+    ],
+    "localRules": [
+      "漁業関係者・港湾荷役作業の邪魔にならないよう配慮徹底",
+      "立入禁止ロープ・看板のある岸壁への立ち入り厳禁",
+      "ゴミ・釣り糸は必ず持ち帰ること"
+    ],
+    "parkingDetails": {
+      "capacity": "シートピアなあど周辺無料駐車場 約200台",
+      "fee": "無料",
+      "hours": "24時間利用可能",
+      "notes": "施設利用者や大型作業車両の動線を塞がないよう駐車してください。"
+    },
+    "tips": "三陸特有の大型アイナメ（ビール瓶サイズ）やクロソイの実績が高く、岸壁の継ぎ目や敷石周りのテキサスリグで好釣果。冬の夜釣りはドンコやヤリイカで賑わいます。"
+  },
+  {
+    "id": "akita-port-selion",
+    "name": "秋田 秋田港 セリオン前岸壁・中島埠頭",
+    "kana": "あきたこうせりおんまえ",
+    "region": "tohoku",
+    "prefecture": "秋田県",
+    "address": "秋田県秋田市土崎港西1-9-1",
+    "lat": 39.7538,
+    "lng": 140.0612,
+    "category": "pier",
+    "description": "道の駅あきた港（セリオンタワー）直下に広がる広大な港湾岸壁。足場が平坦で大駐車場・トイレ・売店が隣接し、アジ・イワシ・シロギス・クロダイ・シーバス・冬のハタハタまで狙える秋田を代表する超人気スポット。",
+    "accessInfo": "JR奥羽本線「土崎駅」より徒歩約15分。秋田自動車道「秋田北IC」より約15分。",
+    "depthRange": "6m〜11m",
+    "bottomType": "砂泥・基礎ケーソン",
+    "facilities": {
+      "hasParking": true,
+      "hasToilet": true,
+      "hasSafetyFence": false,
+      "isFamilyFriendly": true,
+      "hasNightLight": true,
+      "hasConvenienceStoreNearby": true,
+      "hasTackleShopNearby": true,
+      "isFeeRequired": false,
+      "isNightFishingAllowed": true,
+      "openingHours": "24時間利用可能（定期船発着時・作業中エリア除く）"
+    },
+    "targetFish": [
+      "アジ",
+      "マイワシ",
+      "シロギス",
+      "クロダイ",
+      "シーバス",
+      "ハタハタ",
+      "ヒラメ",
+      "マコガレイ"
+    ],
+    "bestSeasons": {
+      "spring": [
+        "クロダイ",
+        "シーバス",
+        "マコガレイ"
+      ],
+      "summer": [
+        "アジ",
+        "マイワシ",
+        "シロギス",
+        "クロダイ"
+      ],
+      "autumn": [
+        "アジ",
+        "サヨリ",
+        "シーバス",
+        "ヒラメ"
+      ],
+      "winter": [
+        "ハタハタ（秋田名物）",
+        "マコガレイ"
+      ]
+    },
+    "recommendedRigs": [
+      "サビキ釣り",
+      "チョイ投げ仕掛け",
+      "ウキフカセ釣り",
+      "ハタハタ専用サビキ仕掛け"
+    ],
+    "localRules": [
+      "フェリーターミナルや荷役専用岸壁への立ち入り禁止",
+      "冬のハタハタ釣り時は混雑マナーとゴミの完全持ち帰りを徹底",
+      "コマセ汚れは必ずバケツの水で洗い流すこと"
+    ],
+    "parkingDetails": {
+      "capacity": "セリオン無料大駐車場 約250台",
+      "fee": "無料",
+      "hours": "24時間利用可能",
+      "notes": "道の駅の営業時間外もトイレ・駐車場が利用可能です。"
+    },
+    "tips": "春〜秋はアジ・イワシのサビキやシロギスのチョイ投げで賑わい、12月上旬〜中旬のハタハタ接岸期は県内外から多くの釣り人が集まる名物ポイントです。"
+  },
+  {
+    "id": "yamagata-sakata-mizubayashi",
+    "name": "山形 庄内 酒田港 水林親水護岸",
+    "kana": "さかたこうみずばやし",
+    "region": "tohoku",
+    "prefecture": "山形県",
+    "address": "山形県酒田市高砂",
+    "lat": 38.9482,
+    "lng": 139.8275,
+    "category": "pier",
+    "description": "日本海に面した山形県最大の重要港湾・酒田港の親水護岸。最上川河口に近く汽水と海水が混ざり合う豊かな水域で、アジ・キス・クロダイ・青物（イナダ・サゴシ）・ヒラメ・シーバスの実績が抜群。",
+    "accessInfo": "JR羽越本線「酒田駅」より車で約10分。日本海東北自動車道「酒田IC」より約15分。",
+    "depthRange": "5m〜10m",
+    "bottomType": "砂泥・捨石・基礎ケーソン",
+    "facilities": {
+      "hasParking": true,
+      "hasToilet": true,
+      "hasSafetyFence": true,
+      "isFamilyFriendly": true,
+      "hasNightLight": true,
+      "hasConvenienceStoreNearby": true,
+      "hasTackleShopNearby": true,
+      "isFeeRequired": false,
+      "isNightFishingAllowed": true,
+      "openingHours": "24時間常時開放"
+    },
+    "targetFish": [
+      "アジ",
+      "シロギス",
+      "クロダイ",
+      "ブリ（イナダ）",
+      "サワラ（サゴシ）",
+      "ヒラメ",
+      "シーバス"
+    ],
+    "bestSeasons": {
+      "spring": [
+        "クロダイ",
+        "シーバス",
+        "サワラ（サゴシ）"
+      ],
+      "summer": [
+        "アジ",
+        "シロギス",
+        "ヒラメ"
+      ],
+      "autumn": [
+        "ブリ（イナダ）",
+        "サワラ（サゴシ）",
+        "アジ",
+        "クロダイ"
+      ],
+      "winter": [
+        "ハタハタ",
+        "クロソイ",
+        "マコガレイ"
+      ]
+    },
+    "recommendedRigs": [
+      "ライトショアジギング",
+      "サビキ釣り",
+      "投げ釣り / チョイ投げ",
+      "ウキフカセ釣り"
+    ],
+    "localRules": [
+      "親水護岸の手すり柵を乗り越えての釣り禁止",
+      "酒田北港水路や火力発電所敷地内の立入禁止エリア厳守",
+      "ゴミ・仕掛けの持ち帰り厳守"
+    ],
+    "parkingDetails": {
+      "capacity": "水林緑地無料駐車場 約60台",
+      "fee": "無料",
+      "hours": "24時間利用可能",
+      "notes": "護岸に隣接した駐車スペースあり。"
+    },
+    "tips": "春と秋はメタルジグでの青物（イナダ・サゴシ）回遊が強烈。初夏〜秋はチョイ投げで良型シロギスが連発し、フカセ釣りでは大型クロダイが狙えます。"
+  },
+  {
+    "id": "fukushima-onahama-aquamarine",
+    "name": "福島 いわき 小名浜港 アクアマリンパーク護岸",
+    "kana": "おなはまこうあくあまりんぱーく",
+    "region": "tohoku",
+    "prefecture": "福島県",
+    "address": "福島県いわき市小名浜辰巳町43-9",
+    "lat": 36.9425,
+    "lng": 140.9038,
+    "category": "pier",
+    "description": "環境水族館アクアマリンふくしまやイオンモールに隣接する広大な親水護岸。全面安全フェンス完備・無料・足場抜群で、アジ・イワシ・サバ・サヨリ・ヒラメ・アイナメ・メバルが狙える常磐屈指のファミリースポット。",
+    "accessInfo": "常磐自動車道「いわき湯本IC」より約20分。JR常磐線「泉駅」より路線バス「小名浜案内所」下車徒歩約5分。",
+    "depthRange": "4m〜8m",
+    "bottomType": "砂泥・捨石・基礎ケーソン",
+    "facilities": {
+      "hasParking": true,
+      "hasToilet": true,
+      "hasSafetyFence": true,
+      "isFamilyFriendly": true,
+      "hasNightLight": true,
+      "hasConvenienceStoreNearby": true,
+      "hasTackleShopNearby": true,
+      "isFeeRequired": false,
+      "isNightFishingAllowed": true,
+      "openingHours": "24時間常時開放"
+    },
+    "targetFish": [
+      "アジ",
+      "マイワシ",
+      "サバ",
+      "サヨリ",
+      "ヒラメ",
+      "アイナメ",
+      "メバル",
+      "クロダイ"
+    ],
+    "bestSeasons": {
+      "spring": [
+        "メバル",
+        "アイナメ",
+        "カレイ"
+      ],
+      "summer": [
+        "アジ",
+        "マイワシ",
+        "サバ",
+        "ヒラメ"
+      ],
+      "autumn": [
+        "サヨリ",
+        "アジ",
+        "サバ",
+        "ヒラメ",
+        "アイナメ"
+      ],
+      "winter": [
+        "ヒイカ",
+        "メバル",
+        "ドンコ"
+      ]
+    },
+    "recommendedRigs": [
+      "サビキ釣り / トリックサビキ",
+      "サヨリカゴ仕掛け",
+      "チョイ投げ仕掛け",
+      "ライトゲーム（アジング・メバリング）"
+    ],
+    "localRules": [
+      "観光客や遊歩道利用者の安全のため、キャスト時の後方確認徹底",
+      "観光船乗り場・水族館施設前への立入・釣り禁止",
+      "コマセの汚れはバケツの水できれいに洗い流すこと"
+    ],
+    "parkingDetails": {
+      "capacity": "アクアマリンパーク無料駐車場 約500台",
+      "fee": "無料",
+      "hours": "24時間利用可能",
+      "notes": "大型無料駐車場完備でファミリーや初心者釣行にも最適です。"
+    },
+    "tips": "秋のサヨリ釣り（専用シモリウキカゴ）とトリックサビキでのアジ・イワシが大人気。夜間は常夜灯下でアジングやメバリング、冬はヒイカ狙いが楽しめます。"
+  },
+
+  {
     id: "niigata-east-port",
     name: "新潟東港第2東防波堤 管理釣り場",
     kana: "にいがたひがしこう",
     region: "hokuriku",
     prefecture: "新潟県",
     address: "新潟県北蒲原郡聖籠町東港",
-    lat: 37.9942,
-    lng: 139.2435,
+    lat: 37.9783,
+    lng: 139.2499,
     category: "park",
     description: "日本海屈指の青物・サワラ・アオリイカの聖地。外洋に突き出た長大な堤防で、春と秋の爆釣劇は全国の釣り人を魅了。",
     accessInfo: "日本海東北自動車道「聖籠新発田IC」より車で約15分。JR白新線「佐々木駅」よりタクシー約15分。",
@@ -1065,6 +2330,241 @@ export const DEFAULT_SPOTS: FishingSpot[] = [
     },
     tips: "春のサゴシ祭りでは表層〜中層の早巻きが鉄板。メタルジグにワイヤーリーダーや太めフロロを推奨。",
   },
+  {
+    "id": "toyama-shinko-shinminato",
+    "name": "富山 射水 富山新港・新湊漁港 護岸",
+    "kana": "とやましんこうしんみなと",
+    "region": "hokuriku",
+    "prefecture": "富山県",
+    "address": "富山県射水市海王町8",
+    "lat": 36.7812,
+    "lng": 137.1092,
+    "category": "pier",
+    "description": "富山湾の富山新港・新湊大橋を望む好漁場。水深が深く潮流が効くため、富山湾名物のキジハタをはじめ、クロダイ・アオリイカ・アジ・ヒラメ・青物（フクラギ）の実績が極めて高い北陸屈指の名所。",
+    "accessInfo": "北陸自動車道「小杉IC」より約20分。万葉線「海王丸駅」より徒歩約8分。",
+    "depthRange": "6m〜14m",
+    "bottomType": "砂泥・敷石・基礎ケーソン",
+    "facilities": {
+      "hasParking": true,
+      "hasToilet": true,
+      "hasSafetyFence": true,
+      "isFamilyFriendly": true,
+      "hasNightLight": true,
+      "hasConvenienceStoreNearby": true,
+      "hasTackleShopNearby": true,
+      "isFeeRequired": false,
+      "isNightFishingAllowed": true,
+      "openingHours": "24時間利用可能（海王丸パーク内禁止エリア・港湾作業岸壁除く）"
+    },
+    "targetFish": [
+      "キジハタ",
+      "クロダイ",
+      "アオリイカ",
+      "アジ",
+      "ヒラメ",
+      "ブリ（フクラギ）",
+      "シロギス"
+    ],
+    "bestSeasons": {
+      "spring": [
+        "クロダイ",
+        "フクラギ",
+        "ヤリイカ"
+      ],
+      "summer": [
+        "キジハタ",
+        "アジ",
+        "シロギス"
+      ],
+      "autumn": [
+        "アオリイカ",
+        "キジハタ",
+        "フクラギ",
+        "アジ"
+      ],
+      "winter": [
+        "クロダイ",
+        "メバル",
+        "カレイ"
+      ]
+    },
+    "recommendedRigs": [
+      "テキサスリグ / ロックフィッシュ仕掛け",
+      "エギング",
+      "ライトショアジギング",
+      "ウキフカセ釣り",
+      "サビキ釣り"
+    ],
+    "localRules": [
+      "海王丸パーク内の船体周辺・芝生広場護岸での釣り禁止エリア厳守",
+      "漁協施設前・作業船の係留索周辺への割り込み禁止",
+      "イカスミ・コマセ汚れは必ず洗い流すこと"
+    ],
+    "parkingDetails": {
+      "capacity": "新湊港周辺無料駐車場 約150台",
+      "fee": "無料",
+      "hours": "24時間利用可能",
+      "notes": "釣り場近くに無料駐車スペースあり。"
+    },
+    "tips": "夏〜秋のキジハタ（テキサスリグやジグヘッド）と秋のエギング（アオリイカ）が名物。水深があるため回遊青物（フクラギ）のショアジギングも高実績です。"
+  },
+  {
+    "id": "ishikawa-kanazawa-ohama",
+    "name": "石川 金沢港 大浜釣り公園（金沢港ふれあい広場）",
+    "kana": "かなざわこうおおはまつりこうえん",
+    "region": "hokuriku",
+    "prefecture": "石川県",
+    "address": "石川県金沢市大浜町",
+    "lat": 36.5614,
+    "lng": 136.6567,
+    "category": "park",
+    "description": "金沢港の湾奥に整備された無料の釣り公園。安全柵・ベンチ・トイレ・大駐車場が完備され、アジ・アオリイカ・クロダイ・シロギス・ヒラメ・サゴシが狙える石川県内トップクラスのファミリースポット。",
+    "accessInfo": "北陸自動車道「金沢西IC」または「金沢東IC」より約15分。JR金沢駅西口より車で約20分。",
+    "depthRange": "4m〜8m",
+    "bottomType": "砂泥・捨石・基礎ケーソン",
+    "facilities": {
+      "hasParking": true,
+      "hasToilet": true,
+      "hasSafetyFence": true,
+      "isFamilyFriendly": true,
+      "hasNightLight": true,
+      "hasConvenienceStoreNearby": true,
+      "hasTackleShopNearby": true,
+      "isFeeRequired": false,
+      "isNightFishingAllowed": true,
+      "openingHours": "24時間常時開放"
+    },
+    "targetFish": [
+      "アジ",
+      "アオリイカ",
+      "クロダイ",
+      "シロギス",
+      "ヒラメ",
+      "サワラ（サゴシ）",
+      "マコガレイ"
+    ],
+    "bestSeasons": {
+      "spring": [
+        "クロダイ",
+        "サゴシ",
+        "マコガレイ"
+      ],
+      "summer": [
+        "アジ",
+        "シロギス",
+        "マゴチ"
+      ],
+      "autumn": [
+        "アオリイカ",
+        "アジ",
+        "サゴシ",
+        "ヒラメ"
+      ],
+      "winter": [
+        "マコガレイ",
+        "メバル",
+        "クロソイ"
+      ]
+    },
+    "recommendedRigs": [
+      "サビキ釣り",
+      "チョイ投げ仕掛け",
+      "エギング",
+      "ライトショアジギング",
+      "ウキフカセ釣り"
+    ],
+    "localRules": [
+      "公園柵を乗り越えてのテトラ帯進入禁止",
+      "本格的なオーバースロー遠投は混雑時危険なため注意",
+      "ゴミ・仕掛けの完全持ち帰り"
+    ],
+    "parkingDetails": {
+      "capacity": "大浜釣り公園専用無料駐車場 約120台",
+      "fee": "無料",
+      "hours": "24時間利用可能",
+      "notes": "釣り場直結で大人気の駐車場です。"
+    },
+    "tips": "足元サビキでアジの数釣りが楽しめるほか、秋はエギングのアオリイカやメタルジグでのサゴシ回遊が熱い。砂地が多いためチョイ投げでキス・カレイも有望です。"
+  },
+  {
+    "id": "fukui-tsuruga-maruyama",
+    "name": "福井 若狭 敦賀港 鞠山海水浴場突堤",
+    "kana": "つるがこうまるやま",
+    "region": "hokuriku",
+    "prefecture": "福井県",
+    "address": "福井県敦賀市鞠山",
+    "lat": 35.6738,
+    "lng": 136.0825,
+    "category": "pier",
+    "description": "敦賀湾の東側に位置する足場の良い長大な突堤。潮通しが抜群でアオリイカのエギングの聖地として名高く、アジ・サゴシ・ハマチ・シロギス・カレイ・メバルと魚種が極めて豊富。",
+    "accessInfo": "北陸自動車道「敦賀IC」より国道8号経由で約10分。JR北陸本線・北陸新幹線「敦賀駅」より車で約15分。",
+    "depthRange": "5m〜11m",
+    "bottomType": "砂泥・岩礁・基礎捨石",
+    "facilities": {
+      "hasParking": true,
+      "hasToilet": true,
+      "hasSafetyFence": false,
+      "isFamilyFriendly": true,
+      "hasNightLight": false,
+      "hasConvenienceStoreNearby": true,
+      "hasTackleShopNearby": true,
+      "isFeeRequired": false,
+      "isNightFishingAllowed": true,
+      "openingHours": "24時間利用可能（荒天・高波時立入禁止）"
+    },
+    "targetFish": [
+      "アオリイカ",
+      "アジ",
+      "サワラ（サゴシ）",
+      "ブリ（ハマチ）",
+      "シロギス",
+      "マコガレイ",
+      "メバル"
+    ],
+    "bestSeasons": {
+      "spring": [
+        "親アオリイカ",
+        "サゴシ",
+        "メバル",
+        "カレイ"
+      ],
+      "summer": [
+        "アジ",
+        "シロギス",
+        "キジハタ"
+      ],
+      "autumn": [
+        "新子アオリイカ",
+        "サゴシ",
+        "ハマチ",
+        "アジ"
+      ],
+      "winter": [
+        "ヤリイカ",
+        "メバル",
+        "カレイ"
+      ]
+    },
+    "recommendedRigs": [
+      "エギング",
+      "ライトショアジギング",
+      "サビキ釣り",
+      "投げ釣り / チョイ投げ"
+    ],
+    "localRules": [
+      "突堤外側のテトラ帯への無理な進入禁止・ライフジャケット着用必須",
+      "海水浴シーズン（夏期）の遊泳エリアでの釣り禁止",
+      "イカスミ・コマセは海水できれいに洗い流すこと"
+    ],
+    "parkingDetails": {
+      "capacity": "鞠山海岸駐車場 約80台",
+      "fee": "無料（夏季海水浴期間のみ有料の場合あり）",
+      "hours": "24時間利用可能",
+      "notes": "突堤入口付近に駐車スペースあり。"
+    },
+    "tips": "春の親アオリイカ（キロアップ）および秋の新子数釣りで関西・中京圏からエギンガーが殺到。ショアジギングでのサゴシ・ハマチのボイル撃ちも高実績です。"
+  },
+
 
   // --- 中国エリア ---
   {
@@ -1074,8 +2574,8 @@ export const DEFAULT_SPOTS: FishingSpot[] = [
     region: "chugoku",
     prefecture: "広島県",
     address: "広島県広島市南区宇品海岸3-12",
-    lat: 34.3512,
-    lng: 132.4645,
+    lat: 34.353,
+    lng: 132.4702,
     category: "park",
     description: "広島港に隣接する足場抜群の海浜公園。安全フェンス完備でファミリーフィッシングからチニング、アジング、タチウオまで瀬戸内海の魚種が豊富。",
     accessInfo: "広島電鉄宇品線「海岸通駅」または「元宇品口駅」より徒歩約5分。広島高速3号線「宇品出入口」より約3分。",
@@ -1121,8 +2621,8 @@ export const DEFAULT_SPOTS: FishingSpot[] = [
     region: "chugoku",
     prefecture: "岡山県",
     address: "岡山県倉敷市玉島乙島字新湊",
-    lat: 34.5123,
-    lng: 133.6789,
+    lat: 34.5055,
+    lng: 133.6781,
     category: "pier",
     description: "瀬戸内海の潮流が抜ける水島灘の名ポイント。岡山名物「ママカリ（サッパ）」サビキの超一級ポイントであり、マダコやチヌ、ギザミ（キュウセン）も実績多数。",
     accessInfo: "山陽自動車道「玉島IC」より車で約20分。JR山陽本線「新倉敷駅」より車で約15分。",
@@ -1168,8 +2668,8 @@ export const DEFAULT_SPOTS: FishingSpot[] = [
     region: "chugoku",
     prefecture: "鳥取県",
     address: "鳥取県境港市竹内団地255-3",
-    lat: 35.5412,
-    lng: 133.2534,
+    lat: 35.5182,
+    lng: 133.2551,
     category: "park",
     description: "日本海と美保湾を一望する広大な海浜公園。境水道からの急潮流が差し込み、春と秋のサゴシ・アオリイカ・ヒラメ・大型キスが狙える山陰屈指の好釣り場。",
     accessInfo: "米子自動車道「米子IC」より国道431号経由で約30分。米子鬼太郎空港より車で約5分。",
@@ -1215,8 +2715,8 @@ export const DEFAULT_SPOTS: FishingSpot[] = [
     region: "chugoku",
     prefecture: "山口県",
     address: "山口県長門市仙崎",
-    lat: 34.3789,
-    lng: 131.2056,
+    lat: 34.3919,
+    lng: 131.1994,
     category: "port",
     description: "北長門海岸国定公園の美しい海に囲まれた天然の良港。透明度抜群でアオリイカのエギングの聖地として名高く、尺アジや青物、キジハタの実績多数。",
     accessInfo: "中国自動車道「美祢IC」より国道316号経由で約40分。JR山陰本線「仙崎駅」より徒歩約10分。",
@@ -1306,6 +2806,84 @@ export const DEFAULT_SPOTS: FishingSpot[] = [
     },
     tips: "水深があり潮通しが良いため、サビキ釣りでアジ・サバ・イワシの数釣りが楽しめます。底狙いのチョイ投げで初夏〜秋はシロギス、秋〜春はマコガレイが有望。売店でエサ・仕掛けの販売や貸竿サービスも充実しています。",
   },
+  {
+    "id": "shimane-hamada-port",
+    "name": "島根 浜田 浜田港 お魚センター裏護岸・長浜波止",
+    "kana": "はまだこうおさかなせんたーうら",
+    "region": "chugoku",
+    "prefecture": "島根県",
+    "address": "島根県浜田市原井町3050-46",
+    "lat": 34.8967,
+    "lng": 132.0628,
+    "category": "port",
+    "description": "山陰屈指の大型漁港・浜田港に位置する人気スポット。しまねお魚センター裏手の足場良好な護岸で、アジ・アオリイカ・ヤリイカ・ヒラマサ・サゴシ・キジハタが狙える山陰の超一級ポイント。",
+    "accessInfo": "山陰自動車道「浜田IC」または「竹迫IC」より車で約10分。JR山陰本線「浜田駅」よりバス約10分。",
+    "depthRange": "6m〜13m",
+    "bottomType": "砂泥・捨石・基礎ケーソン",
+    "facilities": {
+      "hasParking": true,
+      "hasToilet": true,
+      "hasSafetyFence": false,
+      "isFamilyFriendly": true,
+      "hasNightLight": true,
+      "hasConvenienceStoreNearby": true,
+      "hasTackleShopNearby": true,
+      "isFeeRequired": false,
+      "isNightFishingAllowed": true,
+      "openingHours": "24時間利用可能（市場荷揚げ作業エリア除く）"
+    },
+    "targetFish": [
+      "アジ",
+      "アオリイカ",
+      "ヤリイカ",
+      "ヒラマサ",
+      "サワラ（サゴシ）",
+      "キジハタ",
+      "クロダイ"
+    ],
+    "bestSeasons": {
+      "spring": [
+        "親アオリイカ",
+        "ヤリイカ",
+        "ヒラマサ"
+      ],
+      "summer": [
+        "キジハタ",
+        "アジ",
+        "シロギス"
+      ],
+      "autumn": [
+        "新子アオリイカ",
+        "ヒラマサ",
+        "サゴシ",
+        "アジ"
+      ],
+      "winter": [
+        "ヤリイカ（山陰名物）",
+        "メバル",
+        "カサゴ"
+      ]
+    },
+    "recommendedRigs": [
+      "カゴ釣り（ヒラマサ・アジ）",
+      "エギング / テーラー仕掛け",
+      "ショアジギング",
+      "サビキ釣り"
+    ],
+    "localRules": [
+      "魚市場・水揚げ施設周辺への立ち入り・駐車厳禁",
+      "夜間の騒音防止およびゴミの完全持ち帰り",
+      "イカスミやコマセ汚れは必ず海水で洗浄すること"
+    ],
+    "parkingDetails": {
+      "capacity": "お魚センター周辺無料駐車場 約200台",
+      "fee": "無料",
+      "hours": "24時間利用可能",
+      "notes": "観光施設利用者と共用のためマナーを守って駐車してください。"
+    },
+    "tips": "山陰名物の山陰カゴ釣りでのヒラマサ・尺アジ狙いが盛ん。秋のエギングや冬〜春のヤリイカ（テーラー仕掛け）も高い実績を誇ります。"
+  },
+
 
   // --- 四国エリア ---
   {
@@ -1315,8 +2893,8 @@ export const DEFAULT_SPOTS: FishingSpot[] = [
     region: "shikoku",
     prefecture: "香川県",
     address: "香川県高松市サンポート8",
-    lat: 34.3546,
-    lng: 134.0512,
+    lat: 34.3615,
+    lng: 134.0517,
     category: "pier",
     description: "世界初の総ガラス製灯台「せとしるべ」へ続く長大な遊歩道防波堤。瀬戸内海の激流がぶつかるチヌフカセの聖地で、アジングやタチウオ、アオリイカも大人気。",
     accessInfo: "JR予讃線・高徳線「高松駅」より徒歩約10分。高松自動車道「高松中央IC」より約20分。",
@@ -1363,8 +2941,8 @@ export const DEFAULT_SPOTS: FishingSpot[] = [
     region: "shikoku",
     prefecture: "徳島県",
     address: "徳島県鳴門市撫養町岡崎",
-    lat: 34.1845,
-    lng: 134.6189,
+    lat: 34.1855,
+    lng: 134.602,
     category: "port",
     description: "鳴門海峡の激流に育まれた魚影の濃さが自慢。ショアから「鳴門鯛」と呼ばれるマダイが狙えるほか、ハマチ・メジロ、アオリイカ、タチウオの実績が全国区。",
     accessInfo: "神戸淡路鳴門自動車道「鳴門北IC」より車で約10分。JR鳴門線「鳴門駅」より車で約8分。",
@@ -1410,8 +2988,8 @@ export const DEFAULT_SPOTS: FishingSpot[] = [
     region: "shikoku",
     prefecture: "愛媛県",
     address: "愛媛県松山市三津",
-    lat: 33.8654,
-    lng: 132.7098,
+    lat: 33.865,
+    lng: 132.7095,
     category: "port",
     description: "伊予灘に面した松山市を代表する歴史ある名港。アジングの聖地・愛媛県らしく良型アジの魚影が濃く、タチウオやハマチ、アオリイカ、カワハギが狙えます。",
     accessInfo: "伊予鉄道高浜線「三津駅」より徒歩約10分。松山自動車道「松山IC」より車で約25分。",
@@ -1457,8 +3035,8 @@ export const DEFAULT_SPOTS: FishingSpot[] = [
     region: "shikoku",
     prefecture: "高知県",
     address: "高知県高知市種崎",
-    lat: 33.5012,
-    lng: 133.5689,
+    lat: 33.5038,
+    lng: 133.5694,
     category: "port",
     description: "太平洋と浦戸湾を結ぶ湾口に位置する黒潮直結の超一級ポイント。ネイリ（カンパチ若魚）やヒラメ、タチウオ、シロギス、そして怪魚アカメの聖地として名高い。",
     accessInfo: "高知自動車道「高知IC」より車で約20分。とさでん交通バス「種崎」下車すぐ。",

@@ -180,9 +180,10 @@ export default function SpotsPage() {
                       <span>
                         🅿️{" "}
                         {spot.parkingDetails
-                          ? spot.parkingDetails.fee.includes("無料")
-                            ? "無料P"
-                            : "有料P"
+                          ? spot.parkingDetails.fee.includes("円") ||
+                            !spot.parkingDetails.fee.includes("無料")
+                            ? "有料P"
+                            : "無料P"
                           : "駐車場あり"}
                       </span>
                     )}

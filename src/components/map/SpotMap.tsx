@@ -133,7 +133,7 @@ export default function SpotMap({
         </div>
         <div style="display: flex; gap: 4px; flex-wrap: wrap; margin-top: 4px;">
           ${spot.facilities.hasToilet ? '<span style="background: #e0f2fe; color: #0369a1; padding: 2px 6px; border-radius: 4px; font-size: 10px;">🚻 トイレ</span>' : ""}
-          ${spot.facilities.hasParking ? '<span style="background: #e0f2fe; color: #0369a1; padding: 2px 6px; border-radius: 4px; font-size: 10px;">🅿️ 駐車場</span>' : ""}
+          ${spot.facilities.hasParking ? `<span style="background: #e0f2fe; color: #0369a1; padding: 2px 6px; border-radius: 4px; font-size: 10px;">🅿️ ${spot.parkingDetails ? (spot.parkingDetails.fee.includes("円") || !spot.parkingDetails.fee.includes("無料") ? "有料P" : "無料P") : "駐車場"}</span>` : ""}
           ${spot.facilities.hasSafetyFence ? '<span style="background: #dcfce7; color: #15803d; padding: 2px 6px; border-radius: 4px; font-size: 10px;">🛡️ 柵あり</span>' : ""}
         </div>
         <div style="margin-top: 6px; font-size: 11px; color: #334155;">
