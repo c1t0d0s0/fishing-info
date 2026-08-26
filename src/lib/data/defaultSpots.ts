@@ -9096,16 +9096,16 @@ export const DEFAULT_SPOTS: FishingSpot[] = [
   },
   {
     id: "fukuoka-umizuridai",
-    name: "福岡 福岡市海づり公園 (今宿・唐泊)",
-    kana: "ふくおか・ふくおかしうみづりこうえん・いまじゅく・からどまり",
+    name: "福岡 福岡市海づり公園 (唐泊)",
+    kana: "ふくおか・ふくおかしうみづりこうえん・からどまり",
     region: "kyushu",
     prefecture: "福岡県",
-    address: "福岡県福岡市西区小田池ノ浦地先",
-    lat: 33.6285,
-    lng: 130.2185,
+    address: "福岡県福岡市西区大字小田字池ノ浦地先",
+    lat: 33.6275,
+    lng: 130.2312,
     category: "park",
     description: "博多湾と玄界灘をつなぐ今津湾口に突き出たT字型メガ海釣り桟橋（全長480m）。全面安全柵完備で、マダイ・ヤズ（ブリ幼魚）・アジ・アオリイカ・カワハギ・タチウオが安全・快適に狙える九州屈指の有料海釣り施設。",
-    accessInfo: "西九州自動車道「今宿IC」より車で約20分。JR筑肥線「今宿駅」または「九大学研都市駅」より昭和バスで約25分。",
+    accessInfo: "西九州自動車道「今宿IC」より車で約20分。JR筑肥線「九大学研都市駅」または「今宿駅」より昭和バス（西の浦線）「海づり公園前」下車すぐ。",
     depthRange: "6m〜12m",
     bottomType: "砂泥・捨石・人工漁礁ブロック",
     facilities: {
@@ -9138,6 +9138,51 @@ export const DEFAULT_SPOTS: FishingSpot[] = [
       notes: "管理棟・売店・釣具レンタル・食堂・バリアフリートイレ完備。"
     },
     tips: "沖合に設置された人工魚礁に魚が定着。サビキで釣った小アジをそのままエレベーター仕掛けで沈めるとマダイやヤズが一発でヒット。"
+  },
+  {
+    id: "fukuoka-umizuridai-imajuku",
+    name: "福岡 福岡市海づり公園 (今宿)",
+    kana: "ふくおか・ふくおかしうみづりこうえん・いまじゅく",
+    region: "kyushu",
+    prefecture: "福岡県",
+    address: "福岡県福岡市西区今宿駅前・長垂",
+    lat: 33.5855,
+    lng: 130.2585,
+    category: "surf",
+    description: "JR今宿駅から徒歩圏内に広がる今宿海岸・長垂海浜公園周辺の釣り場。波穏やかな遠浅サーフと突堤が広がり、初夏〜秋のシロギス投げ釣りを中心に、シーバス（スズキ）、ヒラメ、マゴチ、チヌなどが手軽に狙える人気スポット。",
+    accessInfo: "西九州自動車道「今宿IC」より車で約5分。JR筑肥線「今宿駅」より徒歩約5〜8分。",
+    depthRange: "1.5m〜5m",
+    bottomType: "砂地・砂泥・小磯・突堤基礎",
+    facilities: {
+      hasParking: true,
+      hasToilet: true,
+      hasSafetyFence: false,
+      isFamilyFriendly: true,
+      hasNightLight: true,
+      hasConvenienceStoreNearby: true,
+      hasTackleShopNearby: true,
+      isFeeRequired: false,
+      
+      isNightFishingAllowed: true,
+      nightFishingText: "可能 (常夜灯下・夜の投げ釣り・ナイトシーバス)",
+      
+    },
+    targetFish: ["シロギス","シーバス (スズキ)","ヒラメ","マゴチ","クロダイ (チヌ)","ハゼ","アジ"],
+    bestSeasons: {
+      spring: ["乗っ込みチヌ","シーバス","メバル"],
+      summer: ["シロギス（数釣り）","ハゼ","マゴチ"],
+      autumn: ["落ちギス","シーバス","ヒラメ","青物"],
+      winter: ["カレイ","ヒラメ","シーバス"]
+    },
+    recommendedRigs: ["投げ釣り仕掛け / チョイ投げ (キス・カレイ)","ミノー / シンキングペンシル (シーバス)","ジグヘッドワーム (フラットフィッシュ)","サビキ仕掛け"],
+    localRules: ["海水浴客・公園散策者への配慮・周囲確認","ゴミ・仕掛けの完全持ち帰り","近隣住宅・道路への迷惑駐車禁止"],
+    parkingDetails: {
+      capacity: "長垂海浜公園駐車場・近隣コインパーキング 約40台",
+      fee: "有料 (時間貸し/一部季節有料)",
+      hours: "24時間利用可能",
+      notes: "公衆トイレあり。今宿駅周辺にコンビニ・釣具店あり。"
+    },
+    tips: "初夏から秋にかけては手前の波打ち際から20〜50mほどのチョイ投げでキスが好反応。朝夕マズメにはルアーでシーバスやフラットフィッシュが狙えます。"
   },
   {
     id: "fukuoka-itoshima-surf",
