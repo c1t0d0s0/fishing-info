@@ -24,12 +24,22 @@ export default function LocationSelector({
   const filteredSpots = DEFAULT_SPOTS.filter((spot) => {
     const matchRegion =
       selectedRegion === "all" || spot.region === selectedRegion;
+    if (!searchQuery) return matchRegion;
+
+    const q = searchQuery.toLowerCase().trim();
     const matchSearch =
-      !searchQuery ||
-      spot.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      spot.kana.includes(searchQuery) ||
-      spot.prefecture.includes(searchQuery) ||
-      spot.targetFish.some((f) => f.includes(searchQuery));
+      spot.name.toLowerCase().includes(q) ||
+      spot.kana.toLowerCase().includes(q) ||
+      spot.prefecture.toLowerCase().includes(q) ||
+      spot.address.toLowerCase().includes(q) ||
+      spot.description.toLowerCase().includes(q) ||
+      spot.targetFish.some((f) => f.toLowerCase().includes(q)) ||
+      spot.localRules.some((r) => r.toLowerCase().includes(q)) ||
+      spot.tips.toLowerCase().includes(q) ||
+      (spot.facilities.feeText?.toLowerCase().includes(q) ?? false) ||
+      (spot.facilities.nightFishingText?.toLowerCase().includes(q) ?? false) ||
+      spot.recommendedRigs.some((r) => r.toLowerCase().includes(q));
+
     return matchRegion && matchSearch;
   });
 
@@ -153,7 +163,7 @@ export default function LocationSelector({
                 <Search className="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
                 <input
                   type="text"
-                  placeholder="釣り場名、都道府県、対象魚 (例: アジ, 本牧, 千葉)..."
+                  placeholder="釣り場名、都道府県、対象魚、キーワード (UMIGO, 予約等)..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   className="w-full pl-9 pr-4 py-2 rounded-xl text-sm bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-ocean-500"
@@ -170,7 +180,7 @@ export default function LocationSelector({
                       : "bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-700"
                   }`}
                 >
-                  全国すべて
+                  全国
                 </button>
                 {REGIONS.map((r) => (
                   <button
@@ -197,6 +207,11 @@ export default function LocationSelector({
               ) : (
                 filteredSpots.map((spot) => {
                   const isSelected = spot.id === currentSpot.id;
+                  const isUmigo =
+                    spot.facilities.feeText?.includes("UMIGO") ||
+                    spot.description.includes("UMIGO") ||
+                    spot.localRules.some((r) => r.includes("UMIGO"));
+
                   return (
                     <button
                       key={spot.id}
@@ -211,13 +226,18 @@ export default function LocationSelector({
                       }`}
                     >
                       <div className="space-y-1">
-                        <div className="flex items-center gap-2">
+                        <div className="flex items-center gap-1.5 flex-wrap">
                           <span className="text-xs font-bold text-ocean-600 dark:text-ocean-400 bg-ocean-100 dark:bg-ocean-900/60 px-1.5 py-0.5 rounded">
                             {spot.prefecture}
                           </span>
                           <span className="font-semibold text-sm text-slate-900 dark:text-white">
                             {spot.name}
                           </span>
+                          {isUmigo && (
+                            <span className="text-[10px] bg-blue-100 dark:bg-blue-950 text-blue-700 dark:text-blue-300 px-1.5 py-0.2 rounded font-extrabold border border-blue-200 dark:border-blue-800">
+                              🎟️ UMIGO予約
+                            </span>
+                          )}
                           {spot.facilities.isFamilyFriendly && (
                             <span className="text-[10px] bg-emerald-100 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-300 px-1.5 py-0.2 rounded font-medium">
                               ファミリー向け

@@ -117,6 +117,11 @@ export default function SpotMap({
     // Add markers
     filteredSpots.forEach((spot) => {
       const isSelected = selectedSpot?.id === spot.id;
+      const isUmigo =
+        spot.facilities.feeText?.includes("UMIGO") ||
+        spot.description.includes("UMIGO") ||
+        spot.localRules.some((r) => r.includes("UMIGO"));
+
       const marker = L.marker([spot.lat, spot.lng], {
         icon: createCustomIcon(spot.category, isSelected),
       }).addTo(mapInstance);
@@ -129,8 +134,9 @@ export default function SpotMap({
           ${spot.name}
         </div>
         <div style="font-size: 11px; color: #64748b;">
-          ${spot.prefecture} / ${spot.category === "park" ? "海釣り施設" : "漁港・防波堤"}
+          ${spot.prefecture} / ${spot.category === "park" ? "海釣り施設" : spot.category === "port" ? "漁港・防波堤" : spot.category === "surf" ? "サーフ" : "磯場・釣り場"}
         </div>
+        ${isUmigo ? '<div style="margin-top: 4px; display: inline-block; background: #dbeafe; color: #1e40af; border: 1px solid #93c5fd; font-size: 10px; font-weight: 800; padding: 2px 6px; border-radius: 4px;">🎟️ UMIGO（海Go）事前予約</div>' : ""}
         <div style="display: flex; gap: 4px; flex-wrap: wrap; margin-top: 4px;">
           ${spot.facilities.hasToilet ? '<span style="background: #e0f2fe; color: #0369a1; padding: 2px 6px; border-radius: 4px; font-size: 10px;">🚻 トイレ</span>' : ""}
           ${spot.facilities.hasParking ? `<span style="background: #e0f2fe; color: #0369a1; padding: 2px 6px; border-radius: 4px; font-size: 10px;">🅿️ ${spot.parkingDetails ? (spot.parkingDetails.fee.includes("円") || !spot.parkingDetails.fee.includes("無料") ? "有料P" : "無料P") : "駐車場"}</span>` : ""}
@@ -174,7 +180,17 @@ export default function SpotMap({
         }
       });
     });
-  }, [filteredSpots, selectedSpot, mapInstance, L, router]);
+
+    // Fit bounds if filtered spots changed
+    if (filteredSpots.length > 0) {
+      if (filteredSpots.length === 1) {
+        mapInstance.flyTo([filteredSpots[0].lat, filteredSpots[0].lng], 12, { duration: 0.8 });
+      } else {
+        const bounds = L.latLngBounds(filteredSpots.map((s) => [s.lat, s.lng]));
+        mapInstance.fitBounds(bounds, { padding: [50, 50], maxZoom: 13 });
+      }
+    }
+  }, [filteredSpots, mapInstance, L, router]);
 
   // Pan to selected spot when selectedSpot changes
   useEffect(() => {
