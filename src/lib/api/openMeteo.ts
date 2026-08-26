@@ -72,6 +72,34 @@ export function degreeToCompass(degree: number): string {
 }
 
 /**
+ * Estimate coastal sea water temperature based on date, latitude, and air temperature
+ */
+export function estimateSeaWaterTemperature(
+  date: Date,
+  lat: number,
+  airTemp?: number
+): number {
+  const month = date.getMonth(); // 0-11
+  const day = date.getDate();
+  const dayOfYear = month * 30 + day;
+
+  // Sea temperature peak is delayed by ~1 month compared to air temp (Peak in late August, Lowest in late Feb)
+  const latOffset = (35.0 - lat) * 0.8;
+  const baseAvg = 19.5 + latOffset;
+  const amplitude = 7.0; // +/- 7 degrees seasonal variation
+
+  // Phase shift: peak around day 235 (late August)
+  const angle = ((dayOfYear - 235) / 365) * 2 * Math.PI;
+  let estimated = baseAvg + amplitude * Math.cos(angle);
+
+  if (airTemp !== undefined) {
+    estimated = estimated * 0.9 + airTemp * 0.1;
+  }
+
+  return Math.round(estimated * 10) / 10;
+}
+
+/**
  * Fetch combined Marine and Weather forecast from Open-Meteo
  */
 export async function fetchMarineWeather(
@@ -80,7 +108,7 @@ export async function fetchMarineWeather(
 ): Promise<MarineWeatherResponse> {
   const weatherUrl = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lng}&current=temperature_2m,relative_humidity_2m,apparent_temperature,precipitation,weather_code,surface_pressure,wind_speed_10m,wind_direction_10m,wind_gusts_10m,uv_index&hourly=temperature_2m,precipitation_probability,precipitation,weather_code,surface_pressure,wind_speed_10m,wind_direction_10m,wind_gusts_10m,uv_index&daily=weather_code,temperature_2m_max,temperature_2m_min,sunrise,sunset,precipitation_sum,wind_speed_10m_max&wind_speed_unit=ms&timezone=Asia%2FTokyo`;
 
-  const marineUrl = `https://marine-api.open-meteo.com/v1/marine?latitude=${lat}&longitude=${lng}&current=wave_height,wave_direction,wave_period,swell_wave_height,swell_wave_direction,swell_wave_period,sea_water_temperature&hourly=wave_height,wave_direction,wave_period,swell_wave_height,swell_wave_direction,swell_wave_period,sea_water_temperature&timezone=Asia%2FTokyo`;
+  const marineUrl = `https://marine-api.open-meteo.com/v1/marine?latitude=${lat}&longitude=${lng}&current=wave_height,wave_direction,wave_period,swell_wave_height,swell_wave_direction,swell_wave_period&hourly=wave_height,wave_direction,wave_period,swell_wave_height,swell_wave_direction,swell_wave_period&timezone=Asia%2FTokyo`;
 
   try {
     const [weatherRes, marineRes] = await Promise.all([
@@ -124,8 +152,11 @@ function processForecastData(
   const swellWaveHeight = curMarine.swell_wave_height ?? 0.3;
   const swellWaveDirection = curMarine.swell_wave_direction ?? 180;
   const swellWavePeriod = curMarine.swell_wave_period ?? 7.0;
-  const seaWaterTemperature =
-    curMarine.sea_water_temperature ?? Math.round(curWeather.temperature_2m - 1.5);
+  const seaWaterTemperature = estimateSeaWaterTemperature(
+    now,
+    lat,
+    curWeather.temperature_2m
+  );
 
   const currentWeather: CurrentMarineWeather = {
     time: curWeather.time,
@@ -164,6 +195,7 @@ function processForecastData(
     const hWaveHeight = hourlyM.wave_height?.[i] ?? 0.6;
     const hWindSpeed = hourlyW.wind_speed_10m?.[i] ?? 2.5;
     const hWindDir = hourlyW.wind_direction_10m?.[i] ?? 180;
+    const hAirTemp = hourlyW.temperature_2m?.[i] ?? 20;
 
     // Check Mazume
     let isMazume: "morning" | "evening" | null = null;
@@ -188,7 +220,7 @@ function processForecastData(
     hourlyItems.push({
       time: hourLabel,
       fullTime: timeStr,
-      temperature: Math.round((hourlyW.temperature_2m?.[i] ?? 20) * 10) / 10,
+      temperature: Math.round(hAirTemp * 10) / 10,
       weatherCode: hourlyW.weather_code?.[i] ?? 0,
       weatherDescription: getWeatherCodeInfo(hourlyW.weather_code?.[i] ?? 0).text,
       precipitation: hourlyW.precipitation?.[i] ?? 0,
@@ -200,8 +232,7 @@ function processForecastData(
       waveHeight: Math.round(hWaveHeight * 10) / 10,
       wavePeriod: Math.round((hourlyM.wave_period?.[i] ?? 5.5) * 10) / 10,
       waveDirection: hourlyM.wave_direction?.[i] ?? 180,
-      seaWaterTemperature:
-        Math.round((hourlyM.sea_water_temperature?.[i] ?? 19.5) * 10) / 10,
+      seaWaterTemperature: estimateSeaWaterTemperature(dateObj, lat, hAirTemp),
       surfacePressure: Math.round(hourlyW.surface_pressure?.[i] ?? 1013),
       fishingScore: scoreRes.score,
       tideHeight: tideHeightPoint?.height,
@@ -219,18 +250,19 @@ function processForecastData(
     const dStr = dailyW.time?.[i] || "";
     const dObj = dStr ? new Date(dStr) : new Date(Date.now() + i * 86400000);
     const dayTide = generateDayTideInfo(dObj, lat, lng);
+    const dMaxTemp = dailyW.temperature_2m_max?.[i] ?? 24;
 
     dailyItems.push({
       date: dStr,
       dayOfWeek: dayNames[dObj.getDay()],
       weatherCode: dailyW.weather_code?.[i] ?? 0,
       weatherDescription: getWeatherCodeInfo(dailyW.weather_code?.[i] ?? 0).text,
-      tempMax: Math.round((dailyW.temperature_2m_max?.[i] ?? 24) * 10) / 10,
+      tempMax: Math.round(dMaxTemp * 10) / 10,
       tempMin: Math.round((dailyW.temperature_2m_min?.[i] ?? 18) * 10) / 10,
       precipitationSum: Math.round((dailyW.precipitation_sum?.[i] ?? 0) * 10) / 10,
       windSpeedMax: Math.round((dailyW.wind_speed_10m_max?.[i] ?? 5) * 10) / 10,
       waveHeightMax: 0.8,
-      seaWaterTempAvg: 20.0,
+      seaWaterTempAvg: estimateSeaWaterTemperature(dObj, lat, dMaxTemp),
       tideName: dayTide.tideType,
       moonAge: dayTide.moonAge,
       moonPhaseName: dayTide.moonPhaseName,
@@ -266,6 +298,8 @@ export function generateFallbackMarineWeather(
     waveHeight: 0.6,
   });
 
+  const baseSeaTemp = estimateSeaWaterTemperature(now, lat, 22.5);
+
   const current: CurrentMarineWeather = {
     time: now.toISOString(),
     temperature: 22.5,
@@ -283,7 +317,7 @@ export function generateFallbackMarineWeather(
     swellWaveHeight: 0.3,
     swellWaveDirection: 170,
     swellWavePeriod: 6.8,
-    seaWaterTemperature: 20.4,
+    seaWaterTemperature: baseSeaTemp,
     surfacePressure: 1014,
     uvIndex: 4,
   };
@@ -292,22 +326,23 @@ export function generateFallbackMarineWeather(
   for (let h = 0; h < 24; h++) {
     const hLabel = `${h.toString().padStart(2, "0")}:00`;
     const tideH = tide.hourlyPoints.find((p) => p.time === hLabel)?.height;
+    const airTemp = 20 + Math.sin((h / 24) * Math.PI * 2 - Math.PI / 2) * 5;
     hourly.push({
       time: hLabel,
       fullTime: `${tide.date}T${hLabel}:00`,
-      temperature: 20 + Math.sin((h / 24) * Math.PI * 2 - Math.PI / 2) * 5,
+      temperature: Math.round(airTemp * 10) / 10,
       weatherCode: 1,
       weatherDescription: "晴れ",
       precipitation: 0,
       precipitationProbability: 10,
-      windSpeed: 2.5 + Math.sin(h) * 1.2,
+      windSpeed: Math.round((2.5 + Math.sin(h) * 1.2) * 10) / 10,
       windDirection: 140,
       windDirectionCompass: "南東",
       windGusts: 4.2,
       waveHeight: 0.6,
       wavePeriod: 5.5,
       waveDirection: 180,
-      seaWaterTemperature: 20.4,
+      seaWaterTemperature: estimateSeaWaterTemperature(now, lat, airTemp),
       surfacePressure: 1014,
       fishingScore: Math.round(scoreRes.score + (h === 6 || h === 18 ? 15 : 0)),
       tideHeight: tideH,
@@ -330,7 +365,7 @@ export function generateFallbackMarineWeather(
       precipitationSum: 0,
       windSpeedMax: 4.5,
       waveHeightMax: 0.7,
-      seaWaterTempAvg: 20.4,
+      seaWaterTempAvg: estimateSeaWaterTemperature(dDate, lat, 25.0),
       tideName: dTide.tideType,
       moonAge: dTide.moonAge,
       moonPhaseName: dTide.moonPhaseName,

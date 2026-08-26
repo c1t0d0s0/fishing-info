@@ -15,6 +15,7 @@ export default function SafetyPage() {
   const dangerousCreatures = [
     {
       name: "ハオコゼ / オニオコゼ",
+      categoryBadge: "棘毒（タンパク毒）",
       dangerLevel: "★★★★★ (強毒)",
       poisonType: "背ビレ・胸ビレの棘毒（タンパク毒）",
       symptom: "刺された瞬間に電撃のような激痛が走り、患部が赤く腫れ上がり数時間〜数日痛みが持続。",
@@ -22,6 +23,7 @@ export default function SafetyPage() {
     },
     {
       name: "アイゴ (バリ)",
+      categoryBadge: "棘毒（ヒレ毒）",
       dangerLevel: "★★★★☆ (強毒)",
       poisonType: "背ビレ・腹ビレ・尻ビレの鋭い棘毒",
       symptom: "サビキやフカセの外道で釣れ、素手で触ると激痛と腫れ。死んでも毒性は残ります。",
@@ -29,6 +31,7 @@ export default function SafetyPage() {
     },
     {
       name: "アカエイ",
+      categoryBadge: "尾部毒棘・外科的重傷",
       dangerLevel: "★★★★★ (猛毒・外科的重傷)",
       poisonType: "尾の付け根にあるノコギリ状の毒棘",
       symptom: "サーフや河口の砂地に潜み、誤って踏むと深く刺さって毒が注入され、組織壊死や失血の恐れ。",
@@ -36,6 +39,7 @@ export default function SafetyPage() {
     },
     {
       name: "ゴンズイ",
+      categoryBadge: "棘毒（ヒレ毒）",
       dangerLevel: "★★★★☆ (強毒)",
       poisonType: "背ビレと胸ビレの鋭い毒棘",
       symptom: "夜釣りの堤防で群れて釣れるナマズに似た魚。刺されると猛烈な痛みが患部全体に広がります。",
@@ -43,13 +47,63 @@ export default function SafetyPage() {
     },
     {
       name: "ヒョウモンダコ",
+      categoryBadge: "神経猛毒（咬傷）",
       dangerLevel: "★★★★★ (致死猛毒)",
       poisonType: "唾液腺に含まれるテトロドトキシン（神経毒）",
       symptom: "興奮すると青いヒョウ柄が発色。噛まれると呼吸困難や麻痺を引き起こし命に関わる。",
       treatment: "絶対に素手で触らない。噛まれた場合は直ちに119番通報し心肺蘇生措置。",
     },
     {
+      name: "ダツ / オキザヨリ",
+      categoryBadge: "突進・物理的刺傷",
+      dangerLevel: "★★★★★ (突進・刺傷事故)",
+      poisonType: "槍のように鋭利なクチバシと鋭い歯（物理的凶器）",
+      symptom: "夜間のヘッドライトや光る装飾品に時速60kmで突進・ジャンプし、人体に突き刺さる重大事故（頸部・胴体貫通や失明など命に関わる）。",
+      treatment: "夜釣りでは海面を絶対にライトで照らさない。万が一刺さった場合は無理に引き抜かず、固定して直ちに119番通報・救急搬送。",
+    },
+    {
+      name: "タチウオ (太刀魚)",
+      categoryBadge: "カミソリ牙・切創出血",
+      dangerLevel: "★★★★☆ (鋭利な牙・出血切創)",
+      poisonType: "カミソリのように極めて鋭く尖った牙（外科用メス並みの切れ味）",
+      symptom: "暴れた際に手や指に触れると肉深くまで一瞬でスパッと切れ、大量出血。歯の表面の海洋細菌による感染症リスク。",
+      treatment: "絶対に素手で口周りを掴まない。フィッシュグリップで頭部を挟み、ロングノーズプライヤーで針を外す。切傷時は流水洗浄・圧迫止血・消毒。",
+    },
+    {
+      name: "サワラ / サゴシ (鰆)",
+      categoryBadge: "鋭利な三角歯・切創",
+      dangerLevel: "★★★★☆ (カミソリ歯・激しい暴れ)",
+      poisonType: "カミソリ状の三角形の鋭利な歯。時速80kmの遊泳力から繰り出される噛みつき",
+      symptom: "ルアーを丸呑みされた際や船上・堤防で激しく暴れた際に口周りを触ると重度の切傷・腱損傷の恐れ。",
+      treatment: "口の中に指を入れたりエラ持ちをしない。大型プライヤーで安全に針外しを行い、必要に応じて即座に脳締めして暴れを止める。",
+    },
+    {
+      name: "アカカマス / ヤマトカマス (梭子魚)",
+      categoryBadge: "鋭利な犬歯・切創",
+      dangerLevel: "★★★☆☆ (鋭利な歯・指の裂傷)",
+      poisonType: "口内にびっしりと並んだ鋭く硬い犬歯状の牙",
+      symptom: "針外し時に魚が暴れて指を深く切る事故が多発。歯が非常に細かく鋭いため傷口が塞がりにくい。",
+      treatment: "魚ばさみ（メゴチバサミ）やフィッシュグリップで胴体を確実に固定し、プライヤーや針外し器具を使用する。",
+    },
+    {
+      name: "トカジャー / ニザダイ (三の字)",
+      categoryBadge: "尾柄部メス状骨板",
+      dangerLevel: "★★★★☆ (鋭利な骨板・切創)",
+      poisonType: "尾ビレの付け根（尾柄部）にある3〜4個の鋭利な突起（サージカルナイフのようなメス状骨板）",
+      symptom: "フカセ釣りで暴れた魚を素手で抑えたり掴むと、尾を激しく振られた際に手のひらや指を深く切り裂かれる。",
+      treatment: "尾柄部周辺には絶対に触れない。タオルや魚ばさみで頭側をしっかりホールドして針を外す。切創時は止血と消毒。",
+    },
+    {
+      name: "バラハタ (ナガジューミーバイ)",
+      categoryBadge: "シガテラ毒・神経障害",
+      dangerLevel: "★★★★★ (シガテラ毒・重度食中毒)",
+      poisonType: "食物連鎖で体内に蓄積されるシガテラ毒素（渦鞭毛藻由来の強力な神経毒）",
+      symptom: "食べると温度感覚異常（ドライアイスセンセーション：水に触れると電撃のように痛む）、激しい下痢、嘔吐、関節痛、倦怠感が数ヶ月〜数年持続。",
+      treatment: "加熱しても毒素は分解されない。南西諸島や小笠原で釣れた大型個体（特に50cm以上）は食べずにリリース。発症時は直ちに神経内科・消化器内科を受診。",
+    },
+    {
       name: "クサフグ・キタマクラ",
+      categoryBadge: "体内致死毒（テトロドトキシン）",
       dangerLevel: "★★★★★ (体内致死毒)",
       poisonType: "内臓・筋肉・皮膚のテトロドトキシン",
       symptom: "加熱しても毒は消えません。素人調理による誤食は呼吸麻痺で死に至ります。",
@@ -135,10 +189,10 @@ export default function SafetyPage() {
         <div>
           <h2 className="font-extrabold text-slate-900 dark:text-white text-lg flex items-center gap-2">
             <AlertTriangle className="w-5 h-5 text-rose-500" />
-            要注意！危険魚・毒魚図鑑 & 応急処置
+            要注意！危険魚・毒魚・牙魚図鑑 & 応急処置
           </h2>
           <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
-            堤防や砂浜で釣れる危険生物の見分け方と刺されたときの救急法
+            堤防・サーフ・磯で釣れる毒魚・カミソリ歯・有毒魚の見分け方と救急法
           </p>
         </div>
 
@@ -148,28 +202,33 @@ export default function SafetyPage() {
               key={idx}
               className="p-4 sm:p-5 rounded-2xl bg-rose-50/40 dark:bg-rose-950/20 border border-rose-200 dark:border-rose-900/50 space-y-2 text-xs"
             >
-              <div className="flex items-center justify-between">
-                <h3 className="font-black text-sm text-rose-700 dark:text-rose-400">
-                  {item.name}
-                </h3>
-                <span className="font-bold text-[10px] bg-rose-200 dark:bg-rose-900/60 text-rose-800 dark:text-rose-200 px-2 py-0.5 rounded-full">
+              <div className="flex items-start justify-between gap-2">
+                <div>
+                  <span className="text-[10px] font-bold text-rose-600 dark:text-rose-400 bg-white/80 dark:bg-rose-950/80 px-2 py-0.5 rounded-md border border-rose-200 dark:border-rose-900/60 inline-block mb-1">
+                    {item.categoryBadge}
+                  </span>
+                  <h3 className="font-black text-sm text-rose-700 dark:text-rose-400">
+                    {item.name}
+                  </h3>
+                </div>
+                <span className="font-bold text-[10px] bg-rose-200 dark:bg-rose-900/60 text-rose-800 dark:text-rose-200 px-2 py-0.5 rounded-full shrink-0">
                   {item.dangerLevel}
                 </span>
               </div>
 
               <div>
-                <span className="font-bold text-slate-700 dark:text-slate-300">毒の部位: </span>
+                <span className="font-bold text-slate-700 dark:text-slate-300">危険部位・毒の特徴: </span>
                 <span className="text-slate-600 dark:text-slate-400">{item.poisonType}</span>
               </div>
 
               <div>
-                <span className="font-bold text-slate-700 dark:text-slate-300">症状: </span>
+                <span className="font-bold text-slate-700 dark:text-slate-300">危険性・症状: </span>
                 <span className="text-slate-600 dark:text-slate-400 leading-relaxed">{item.symptom}</span>
               </div>
 
               <div className="p-2.5 rounded-xl bg-white dark:bg-slate-900 border border-rose-100 dark:border-rose-950">
                 <span className="font-bold text-rose-600 dark:text-rose-400 block mb-0.5">
-                  🚑 応急手当:
+                  🚑 応急手当・対処法:
                 </span>
                 <span className="text-slate-700 dark:text-slate-300 leading-relaxed">
                   {item.treatment}
