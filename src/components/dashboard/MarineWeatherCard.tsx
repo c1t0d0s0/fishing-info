@@ -44,23 +44,23 @@ export default function MarineWeatherCard({ weather }: MarineWeatherCardProps) {
 
   return (
     <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-5 sm:p-6 shadow-sm hover:shadow-md transition-shadow">
-      <div className="flex items-center justify-between gap-2 mb-5">
-        <div className="flex items-center gap-2.5">
-          <div className="p-1.5 rounded-lg bg-teal-500/10 text-teal-600 dark:text-teal-400">
+      <div className="flex flex-wrap items-center justify-between gap-2.5 mb-5">
+        <div className="flex items-center gap-2.5 min-w-0">
+          <div className="p-1.5 rounded-lg bg-teal-500/10 text-teal-600 dark:text-teal-400 shrink-0">
             <Wind className="w-5 h-5" />
           </div>
-          <div>
-            <h3 className="font-bold text-slate-900 dark:text-white text-base">
-              海洋・気象実況 (Marine Weather)
+          <div className="min-w-0">
+            <h3 className="font-bold text-slate-900 dark:text-white text-base truncate">
+              海洋・気象実況
             </h3>
-            <span className="text-xs text-slate-500 dark:text-slate-400">
+            <span className="text-xs text-slate-500 dark:text-slate-400 block truncate">
               波高・風向風速・海水温・気圧
             </span>
           </div>
         </div>
 
         {/* Current Weather condition chip */}
-        <div className="px-3 py-1 rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700/80 text-xs font-bold text-slate-800 dark:text-slate-200 flex items-center gap-1.5">
+        <div className="px-3 py-1.5 rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700/80 text-xs font-bold text-slate-800 dark:text-slate-200 flex items-center gap-1.5 shrink-0 whitespace-nowrap shadow-2xs">
           <span>{weatherDescription}</span>
           <span className="text-ocean-600 dark:text-ocean-400">{temperature}°C</span>
         </div>

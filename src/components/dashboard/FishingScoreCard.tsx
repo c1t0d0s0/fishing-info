@@ -40,7 +40,7 @@ export default function FishingScoreCard({
           </div>
           <div>
             <h3 className="font-bold text-slate-900 dark:text-white text-base">
-              釣行指数 (Fishing Score)
+              釣行指数
             </h3>
             <span className="text-xs text-slate-500 dark:text-slate-400">
               {timeLabel}の総合コンディション判定

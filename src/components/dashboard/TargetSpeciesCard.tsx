@@ -106,7 +106,7 @@ export default function TargetSpeciesCard({ spot }: TargetSpeciesCardProps) {
           </div>
           <div>
             <h3 className="font-bold text-slate-900 dark:text-white text-base">
-              この釣り場の狙い目魚種 (Target Fish)
+              この釣り場の狙い目魚種
             </h3>
             <span className="text-xs text-slate-500 dark:text-slate-400">
               今釣れるおすすめターゲット & 仕掛け ({sortedTargetFish.length}種登録)
@@ -131,13 +131,13 @@ export default function TargetSpeciesCard({ spot }: TargetSpeciesCardProps) {
             className="p-3.5 rounded-2xl bg-slate-50 dark:bg-slate-800/40 border border-slate-100 dark:border-slate-800 flex flex-col justify-between space-y-2 hover:border-ocean-300 dark:hover:border-ocean-700 transition-colors"
           >
             <div className="space-y-1">
-              <div className="flex items-center justify-between gap-2">
-                <span className="font-bold text-sm text-slate-900 dark:text-white flex items-center gap-1.5">
-                  <Fish className="w-4 h-4 text-ocean-500 shrink-0" />
-                  <span className="truncate">{sp.name}</span>
+              <div className="flex items-start justify-between gap-2">
+                <span className="font-bold text-sm text-slate-900 dark:text-white flex items-center gap-1.5 min-w-0 flex-1">
+                  <Fish className="w-4 h-4 text-ocean-500 shrink-0 mt-0.5" />
+                  <span className="truncate" title={sp.name}>{sp.name}</span>
                 </span>
                 {sp.isPeak && (
-                  <span className="text-[10px] font-black px-2 py-0.5 rounded-full bg-rose-500/10 text-rose-600 dark:text-rose-400 border border-rose-500/20 flex items-center gap-0.5 shrink-0">
+                  <span className="text-[10px] font-black px-2 py-0.5 rounded-full bg-rose-500/10 text-rose-600 dark:text-rose-400 border border-rose-500/20 flex items-center gap-0.5 shrink-0 whitespace-nowrap mt-0.5">
                     <Sparkles className="w-2.5 h-2.5" />
                     今が旬!
                   </span>

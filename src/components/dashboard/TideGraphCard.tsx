@@ -216,7 +216,7 @@ export default function TideGraphCard({
           </div>
           <div>
             <h3 className="font-bold text-slate-900 dark:text-white text-base">
-              タイドグラフ (Tide Graph)
+              タイドグラフ
             </h3>
             <span className="text-xs text-slate-500 dark:text-slate-400">
               潮位推移 & 満潮・干潮予測

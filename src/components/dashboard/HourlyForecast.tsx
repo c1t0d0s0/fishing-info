@@ -66,7 +66,7 @@ export default function HourlyForecast({ hourly }: HourlyForecastProps) {
           </div>
           <div>
             <h3 className="font-bold text-slate-900 dark:text-white text-base">
-              24時間コンディション推移 (Hourly Matrix)
+              24時間コンディション推移
             </h3>
             <span className="text-xs text-slate-500 dark:text-slate-400">
               時間別の釣行指数・波・風・潮位
