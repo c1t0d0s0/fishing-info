@@ -10668,5 +10668,365 @@ export const DEFAULT_SPOTS: FishingSpot[] = [
       notes: "トイレ・観光売店完備。"
     },
     tips: "北西風でサラシが広がるタイミングはヒラスズキの独壇場。潮目が磯際を通るときにダイビングペンシルを引けばヒラマサが水面を割ります。"
+  },
+  {
+    id: "tokyo-hachijojima-yaene",
+    name: "東京 八丈島 八重根港・八重根タイドプール地磯",
+    kana: "とうきょう・はちじょうじま・やえねこう・やえねたいどぷーるじいそ",
+    region: "kanto",
+    prefecture: "東京都",
+    address: "東京都八丈島八丈町大賀郷",
+    lat: 33.1024,
+    lng: 139.7741,
+    category: "port",
+    description: "黒潮本流が島を取り巻く八丈島西岸の超一級ビッグゲームポイント。港内の深い澪筋や外側溶岩地磯から、大型シマアジ・カンパチ・ヒラマサ・キハダマグロ・尾長グレ・アカハタ・タカベ・ナンヨウカイワリが狙える全国の離島アングラー憧れの聖地。",
+    accessInfo: "八丈島空港より車で約10分、または底土港より車で約15分。八重根港岸壁すぐ。",
+    depthRange: "6m〜20m (黒潮本流急深)",
+    bottomType: "玄武岩溶岩・捨石・急深スリット・海溝",
+    facilities: {
+      hasParking: true,
+      hasToilet: true,
+      hasSafetyFence: false,
+      isFamilyFriendly: true,
+      hasNightLight: true,
+      hasConvenienceStoreNearby: true,
+      hasTackleShopNearby: true,
+      isFeeRequired: false,
+      
+      isNightFishingAllowed: true,
+      nightFishingText: "可能 (常夜灯下のアジング・夜フカセシマアジ)",
+      
+    },
+    targetFish: ["シマアジ (大型)","カンパチ (ショゴ/ネリゴ)","ヒラマサ","キハダマグロ","尾長グレ (60cmUP)","アカハタ","タカベ","ナンヨウカイワリ"],
+    bestSeasons: {
+      spring: ["シマアジ (夜釣り/朝マズメ)","ヒラマサ","親アオリイカ","乗っ込み尾長グレ"],
+      summer: ["キハダマグロ","カンパチ","タカベ","アカハタ","シイラ"],
+      autumn: ["大型シマアジ","カンパチ","ナンヨウカイワリ","青物"],
+      winter: ["寒グレ（ロクマル尾長）","シマアジ","ヒラスズキ"]
+    },
+    recommendedRigs: ["ウキフカセ太仕掛け (道糸4〜6号/ハリス4〜6号 + オキアミ)","ショアジギング (60〜100g)","カゴ釣り (ハリス6〜8m)","タイドプール・ロックフィッシュリグ"],
+    localRules: ["外側テトラ・溶岩磯でのスパイクシューズ・固型式ライフジャケット着用必須","定期船・給油作業エリアへの立ち入り禁止","コマセ汚れの海水洗い流し・ゴミの完全持ち帰り"],
+    parkingDetails: {
+      capacity: "八重根港内駐車場 約50台",
+      fee: "無料",
+      hours: "24時間利用可能",
+      notes: "トイレ・休憩所完備。タイドプール遊歩道隣接。"
+    },
+    tips: "八丈島名物のシマアジは朝夕マズメや夜釣りのウキフカセ・カゴ釣りが本番。ウキが海中へ消し込む電撃バイトに素早くアワセ、強烈な横走りを耐えて根から引き剥がします。"
+  },
+  {
+    id: "tokyo-hachijojima-sokodo",
+    name: "東京 八丈島 底土港・底土海水浴場波止",
+    kana: "とうきょう・はちじょうじま・そこどこう・そこどかいすいよくじょうはと",
+    region: "kanto",
+    prefecture: "東京都",
+    address: "東京都八丈島八丈町三根",
+    lat: 33.1241,
+    lng: 139.8182,
+    category: "port",
+    description: "東京（竹芝）からの大型定期船「橘丸」が発着する八丈島のメイン港。大型客船が接岸するため足元から水深が15m以上あり、シマアジ・ヒラマサ・カンパチ・ムロアジ・タマン・アオリイカが堤防から手軽に狙える屈指の大物ポイント。",
+    accessInfo: "底土客船ターミナル直結。八丈島空港より車で約10分。",
+    depthRange: "8m〜18m",
+    bottomType: "砂泥・基礎捨石・大型ケーソン岸壁",
+    facilities: {
+      hasParking: true,
+      hasToilet: true,
+      hasSafetyFence: false,
+      isFamilyFriendly: true,
+      hasNightLight: true,
+      hasConvenienceStoreNearby: true,
+      hasTackleShopNearby: true,
+      isFeeRequired: false,
+      
+      isNightFishingAllowed: true,
+      nightFishingText: "可能 (常夜灯下でのムロアジサビキ・夜釣り)",
+      
+    },
+    targetFish: ["シマアジ","ヒラマサ","カンパチ","ムロアジ","タマン (ハマフエフキ)","アオリイカ","アカハタ"],
+    bestSeasons: {
+      spring: ["シマアジ","ヒラマサ","親アオリイカ"],
+      summer: ["ムロアジ（生きエサ用）","カンパチ","タマン","シイラ"],
+      autumn: ["大型シマアジ","ヒラマサ","カンパチ","アオリイカ"],
+      winter: ["寒グレ","シマアジ","メバル"]
+    },
+    recommendedRigs: ["カゴ釣り (両軸/スピニング遠投)","泳がせノマセ釣り (活きムロアジ)","ショアジギング (60〜80g)","サビキ釣り"],
+    localRules: ["東海汽船客船の入出港作業中は指定エリアへの立ち入り・釣り禁止","岸壁でのライフジャケット着用","ゴミの持ち帰り"],
+    parkingDetails: {
+      capacity: "底土港船客待合所駐車場 約80台",
+      fee: "無料",
+      hours: "24時間利用可能",
+      notes: "大型トイレ・待合所・自販機完備。"
+    },
+    tips: "サビキで足元のムロアジを確保し、エレベーター仕掛けやウキ泳がせで投入するとヒラマサやカンパチが一発で竿を絞り込みます。"
+  },
+  {
+    id: "tokyo-ogasawara-chichijima-futami",
+    name: "東京 小笠原 父島 二見港・青灯台桟橋",
+    kana: "とうきょう・おがさわら・ちちじま・ふたみこう・あおとうだいさんばし",
+    region: "kanto",
+    prefecture: "東京都",
+    address: "東京都小笠原村父島東町・西町",
+    lat: 27.0941,
+    lng: 142.1941,
+    category: "port",
+    description: "世界自然遺産・小笠原諸島父島の海の玄関口「おがさわら丸」が接岸する二見港と青灯台桟橋。透明度抜群のボニンブルーの海で、堤防からGT（ロウニンアジ）・キハダマグロ・シロダイ・アカバ（アカハタ）・タマン・サワラ・ナンヨウカイワリが狙える日本屈指のモンスターフィールド。",
+    accessInfo: "東京・竹芝桟橋より定期船「おがさわら丸」で約24時間。二見港客船待合所より徒歩すぐ。",
+    depthRange: "6m〜20m",
+    bottomType: "サンゴ礁・砂泥・岸壁ケーソン・捨石",
+    facilities: {
+      hasParking: true,
+      hasToilet: true,
+      hasSafetyFence: false,
+      isFamilyFriendly: true,
+      hasNightLight: true,
+      hasConvenienceStoreNearby: true,
+      hasTackleShopNearby: true,
+      isFeeRequired: false,
+      
+      isNightFishingAllowed: true,
+      nightFishingText: "可能 (常夜灯下での夜サメ・GT・タマン打ち込み)",
+      
+    },
+    targetFish: ["GT (ロウニンアジ 20kg超)","キハダマグロ","シロダイ","アカバ (アカハタ)","タマン","サワラ (オキサワラ)","ナンヨウカイワリ"],
+    bestSeasons: {
+      spring: ["大型シロダイ","タマン","キハダマグロ"],
+      summer: ["GT（ロウニンアジ）","サワラ","アカバ","ナンヨウカイワリ"],
+      autumn: ["GT","キハダマグロ","カンパチ","シロダイ"],
+      winter: ["アカバ","大型GT","タマン"]
+    },
+    recommendedRigs: ["ヘビーキャスティングタックル (大型ポッパー/ダイペン 160〜200mm)","タマン・シロダイ打ち込み仕掛け (PE6〜8号 + ムロアジ1匹掛け)","メタルジグ (40〜80g)"],
+    localRules: ["世界自然遺産小笠原のルール・外来種持ち込み防止の徹底","ウミガメ・エイ等への配慮","定期船入出港時の作業エリア規制遵守","ゴミの完全持ち帰り"],
+    parkingDetails: {
+      capacity: "二見港船客待合所周辺 約30台",
+      fee: "無料",
+      hours: "24時間利用可能",
+      notes: "観光案内所・大型トイレ・売店完備。"
+    },
+    tips: "夕マズメから夜間にかけて青灯台周辺へ回遊してくるGTやシロダイは圧巻。ムロアジを泳がせるか、大型ポッパーのポッピングで水面が爆発します。"
+  },
+  {
+    id: "tokyo-ogasawara-chichijima-miyanohama",
+    name: "東京 小笠原 父島 宮之浜・兄島海峡リーフ",
+    kana: "とうきょう・おがさわら・ちちじま・みやのはま・あにじまかいきょうりーふ",
+    region: "kanto",
+    prefecture: "東京都",
+    address: "東京都小笠原村父島宮之浜",
+    lat: 27.1082,
+    lng: 142.1882,
+    category: "rock",
+    description: "父島北部、兄島瀬戸の激流に面した白砂ビーチと巨大リーフ地磯。ボニンブルーの急流に大型カスミアジ・カンパチ・イソマグロ・アカバ・タマン・ダツが群れ、シュノーケリングでも魚影が確認できる大自然パラダイス。",
+    accessInfo: "二見港集落（大村地区）より車で約5分、または徒歩約20分。",
+    depthRange: "2m〜14m (兄島瀬戸激流)",
+    bottomType: "サンゴ礁リーフ・白砂・激流スリット・ドロップオフ",
+    facilities: {
+      hasParking: true,
+      hasToilet: true,
+      hasSafetyFence: false,
+      isFamilyFriendly: true,
+      hasNightLight: false,
+      hasConvenienceStoreNearby: false,
+      hasTackleShopNearby: true,
+      isFeeRequired: false,
+      
+      isNightFishingAllowed: true,
+      nightFishingText: "夜釣り可能（リーフ歩行時の足元注意）",
+      
+    },
+    targetFish: ["カスミアジ","カンパチ","イソマグロ","アカバ (アカハタ)","タマン","ダツ","バラハタ"],
+    bestSeasons: {
+      spring: ["タマン","カスミアジ","カンパチ"],
+      summer: ["イソマグロ","カスミアジ","アカバ","ダツ"],
+      autumn: ["カンパチ","タマン","バラハタ"],
+      winter: ["アカバ","カスミアジ"]
+    },
+    recommendedRigs: ["ショアキャスティング (シンペン/ポッパー 120〜160mm)","ライトショアジギング (30〜60g)","テキサスリグ (アカバ狙い)"],
+    localRules: ["サンゴ礁を踏み荒らさないこと（マナーシューズ着用）","兄島瀬戸の急流への流されに厳重警戒","ライフジャケット着用必須"],
+    parkingDetails: {
+      capacity: "宮之浜園地駐車場 約15台",
+      fee: "無料",
+      hours: "24時間利用可能",
+      notes: "トイレ・東屋完備。"
+    },
+    tips: "兄島瀬戸から流れ込む激流がリーフエッジにぶつかるポイントへシンペンをキャスト。エメラルドグリーンの浅瀬からカスミアジやカンパチが猛追してきます。"
+  },
+  {
+    id: "tokyo-ogasawara-hahajima-oki",
+    name: "東京 小笠原 母島 沖港・脇浜波止",
+    kana: "とうきょう・おがさわら・ははじま・おきこう・わきはまはと",
+    region: "kanto",
+    prefecture: "東京都",
+    address: "東京都小笠原村母島元地",
+    lat: 26.6382,
+    lng: 142.1541,
+    category: "port",
+    description: "父島からさらに南へ定期船「ははじま丸」で渡る日本最南端級の有人離島・母島のメイン港。手つかずの超濃厚な魚影を誇り、イソマグロ・キハダ・GT・シロダイ・アカバ・バラハタ・タマンが港の防波堤から狙える幻のパラダイス。",
+    accessInfo: "父島二見港より定期船「ははじま丸」で約2時間10分。沖港船客待合所すぐ。",
+    depthRange: "5m〜16m",
+    bottomType: "サンゴ礁・砂泥・岸壁ケーソン・捨石",
+    facilities: {
+      hasParking: true,
+      hasToilet: true,
+      hasSafetyFence: false,
+      isFamilyFriendly: true,
+      hasNightLight: true,
+      hasConvenienceStoreNearby: true,
+      hasTackleShopNearby: false,
+      isFeeRequired: false,
+      
+      isNightFishingAllowed: true,
+      nightFishingText: "可能 (夜釣りの大型シロダイ・GT・タマン打ち込み)",
+      
+    },
+    targetFish: ["イソマグロ (大型)","キハダマグロ","GT (ロウニンアジ)","シロダイ (70cmUP)","アカバ (アカハタ)","バラハタ","タマン"],
+    bestSeasons: {
+      spring: ["シロダイ","タマン","キハダマグロ"],
+      summer: ["イソマグロ","GT","アカバ","バラハタ"],
+      autumn: ["イソマグロ","GT","キハダ","シロダイ"],
+      winter: ["アカバ","タマン","カスミアジ"]
+    },
+    recommendedRigs: ["ヘビーショアキャスティング (ダイビングペンシル 160〜200mm)","タマン・シロダイ打ち込み仕掛け (極太タマン針 + イカ/ムロアジ)","メタルジグ (40〜80g)"],
+    localRules: ["自然環境保全・クダマキガイ等の採捕禁止","定期船入出港時の作業安全確保","ゴミの完全持ち帰り（島内処理不可のため本土持ち帰り）"],
+    parkingDetails: {
+      capacity: "沖港待合所周辺 約20台",
+      fee: "無料",
+      hours: "24時間利用可能",
+      notes: "船客待合所・トイレ・自販機完備。"
+    },
+    tips: "港の防波堤先端から外洋へ向かってメタルジグやポッパーを投げると、イソマグロやキハダが回遊。夜は足元で良型アカバやシロダイが連発。"
+  },
+  {
+    id: "tokyo-miyakejima-akakokko",
+    name: "東京 三宅島 三池港・サタドー岬地磯",
+    kana: "とうきょう・みやけじま・みいけこう・さたどーみさきじいそ",
+    region: "kanto",
+    prefecture: "東京都",
+    address: "東京都三宅島三宅村坪田",
+    lat: 34.0841,
+    lng: 139.5482,
+    category: "rock",
+    description: "黒潮本流が激しく洗う火山島・三宅島の南東部の一級地磯＆港湾。水深が足元から落ち込み、60cmオーバーの超巨大尾長グレ・ヒラマサ・カンパチ・シマアジ・大型イサキが狙える全国のグレ釣り師憧れの聖地。",
+    accessInfo: "三宅島空港より車で約5分、または錆ヶ浜港より車で約15分。サタドー岬灯台駐車場よりエントリー。",
+    depthRange: "6m〜25m (黒潮本流直撃)",
+    bottomType: "玄武岩溶岩・スリット・海溝・ドロップオフ",
+    facilities: {
+      hasParking: true,
+      hasToilet: true,
+      hasSafetyFence: false,
+      isFamilyFriendly: false,
+      hasNightLight: true,
+      hasConvenienceStoreNearby: true,
+      hasTackleShopNearby: true,
+      isFeeRequired: false,
+      
+      isNightFishingAllowed: true,
+      nightFishingText: "夜釣り可能（夜の大型イサキ・シマアジ・フカセ）",
+      
+    },
+    targetFish: ["尾長グレ (60cmUP)","ヒラマサ","カンパチ","シマアジ","イサキ (ジャンボイサキ)","タカベ","アカハタ"],
+    bestSeasons: {
+      spring: ["乗っ込み尾長グレ","シマアジ","ヒラマサ"],
+      summer: ["ジャンボイサキ（夜釣り爆釣）","カンパチ","タカベ","アカハタ"],
+      autumn: ["ヒラマサ","カンパチ","シマアジ","大型尾長グレ"],
+      winter: ["寒グレ（ロクマル尾長）","ヒラスズキ"]
+    },
+    recommendedRigs: ["ウキフカセ太仕掛け (道糸4〜6号/ハリス4〜6号)","ロックショアジギング (60〜100g)","カゴ釣り仕掛け (夜釣りイサキ/シマアジ)"],
+    localRules: ["溶岩磯でのスパイクシューズ・固型式ライフジャケット完全着用必須","高波・ウネリ時の磯乗り絶対禁止","コマセの洗い流し・ゴミ持ち帰り"],
+    parkingDetails: {
+      capacity: "サタドー岬・三池港駐車場 約40台",
+      fee: "無料",
+      hours: "24時間利用可能",
+      notes: "トイレ完備。"
+    },
+    tips: "サタドー岬の激流潮目へウキフカセでオキアミを流し込むと、60cm級の尾長グレが一撃で竿を満月に曲げます。夏の夜釣りはジャンボイサキが数釣り可能。"
+  },
+  {
+    id: "tokyo-kouzushima-tako",
+    name: "東京 神津島 多幸湾 三浦港・赤崎遊歩道磯",
+    kana: "とうきょう・こうづしま・たこうわん・みうらこう・あかさきゆうほどういそ",
+    region: "kanto",
+    prefecture: "東京都",
+    address: "東京都神津島村多幸湾・赤崎",
+    lat: 34.2042,
+    lng: 139.1482,
+    category: "rock",
+    description: "天上山の大白壁を背にする神秘の入江・多幸湾三浦港と、木道が整備された赤崎遊歩道磯。湧水と黒潮が育む名海域で、シマアジ・イシダイ・尾長グレ・カンパチ・タカベ・アオリイカが狙える風光明媚な超一級ポイント。",
+    accessInfo: "神津島港（前浜港）より車で約10分、または神津島空港より車で約8分。村営バス「多幸湾」下車すぐ。",
+    depthRange: "5m〜16m",
+    bottomType: "流紋岩白砂・岩盤・スリット・海藻帯",
+    facilities: {
+      hasParking: true,
+      hasToilet: true,
+      hasSafetyFence: false,
+      isFamilyFriendly: true,
+      hasNightLight: true,
+      hasConvenienceStoreNearby: true,
+      hasTackleShopNearby: true,
+      isFeeRequired: false,
+      
+      isNightFishingAllowed: true,
+      nightFishingText: "可能 (常夜灯下のアジング・夜フカセ)",
+      
+    },
+    targetFish: ["シマアジ","イシダイ","尾長グレ","カンパチ (ショゴ)","タカベ","アオリイカ","アカハタ"],
+    bestSeasons: {
+      spring: ["シマアジ","親アオリイカ","乗っ込みグレ"],
+      summer: ["タカベ","カンパチ","アカハタ","イシダイ"],
+      autumn: ["シマアジ","アオリイカ","カンパチ","イシダイ"],
+      winter: ["寒グレ（尾長）","寒マダイ","シマアジ"]
+    },
+    recommendedRigs: ["ウキフカセ釣り","イシダイ仕掛け (ウニ/サザエ)","ショアジギング (40〜80g)","エギング (3.5号)"],
+    localRules: ["多幸湧水地の保全","赤崎遊歩道での一般観光客への配慮","ライフジャケット着用・ゴミ持ち帰り"],
+    parkingDetails: {
+      capacity: "多幸湾待合所・赤崎遊歩道駐車場 約50台",
+      fee: "無料",
+      hours: "24時間利用可能",
+      notes: "待合所・トイレ・自販機完備。"
+    },
+    tips: "多幸湾三浦港の赤灯台先端からは潮目に乗せてシマアジやカンパチが狙え、赤崎遊歩道磯では足元のサラシで尾長グレやアカハタが手堅く釣れます。"
+  },
+  {
+    id: "tokyo-niijima-habushiura",
+    name: "東京 新島 羽伏浦海岸サーフ・新島港",
+    kana: "とうきょう・にいじま・はぶしうらかいがんさーふ・にいじまこう",
+    region: "kanto",
+    prefecture: "東京都",
+    address: "東京都新島村羽伏浦・本村",
+    lat: 34.3741,
+    lng: 139.2682,
+    category: "surf",
+    description: "世界屈指のサーフポイントとして知られる延長約6.5kmの真っ白なコーラルサンド大サーフと新島港。黒潮の力強い波が打ち寄せ、ショアから座布団ヒラメ・カンパチ・ヒラマサ・シマアジ・シロギス・マダイが狙える絶景サーフ。",
+    accessInfo: "新島港より車で約10分、または新島空港より車で約5分。羽伏浦メインゲートすぐ。",
+    depthRange: "2m〜8m (外洋大波サーフ)",
+    bottomType: "コーラル白細砂・激流サンドバー・離岸流海溝",
+    facilities: {
+      hasParking: true,
+      hasToilet: true,
+      hasSafetyFence: false,
+      isFamilyFriendly: true,
+      hasNightLight: false,
+      hasConvenienceStoreNearby: true,
+      hasTackleShopNearby: true,
+      isFeeRequired: false,
+      
+      isNightFishingAllowed: true,
+      nightFishingText: "可能 (夜間のシーバス・大型ヒラメ狙い)",
+      
+    },
+    targetFish: ["ヒラメ (座布団級)","カンパチ (ショゴ)","ヒラマサ","シマアジ","シロギス","マダイ","シーバス"],
+    bestSeasons: {
+      spring: ["シロギス","ショア真鯛","ヒラメ"],
+      summer: ["カンパチ","シマアジ","シロギス"],
+      autumn: ["座布団ヒラメ","カンパチ","ヒラマサ","シマアジ"],
+      winter: ["寒ヒラメ","ヒラスズキ"]
+    },
+    recommendedRigs: ["ヘビーシンキングペンシル (35〜45g)","メタルジグ (40〜60g)","ジグヘッドワーム (28〜35g)","投げ釣り仕掛け"],
+    localRules: ["サーファーとの十分な安全距離確保（世界的人気サーフポイントのため）","高波・巻き波による引き波に厳重注意","ライフジャケット着用・ゴミ持ち帰り"],
+    parkingDetails: {
+      capacity: "羽伏浦海岸メインゲート駐車場 約100台",
+      fee: "無料",
+      hours: "24時間利用可能",
+      notes: "大型トイレ・シャワー・展望台完備。"
+    },
+    tips: "白い砂浜の沖合にあるブレイクラインへヘビーシンペンをフルキャスト。白波の切れ目の払い出しを通すと座布団ヒラメやカンパチが強烈にヒットします。"
   }
 ];

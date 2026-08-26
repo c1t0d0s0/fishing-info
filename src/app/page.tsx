@@ -164,7 +164,7 @@ export default function DashboardPage() {
               全国釣り場マップ
             </h4>
             <p className="text-xs text-slate-500 dark:text-slate-400">
-              210箇所の施設・堤防・サーフ・地磯
+              218箇所の施設・堤防・サーフ・地磯・離島
             </p>
           </div>
           <div className="w-10 h-10 rounded-2xl bg-ocean-500/10 text-ocean-600 dark:text-ocean-400 flex items-center justify-center group-hover:scale-110 transition-transform">
