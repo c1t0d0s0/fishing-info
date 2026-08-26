@@ -376,78 +376,86 @@ export default function SpotDetailClient({ spotId }: SpotDetailClientProps) {
       )}
 
       {/* Seasonal Target Fish Breakdown */}
-      <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-5 sm:p-6 shadow-sm space-y-4">
-        <h3 className="font-bold text-slate-900 dark:text-white text-base flex items-center gap-2">
-          <Clock className="w-5 h-5 text-ocean-500" />
-          四季のターゲット魚種カレンダー
-        </h3>
+      {(() => {
+        const currentMonth = new Date().getMonth() + 1;
+        const currentSeasonKey =
+          currentMonth >= 3 && currentMonth <= 5
+            ? "spring"
+            : currentMonth >= 6 && currentMonth <= 8
+            ? "summer"
+            : currentMonth >= 9 && currentMonth <= 11
+            ? "autumn"
+            : "winter";
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 text-xs">
-          <div className="p-4 rounded-2xl bg-emerald-50/50 dark:bg-emerald-950/30 border border-emerald-100 dark:border-emerald-900/40 space-y-2">
-            <span className="font-bold text-emerald-700 dark:text-emerald-300 block">
-              🌸 春 (3月〜5月)
-            </span>
-            <div className="flex flex-wrap gap-1">
-              {spot.bestSeasons.spring.map((f) => (
-                <span
-                  key={f}
-                  className="bg-white dark:bg-slate-800 px-2 py-0.5 rounded-md font-medium text-slate-700 dark:text-slate-200"
-                >
-                  {f}
-                </span>
-              ))}
+        const seasons = [
+          {
+            key: "spring",
+            label: "🌸 春 (3月〜5月)",
+            fishes: spot.bestSeasons.spring,
+          },
+          {
+            key: "summer",
+            label: "☀️ 夏 (6月〜8月)",
+            fishes: spot.bestSeasons.summer,
+          },
+          {
+            key: "autumn",
+            label: "🍁 秋 (9月〜11月)",
+            fishes: spot.bestSeasons.autumn,
+          },
+          {
+            key: "winter",
+            label: "❄️ 冬 (12月〜2月)",
+            fishes: spot.bestSeasons.winter,
+          },
+        ];
+
+        return (
+          <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-5 sm:p-6 shadow-sm space-y-4">
+            <h3 className="font-bold text-slate-900 dark:text-white text-base flex items-center gap-2">
+              <Clock className="w-5 h-5 text-ocean-500" />
+              四季のターゲット魚種カレンダー
+            </h3>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 text-xs">
+              {seasons.map((season) => {
+                const isCurrent = season.key === currentSeasonKey;
+                return (
+                  <div
+                    key={season.key}
+                    className={`p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/40 space-y-2 transition-all ${
+                      isCurrent
+                        ? "border-2 border-ocean-600 dark:border-ocean-400 ring-2 ring-ocean-500/20 shadow-sm"
+                        : "border border-slate-200 dark:border-slate-800"
+                    }`}
+                  >
+                    <div className="flex items-center justify-between">
+                      <span className="font-bold text-slate-800 dark:text-slate-200 block">
+                        {season.label}
+                      </span>
+                      {isCurrent && (
+                        <span className="px-1.5 py-0.5 rounded-full text-[10px] font-extrabold bg-ocean-600 text-white dark:bg-ocean-500">
+                          現在
+                        </span>
+                      )}
+                    </div>
+                    <div className="flex flex-wrap gap-1">
+                      {season.fishes.map((f) => (
+                        <span
+                          key={f}
+                          className="bg-white dark:bg-slate-700/80 px-2 py-0.5 rounded-md font-medium text-slate-700 dark:text-slate-200 border border-slate-200/60 dark:border-slate-600/40"
+                        >
+                          {f}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                );
+              })}
             </div>
           </div>
-
-          <div className="p-4 rounded-2xl bg-sky-50/50 dark:bg-sky-950/30 border border-sky-100 dark:border-sky-900/40 space-y-2">
-            <span className="font-bold text-sky-700 dark:text-sky-300 block">
-              ☀️ 夏 (6月〜8月)
-            </span>
-            <div className="flex flex-wrap gap-1">
-              {spot.bestSeasons.summer.map((f) => (
-                <span
-                  key={f}
-                  className="bg-white dark:bg-slate-800 px-2 py-0.5 rounded-md font-medium text-slate-700 dark:text-slate-200"
-                >
-                  {f}
-                </span>
-              ))}
-            </div>
-          </div>
-
-          <div className="p-4 rounded-2xl bg-amber-50/50 dark:bg-amber-950/30 border border-amber-100 dark:border-amber-900/40 space-y-2">
-            <span className="font-bold text-amber-700 dark:text-amber-300 block">
-              🍁 秋 (9月〜11月)
-            </span>
-            <div className="flex flex-wrap gap-1">
-              {spot.bestSeasons.autumn.map((f) => (
-                <span
-                  key={f}
-                  className="bg-white dark:bg-slate-800 px-2 py-0.5 rounded-md font-medium text-slate-700 dark:text-slate-200"
-                >
-                  {f}
-                </span>
-              ))}
-            </div>
-          </div>
-
-          <div className="p-4 rounded-2xl bg-indigo-50/50 dark:bg-indigo-950/30 border border-indigo-100 dark:border-indigo-900/40 space-y-2">
-            <span className="font-bold text-indigo-700 dark:text-indigo-300 block">
-              ❄️ 冬 (12月〜2月)
-            </span>
-            <div className="flex flex-wrap gap-1">
-              {spot.bestSeasons.winter.map((f) => (
-                <span
-                  key={f}
-                  className="bg-white dark:bg-slate-800 px-2 py-0.5 rounded-md font-medium text-slate-700 dark:text-slate-200"
-                >
-                  {f}
-                </span>
-              ))}
-            </div>
-          </div>
-        </div>
-      </div>
+        );
+      })()}
     </div>
   );
 }
