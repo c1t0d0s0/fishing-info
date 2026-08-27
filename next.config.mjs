@@ -1,5 +1,5 @@
 /** @type {import('next').NextConfig} */
-const basePath = process.env.BASE_PATH !== undefined ? process.env.BASE_PATH : "/fishing-info";
+const basePath = process.env.BASE_PATH !== undefined ? process.env.BASE_PATH : "";
 
 const nextConfig = {
   reactStrictMode: true,
