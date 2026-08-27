@@ -22,12 +22,8 @@ export default function Header() {
   const [isDark, setIsDark] = useState(false);
 
   useEffect(() => {
-    // Check initial dark mode preference
-    if (
-      localStorage.theme === "dark" ||
-      (!("theme" in localStorage) &&
-        window.matchMedia("(prefers-color-scheme: dark)").matches)
-    ) {
+    // Check initial theme preference (default to light)
+    if (localStorage.theme === "dark") {
       document.documentElement.classList.add("dark");
       setIsDark(true);
     } else {
