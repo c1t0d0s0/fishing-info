@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { FishingSpot, SpotCategory } from "@/types/spot";
 import { MapPin, Filter, Check, ExternalLink, Info } from "lucide-react";
@@ -10,6 +10,40 @@ interface SpotMapProps {
   spots: FishingSpot[];
   selectedSpot?: FishingSpot;
   onSelectSpot: (spot: FishingSpot) => void;
+}
+
+// Custom Icon Generator
+function createCustomIcon(L: any, category: SpotCategory, isSelected: boolean) {
+  let bgColor = "#0284c7"; // default ocean
+  if (category === "park") bgColor = "#059669"; // emerald
+  if (category === "surf") bgColor = "#d97706"; // amber
+  if (category === "rock") bgColor = "#7c3aed"; // violet
+
+  const size = isSelected ? 36 : 28;
+  const border = isSelected ? "3px solid #ec4899" : "2px solid #ffffff";
+
+  return L.divIcon({
+    className: "custom-map-pin",
+    html: `<div style="
+      background-color: ${bgColor};
+      width: ${size}px;
+      height: ${size}px;
+      border-radius: 50%;
+      border: ${border};
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: ${isSelected ? "16px" : "14px"};
+      box-shadow: 0 4px 6px -1px rgba(0,0,0,0.3);
+      transform: translate(-50%, -50%);
+    ">
+      🎣
+    </div>`,
+    iconSize: [size, size],
+    iconAnchor: [size / 2, size / 2],
+    popupAnchor: [0, -size / 2],
+  });
 }
 
 export default function SpotMap({
@@ -27,15 +61,22 @@ export default function SpotMap({
   const [mapInstance, setMapInstance] = useState<any>(null);
   const [L, setL] = useState<any>(null);
 
+  const markersRef = useRef<Map<string, any>>(new Map());
+  const selectedSpotIdRef = useRef<string | undefined>(selectedSpot?.id);
+  const prevSpotsKeyRef = useRef<string>("");
+  const isInitialMountRef = useRef<boolean>(true);
+
   // Filter spots
-  const filteredSpots = spots.filter((spot) => {
-    if (categoryFilter !== "all" && spot.category !== categoryFilter) return false;
-    if (filterParking && !spot.facilities.hasParking) return false;
-    if (filterToilet && !spot.facilities.hasToilet) return false;
-    if (filterFence && !spot.facilities.hasSafetyFence) return false;
-    if (filterFamily && !spot.facilities.isFamilyFriendly) return false;
-    return true;
-  });
+  const filteredSpots = useMemo(() => {
+    return spots.filter((spot) => {
+      if (categoryFilter !== "all" && spot.category !== categoryFilter) return false;
+      if (filterParking && !spot.facilities.hasParking) return false;
+      if (filterToilet && !spot.facilities.hasToilet) return false;
+      if (filterFence && !spot.facilities.hasSafetyFence) return false;
+      if (filterFamily && !spot.facilities.isFamilyFriendly) return false;
+      return true;
+    });
+  }, [spots, categoryFilter, filterParking, filterToilet, filterFence, filterFamily]);
 
   // Dynamic import Leaflet on client
   useEffect(() => {
@@ -53,7 +94,7 @@ export default function SpotMap({
 
     const map = L.map("fishing-spot-map", {
       center: [centerLat, centerLng],
-      zoom: 10,
+      zoom: 11,
       zoomControl: true,
     });
 
@@ -74,132 +115,144 @@ export default function SpotMap({
   useEffect(() => {
     if (!L || !mapInstance) return;
 
-    // Clear existing marker layers
-    mapInstance.eachLayer((layer: any) => {
-      if (layer instanceof L.Marker) {
-        mapInstance.removeLayer(layer);
-      }
-    });
+    const currentSpotsKey = filteredSpots.map((s) => s.id).join(",");
+    const spotsListChanged = currentSpotsKey !== prevSpotsKeyRef.current;
 
-    // Custom Icon Generator
-    const createCustomIcon = (category: SpotCategory, isSelected: boolean) => {
-      let bgColor = "#0284c7"; // default ocean
-      if (category === "park") bgColor = "#059669"; // emerald
-      if (category === "surf") bgColor = "#d97706"; // amber
-      if (category === "rock") bgColor = "#7c3aed"; // violet
-
-      const size = isSelected ? 36 : 28;
-      const border = isSelected ? "3px solid #ec4899" : "2px solid #ffffff";
-
-      return L.divIcon({
-        className: "custom-map-pin",
-        html: `<div style="
-          background-color: ${bgColor};
-          width: ${size}px;
-          height: ${size}px;
-          border-radius: 50%;
-          border: ${border};
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          color: white;
-          font-size: 14px;
-          box-shadow: 0 4px 6px -1px rgba(0,0,0,0.3);
-          transform: translate(-50%, -50%);
-        ">
-          🎣
-        </div>`,
-        iconSize: [size, size],
-        iconAnchor: [size / 2, size / 2],
+    if (spotsListChanged) {
+      // Clear existing marker layers
+      markersRef.current.forEach((marker) => {
+        mapInstance.removeLayer(marker);
       });
-    };
+      markersRef.current.clear();
 
-    // Add markers
-    filteredSpots.forEach((spot) => {
-      const isSelected = selectedSpot?.id === spot.id;
-      const isUmigo =
-        spot.facilities.feeText?.includes("UMIGO") ||
-        spot.description.includes("UMIGO") ||
-        spot.localRules.some((r) => r.includes("UMIGO"));
+      // Add markers
+      filteredSpots.forEach((spot) => {
+        const isSelected = selectedSpot?.id === spot.id;
+        const isUmigo =
+          spot.facilities.feeText?.includes("UMIGO") ||
+          spot.description.includes("UMIGO") ||
+          spot.localRules.some((r) => r.includes("UMIGO"));
 
-      const marker = L.marker([spot.lat, spot.lng], {
-        icon: createCustomIcon(spot.category, isSelected),
-      }).addTo(mapInstance);
+        const marker = L.marker([spot.lat, spot.lng], {
+          icon: createCustomIcon(L, spot.category, isSelected),
+        }).addTo(mapInstance);
 
-      // Popup html
-      const popupContent = document.createElement("div");
-      popupContent.className = "p-1 space-y-1.5 font-sans text-xs min-w-[200px]";
-      popupContent.innerHTML = `
-        <div style="font-weight: bold; font-size: 13px; color: #0f172a; margin-bottom: 2px;">
-          ${spot.name}
-        </div>
-        <div style="font-size: 11px; color: #64748b;">
-          ${spot.prefecture} / ${spot.category === "park" ? "海釣り施設" : spot.category === "port" ? "漁港・防波堤" : spot.category === "surf" ? "サーフ" : "磯場・釣り場"}
-        </div>
-        ${isUmigo ? '<div style="margin-top: 4px; display: inline-block; background: #dbeafe; color: #1e40af; border: 1px solid #93c5fd; font-size: 10px; font-weight: 800; padding: 2px 6px; border-radius: 4px;">🎟️ UMIGO（海Go）事前予約</div>' : ""}
-        <div style="display: flex; gap: 4px; flex-wrap: wrap; margin-top: 4px;">
-          ${spot.facilities.hasToilet ? '<span style="background: #e0f2fe; color: #0369a1; padding: 2px 6px; border-radius: 4px; font-size: 10px;">🚻 トイレ</span>' : ""}
-          ${spot.facilities.hasParking ? `<span style="background: #e0f2fe; color: #0369a1; padding: 2px 6px; border-radius: 4px; font-size: 10px;">🅿️ ${spot.parkingDetails ? (spot.parkingDetails.fee.includes("円") || !spot.parkingDetails.fee.includes("無料") ? "有料P" : "無料P") : "駐車場"}</span>` : ""}
-          ${spot.facilities.hasSafetyFence ? '<span style="background: #dcfce7; color: #15803d; padding: 2px 6px; border-radius: 4px; font-size: 10px;">🛡️ 柵あり</span>' : ""}
-        </div>
-        <div style="margin-top: 6px; font-size: 11px; color: #334155;">
-          <strong>主な対象魚:</strong> ${spot.targetFish.slice(0, 4).join(", ")}
-        </div>
-        <a id="btn-detail-${spot.id}" href="/spots/${spot.id}" style="
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          gap: 6px;
-          margin-top: 8px;
-          width: 100%;
-          box-sizing: border-box;
-          background: #0284c7;
-          color: white;
-          padding: 7px 10px;
-          border-radius: 8px;
-          font-weight: 700;
-          font-size: 12px;
-          text-decoration: none;
-          cursor: pointer;
-        ">
-          <span>この釣り場の詳細</span>
-          <span style="font-size: 13px;">→</span>
-        </a>
-      `;
+        // Popup html
+        const popupContent = document.createElement("div");
+        popupContent.className = "p-1 space-y-1.5 font-sans text-xs min-w-[200px]";
+        popupContent.innerHTML = `
+          <div style="font-weight: bold; font-size: 13px; color: #0f172a; margin-bottom: 2px;">
+            ${spot.name}
+          </div>
+          <div style="font-size: 11px; color: #64748b;">
+            ${spot.prefecture} / ${spot.category === "park" ? "海釣り施設" : spot.category === "port" ? "漁港・防波堤" : spot.category === "surf" ? "サーフ" : "磯場・釣り場"}
+          </div>
+          ${isUmigo ? '<div style="margin-top: 4px; display: inline-block; background: #dbeafe; color: #1e40af; border: 1px solid #93c5fd; font-size: 10px; font-weight: 800; padding: 2px 6px; border-radius: 4px;">🎟️ UMIGO（海Go）事前予約</div>' : ""}
+          <div style="display: flex; gap: 4px; flex-wrap: wrap; margin-top: 4px;">
+            ${spot.facilities.hasToilet ? '<span style="background: #e0f2fe; color: #0369a1; padding: 2px 6px; border-radius: 4px; font-size: 10px;">🚻 トイレ</span>' : ""}
+            ${spot.facilities.hasParking ? `<span style="background: #e0f2fe; color: #0369a1; padding: 2px 6px; border-radius: 4px; font-size: 10px;">🅿️ ${spot.parkingDetails ? (spot.parkingDetails.fee.includes("円") || !spot.parkingDetails.fee.includes("無料") ? "有料P" : "無料P") : "駐車場"}</span>` : ""}
+            ${spot.facilities.hasSafetyFence ? '<span style="background: #dcfce7; color: #15803d; padding: 2px 6px; border-radius: 4px; font-size: 10px;">🛡️ 柵あり</span>' : ""}
+          </div>
+          <div style="margin-top: 6px; font-size: 11px; color: #334155;">
+            <strong>主な対象魚:</strong> ${spot.targetFish.slice(0, 4).join(", ")}
+          </div>
+          <a id="btn-detail-${spot.id}" href="/spots/${spot.id}" style="
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            margin-top: 8px;
+            width: 100%;
+            box-sizing: border-box;
+            background: #0284c7;
+            color: white;
+            padding: 7px 10px;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 12px;
+            text-decoration: none;
+            cursor: pointer;
+          ">
+            <span>この釣り場の詳細</span>
+            <span style="font-size: 13px;">→</span>
+          </a>
+        `;
 
-      marker.bindPopup(popupContent);
+        marker.bindPopup(popupContent, {
+          autoPan: false,
+        });
 
-      marker.on("popupopen", () => {
-        onSelectSpot(spot);
-        const btn = document.getElementById(`btn-detail-${spot.id}`);
-        if (btn) {
-          btn.onclick = (e) => {
-            e.preventDefault();
-            router.push(`/spots/${spot.id}`);
-          };
+        marker.on("click", () => {
+          mapInstance.panTo([spot.lat, spot.lng], {
+            animate: true,
+            duration: 0.4,
+          });
+          onSelectSpot(spot);
+        });
+
+        marker.on("popupopen", () => {
+          const btn = document.getElementById(`btn-detail-${spot.id}`);
+          if (btn) {
+            btn.onclick = (e) => {
+              e.preventDefault();
+              router.push(`/spots/${spot.id}`);
+            };
+          }
+        });
+
+        markersRef.current.set(spot.id, marker);
+      });
+
+      // Fit bounds ONLY when the user actively filters to a specific subset of spots (not nationwide)
+      const isFilteredSubset = filteredSpots.length > 0 && filteredSpots.length < spots.length;
+      if (!isInitialMountRef.current && isFilteredSubset) {
+        if (filteredSpots.length === 1) {
+          mapInstance.panTo([filteredSpots[0].lat, filteredSpots[0].lng], {
+            animate: true,
+            duration: 0.4,
+          });
+        } else {
+          const bounds = L.latLngBounds(filteredSpots.map((s) => [s.lat, s.lng]));
+          mapInstance.fitBounds(bounds, { padding: [50, 50], maxZoom: 13 });
         }
-      });
-    });
+      }
 
-    // Fit bounds if filtered spots changed
-    if (filteredSpots.length > 0) {
-      if (filteredSpots.length === 1) {
-        mapInstance.flyTo([filteredSpots[0].lat, filteredSpots[0].lng], 12, { duration: 0.8 });
-      } else {
-        const bounds = L.latLngBounds(filteredSpots.map((s) => [s.lat, s.lng]));
-        mapInstance.fitBounds(bounds, { padding: [50, 50], maxZoom: 13 });
+      prevSpotsKeyRef.current = currentSpotsKey;
+      isInitialMountRef.current = false;
+    }
+  }, [filteredSpots, mapInstance, L, router, spots.length, onSelectSpot]);
+
+  // Pan and open popup when selectedSpot changes
+  useEffect(() => {
+    if (!mapInstance || !selectedSpot || !L) return;
+
+    // Update previously selected marker icon
+    const prevId = selectedSpotIdRef.current;
+    if (prevId && prevId !== selectedSpot.id) {
+      const prevMarker = markersRef.current.get(prevId);
+      const prevSpot = spots.find((s) => s.id === prevId);
+      if (prevMarker && prevSpot) {
+        prevMarker.setIcon(createCustomIcon(L, prevSpot.category, false));
       }
     }
-  }, [filteredSpots, mapInstance, L, router]);
 
-  // Pan to selected spot when selectedSpot changes
-  useEffect(() => {
-    if (mapInstance && selectedSpot) {
-      mapInstance.flyTo([selectedSpot.lat, selectedSpot.lng], 12, {
-        duration: 1.2,
-      });
+    // Update newly selected marker icon and popup
+    const currentMarker = markersRef.current.get(selectedSpot.id);
+    if (currentMarker) {
+      currentMarker.setIcon(createCustomIcon(L, selectedSpot.category, true));
+      if (!currentMarker.isPopupOpen()) {
+        currentMarker.openPopup();
+      }
     }
-  }, [selectedSpot, mapInstance]);
+
+    selectedSpotIdRef.current = selectedSpot.id;
+
+    // Smoothly pan to selected spot
+    mapInstance.panTo([selectedSpot.lat, selectedSpot.lng], {
+      animate: true,
+      duration: 0.4,
+    });
+  }, [selectedSpot, mapInstance, L, spots]);
 
   return (
     <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-5 sm:p-6 shadow-sm space-y-4">

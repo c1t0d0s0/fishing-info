@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import Link from "next/link";
 import { DEFAULT_SPOTS, REGIONS } from "@/lib/data/defaultSpots";
 import { FishingSpot, RegionId, SpotCategory } from "@/types/spot";
@@ -95,13 +95,15 @@ export default function SpotsPage() {
   const [activeSpot, setActiveSpot] = useState<FishingSpot>(DEFAULT_SPOTS[0]);
 
   // Comprehensive Search and Filters
-  const filteredSpots = DEFAULT_SPOTS.filter((spot) => {
-    // If a search query is typed, search across all regions so spots in Shizuoka/Kobe etc. are not filtered out by region tabs
-    if (!searchQuery && selectedRegion !== "all" && spot.region !== selectedRegion) return false;
-    if (selectedCategory !== "all" && spot.category !== selectedCategory) return false;
-    if (searchQuery && !isSpotMatchingQuery(spot, searchQuery)) return false;
-    return true;
-  });
+  const filteredSpots = useMemo(() => {
+    return DEFAULT_SPOTS.filter((spot) => {
+      // If a search query is typed, search across all regions so spots in Shizuoka/Kobe etc. are not filtered out by region tabs
+      if (!searchQuery && selectedRegion !== "all" && spot.region !== selectedRegion) return false;
+      if (selectedCategory !== "all" && spot.category !== selectedCategory) return false;
+      if (searchQuery && !isSpotMatchingQuery(spot, searchQuery)) return false;
+      return true;
+    });
+  }, [searchQuery, selectedRegion, selectedCategory]);
 
   // Keep activeSpot synced when filtered
   useEffect(() => {
