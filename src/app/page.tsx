@@ -30,7 +30,7 @@ import {
 import Link from "next/link";
 
 export default function DashboardPage() {
-  const [selectedSpot, setSelectedSpot] = useState<FishingSpot>(DEFAULT_SPOTS[1]);
+  const [selectedSpot, setSelectedSpot] = useState<FishingSpot>(DEFAULT_SPOTS[0]);
   const [tideInfo, setTideInfo] = useState<DayTideInfo | null>(null);
   const [weatherData, setWeatherData] = useState<MarineWeatherResponse | null>(null);
   const [isLoading, setIsLoading] = useState(true);

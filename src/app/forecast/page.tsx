@@ -27,11 +27,20 @@ import {
 } from "lucide-react";
 
 export default function ForecastPage() {
-  const [selectedSpot, setSelectedSpot] = useState<FishingSpot>(DEFAULT_SPOTS[1]);
+  const [selectedSpot, setSelectedSpot] = useState<FishingSpot>(DEFAULT_SPOTS[0]);
   const [weatherData, setWeatherData] = useState<MarineWeatherResponse | null>(null);
   const [sevenDayTides, setSevenDayTides] = useState<DayTideInfo[]>([]);
   const [activeDayIndex, setActiveDayIndex] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
+
+  // Load spot preference
+  useEffect(() => {
+    const savedSpotId = localStorage.getItem("preferred_fishing_spot_id");
+    if (savedSpotId) {
+      const found = DEFAULT_SPOTS.find((s) => s.id === savedSpotId);
+      if (found) setSelectedSpot(found);
+    }
+  }, []);
 
   useEffect(() => {
     async function loadData() {
@@ -57,6 +66,7 @@ export default function ForecastPage() {
     }
 
     loadData();
+    localStorage.setItem("preferred_fishing_spot_id", selectedSpot.id);
   }, [selectedSpot]);
 
   const activeTide = sevenDayTides[activeDayIndex] || sevenDayTides[0];
