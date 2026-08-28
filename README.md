@@ -21,14 +21,14 @@
 - **今日の狙い目魚種 & 攻略ワンポイント**: 選択した釣り場と現在の季節に応じたおすすめターゲットと推奨仕掛けをピックアップ。
 
 ### 2. 🗺️ 全国釣り場マップ & スポット詳細 (`/spots`, `/spots/[id]`)
-- **Leaflet & OpenStreetMap インタラクティブマップ**: 全国50箇所以上の主要海釣り公園、漁港、防波堤、サーフ、地磯を収録。
-- **設備・条件フィルター**: 「🅿️ 駐車場あり」「🚻 トイレ完備」「🛡️ 安全柵あり」「👨‍👩‍👧 ファミリー向け」「🆓 無料」で瞬時に絞り込み。
-- **釣り場個別ページ**: ピンポイント座標のリアルタイム海況・タイドグラフ、水深、底質、アクセス、四季のターゲット魚種カレンダー、注意事項を掲載。
+- **Leaflet & OpenStreetMap インタラクティブマップ**: 全国240箇所以上（245スポット）の主要海釣り施設・公園、漁港、防波堤、サーフ、地磯を網羅。
+- **設備・条件フィルター**: 「🅿️ 駐車場あり」「🚻 トイレ完備」「🛡️ 安全柵あり」「👨‍👩‍👧 ファミリー向け」「🆓 無料」「🎟️ UMIGO（海Go）事前予約対応」で瞬時に絞り込み。
+- **釣り場個別詳細ページ**: ピンポイント座標のリアルタイム海況・タイドグラフ、水深、底質、駐車場詳細、アクセス、四季のターゲット魚種カレンダー、ローカルルール・注意事項を掲載。
 
 ### 3. 🐟 魚種図鑑 & 仕掛け・タックル図解 (`/species`)
-- **人気ターゲット30種以上**: アジ、メバル、シーバス、クロダイ、アオリイカ、ブリ/青物、タチウオ、シロギス、ヒラメ等の生息タナ、旬カレンダー、難易度、食味、調理法。
+- **人気ターゲット90魚種網羅**: アジ、メバル、シーバス、クロダイ、アオリイカ、ブリ/青物、タチウオ、シロギス、ヒラメ等の生息タナ、旬カレンダー、難易度、食味、調理法。
 - **危険魚・毒魚アラート**: アイゴ、ハオコゼ、アカエイ、ゴンズイ、ヒョウモンダコ等の毒部位と応急手当（45℃温熱療法）ガイド。
-- **仕掛け・タックル解説**: サビキ、ジグ単アジング、ライトショアジギング、エギング、ウキフカセ、チョイ投げのロッド・リール・ライン・針・アクション方法を図解。
+- **SVG仕掛け・タックル図解ガイド**: サビキ、ジグ単アジング、ライトショアジギング、エギング、ウキフカセ、チョイ投げ、穴釣り、カゴ釣り、タチウオテンヤなど9種類のロッド・リール・ライン・針・アクション方法を図解。
 
 ### 4. 📅 7日間 潮汐・海洋気象マトリクス (`/forecast`)
 - 今後1週間の大潮スケジュール、満干潮ピーク時刻、日の出・日の入り・マズメ時帯、波風トレンドを一目で確認。
@@ -76,7 +76,7 @@ npm run dev
 
 ### 本番ビルド
 ```bash
-# プロダクションビルド
+# プロダクションビルド (静的HTMLエクスポート)
 npm run build
 
 # 本番サーバー起動
@@ -85,31 +85,32 @@ npm start
 
 ---
 
-## 🌐 Webサーバー (Apache / Nginx / DocumentRoot) へのデプロイ
+## 🌐 Webサーバーへのデプロイ & 静的エクスポート
 
-本プロジェクトは **静的HTMLエクスポート (SSG)** に対応しており、Node.js サーバーを起動することなく、一般的な Web サーバー（Apache, Nginx, レンタルサーバー等）のドキュメントルート配下に配置するだけで運用できます。
+本プロジェクトは **静的HTMLエクスポート (SSG / `output: 'export'`)** に対応しており、Node.js サーバーを起動することなく、一般的な Web サーバー（Apache, Nginx, GitHub Pages, Cloudflare Pages, S3等）のドキュメントルート配下に配置するだけで運用できます。
 
-### ドキュメントルート配下の `fishing-info` ディレクトリとして公開する場合
-デフォルトで `basePath: '/fishing-info'` および `output: 'export'` が設定されています。
+### 1. ドメイン直下 (ルート `/`) で公開する場合【デフォルト】
+デフォルトで `basePath: ''` が設定されているため、そのままビルドします：
 
-1. ビルドを実行します：
-   ```bash
-   npm run build
-   ```
-2. ビルド完了後、生成された **`dist` ディレクトリの中身すべて（または `dist` を `fishing-info` にリネーム）** を Web サーバーの `DocumentRoot/fishing-info/` にコピーします。
-   ```bash
-   # 例: Apache の場合
-   cp -r dist/* /var/www/html/fishing-info/
-   ```
-3. ブラウザで `https://your-domain.com/fishing-info/` にアクセスすれば完了です。
-
-### ドメイン直下 (ルート `/`) で公開したい場合
-環境変数 `BASE_PATH=""` を指定してビルドします：
 ```bash
-BASE_PATH="" npm run build
+npm run build
 ```
-生成された `dist` の中身を `DocumentRoot/` 直下に配置してください。
+ビルド完了後、生成された **`dist` ディレクトリの中身すべて** を Web サーバーのドキュメントルート直下にコピーします。
+```bash
+# 例: Apache / Nginx の場合
+cp -r dist/* /var/www/html/
+```
 
+### 2. サブディレクトリ (`/fishing-info/` など) で公開する場合
+環境変数 `BASE_PATH` を指定してビルドします：
+
+```bash
+BASE_PATH="/fishing-info" npm run build
+```
+生成された `dist` の中身を Web サーバーの `DocumentRoot/fishing-info/` 配下に配置してください。
+
+### 3. GitHub Pages への自動デプロイ (CI/CD)
+`.github/workflows/deploy.yml` により、バージョンタグ（`v*`）のプッシュまたは GitHub Actions からの手動トリガー（`workflow_dispatch`）で GitHub Pages に自動ビルド・デプロイされます。
 
 ---
 
@@ -123,10 +124,16 @@ fishing-info/
 ├── tailwind.config.ts
 ├── postcss.config.mjs
 ├── next.config.mjs
+├── .github/
+│   └── workflows/
+│       └── deploy.yml        # GitHub Pages 自動デプロイパイプライン
+├── public/
+│   └── CNAME                 # カスタムドメイン設定
 └── src/
     ├── app/                  # Next.js App Router ルート
-    │   ├── layout.tsx        # 共通レイアウト (Header, Footer)
+    │   ├── layout.tsx        # 共通レイアウト (Header, Footer, メタデータ)
     │   ├── page.tsx          # メインダッシュボード (Top)
+    │   ├── globals.css       # グローバルスタイル (Tailwind CSS)
     │   ├── spots/            # 全国釣り場マップ & スポット一覧
     │   │   ├── page.tsx
     │   │   └── [id]/page.tsx # 釣り場個別詳細
@@ -139,13 +146,14 @@ fishing-info/
     ├── components/
     │   ├── layout/           # Header, Footer, Navigation
     │   ├── dashboard/        # FishingScoreCard, TideGraphCard, MarineWeatherCard, HourlyForecast, TargetSpeciesCard, LocationSelector
-    │   ├── map/              # SpotMap (Leaflet)
-    │   └── species/          # SpeciesCard, RigGuideCard
+    │   ├── map/              # SpotMap (Leaflet インタラクティブマップ)
+    │   ├── species/          # SpeciesCard, RigGuideCard, RigDiagram (SVG仕掛け図解)
+    │   └── spots/            # SpotDetailClient
     ├── lib/
     │   ├── api/              # Open-Meteo Marine/Weather API クライアント
-    │   ├── tide/             # 潮汐推移・満干潮・月齢・日の出日の入り計算エンジン
+    │   ├── tide/             # tideEngine, lunarEngine (月齢・旧暦), jmaStations (気象庁観測所データ)
     │   ├── score/            # 釣行指数（0〜100点）アルゴリズム
-    │   ├── data/             # 全国50+釣り場、主要30+魚種、仕掛けマスターデータ
+    │   ├── data/             # 全国245釣り場、主要90魚種、9種類仕掛けマスターデータ
     │   └── utils/            # 日時・バッジ色・フォーマッター
     └── types/                # TypeScript 型定義 (weather, tide, spot, species)
 ```
