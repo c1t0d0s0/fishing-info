@@ -15,6 +15,7 @@ import {
 interface TideGraphCardProps {
   tideInfo: DayTideInfo;
   currentHour?: number;
+  showCurrentTime?: boolean;
 }
 
 interface Point2D {
@@ -52,6 +53,7 @@ function getCatmullRomSplinePath(points: Point2D[], tension: number = 0.5): stri
 export default function TideGraphCard({
   tideInfo,
   currentHour = new Date().getHours() + new Date().getMinutes() / 60,
+  showCurrentTime,
 }: TideGraphCardProps) {
   const [hoveredData, setHoveredData] = useState<{
     hour: number;
@@ -61,6 +63,15 @@ export default function TideGraphCard({
   } | null>(null);
 
   const svgRef = useRef<SVGSVGElement>(null);
+
+  // Check if this graph represents today
+  const isToday = (() => {
+    if (showCurrentTime !== undefined) return showCurrentTime;
+    if (!tideInfo.date) return true;
+    const now = new Date();
+    const todayStr = `${now.getFullYear()}-${(now.getMonth() + 1).toString().padStart(2, "0")}-${now.getDate().toString().padStart(2, "0")}`;
+    return tideInfo.date === todayStr;
+  })();
 
   const {
     tideType,
@@ -446,29 +457,33 @@ export default function TideGraphCard({
             );
           })}
 
-          {/* Current time indicator line */}
-          <line
-            x1={currentX}
-            y1={paddingY - 5}
-            x2={currentX}
-            y2={svgHeight - paddingY + 5}
-            stroke="#ec4899"
-            strokeWidth="2"
-          />
-          <circle
-            cx={currentX}
-            cy={paddingY - 4}
-            r="3.5"
-            fill="#ec4899"
-          />
-          <text
-            x={currentX}
-            y={paddingY - 8}
-            textAnchor="middle"
-            className="text-[8px] font-black fill-pink-500"
-          >
-            現在
-          </text>
+          {/* Current time indicator line (Today only) */}
+          {isToday && (
+            <g>
+              <line
+                x1={currentX}
+                y1={paddingY - 5}
+                x2={currentX}
+                y2={svgHeight - paddingY + 5}
+                stroke="#ec4899"
+                strokeWidth="2"
+              />
+              <circle
+                cx={currentX}
+                cy={paddingY - 4}
+                r="3.5"
+                fill="#ec4899"
+              />
+              <text
+                x={currentX}
+                y={paddingY - 8}
+                textAnchor="middle"
+                className="text-[8px] font-black fill-pink-500"
+              >
+                現在
+              </text>
+            </g>
+          )}
 
           {/* Interactive Hover inspection line & circle */}
           {hoveredData && (
