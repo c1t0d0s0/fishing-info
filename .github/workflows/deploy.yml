@@ -42,6 +42,7 @@ jobs:
         env:
           BASE_PATH: ${{ steps.pages.outputs.base_path }}
           GTM_ID: ${{ vars.GTM_ID || secrets.GTM_ID }}
+          GA_ID: ${{ vars.GA_ID || secrets.GA_ID || vars.NEXT_PUBLIC_GA_ID || secrets.NEXT_PUBLIC_GA_ID }}
         run: npm run build
 
       - name: Upload artifact

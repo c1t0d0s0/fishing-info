@@ -28,7 +28,12 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const gtmId = process.env.NEXT_PUBLIC_GTM_ID || process.env.GTM_ID;
+  const rawGtmId = process.env.NEXT_PUBLIC_GTM_ID || process.env.GTM_ID || "";
+  const rawGaId = process.env.NEXT_PUBLIC_GA_ID || process.env.GA_ID || "";
+
+  // Auto-detect if GTM_ID is actually a GA4 Measurement ID (starts with "G-")
+  const gaId = rawGaId || (rawGtmId.startsWith("G-") ? rawGtmId : "");
+  const gtmId = rawGtmId.startsWith("GTM-") ? rawGtmId : (!rawGtmId.startsWith("G-") ? rawGtmId : "");
 
   return (
     <html lang="ja" suppressHydrationWarning>
@@ -46,6 +51,29 @@ export default function RootLayout({
             })();`,
           }}
         />
+        {/* Google Analytics 4 (gtag.js) */}
+        {gaId && (
+          <>
+            <script
+              async
+              src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`}
+            />
+            <script
+              dangerouslySetInnerHTML={{
+                __html: `
+                  window.dataLayer = window.dataLayer || [];
+                  function gtag(){dataLayer.push(arguments);}
+                  gtag('js', new Date());
+                  gtag('config', '${gaId}', {
+                    page_path: window.location.pathname,
+                  });
+                `,
+              }}
+            />
+          </>
+        )}
+
+        {/* Google Tag Manager (gtm.js) */}
         {gtmId && (
           <script
             dangerouslySetInnerHTML={{
