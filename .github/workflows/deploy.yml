@@ -21,6 +21,8 @@ jobs:
   # Build static export job
   build:
     runs-on: ubuntu-latest
+    environment:
+      name: github-pages
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -37,6 +39,20 @@ jobs:
 
       - name: Install dependencies
         run: npm ci
+
+      - name: Check Environment Config
+        run: |
+          echo "Checking analytics configuration..."
+          if [ -n "${{ vars.GA_ID || secrets.GA_ID }}" ]; then
+            echo "GA_ID is set: YES"
+          else
+            echo "GA_ID is set: NO (empty)"
+          fi
+          if [ -n "${{ vars.GTM_ID || secrets.GTM_ID }}" ]; then
+            echo "GTM_ID is set: YES"
+          else
+            echo "GTM_ID is set: NO (empty)"
+          fi
 
       - name: Build Next.js Static Export
         env:
