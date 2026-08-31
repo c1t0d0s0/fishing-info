@@ -85,7 +85,7 @@ export default function Footer() {
         </div>
 
         <div className="mt-8 pt-6 border-t border-slate-200 dark:border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-slate-500 dark:text-slate-400">
-          <div>© {new Date().getFullYear()} cuio.net. All rights reserved.</div>
+          <div>© {new Date().getFullYear()} c1t0d0s0  All rights reserved.</div>
           <div className="flex items-center gap-1">
             <span>Made with</span>
             <Heart className="w-3.5 h-3.5 text-rose-500 fill-rose-500" />
