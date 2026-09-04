@@ -131,7 +131,7 @@ export default function ForecastPage() {
 
               {/* Tide Type Badge */}
               <div
-                className={`py-1 px-2 rounded-xl text-xs font-bold border ${getTideBadgeColor(
+                className={`py-1.5 px-2 rounded-xl text-xs sm:text-sm font-black border text-center shadow-xs ${getTideBadgeColor(
                   tide.tideType
                 )}`}
               >

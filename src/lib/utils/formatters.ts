@@ -27,17 +27,34 @@ export function formatDateTimeJp(isoStr: string): string {
 export function getTideBadgeColor(tideType: string): string {
   switch (tideType) {
     case "大潮":
-      return "bg-rose-500/15 text-rose-600 dark:text-rose-400 border-rose-500/30";
+      return "bg-rose-600 bg-gradient-to-r from-rose-600 to-red-600 text-white border-rose-500 shadow-xs shadow-rose-500/30";
     case "中潮":
-      return "bg-sky-500/15 text-sky-600 dark:text-sky-400 border-sky-500/30";
+      return "bg-sky-600 bg-gradient-to-r from-sky-600 to-blue-600 text-white border-sky-500 shadow-xs shadow-sky-500/30";
     case "小潮":
-      return "bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 border-emerald-500/30";
+      return "bg-emerald-600 bg-gradient-to-r from-emerald-600 to-teal-600 text-white border-emerald-500 shadow-xs shadow-emerald-500/30";
     case "長潮":
-      return "bg-amber-500/15 text-amber-600 dark:text-amber-400 border-amber-500/30";
+      return "bg-amber-600 bg-gradient-to-r from-amber-600 to-orange-600 text-white border-amber-500 shadow-xs shadow-amber-500/30";
     case "若潮":
-      return "bg-indigo-500/15 text-indigo-600 dark:text-indigo-400 border-indigo-500/30";
+      return "bg-indigo-600 bg-gradient-to-r from-indigo-600 to-violet-600 text-white border-indigo-500 shadow-xs shadow-indigo-500/30";
     default:
-      return "bg-slate-500/15 text-slate-600 dark:text-slate-400 border-slate-500/30";
+      return "bg-slate-700 bg-gradient-to-r from-slate-600 to-slate-700 text-white border-slate-500 shadow-xs";
+  }
+}
+
+export function getTideDescription(tideType: string): string {
+  switch (tideType) {
+    case "大潮":
+      return "干満差が最も大きく潮が良く動く好時合";
+    case "中潮":
+      return "潮の動きが安定し多くの魚種で釣りやすい";
+    case "小潮":
+      return "干満差が穏やかで底釣りや緩潮向き";
+    case "長潮":
+      return "干満差が最小で潮止まりが長く続く";
+    case "若潮":
+      return "長潮の翌日・再び潮が動き出す好転期";
+    default:
+      return "";
   }
 }
 

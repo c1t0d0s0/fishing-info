@@ -2,7 +2,7 @@
 
 import React, { useState, useRef } from "react";
 import { DayTideInfo } from "@/types/tide";
-import { getTideBadgeColor } from "@/lib/utils/formatters";
+import { getTideBadgeColor, getTideDescription } from "@/lib/utils/formatters";
 import {
   Waves,
   Sunrise,
@@ -16,6 +16,7 @@ interface TideGraphCardProps {
   tideInfo: DayTideInfo;
   currentHour?: number;
   showCurrentTime?: boolean;
+  className?: string;
 }
 
 interface Point2D {
@@ -54,6 +55,7 @@ export default function TideGraphCard({
   tideInfo,
   currentHour = new Date().getHours() + new Date().getMinutes() / 60,
   showCurrentTime,
+  className = "",
 }: TideGraphCardProps) {
   const [hoveredData, setHoveredData] = useState<{
     hour: number;
@@ -218,35 +220,48 @@ export default function TideGraphCard({
   };
 
   return (
-    <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-5 sm:p-6 shadow-sm hover:shadow-md transition-shadow">
+    <div className={`bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-5 sm:p-6 shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between ${className}`}>
       {/* Top Bar: Title + Tide Type Badge + Moon info */}
       <div className="flex flex-wrap items-center justify-between gap-3 mb-5">
         <div className="flex items-center gap-2.5">
-          <div className="p-1.5 rounded-lg bg-sky-500/10 text-sky-600 dark:text-sky-400">
+          <div className="p-2 rounded-xl bg-sky-500/10 text-sky-600 dark:text-sky-400 shrink-0">
             <Waves className="w-5 h-5" />
           </div>
           <div>
             <h3 className="font-bold text-slate-900 dark:text-white text-base">
               タイドグラフ
             </h3>
-            <span className="text-xs text-slate-500 dark:text-slate-400">
-              潮位推移 & 満潮・干潮予測
-            </span>
+            <p className="text-xs text-slate-500 dark:text-slate-400 flex items-center gap-1.5 mt-0.5">
+              <span>潮位推移 & 満潮・干潮予測</span>
+              <span className="hidden sm:inline text-slate-300 dark:text-slate-600">•</span>
+              <span className="hidden sm:inline font-medium text-slate-600 dark:text-slate-300">
+                {getTideDescription(tideType)}
+              </span>
+            </p>
           </div>
         </div>
 
         {/* Tide Badge & Moon Phase */}
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2 sm:gap-3">
+          {/* Prominent Tide Badge */}
           <div
-            className={`px-3 py-1 rounded-xl text-xs font-bold border flex items-center gap-1.5 ${getTideBadgeColor(
+            className={`px-3.5 sm:px-4 py-1.5 sm:py-2 rounded-2xl border flex items-center gap-2 shadow-sm transition-transform hover:scale-[1.02] ${getTideBadgeColor(
               tideType
             )}`}
+            title={`${tideType}: ${getTideDescription(tideType)}`}
           >
-            <span>{tideType}</span>
+            <span className="text-[11px] font-bold opacity-85 hidden sm:inline tracking-wider">
+              潮回り
+            </span>
+            <span className="text-base sm:text-xl font-black tracking-wide leading-none">
+              {tideType}
+            </span>
           </div>
-          <div className="px-2.5 py-1 rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700/80 text-xs font-semibold text-slate-700 dark:text-slate-300 flex items-center gap-1.5">
-            <span className="text-sm">{moonPhaseIcon}</span>
-            <span>月齢 {moonAge}</span>
+
+          {/* Moon Info Badge */}
+          <div className="px-3 py-1.5 sm:py-2 rounded-2xl bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700/80 text-xs sm:text-sm font-semibold text-slate-700 dark:text-slate-300 flex items-center gap-1.5 shadow-2xs">
+            <span className="text-base sm:text-lg leading-none">{moonPhaseIcon}</span>
+            <span className="leading-none">月齢 {moonAge}</span>
           </div>
         </div>
       </div>

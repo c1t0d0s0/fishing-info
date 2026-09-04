@@ -359,14 +359,14 @@ export default function SpotDetailClient({ spotId }: SpotDetailClientProps) {
         この釣り場のリアルタイム海況・タイドグラフ
       </h2>
 
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
-        <div className="lg:col-span-5">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
+        <div className="lg:col-span-5 flex flex-col">
           {currentScore && (
-            <FishingScoreCard scoreResult={currentScore} timeLabel="現在" />
+            <FishingScoreCard scoreResult={currentScore} timeLabel="現在" className="h-full" />
           )}
         </div>
-        <div className="lg:col-span-7">
-          {tideInfo && <TideGraphCard tideInfo={tideInfo} />}
+        <div className="lg:col-span-7 flex flex-col">
+          {tideInfo && <TideGraphCard tideInfo={tideInfo} className="h-full" />}
         </div>
       </div>
 

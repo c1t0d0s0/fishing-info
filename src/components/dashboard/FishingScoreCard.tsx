@@ -5,11 +5,13 @@ import { Sparkles, AlertTriangle, ShieldCheck, Activity, Flame } from "lucide-re
 interface FishingScoreCardProps {
   scoreResult: FishingScoreResult;
   timeLabel?: string;
+  className?: string;
 }
 
 export default function FishingScoreCard({
   scoreResult,
   timeLabel = "現在",
+  className = "",
 }: FishingScoreCardProps) {
   const { score, grade, title, advice, breakdown, safetyWarning } = scoreResult;
 
@@ -19,7 +21,7 @@ export default function FishingScoreCard({
   const strokeDashoffset = circumference - (score / 100) * circumference;
 
   return (
-    <div className="relative overflow-hidden bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-5 sm:p-6 shadow-sm hover:shadow-md transition-shadow">
+    <div className={`relative overflow-hidden bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-5 sm:p-6 shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between ${className}`}>
       {/* Background ambient glow */}
       <div
         className={`absolute -right-16 -top-16 w-48 h-48 rounded-full blur-3xl opacity-20 pointer-events-none ${
@@ -194,6 +196,20 @@ export default function FishingScoreCard({
               </div>
             </div>
           </div>
+        </div>
+      </div>
+
+      {/* Footer bar aligning with TideGraphCard */}
+      <div className="mt-3 flex flex-wrap items-center justify-between gap-2 text-xs bg-slate-50 dark:bg-slate-800/40 p-2.5 rounded-2xl border border-slate-100 dark:border-slate-800 text-slate-600 dark:text-slate-400">
+        <div className="flex items-center gap-1.5 font-medium min-w-0">
+          <Activity className="w-4 h-4 text-ocean-500 shrink-0" />
+          <span className="truncate">
+            解析: <strong className="text-slate-800 dark:text-slate-200 font-bold">{breakdown.tideScore >= 20 ? "潮の動き活発" : "潮止まり前後の緩潮"}</strong> (4要素総合判定)
+          </span>
+        </div>
+        <div className="flex items-center gap-1 text-[11px] font-bold text-emerald-600 dark:text-emerald-400 shrink-0">
+          <ShieldCheck className="w-3.5 h-3.5" />
+          <span>海洋気象連動</span>
         </div>
       </div>
     </div>

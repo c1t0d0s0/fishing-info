@@ -115,22 +115,22 @@ export default function DashboardPage() {
       />
 
       {/* Row 1: Fishing Score & Tide Graph */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
         {/* Fishing Score (40% width on desktop) */}
-        <div className="lg:col-span-5">
+        <div className="lg:col-span-5 flex flex-col">
           {currentScore ? (
-            <FishingScoreCard scoreResult={currentScore} timeLabel="現在" />
+            <FishingScoreCard scoreResult={currentScore} timeLabel="現在" className="h-full" />
           ) : (
-            <div className="h-64 bg-slate-100 dark:bg-slate-900 rounded-3xl animate-pulse" />
+            <div className="h-full min-h-[360px] bg-slate-100 dark:bg-slate-900 rounded-3xl animate-pulse" />
           )}
         </div>
 
         {/* Tide Graph (60% width on desktop) */}
-        <div className="lg:col-span-7">
+        <div className="lg:col-span-7 flex flex-col">
           {tideInfo ? (
-            <TideGraphCard tideInfo={tideInfo} />
+            <TideGraphCard tideInfo={tideInfo} className="h-full" />
           ) : (
-            <div className="h-64 bg-slate-100 dark:bg-slate-900 rounded-3xl animate-pulse" />
+            <div className="h-full min-h-[360px] bg-slate-100 dark:bg-slate-900 rounded-3xl animate-pulse" />
           )}
         </div>
       </div>
