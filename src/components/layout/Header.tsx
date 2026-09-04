@@ -61,11 +61,16 @@ export default function Header() {
             <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-ocean-600 via-sky-500 to-cyan-400 flex items-center justify-center text-white shadow-md shadow-sky-500/20 group-hover:scale-105 transition-transform">
               <Fish className="w-6 h-6 animate-float" />
             </div>
-            <div className="flex flex-col">
-              <span className="font-extrabold text-lg sm:text-xl tracking-tight bg-gradient-to-r from-ocean-700 via-sky-600 to-cyan-500 dark:from-ocean-400 dark:to-cyan-300 bg-clip-text text-transparent">
-                釣行ナビ <span className="text-xs font-semibold px-1.5 py-0.5 rounded bg-ocean-100 dark:bg-ocean-950/60 text-ocean-700 dark:text-ocean-300 border border-ocean-200 dark:border-ocean-800 ml-1">Live</span>
-              </span>
-              <span className="text-[10px] text-slate-500 dark:text-slate-400 font-medium -mt-1 hidden sm:inline">
+            <div className="flex flex-col justify-center">
+              <div className="flex items-center gap-1.5">
+                <span className="font-extrabold text-lg sm:text-xl tracking-tight bg-gradient-to-r from-ocean-700 via-sky-600 to-cyan-500 dark:from-ocean-400 dark:to-cyan-300 bg-clip-text text-transparent leading-tight">
+                  釣行ナビ
+                </span>
+                <span className="text-[10px] font-bold px-1.5 py-0.5 rounded-full bg-ocean-100 dark:bg-ocean-950/60 text-ocean-700 dark:text-ocean-300 border border-ocean-200/80 dark:border-ocean-800 leading-none">
+                  Live
+                </span>
+              </div>
+              <span className="text-[10px] text-slate-500 dark:text-slate-400 font-medium hidden sm:inline leading-tight mt-0.5">
                 全国潮汐・海洋気象・釣果ダッシュボード
               </span>
             </div>
