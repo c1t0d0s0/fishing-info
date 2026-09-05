@@ -98,6 +98,27 @@ export default function HourlyForecast({ hourly }: HourlyForecastProps) {
             const isScoreMedium =
               item.fishingScore >= 60 && item.fishingScore < 80;
 
+            const tempColor =
+              item.temperature >= 30
+                ? "text-rose-600 dark:text-rose-400 font-black"
+                : item.temperature <= 7
+                ? "text-sky-600 dark:text-sky-400 font-black"
+                : "text-slate-800 dark:text-slate-200";
+
+            const windColor =
+              item.windSpeed >= 7.0
+                ? "text-rose-600 dark:text-rose-400 font-bold"
+                : item.windSpeed >= 4.5
+                ? "text-amber-600 dark:text-amber-400 font-bold"
+                : "text-slate-700 dark:text-slate-300";
+
+            const waveColor =
+              item.waveHeight >= 2.0
+                ? "text-rose-600 dark:text-rose-400 font-bold"
+                : item.waveHeight >= 1.2
+                ? "text-amber-600 dark:text-amber-400 font-bold"
+                : "text-slate-700 dark:text-slate-300";
+
             return (
               <div
                 key={idx}
@@ -141,7 +162,7 @@ export default function HourlyForecast({ hourly }: HourlyForecastProps) {
                 {/* Weather icon & temp */}
                 <div className="my-2 space-y-0.5">
                   <div className="text-xl">{weatherIcon}</div>
-                  <div className="text-xs font-bold text-slate-800 dark:text-slate-200">
+                  <div className={`text-xs font-bold ${tempColor}`}>
                     {item.temperature}°C
                   </div>
                 </div>
@@ -176,11 +197,11 @@ export default function HourlyForecast({ hourly }: HourlyForecastProps) {
                         transform: `rotate(${item.windDirection + 180}deg)`,
                       }}
                     />
-                    <span>{item.windSpeed}m/s</span>
+                    <span className={windColor}>{item.windSpeed}m/s</span>
                   </div>
                   <div>
                     波{" "}
-                    <span className="font-semibold text-slate-700 dark:text-slate-300">
+                    <span className={`font-semibold ${waveColor}`}>
                       {item.waveHeight}m
                     </span>
                   </div>

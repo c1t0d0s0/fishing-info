@@ -33,14 +33,63 @@ export default function MarineWeatherCard({ weather }: MarineWeatherCardProps) {
     uvIndex,
   } = weather;
 
-  // Wave condition badge & styling
+  // Wave condition styling & thresholds
   const isHighWave = waveHeight >= 2.0;
   const isModerateWave = waveHeight >= 1.2 && waveHeight < 2.0;
-  const isCalmWave = waveHeight < 1.2;
+  const waveHeightColor = isHighWave
+    ? "text-rose-600 dark:text-rose-400"
+    : isModerateWave
+    ? "text-amber-600 dark:text-amber-400"
+    : "text-slate-900 dark:text-white";
 
-  // Wind condition badge
+  const isHighSwell = swellWaveHeight >= 1.5;
+  const isModerateSwell = swellWaveHeight >= 1.0 && swellWaveHeight < 1.5;
+  const swellColor = isHighSwell
+    ? "text-rose-600 dark:text-rose-400"
+    : isModerateSwell
+    ? "text-amber-600 dark:text-amber-400"
+    : "text-slate-800 dark:text-slate-200";
+
+  // Wind condition styling & thresholds
   const isStrongWind = windSpeed >= 7.0;
   const isModerateWind = windSpeed >= 4.5 && windSpeed < 7.0;
+  const windSpeedColor = isStrongWind
+    ? "text-rose-600 dark:text-rose-400"
+    : isModerateWind
+    ? "text-amber-600 dark:text-amber-400"
+    : "text-slate-900 dark:text-white";
+
+  const isStrongGust = windGusts >= 10.0;
+  const isModerateGust = windGusts >= 7.0 && windGusts < 10.0;
+  const gustColor = isStrongGust
+    ? "text-rose-600 dark:text-rose-400"
+    : isModerateGust
+    ? "text-amber-600 dark:text-amber-400"
+    : "text-slate-800 dark:text-slate-200";
+
+  // Sea water temperature styling & thresholds
+  const isHighSeaTemp = seaWaterTemperature >= 26.0;
+  const isLowSeaTemp = seaWaterTemperature <= 13.0;
+  const seaTempColor = isHighSeaTemp
+    ? "text-rose-600 dark:text-rose-400"
+    : isLowSeaTemp
+    ? "text-sky-600 dark:text-sky-400"
+    : "text-slate-900 dark:text-white";
+
+  // Air temperature styling & thresholds
+  const isHighTemp = temperature >= 30.0;
+  const isLowTemp = temperature <= 7.0;
+  const tempNumberColor = isHighTemp
+    ? "text-rose-600 dark:text-rose-400"
+    : isLowTemp
+    ? "text-sky-600 dark:text-sky-400"
+    : "text-slate-800 dark:text-slate-200";
+
+  const headerTempColor = isHighTemp
+    ? "text-rose-600 dark:text-rose-400 font-extrabold"
+    : isLowTemp
+    ? "text-sky-600 dark:text-sky-400 font-extrabold"
+    : "text-ocean-600 dark:text-ocean-400";
 
   return (
     <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-5 sm:p-6 shadow-sm hover:shadow-md transition-shadow">
@@ -62,7 +111,7 @@ export default function MarineWeatherCard({ weather }: MarineWeatherCardProps) {
         {/* Current Weather condition chip */}
         <div className="px-3 py-1.5 rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700/80 text-xs font-bold text-slate-800 dark:text-slate-200 flex items-center gap-1.5 shrink-0 whitespace-nowrap shadow-2xs">
           <span>{weatherDescription}</span>
-          <span className="text-ocean-600 dark:text-ocean-400">{temperature}°C</span>
+          <span className={headerTempColor}>{temperature}°C</span>
         </div>
       </div>
 
@@ -89,7 +138,7 @@ export default function MarineWeatherCard({ weather }: MarineWeatherCardProps) {
           </div>
 
           <div className="flex items-baseline gap-1 my-1">
-            <span className="text-3xl font-black text-slate-900 dark:text-white">
+            <span className={`text-3xl font-black transition-colors ${waveHeightColor}`}>
               {waveHeight}
             </span>
             <span className="text-sm font-bold text-slate-500">m</span>
@@ -100,7 +149,8 @@ export default function MarineWeatherCard({ weather }: MarineWeatherCardProps) {
               波の周期: <span className="font-semibold text-slate-800 dark:text-slate-200">{wavePeriod}秒</span>
             </div>
             <div>
-              うねり: <span className="font-semibold text-slate-800 dark:text-slate-200">{swellWaveHeight}m ({swellWavePeriod}秒)</span>
+              うねり: <span className={`font-semibold ${swellColor}`}>{swellWaveHeight}m</span>
+              <span className="text-slate-800 dark:text-slate-200 font-semibold"> ({swellWavePeriod}秒)</span>
             </div>
           </div>
         </div>
@@ -127,7 +177,7 @@ export default function MarineWeatherCard({ weather }: MarineWeatherCardProps) {
 
           <div className="flex items-center justify-between">
             <div className="flex items-baseline gap-1 my-1">
-              <span className="text-3xl font-black text-slate-900 dark:text-white">
+              <span className={`text-3xl font-black transition-colors ${windSpeedColor}`}>
                 {windSpeed}
               </span>
               <span className="text-sm font-bold text-slate-500">m/s</span>
@@ -148,7 +198,7 @@ export default function MarineWeatherCard({ weather }: MarineWeatherCardProps) {
           </div>
 
           <div className="text-xs text-slate-600 dark:text-slate-400 pt-1">
-            最大瞬間突風: <span className="font-semibold text-slate-800 dark:text-slate-200">{windGusts} m/s</span>
+            最大瞬間突風: <span className={`font-semibold ${gustColor}`}>{windGusts} m/s</span>
           </div>
         </div>
 
@@ -159,13 +209,21 @@ export default function MarineWeatherCard({ weather }: MarineWeatherCardProps) {
               <Thermometer className="w-4 h-4" />
               海水温・気温
             </span>
-            <span className="text-[10px] font-semibold bg-cyan-100 dark:bg-cyan-900/60 text-cyan-800 dark:text-cyan-200 px-2 py-0.5 rounded-full">
-              魚の活性目安
+            <span
+              className={`text-[10px] font-extrabold px-2 py-0.5 rounded-full ${
+                isHighSeaTemp
+                  ? "bg-rose-500 text-white"
+                  : isLowSeaTemp
+                  ? "bg-sky-500 text-white"
+                  : "bg-cyan-100 dark:bg-cyan-900/60 text-cyan-800 dark:text-cyan-200"
+              }`}
+            >
+              {isHighSeaTemp ? "高水温注意" : isLowSeaTemp ? "低水温警戒" : "魚の活性目安"}
             </span>
           </div>
 
           <div className="flex items-baseline gap-1 my-1">
-            <span className="text-3xl font-black text-slate-900 dark:text-white">
+            <span className={`text-3xl font-black transition-colors ${seaTempColor}`}>
               {seaWaterTemperature}
             </span>
             <span className="text-sm font-bold text-slate-500">°C</span>
@@ -173,7 +231,14 @@ export default function MarineWeatherCard({ weather }: MarineWeatherCardProps) {
 
           <div className="text-xs text-slate-600 dark:text-slate-400 space-y-0.5 pt-1">
             <div>
-              気温: <span className="font-semibold text-slate-800 dark:text-slate-200">{temperature}°C (体感 {apparentTemperature}°C)</span>
+              気温:{" "}
+              <span className={`font-semibold ${tempNumberColor}`}>
+                {temperature}°C
+              </span>
+              {" "}
+              <span className="text-slate-500 dark:text-slate-400">
+                (体感 {apparentTemperature}°C)
+              </span>
             </div>
             <div>
               降水量: <span className="font-semibold text-slate-800 dark:text-slate-200">{precipitation} mm/h</span>

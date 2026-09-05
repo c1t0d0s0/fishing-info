@@ -245,15 +245,12 @@ export default function TideGraphCard({
         <div className="flex items-center gap-2 sm:gap-3">
           {/* Prominent Tide Badge */}
           <div
-            className={`px-3.5 sm:px-4 py-1.5 sm:py-2 rounded-2xl border flex items-center gap-2 shadow-sm transition-transform hover:scale-[1.02] ${getTideBadgeColor(
+            className={`px-4 sm:px-5 py-1.5 sm:py-2 rounded-2xl border flex items-center justify-center shadow-sm transition-transform hover:scale-[1.02] ${getTideBadgeColor(
               tideType
             )}`}
             title={`${tideType}: ${getTideDescription(tideType)}`}
           >
-            <span className="text-[11px] font-bold opacity-85 hidden sm:inline tracking-wider">
-              潮回り
-            </span>
-            <span className="text-base sm:text-xl font-black tracking-wide leading-none">
+            <span className="text-base sm:text-xl font-black tracking-wider leading-none">
               {tideType}
             </span>
           </div>
