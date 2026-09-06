@@ -78,10 +78,19 @@ export default function UmiNoEkiPage() {
       const candidates = fishingStations.filter((s) => s.id !== activeStation?.id);
       const pool = candidates.length > 0 ? candidates : fishingStations;
       const picked = pool[Math.floor(Math.random() * pool.length)];
-      setActiveStation(picked);
+
+      // Reset any active filters that would exclude the randomly picked station
+      if (searchQuery) {
+        setSearchQuery("");
+      }
       if (selectedRegion !== "all" && picked.region !== selectedRegion) {
         setSelectedRegion("all");
       }
+      if (filterRentalBoat && !picked.hasRentalBoat) {
+        setFilterRentalBoat(false);
+      }
+
+      setActiveStation(picked);
     }
   };
 

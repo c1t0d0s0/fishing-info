@@ -34,13 +34,12 @@ function createCustomIcon(L: any, station: UmiNoEki, isSelected: boolean) {
       color: white;
       font-size: ${isSelected ? "16px" : "13px"};
       box-shadow: 0 4px 6px -1px rgba(0,0,0,0.3);
-      transform: translate(-50%, -50%);
     ">
       ${iconEmoji}
     </div>`,
     iconSize: [size, size],
     iconAnchor: [size / 2, size / 2],
-    popupAnchor: [0, -size / 2],
+    popupAnchor: [0, -size / 2 - 4],
   });
 }
 
@@ -148,7 +147,10 @@ export default function UmiNoEkiMap({
           </div>
         `;
 
-        marker.bindPopup(popupContent);
+        marker.bindPopup(popupContent, {
+          autoPan: false,
+          closeButton: true,
+        });
 
         marker.on("click", () => {
           onSelectStation(station);
@@ -157,6 +159,10 @@ export default function UmiNoEkiMap({
         marker.addTo(mapInstance);
         markersRef.current.set(station.id, marker);
       });
+
+      if (selectedStation && markersRef.current.has(selectedStation.id)) {
+        markersRef.current.get(selectedStation.id).openPopup();
+      }
     } else {
       // Update marker icons on selection change
       if (selectedStationIdRef.current !== selectedStation?.id) {
@@ -182,13 +188,22 @@ export default function UmiNoEkiMap({
   useEffect(() => {
     if (!mapInstance || !selectedStation || !selectedStation.lat || !selectedStation.lng) return;
 
+    mapInstance.invalidateSize();
     mapInstance.setView([selectedStation.lat, selectedStation.lng], 12, {
-      animate: true,
+      animate: false,
     });
 
     const marker = markersRef.current.get(selectedStation.id);
     if (marker) {
       marker.openPopup();
+    } else {
+      const timer = setTimeout(() => {
+        const m = markersRef.current.get(selectedStation.id);
+        if (m) {
+          m.openPopup();
+        }
+      }, 50);
+      return () => clearTimeout(timer);
     }
   }, [selectedStation, mapInstance]);
 
