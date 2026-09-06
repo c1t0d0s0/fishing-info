@@ -4979,8 +4979,8 @@ export const umiNoEkiList: UmiNoEki[] = [
     "seaAccess": "N 33° 23´45'' ;　E 133° 18´50''",
     "landAccess": "車の場合：高知道須崎ICから車で5分、JR：土讃線須崎駅から車で7分 路線バス(約2時間に1本)：須崎市営バス「串ノ浦」バス停(歩170ｍ)",
     "websiteUrl": "https://yoshinomarina.kochi.jp",
-    "lat": 33.39583,
-    "lng": 133.31389,
+    "lat": 33.39227,
+    "lng": 133.30413,
     "imageUrl": "https://www.umi-eki.jp/uminoeki/susaki_yoshinomarina/img02.jpg",
     "photos": [
       "https://www.umi-eki.jp/uminoeki/susaki_yoshinomarina/img02.jpg",
