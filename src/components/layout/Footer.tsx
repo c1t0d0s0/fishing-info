@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Fish, ShieldCheck, Heart, Waves, Compass, CloudSun } from "lucide-react";
+import { Fish, ShieldCheck, Heart, Waves, Compass, CloudSun, Anchor, Calendar } from "lucide-react";
 
 export default function Footer() {
   return (
@@ -44,9 +44,21 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
+                <Link href="/umi-no-eki" className="text-slate-600 dark:text-slate-400 hover:text-ocean-600 dark:hover:text-ocean-400 transition-colors flex items-center gap-1.5">
+                  <Anchor className="w-3.5 h-3.5 text-cyan-500" />
+                  全国海の駅マップ
+                </Link>
+              </li>
+              <li>
                 <Link href="/species" className="text-slate-600 dark:text-slate-400 hover:text-ocean-600 dark:hover:text-ocean-400 transition-colors flex items-center gap-1.5">
                   <Fish className="w-3.5 h-3.5 text-ocean-500" />
                   魚種・仕掛け図鑑
+                </Link>
+              </li>
+              <li>
+                <Link href="/forecast" className="text-slate-600 dark:text-slate-400 hover:text-ocean-600 dark:hover:text-ocean-400 transition-colors flex items-center gap-1.5">
+                  <Calendar className="w-3.5 h-3.5 text-ocean-500" />
+                  週間潮汐・海洋情報
                 </Link>
               </li>
               <li>

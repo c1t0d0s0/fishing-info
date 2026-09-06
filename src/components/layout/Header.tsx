@@ -14,6 +14,7 @@ import {
   Sun,
   Moon,
   Waves,
+  Anchor,
 } from "lucide-react";
 
 export default function Header() {
@@ -47,8 +48,9 @@ export default function Header() {
   const navLinks = [
     { href: "/", label: "ダッシュボード", icon: Waves },
     { href: "/spots", label: "釣り場マップ", icon: Compass },
+    { href: "/umi-no-eki", label: "海の駅マップ", icon: Anchor },
     { href: "/species", label: "魚種・仕掛け図鑑", icon: Fish },
-    { href: "/forecast", label: "週間潮汐・海洋予報", icon: Calendar },
+    { href: "/forecast", label: "週間潮汐・海洋情報", icon: Calendar },
     { href: "/safety", label: "安全・ルール", icon: ShieldAlert },
   ];
 

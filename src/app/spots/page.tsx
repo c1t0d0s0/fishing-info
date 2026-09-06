@@ -61,6 +61,24 @@ function isSpotMatchingQuery(spot: FishingSpot, query: string): boolean {
     if (isUmigoSpot) return true;
   }
 
+  // Direct check for 海の駅 / うみのえき / uminoeki
+  const isUmiNoEkiSearch =
+    normQ.includes("うみのえき") ||
+    rawQ.includes("海の駅") ||
+    rawQ.includes("うみの駅") ||
+    rawQ.includes("uminoeki") ||
+    normQ.includes("uminoeki");
+
+  if (isUmiNoEkiSearch) {
+    const isUmiNoEkiSpot =
+      spot.id.startsWith("uminoeki-") ||
+      spot.name.includes("海の駅") ||
+      spot.kana.includes("うみのえき") ||
+      spot.description.includes("海の駅") ||
+      spot.tips.includes("海の駅");
+    if (isUmiNoEkiSpot) return true;
+  }
+
   // All searchable texts
   const targetTexts = [
     spot.name,
@@ -139,7 +157,7 @@ export default function SpotsPage() {
             <Search className="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
             <input
               type="text"
-              placeholder="釣り場名、都道府県、魚種、キーワード (UMIGO, 予約等)..."
+              placeholder="釣り場名、都道府県、海の駅、魚種、キーワード (UMIGO等)..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               className="w-full pl-9 pr-8 py-2.5 rounded-2xl text-xs sm:text-sm bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-ocean-500"
