@@ -1154,8 +1154,8 @@ export const umiNoEkiList: UmiNoEki[] = [
     "seaAccess": "N 35° 14.25´　E 139° 43.25´",
     "landAccess": "車の場合：　浦賀I.Cより5分、I.C.を降りて右折、浦賀駅前を通り抜けミニストップのある新町交差点を直進、次の信号を右折して道なり、公園を左折してすぐ電車の場合：　浦賀駅より徒歩17分。京急バス「かもめ団地」または「観音崎」行きに乗車、約2分　「新町」バス停下車、徒歩7分",
     "websiteUrl": "http://www.ssm-uraga.jp/",
-    "lat": 35.2375,
-    "lng": 139.72083,
+    "lat": 35.24071,
+    "lng": 139.72503,
     "imageUrl": "https://www.umi-eki.jp/uminoeki/uraga/img02.jpg",
     "photos": [
       "https://www.umi-eki.jp/uminoeki/uraga/img02.jpg",

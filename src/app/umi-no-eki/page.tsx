@@ -145,10 +145,6 @@ export default function UmiNoEkiPage() {
       {/* Top Banner */}
       <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
         <div>
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold bg-cyan-100 dark:bg-cyan-950/60 text-cyan-700 dark:text-cyan-300 border border-cyan-200/80 dark:border-cyan-800 mb-2">
-            <Anchor className="w-3.5 h-3.5" />
-            <span>全国海の駅ネットワーク 公認データ連携</span>
-          </div>
           <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-slate-900 dark:text-white flex items-center gap-2.5">
             <span>全国海の駅マップ & マリンステーション情報</span>
           </h1>
