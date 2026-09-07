@@ -1,9 +1,9 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { FISH_SPECIES_DATA } from "@/lib/data/fishSpeciesData";
 import { RIG_GUIDES } from "@/lib/data/rigData";
-import { FishCategory } from "@/types/species";
+import { FishCategory, DangerType } from "@/types/species";
 import SpeciesCard from "@/components/species/SpeciesCard";
 import RigGuideCard from "@/components/species/RigGuideCard";
 import {
@@ -12,6 +12,8 @@ import {
   Search,
   Sparkles,
   AlertTriangle,
+  Skull,
+  ShieldAlert,
   Star,
   Layers,
   Filter,
@@ -20,15 +22,33 @@ import {
 export default function SpeciesPage() {
   const [activeTab, setActiveTab] = useState<"species" | "rigs">("species");
   const [searchQuery, setSearchQuery] = useState("");
-  const [selectedCategory, setSelectedCategory] = useState<FishCategory | "all" | "dangerous" | "peak_now">("all");
+  const [selectedCategory, setSelectedCategory] = useState<FishCategory | "all" | "peak_now">("all");
+  const [dangerTypeFilter, setDangerTypeFilter] = useState<"all" | DangerType>("all");
   const [difficultyFilter, setDifficultyFilter] = useState<number | "all">("all");
 
   const currentMonth = new Date().getMonth() + 1;
 
+  const dangerousFish = useMemo(() => {
+    return FISH_SPECIES_DATA.filter((s) => s.isDangerous || s.category === "dangerous");
+  }, []);
+
+  const ingestionCount = useMemo(() => {
+    return dangerousFish.filter((s) => s.dangerType === "ingestion_poison").length;
+  }, [dangerousFish]);
+
+  const contactCount = useMemo(() => {
+    return dangerousFish.filter((s) => s.dangerType === "contact_venom").length;
+  }, [dangerousFish]);
+
+  const physicalCount = useMemo(() => {
+    return dangerousFish.filter((s) => s.dangerType === "physical_hazard").length;
+  }, [dangerousFish]);
+
   // Filter species
   const filteredSpecies = FISH_SPECIES_DATA.filter((sp) => {
     if (selectedCategory === "dangerous") {
-      if (!sp.isDangerous) return false;
+      if (!sp.isDangerous && sp.category !== "dangerous") return false;
+      if (dangerTypeFilter !== "all" && sp.dangerType !== dangerTypeFilter) return false;
     } else if (selectedCategory === "peak_now") {
       if (!sp.peakMonths.includes(currentMonth)) return false;
     } else if (selectedCategory !== "all") {
@@ -173,7 +193,30 @@ export default function SpeciesPage() {
                   イカ・タコ
                 </button>
                 <button
-                  onClick={() => setSelectedCategory("dangerous")}
+                  onClick={() => setSelectedCategory("tasty_table")}
+                  className={`px-3 py-1.5 rounded-xl font-bold transition-colors shrink-0 ${
+                    selectedCategory === "tasty_table"
+                      ? "bg-amber-600 text-white shadow-xs"
+                      : "bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200"
+                  }`}
+                >
+                  美味しい食卓魚
+                </button>
+                <button
+                  onClick={() => setSelectedCategory("fresh_brackish")}
+                  className={`px-3 py-1.5 rounded-xl font-bold transition-colors shrink-0 ${
+                    selectedCategory === "fresh_brackish"
+                      ? "bg-emerald-600 text-white shadow-xs"
+                      : "bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200"
+                  }`}
+                >
+                  河口・汽水魚
+                </button>
+                <button
+                  onClick={() => {
+                    setSelectedCategory("dangerous");
+                    setDangerTypeFilter("all");
+                  }}
                   className={`px-3 py-1.5 rounded-xl font-bold transition-colors shrink-0 flex items-center gap-1 ${
                     selectedCategory === "dangerous"
                       ? "bg-rose-600 text-white shadow-xs"
@@ -181,10 +224,108 @@ export default function SpeciesPage() {
                   }`}
                 >
                   <AlertTriangle className="w-3 h-3" />
-                  危険魚
+                  危険魚・毒注意
                 </button>
               </div>
             </div>
+
+            {/* Danger sub-navigation & visual color-coded guide */}
+            {selectedCategory === "dangerous" && (
+              <div className="pt-3.5 border-t border-slate-200/80 dark:border-slate-800 space-y-3 animate-in fade-in-50 duration-200">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs">
+                  <div className="flex items-center gap-1.5 flex-wrap">
+                    <span className="font-bold text-slate-500 dark:text-slate-400 text-[11px] mr-1">
+                      危険の種別で絞り込み:
+                    </span>
+                    <button
+                      onClick={() => setDangerTypeFilter("all")}
+                      className={`px-3 py-1.5 rounded-xl font-bold transition-all ${
+                        dangerTypeFilter === "all"
+                          ? "bg-slate-900 text-white dark:bg-white dark:text-slate-900 shadow-xs"
+                          : "bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200"
+                      }`}
+                    >
+                      すべて ({dangerousFish.length})
+                    </button>
+                    <button
+                      onClick={() => setDangerTypeFilter("ingestion_poison")}
+                      className={`px-3 py-1.5 rounded-xl font-bold transition-all flex items-center gap-1.5 ${
+                        dangerTypeFilter === "ingestion_poison"
+                          ? "bg-red-600 text-white shadow-xs"
+                          : "bg-red-50 dark:bg-red-950/40 text-red-700 dark:text-red-300 border border-red-200 dark:border-red-900 hover:bg-red-100"
+                      }`}
+                    >
+                      <Skull className="w-3.5 h-3.5 text-red-500 shrink-0" />
+                      <span>☠️ 体内猛毒・誤食厳禁</span>
+                      <span className="text-[10px] opacity-80 font-mono">({ingestionCount})</span>
+                    </button>
+                    <button
+                      onClick={() => setDangerTypeFilter("contact_venom")}
+                      className={`px-3 py-1.5 rounded-xl font-bold transition-all flex items-center gap-1.5 ${
+                        dangerTypeFilter === "contact_venom"
+                          ? "bg-purple-600 text-white shadow-xs"
+                          : "bg-purple-50 dark:bg-purple-950/40 text-purple-700 dark:text-purple-300 border border-purple-200 dark:border-purple-900 hover:bg-purple-100"
+                      }`}
+                    >
+                      <ShieldAlert className="w-3.5 h-3.5 text-purple-500 shrink-0" />
+                      <span>⚠️ 刺毒・接触厳禁</span>
+                      <span className="text-[10px] opacity-80 font-mono">({contactCount})</span>
+                    </button>
+                    <button
+                      onClick={() => setDangerTypeFilter("physical_hazard")}
+                      className={`px-3 py-1.5 rounded-xl font-bold transition-all flex items-center gap-1.5 ${
+                        dangerTypeFilter === "physical_hazard"
+                          ? "bg-amber-500 text-white shadow-xs"
+                          : "bg-amber-50 dark:bg-amber-950/40 text-amber-700 dark:text-amber-300 border border-amber-200 dark:border-amber-900 hover:bg-amber-100"
+                      }`}
+                    >
+                      <AlertTriangle className="w-3.5 h-3.5 text-amber-500 shrink-0" />
+                      <span>🩸 鋭歯・切創注意</span>
+                      <span className="text-[10px] opacity-80 font-mono">({physicalCount})</span>
+                    </button>
+                  </div>
+                </div>
+
+                {/* Clear visual explanation legend */}
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 pt-1 text-[11px]">
+                  <div className="flex items-start gap-2 p-2.5 rounded-xl bg-red-50/70 dark:bg-red-950/30 border border-red-200/80 dark:border-red-900/50">
+                    <div className="w-3 h-3 rounded-full bg-red-600 shrink-0 mt-0.5" />
+                    <div>
+                      <span className="font-bold text-red-900 dark:text-red-200 block">
+                        赤枠: 食べると危険（致死猛毒）
+                      </span>
+                      <span className="text-red-700/80 dark:text-red-300/80 text-[10px] leading-tight block mt-0.5">
+                        フグ毒（テトロドトキシン）やシガテラ毒。加熱しても毒は消えず素人調理・喫食厳禁。
+                      </span>
+                    </div>
+                  </div>
+
+                  <div className="flex items-start gap-2 p-2.5 rounded-xl bg-purple-50/70 dark:bg-purple-950/30 border border-purple-200/80 dark:border-purple-900/50">
+                    <div className="w-3 h-3 rounded-full bg-purple-600 shrink-0 mt-0.5" />
+                    <div>
+                      <span className="font-bold text-purple-900 dark:text-purple-200 block">
+                        紫枠: 触ると危険（刺毒棘）
+                      </span>
+                      <span className="text-purple-700/80 dark:text-purple-300/80 text-[10px] leading-tight block mt-0.5">
+                        ゴンズイ・ハオコゼ・オニオコゼ・アカエイ等。ヒレや尾の毒棘で激痛・組織壊死。素手厳禁。
+                      </span>
+                    </div>
+                  </div>
+
+                  <div className="flex items-start gap-2 p-2.5 rounded-xl bg-amber-50/70 dark:bg-amber-950/30 border border-amber-200/80 dark:border-amber-900/50">
+                    <div className="w-3 h-3 rounded-full bg-amber-500 shrink-0 mt-0.5" />
+                    <div>
+                      <span className="font-bold text-amber-900 dark:text-amber-200 block">
+                        橙枠: 咬傷・怪我注意（鋭利な歯）
+                      </span>
+                      <span className="text-amber-700/80 dark:text-amber-300/80 text-[10px] leading-tight block mt-0.5">
+                        タチウオ・サワラ・ダツ等。カミソリ状の牙や突進による物理的切創事故。プライヤー必須。
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
           </div>
 
           {/* Species Grid */}

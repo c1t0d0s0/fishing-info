@@ -5,6 +5,8 @@ import { FishSpecies, FishCategory, WaterLayer } from "@/types/species";
 import {
   Fish,
   AlertTriangle,
+  Skull,
+  ShieldAlert,
   Star,
   Utensils,
   ChevronDown,
@@ -34,6 +36,8 @@ function getCategoryBadge(category: FishCategory) {
       return { label: "美味しい食卓魚", className: "bg-amber-50 text-amber-700 dark:bg-amber-950/60 dark:text-amber-300 border-amber-200 dark:border-amber-800" };
     case "fresh_brackish":
       return { label: "河口・汽水魚", className: "bg-emerald-50 text-emerald-700 dark:bg-emerald-950/60 dark:text-emerald-300 border-emerald-200 dark:border-emerald-800" };
+    case "dangerous":
+      return { label: "危険魚・毒注意", className: "bg-rose-50 text-rose-700 dark:bg-rose-950/60 dark:text-rose-300 border-rose-200 dark:border-rose-800" };
     default:
       return { label: "沿岸魚", className: "bg-slate-50 text-slate-700 dark:bg-slate-800 dark:text-slate-300 border-slate-200 dark:border-slate-700" };
   }
@@ -51,6 +55,75 @@ function getWaterLayerBadge(waterLayer: WaterLayer) {
       return { label: "全層", icon: "🔄", className: "bg-violet-50 text-violet-700 dark:bg-violet-950/50 dark:text-violet-300 border-violet-200 dark:border-violet-800" };
     default:
       return { label: "全層", icon: "🌊", className: "bg-slate-50 text-slate-700 dark:bg-slate-800 dark:text-slate-300 border-slate-200 dark:border-slate-700" };
+  }
+}
+
+function getDangerConfig(species: FishSpecies) {
+  if (!species.isDangerous) return null;
+
+  const dangerType =
+    species.dangerType ||
+    (species.id.includes("fugu") || species.id === "barahata" || species.id.includes("kitamakura")
+      ? "ingestion_poison"
+      : species.category === "dangerous" ||
+        species.id.includes("poison") ||
+        species.id.includes("aigo") ||
+        species.id.includes("okoze") ||
+        species.id.includes("gonzui") ||
+        species.id.includes("akaei")
+      ? "contact_venom"
+      : "physical_hazard");
+
+  switch (dangerType) {
+    case "ingestion_poison":
+      return {
+        type: "ingestion_poison" as const,
+        label: "☠️ 体内猛毒・誤食厳禁",
+        shortLabel: "体内猛毒",
+        headerTitle: "致死猛毒・素人調理厳禁（加熱しても無毒化しません）",
+        badgeClass:
+          "bg-red-600 text-white shadow-md shadow-red-600/30 animate-pulse font-black border border-red-400/50",
+        cardBorder:
+          "border-red-500/90 dark:border-red-600/90 bg-gradient-to-b from-red-500/10 via-red-500/5 to-transparent hover:border-red-600 shadow-md shadow-red-500/10",
+        boxClass:
+          "bg-red-500/15 border-red-500/50 text-red-950 dark:text-red-100 shadow-xs",
+        boxTitleClass: "text-red-700 dark:text-red-400 font-black",
+        icon: Skull,
+        iconColor: "text-red-600 dark:text-red-400",
+      };
+    case "contact_venom":
+      return {
+        type: "contact_venom" as const,
+        label: "⚠️ 刺毒・接触厳禁",
+        shortLabel: "毒棘・刺毒",
+        headerTitle: "毒棘・刺毒注意（絶対に素手で触らないでください）",
+        badgeClass:
+          "bg-purple-600 text-white shadow-md shadow-purple-600/30 animate-pulse font-black border border-purple-400/50",
+        cardBorder:
+          "border-purple-500/90 dark:border-purple-600/90 bg-gradient-to-b from-purple-500/10 via-purple-500/5 to-transparent hover:border-purple-600 shadow-md shadow-purple-500/10",
+        boxClass:
+          "bg-purple-500/15 border-purple-500/50 text-purple-950 dark:text-purple-100 shadow-xs",
+        boxTitleClass: "text-purple-700 dark:text-purple-400 font-black",
+        icon: ShieldAlert,
+        iconColor: "text-purple-600 dark:text-purple-400",
+      };
+    case "physical_hazard":
+    default:
+      return {
+        type: "physical_hazard" as const,
+        label: "🩸 鋭歯・切創注意",
+        shortLabel: "鋭利な歯・骨板",
+        headerTitle: "鋭利な牙・骨板注意（フィッシュグリップ・プライヤー必須）",
+        badgeClass:
+          "bg-amber-500 text-white shadow-sm shadow-amber-500/20 font-black border border-amber-400/50",
+        cardBorder:
+          "border-amber-400/80 dark:border-amber-600/80 bg-gradient-to-b from-amber-500/10 via-amber-500/5 to-transparent hover:border-amber-500 shadow-sm",
+        boxClass:
+          "bg-amber-500/10 border-amber-500/40 text-amber-950 dark:text-amber-100",
+        boxTitleClass: "text-amber-700 dark:text-amber-400 font-black",
+        icon: AlertTriangle,
+        iconColor: "text-amber-600 dark:text-amber-400",
+      };
   }
 }
 
@@ -86,12 +159,13 @@ export default function SpeciesCard({ species }: SpeciesCardProps) {
   const categoryBadge = getCategoryBadge(category);
   const layerBadge = getWaterLayerBadge(waterLayer);
   const isPeakThisMonth = peakMonths.includes(currentMonth);
+  const dangerConfig = getDangerConfig(species);
 
   return (
     <div
       className={`bg-white dark:bg-slate-900 border rounded-3xl p-5 sm:p-6 shadow-sm transition-all duration-200 hover:shadow-md ${
-        isDangerous
-          ? "border-rose-300 dark:border-rose-900/60 bg-gradient-to-b from-rose-50/20 to-transparent"
+        dangerConfig
+          ? dangerConfig.cardBorder
           : "border-slate-200 dark:border-slate-800 hover:border-ocean-300 dark:hover:border-ocean-700"
       }`}
     >
@@ -104,10 +178,12 @@ export default function SpeciesCard({ species }: SpeciesCardProps) {
           >
             {categoryBadge.label}
           </span>
-          {isDangerous && (
-            <span className="text-[10px] font-black px-2 py-0.5 rounded-lg bg-rose-500 text-white flex items-center gap-1 animate-pulse shadow-xs">
-              <AlertTriangle className="w-3 h-3" />
-              危険魚・毒注意
+          {dangerConfig && (
+            <span
+              className={`text-[10px] font-black px-2 py-0.5 rounded-lg flex items-center gap-1 ${dangerConfig.badgeClass}`}
+            >
+              <dangerConfig.icon className="w-3 h-3 text-white shrink-0" />
+              <span>{dangerConfig.label}</span>
             </span>
           )}
           {isPeakThisMonth && (
@@ -159,7 +235,13 @@ export default function SpeciesCard({ species }: SpeciesCardProps) {
         <h3 className="text-xl font-black text-slate-900 dark:text-white flex items-center gap-2">
           <Fish
             className={`w-5 h-5 shrink-0 ${
-              isDangerous ? "text-rose-500" : "text-ocean-500"
+              dangerConfig?.type === "ingestion_poison"
+                ? "text-red-600 dark:text-red-400"
+                : dangerConfig?.type === "contact_venom"
+                ? "text-purple-600 dark:text-purple-400"
+                : dangerConfig?.type === "physical_hazard"
+                ? "text-amber-500 dark:text-amber-400"
+                : "text-ocean-500"
             }`}
           />
           <span>{name}</span>
@@ -211,13 +293,15 @@ export default function SpeciesCard({ species }: SpeciesCardProps) {
       </p>
 
       {/* Danger Warning Alert Box */}
-      {isDangerous && dangerNotes && (
-        <div className="mb-3.5 p-3 rounded-2xl bg-rose-500/10 border border-rose-500/30 text-rose-900 dark:text-rose-200 text-xs leading-relaxed space-y-1">
-          <div className="font-bold flex items-center gap-1.5 text-rose-600 dark:text-rose-400">
-            <AlertTriangle className="w-4 h-4" />
-            <span>毒棘・危険部位に関する注意</span>
+      {isDangerous && dangerNotes && dangerConfig && (
+        <div
+          className={`mb-3.5 p-3.5 rounded-2xl border text-xs leading-relaxed space-y-1.5 ${dangerConfig.boxClass}`}
+        >
+          <div className={`font-black flex items-center gap-2 ${dangerConfig.boxTitleClass}`}>
+            <dangerConfig.icon className={`w-4 h-4 shrink-0 ${dangerConfig.iconColor}`} />
+            <span>{dangerConfig.headerTitle}</span>
           </div>
-          <p>{dangerNotes}</p>
+          <p className="pl-6 leading-relaxed font-medium">{dangerNotes}</p>
         </div>
       )}
 

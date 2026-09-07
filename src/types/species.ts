@@ -6,7 +6,8 @@ export type FishCategory =
   | "bottom_rock"     // 底物・ロックフィッシュ (カサゴ・アイナメ・ハタ・ヒラメ・マゴチ)
   | "squid_octopus"   // イカ・タコ (アオリイカ・コウイカ・マダコ)
   | "tasty_table"     // 美味しい食卓魚 (キス・カワハギ・タチウオ・マダイ)
-  | "fresh_brackish"; // 河口・汽水・汽水魚 (ハゼ・スズキ・ウナギ)
+  | "fresh_brackish"  // 河口・汽水・汽水魚 (ハゼ・スズキ・ウナギ)
+  | "dangerous";      // 危険魚・毒注意 (ゴンズイ・ハオコゼ・アイゴ等)
 
 export interface RigGuide {
   id: string;
@@ -20,6 +21,11 @@ export interface RigGuide {
   hookBait: string;
   actionTips: string;
 }
+
+export type DangerType =
+  | "ingestion_poison" // 体内猛毒・誤食厳禁 (フグ毒テトロドトキシン、シガテラ毒など食べてはいけない魚)
+  | "contact_venom"    // 刺毒・毒棘・接触厳禁 (ゴンズイ・ハオコゼ・オニオコゼ・アイゴなど触ってはいけない魚)
+  | "physical_hazard"; // 鋭歯・骨板・切創注意 (タチウオ・サワラ・カマス・ダツなど歯や棘による物理的怪我)
 
 export interface FishSpecies {
   id: string;
@@ -43,6 +49,7 @@ export interface FishSpecies {
   favoriteBaits: string[]; // e.g. ["アミエビ", "オキアミ", "青イソメ", "ワーム1.5〜2inch"]
   fishingTips: string;
   isDangerous: boolean;
+  dangerType?: DangerType;
   dangerNotes?: string;
   imageUrl?: string;
 }
