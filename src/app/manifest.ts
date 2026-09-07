@@ -1,0 +1,42 @@
+import { MetadataRoute } from "next";
+
+export default function manifest(): MetadataRoute.Manifest {
+  return {
+    name: "釣行ナビ - 全国潮汐・タイドグラフ・海洋気象",
+    short_name: "釣行ナビ",
+    description:
+      "全国218箇所の海釣り施設・堤防・サーフ・磯の潮汐（タイドグラフ）・海洋気象（波高・風速・水温）・釣行指数・魚種図鑑を網羅した釣り人専用PWAアプリ",
+    start_url: "/",
+    scope: "/",
+    display: "standalone",
+    background_color: "#0369a1",
+    theme_color: "#0284c7",
+    orientation: "portrait-primary",
+    icons: [
+      {
+        src: "/icon-192.png",
+        sizes: "192x192",
+        type: "image/png",
+        purpose: "any",
+      },
+      {
+        src: "/icon-192.png",
+        sizes: "192x192",
+        type: "image/png",
+        purpose: "maskable",
+      },
+      {
+        src: "/icon-512.png",
+        sizes: "512x512",
+        type: "image/png",
+        purpose: "any",
+      },
+      {
+        src: "/icon-512.png",
+        sizes: "512x512",
+        type: "image/png",
+        purpose: "maskable",
+      },
+    ],
+  };
+}
