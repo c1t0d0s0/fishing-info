@@ -3640,8 +3640,8 @@ export const umiNoEkiList: UmiNoEki[] = [
     "seaAccess": "N 34.2844°　E 132.9491°",
     "landAccess": "【めばる港から】めばる港の出入り口を右折し県道65号線を道なりに進み車で1分（約500m）徒歩7分。【垂水港から】垂水港の出入り口を左折し県道65号線を道なりに進み車で2分（約1.4km）徒歩19分",
     "websiteUrl": "https://ar-skymarine.com",
-    "lat": 34.2844,
-    "lng": 132.9491,
+    "lat": 34.2806,
+    "lng": 132.9373,
     "imageUrl": "https://www.umi-eki.jp/uminoeki/skymarine/img02.jpg",
     "photos": [
       "https://www.umi-eki.jp/uminoeki/skymarine/img02.jpg",
