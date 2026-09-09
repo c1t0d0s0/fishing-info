@@ -40,1017 +40,1267 @@ export default function RigDiagram({ rigId, name }: RigDiagramProps) {
   }
 }
 
-// 1. サビキ釣り仕掛け
+// ─────────────────────────────────────────────────────────────
+// Common CAD Blueprint Canvas & Engineering Style Components
+// ─────────────────────────────────────────────────────────────
+
+interface BlueprintProps {
+  figNo: string;
+  title: string;
+  subtitle: string;
+  targetSpecies: string;
+  standardDepth: string;
+  mainLineSpec: string;
+  styleSpec: string;
+  children: React.ReactNode;
+}
+
+function BlueprintCanvas({
+  figNo,
+  title,
+  subtitle,
+  targetSpecies,
+  standardDepth,
+  mainLineSpec,
+  styleSpec,
+  children,
+}: BlueprintProps) {
+  return (
+    <svg
+      viewBox="0 0 560 360"
+      className="w-full h-auto max-h-[420px] select-none rounded-xl border border-sky-800/80 shadow-2xl bg-[#09111e] overflow-hidden font-mono"
+    >
+      <defs>
+        {/* CAD Fine Grid (20x20) */}
+        <pattern id="cadGridSmall" width="20" height="20" patternUnits="userSpaceOnUse">
+          <path d="M 20 0 L 0 0 0 20" fill="none" stroke="#1e3a5f" strokeWidth="0.4" strokeOpacity="0.45" />
+        </pattern>
+        {/* CAD Major Grid (100x100) */}
+        <pattern id="cadGridLarge" width="100" height="100" patternUnits="userSpaceOnUse">
+          <rect width="100" height="100" fill="url(#cadGridSmall)" />
+          <path d="M 100 0 L 0 0 0 100" fill="none" stroke="#0284c7" strokeWidth="0.8" strokeOpacity="0.22" />
+        </pattern>
+        {/* Arrow Markers for CAD Dimension Lines */}
+        <marker id="arrowStart" viewBox="0 0 10 10" refX="2" refY="5" markerWidth="5" markerHeight="5" orient="auto">
+          <path d="M 9 2 L 1 5 L 9 8 Z" fill="#38bdf8" />
+        </marker>
+        <marker id="arrowEnd" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto">
+          <path d="M 1 2 L 9 5 L 1 8 Z" fill="#38bdf8" />
+        </marker>
+        {/* Dot Marker for Leader Lines */}
+        <marker id="dotMarker" viewBox="0 0 6 6" refX="3" refY="3" markerWidth="4" markerHeight="4">
+          <circle cx="3" cy="3" r="2" fill="#38bdf8" stroke="#0284c7" strokeWidth="0.6" />
+        </marker>
+      </defs>
+
+      {/* Blueprint Grid Background */}
+      <rect width="560" height="360" fill="#09111e" />
+      <rect width="560" height="360" fill="url(#cadGridLarge)" />
+
+      {/* Technical Double Frame */}
+      <rect x="8" y="8" width="544" height="344" rx="3" fill="none" stroke="#0ea5e9" strokeWidth="1.2" strokeOpacity="0.8" />
+      <rect x="12" y="12" width="536" height="336" fill="none" stroke="#0284c7" strokeWidth="0.6" strokeDasharray="4 2" strokeOpacity="0.5" />
+
+      {/* Corner Technical Registration Crosshairs */}
+      <path d="M 15 24 L 15 15 L 24 15" fill="none" stroke="#38bdf8" strokeWidth="1.2" />
+      <circle cx="19" cy="19" r="1.5" fill="#38bdf8" />
+      <path d="M 545 24 L 545 15 L 536 15" fill="none" stroke="#38bdf8" strokeWidth="1.2" />
+      <circle cx="541" cy="19" r="1.5" fill="#38bdf8" />
+      <path d="M 15 336 L 15 345 L 24 345" fill="none" stroke="#38bdf8" strokeWidth="1.2" />
+      <circle cx="19" cy="341" r="1.5" fill="#38bdf8" />
+      <path d="M 545 336 L 545 345 L 536 345" fill="none" stroke="#38bdf8" strokeWidth="1.2" />
+      <circle cx="541" cy="341" r="1.5" fill="#38bdf8" />
+
+      {/* Top Header / Title Block */}
+      <g transform="translate(18, 16)">
+        <rect x="0" y="0" width="58" height="18" rx="2" fill="#0369a1" fillOpacity="0.45" stroke="#38bdf8" strokeWidth="1" />
+        <text x="29" y="12.5" textAnchor="middle" className="text-[9px] font-bold fill-sky-200 tracking-wider">
+          {figNo}
+        </text>
+        <text x="66" y="13.5" className="text-[12px] font-bold fill-sky-100 tracking-wide">
+          {title}
+        </text>
+        <text x="66" y="24" className="text-[8px] fill-sky-400 font-mono tracking-wider opacity-85">
+          {subtitle}
+        </text>
+      </g>
+
+      {/* Reference Sea Surface Marker */}
+      <g opacity="0.45">
+        <line x1="20" y1="46" x2="540" y2="46" stroke="#0ea5e9" strokeWidth="0.6" strokeDasharray="5 3" />
+        <text x="24" y="43" className="text-[7.5px] fill-sky-400 font-mono tracking-widest">▲ SEA SURFACE (水面基準線)</text>
+      </g>
+
+      {/* Reference Seabed Marker */}
+      <g opacity="0.45">
+        <line x1="20" y1="310" x2="540" y2="310" stroke="#0284c7" strokeWidth="0.8" />
+        <path d="M 20 310 L 28 316 M 50 310 L 58 316 M 80 310 L 88 316 M 110 310 L 118 316 M 140 310 L 148 316 M 170 310 L 178 316 M 200 310 L 208 316 M 230 310 L 238 316 M 260 310 L 268 316 M 290 310 L 298 316 M 320 310 L 328 316 M 350 310 L 358 316 M 380 310 L 388 316 M 410 310 L 418 316 M 440 310 L 448 316 M 470 310 L 478 316 M 500 310 L 508 316 M 530 310 L 538 316" stroke="#0284c7" strokeWidth="0.7" />
+        <text x="24" y="307" className="text-[7.5px] fill-sky-400 font-mono tracking-widest">▼ SEABED / REEF (海底ライン)</text>
+      </g>
+
+      {/* Technical Rig Artwork */}
+      {children}
+
+      {/* Bottom Specification Footer */}
+      <g transform="translate(16, 318)">
+        <rect x="0" y="0" width="528" height="28" rx="2" fill="#031527" fillOpacity="0.9" stroke="#0284c7" strokeWidth="0.8" />
+        <line x1="126" y1="0" x2="126" y2="28" stroke="#1e3a5f" strokeWidth="0.8" />
+        <line x1="250" y1="0" x2="250" y2="28" stroke="#1e3a5f" strokeWidth="0.8" />
+        <line x1="390" y1="0" x2="390" y2="28" stroke="#1e3a5f" strokeWidth="0.8" />
+
+        <text x="8" y="10.5" className="text-[7px] fill-sky-400 font-bold tracking-wider">TARGET (対象魚)</text>
+        <text x="8" y="21.5" className="text-[8.5px] fill-slate-200 font-semibold">{targetSpecies}</text>
+
+        <text x="134" y="10.5" className="text-[7px] fill-sky-400 font-bold tracking-wider">DEPTH (基準タナ)</text>
+        <text x="134" y="21.5" className="text-[8.5px] fill-slate-200 font-semibold">{standardDepth}</text>
+
+        <text x="258" y="10.5" className="text-[7px] fill-sky-400 font-bold tracking-wider">MAIN LINE (道糸規格)</text>
+        <text x="258" y="21.5" className="text-[8.5px] fill-slate-200 font-semibold">{mainLineSpec}</text>
+
+        <text x="398" y="10.5" className="text-[7px] fill-sky-400 font-bold tracking-wider">TACTIQUE (設計仕様)</text>
+        <text x="398" y="21.5" className="text-[8.5px] fill-slate-200 font-semibold">{styleSpec}</text>
+      </g>
+    </svg>
+  );
+}
+
+interface SpecBoxProps {
+  x: number;
+  y: number;
+  w?: number;
+  h?: number;
+  num: number;
+  title: string;
+  spec: string;
+  note?: string;
+  tag?: string;
+}
+
+function SpecBox({ x, y, w = 154, h = 42, num, title, spec, note, tag }: SpecBoxProps) {
+  return (
+    <g transform={`translate(${x}, ${y})`}>
+      <rect
+        x="0"
+        y="0"
+        width={w}
+        height={h}
+        rx="3"
+        fill="#07172b"
+        fillOpacity="0.94"
+        stroke="#0284c7"
+        strokeWidth="0.8"
+      />
+      <line x1="0" y1="0" x2={w} y2="0" stroke="#38bdf8" strokeWidth="1.5" strokeOpacity="0.8" />
+      <circle cx="12" cy="13" r="7" fill="#0369a1" stroke="#38bdf8" strokeWidth="0.8" />
+      <text x="12" y="16" textAnchor="middle" className="text-[8.5px] font-bold fill-white">
+        {num}
+      </text>
+      <text x="24" y="14" className="text-[9px] font-bold fill-sky-200">
+        {title}
+      </text>
+      {tag && (
+        <text x={w - 6} y="13" textAnchor="end" className="text-[7px] font-mono fill-cyan-400 opacity-75">
+          [{tag}]
+        </text>
+      )}
+      <text x="7" y="26.5" className="text-[8px] font-semibold fill-slate-100">
+        {spec}
+      </text>
+      {note && (
+        <text x="7" y="36.5" className="text-[7px] fill-sky-300/80 truncate">
+          {note}
+        </text>
+      )}
+    </g>
+  );
+}
+
+interface DimensionProps {
+  x1: number;
+  y1: number;
+  x2: number;
+  y2: number;
+  label: string;
+  offset?: number;
+  orientation?: "vertical" | "horizontal";
+}
+
+function Dimension({
+  x1,
+  y1,
+  x2,
+  y2,
+  label,
+  offset = 0,
+  orientation = "vertical",
+}: DimensionProps) {
+  if (orientation === "vertical") {
+    const lx = x1 + offset;
+    return (
+      <g className="select-none opacity-85">
+        <line x1={x1} y1={y1} x2={lx + (offset >= 0 ? 5 : -5)} y2={y1} stroke="#0ea5e9" strokeWidth="0.5" strokeDasharray="2 2" />
+        <line x1={x2} y1={y2} x2={lx + (offset >= 0 ? 5 : -5)} y2={y2} stroke="#0ea5e9" strokeWidth="0.5" strokeDasharray="2 2" />
+        <line x1={lx} y1={y1} x2={lx} y2={y2} stroke="#38bdf8" strokeWidth="0.8" markerStart="url(#arrowStart)" markerEnd="url(#arrowEnd)" />
+        <rect x={lx - 25} y={(y1 + y2) / 2 - 6.5} width="50" height="13" rx="2" fill="#07172b" stroke="#0284c7" strokeWidth="0.6" />
+        <text x={lx} y={(y1 + y2) / 2 + 3} textAnchor="middle" className="text-[7px] font-mono font-bold fill-cyan-200">
+          {label}
+        </text>
+      </g>
+    );
+  } else {
+    const ly = y1 + offset;
+    return (
+      <g className="select-none opacity-85">
+        <line x1={x1} y1={y1} x2={x1} y2={ly + (offset >= 0 ? 5 : -5)} stroke="#0ea5e9" strokeWidth="0.5" strokeDasharray="2 2" />
+        <line x1={x2} y1={y2} x2={x2} y2={ly + (offset >= 0 ? 5 : -5)} stroke="#0ea5e9" strokeWidth="0.5" strokeDasharray="2 2" />
+        <line x1={x1} y1={ly} x2={x2} y2={ly} stroke="#38bdf8" strokeWidth="0.8" markerStart="url(#arrowStart)" markerEnd="url(#arrowEnd)" />
+        <rect x={(x1 + x2) / 2 - 27} y={ly - 6.5} width="54" height="13" rx="2" fill="#07172b" stroke="#0284c7" strokeWidth="0.6" />
+        <text x={(x1 + x2) / 2} y={ly + 3} textAnchor="middle" className="text-[7px] font-mono font-bold fill-cyan-200">
+          {label}
+        </text>
+      </g>
+    );
+  }
+}
+
+function LeaderLine({ points }: { points: string }) {
+  return (
+    <polyline
+      points={points}
+      fill="none"
+      stroke="#38bdf8"
+      strokeWidth="0.8"
+      strokeDasharray="3 2"
+      markerEnd="url(#dotMarker)"
+      opacity="0.8"
+    />
+  );
+}
+
+// ─────────────────────────────────────────────────────────────
+// 1. サビキ釣り仕掛け (FIG-01)
+// ─────────────────────────────────────────────────────────────
 function SabikiDiagram() {
   return (
-    <svg
-      viewBox="0 0 540 330"
-      className="w-full h-auto max-h-[340px] select-none rounded-2xl bg-gradient-to-b from-sky-50/80 via-white to-blue-50/50 dark:from-slate-900/90 dark:via-slate-900 dark:to-slate-800/80 border border-slate-200/80 dark:border-slate-800"
+    <BlueprintCanvas
+      figNo="FIG-01"
+      title="サビキ釣り仕掛け構成図 (下カゴ式)"
+      subtitle="DWG REF: #SBK-01 / MULTI-HOOK SABIKI SYSTEM / SCALE: NON-SCALE"
+      targetSpecies="アジ・イワシ・サバ・サッパ"
+      standardDepth="表層〜底層 (5〜15m)"
+      mainLineSpec="ナイロン 2〜3号 / PE 0.8号"
+      styleSpec="下カゴ式・多点疑似針展開図"
     >
-      <defs>
-        <linearGradient id="sabikiWater" x1="0%" y1="0%" x2="0%" y2="100%">
-          <stop offset="0%" stopColor="#0284c7" stopOpacity="0.08" />
-          <stop offset="100%" stopColor="#0369a1" stopOpacity="0.22" />
-        </linearGradient>
-        <radialGradient id="chumCloud" cx="50%" cy="50%" r="50%">
-          <stop offset="0%" stopColor="#f43f5e" stopOpacity="0.45" />
-          <stop offset="70%" stopColor="#fb7185" stopOpacity="0.2" />
-          <stop offset="100%" stopColor="#fb7185" stopOpacity="0" />
-        </radialGradient>
-      </defs>
+      <SpecBox x={20} y={60} w={154} h={42} num={1} title="道糸 (メインライン)" spec="ナイロン 2〜3号 / PE 0.8号" note="適度なしなやかさで糸絡み防止" />
+      <SpecBox x={384} y={60} w={154} h={42} num={2} title="幹糸・ハリス" spec="幹糸 1.5〜2号 / ハリス 0.8〜1.5号" note="フロロカーボン仕様" />
+      <SpecBox x={20} y={148} w={154} h={42} num={3} title="擬似針 (5〜6本)" spec="ピンクスキン/ケイムラ 4〜6号" note="アミエビを模倣した多点針" />
+      <SpecBox x={20} y={242} w={154} h={42} num={4} title="コマセカゴ＆オモリ" spec="下カゴ式 6〜10号" note="アミエビ煙幕を海底で放出" />
 
-      {/* Water background & surface */}
-      <rect x="0" y="45" width="540" height="285" fill="url(#sabikiWater)" />
-      <path d="M 0 45 Q 67 40, 135 45 T 270 45 T 405 45 T 540 45" stroke="#38bdf8" strokeWidth="2" strokeDasharray="6 3" fill="none" opacity="0.7" />
-      <text x="14" y="38" className="text-[11px] font-bold fill-sky-600 dark:fill-sky-400">水面 (海面)</text>
+      <LeaderLine points="174,81 210,81 270,72" />
+      <LeaderLine points="384,81 330,81 285,95" />
+      <LeaderLine points="174,169 220,169 248,172" />
+      <LeaderLine points="174,263 230,263 268,272" />
 
-      {/* Rod Tip (Top Left) */}
-      <path d="M 20 15 Q 70 18, 120 28" stroke="#64748b" strokeWidth="4" strokeLinecap="round" fill="none" />
-      <circle cx="120" cy="28" r="4" fill="#0284c7" />
-      <text x="30" y="12" className="text-[11px] font-bold fill-slate-700 dark:fill-slate-300">磯竿 2〜3号 / コンパクトロッド</text>
+      <path d="M 230 46 L 248 56 L 246 59 L 228 49 Z" fill="#64748b" stroke="#94a3b8" strokeWidth="0.8" />
+      <line x1="247" y1="58" x2="280" y2="75" stroke="#fbbf24" strokeWidth="1.6" />
 
-      {/* Main Line */}
-      <path d="M 120 28 L 220 55" stroke="#f59e0b" strokeWidth="2" strokeDasharray="4 2" fill="none" />
-      <rect x="135" y="32" width="105" height="18" rx="4" className="fill-amber-500/10 dark:fill-amber-500/20 stroke stroke-amber-500/30" />
-      <text x="140" y="45" className="text-[10px] font-bold fill-amber-700 dark:fill-amber-300">道糸: ナイロン 2〜3号</text>
+      <circle cx="280" cy="78" r="3" fill="none" stroke="#94a3b8" strokeWidth="1.2" />
+      <rect x="278" y="79" width="4" height="6" rx="1" fill="#475569" stroke="#94a3b8" strokeWidth="0.8" />
+      <circle cx="280" cy="86" r="3" fill="none" stroke="#94a3b8" strokeWidth="1.2" />
 
-      {/* Snap Swivel */}
-      <circle cx="220" cy="55" r="4" fill="#64748b" stroke="#334155" strokeWidth="1.5" />
-      <text x="232" y="58" className="text-[10px] font-medium fill-slate-600 dark:fill-slate-400">スナップサルカン</text>
+      <line x1="280" y1="89" x2="280" y2="248" stroke="#38bdf8" strokeWidth="1.5" />
 
-      {/* Main Trunk Line (幹糸) */}
-      <line x1="220" y1="55" x2="220" y2="250" stroke="#0ea5e9" strokeWidth="2.5" />
-      <text x="155" y="145" className="text-[10px] font-semibold fill-sky-700 dark:fill-sky-300">幹糸: 1.5〜2号</text>
-
-      {/* Multi Sabiki Hooks (4 Branches) */}
-      {/* Hook 1 */}
-      <path d="M 220 85 Q 245 88, 260 80" stroke="#0ea5e9" strokeWidth="1.5" fill="none" />
-      <ellipse cx="260" cy="80" rx="6" ry="3" fill="#f43f5e" transform="rotate(-20 260 80)" />
-      <path d="M 260 80 Q 266 84, 263 90 Q 258 92, 255 87" stroke="#94a3b8" strokeWidth="1.8" fill="none" />
-      <circle cx="260" cy="78" r="2" fill="#38bdf8" />
-
-      {/* Hook 2 */}
-      <path d="M 220 120 Q 245 123, 260 115" stroke="#0ea5e9" strokeWidth="1.5" fill="none" />
-      <ellipse cx="260" cy="115" rx="6" ry="3" fill="#ec4899" transform="rotate(-20 260 115)" />
-      <path d="M 260 115 Q 266 119, 263 125 Q 258 127, 255 122" stroke="#94a3b8" strokeWidth="1.8" fill="none" />
-
-      {/* Hook 3 */}
-      <path d="M 220 155 Q 245 158, 260 150" stroke="#0ea5e9" strokeWidth="1.5" fill="none" />
-      <ellipse cx="260" cy="150" rx="6" ry="3" fill="#f43f5e" transform="rotate(-20 260 150)" />
-      <path d="M 260 150 Q 266 154, 263 160 Q 258 162, 255 157" stroke="#94a3b8" strokeWidth="1.8" fill="none" />
-
-      {/* Hook 4 */}
-      <path d="M 220 190 Q 245 193, 260 185" stroke="#0ea5e9" strokeWidth="1.5" fill="none" />
-      <ellipse cx="260" cy="185" rx="6" ry="3" fill="#ec4899" transform="rotate(-20 260 185)" />
-      <path d="M 260 185 Q 266 189, 263 195 Q 258 197, 255 192" stroke="#94a3b8" strokeWidth="1.8" fill="none" />
-
-      {/* Hook Label Callout */}
-      <rect x="285" y="115" width="220" height="34" rx="8" className="fill-rose-50 dark:fill-rose-950/40 stroke stroke-rose-300 dark:stroke-rose-800" />
-      <text x="295" y="130" className="text-[11px] font-bold fill-rose-700 dark:fill-rose-300">擬似針 (ピンクスキン/ハゲ皮 4〜6号)</text>
-      <text x="295" y="143" className="text-[9px] fill-slate-500 dark:fill-slate-400">エダス: 0.8〜1.0号 (3〜5cm)</text>
-
-      {/* Chum Cage & Cloud (Bottom) */}
-      <circle cx="220" cy="275" r="42" fill="url(#chumCloud)" />
-      
-      {/* Chum Cage SVG */}
-      <g transform="translate(208, 250)">
-        <rect x="0" y="0" width="24" height="35" rx="5" fill="#f59e0b" stroke="#b45309" strokeWidth="1.5" opacity="0.85" />
-        <line x1="6" y1="0" x2="6" y2="35" stroke="#78350f" strokeWidth="1" strokeDasharray="3 3" />
-        <line x1="12" y1="0" x2="12" y2="35" stroke="#78350f" strokeWidth="1" strokeDasharray="3 3" />
-        <line x1="18" y1="0" x2="18" y2="35" stroke="#78350f" strokeWidth="1" strokeDasharray="3 3" />
-        {/* Sinker on bottom */}
-        <ellipse cx="12" cy="40" rx="8" ry="6" fill="#475569" stroke="#1e293b" strokeWidth="1" />
+      {/* Branch 1 */}
+      <g transform="translate(280, 110)">
+        <line x1="0" y1="0" x2="35" y2="10" stroke="#7dd3fc" strokeWidth="1" />
+        <path d="M 35 10 Q 42 13, 40 18 Q 36 21, 33 16" fill="none" stroke="#f8fafc" strokeWidth="1.2" />
+        <path d="M 34 8 Q 42 9, 44 14 Q 38 15, 34 11" fill="#f43f5e" fillOpacity="0.85" />
+        <circle cx="35" cy="10" r="1.5" fill="#38bdf8" />
+      </g>
+      {/* Branch 2 */}
+      <g transform="translate(280, 138)">
+        <line x1="0" y1="0" x2="-35" y2="10" stroke="#7dd3fc" strokeWidth="1" />
+        <path d="M -35 10 Q -42 13, -40 18 Q -36 21, -33 16" fill="none" stroke="#f8fafc" strokeWidth="1.2" />
+        <path d="M -34 8 Q -42 9, -44 14 Q -38 15, -34 11" fill="#06b6d4" fillOpacity="0.85" />
+        <circle cx="-35" cy="10" r="1.5" fill="#38bdf8" />
+      </g>
+      {/* Branch 3 */}
+      <g transform="translate(280, 166)">
+        <line x1="0" y1="0" x2="35" y2="10" stroke="#7dd3fc" strokeWidth="1" />
+        <path d="M 35 10 Q 42 13, 40 18 Q 36 21, 33 16" fill="none" stroke="#f8fafc" strokeWidth="1.2" />
+        <path d="M 34 8 Q 42 9, 44 14 Q 38 15, 34 11" fill="#fbbf24" fillOpacity="0.85" />
+        <circle cx="35" cy="10" r="1.5" fill="#38bdf8" />
+      </g>
+      {/* Branch 4 */}
+      <g transform="translate(280, 194)">
+        <line x1="0" y1="0" x2="-35" y2="10" stroke="#7dd3fc" strokeWidth="1" />
+        <path d="M -35 10 Q -42 13, -40 18 Q -36 21, -33 16" fill="none" stroke="#f8fafc" strokeWidth="1.2" />
+        <path d="M -34 8 Q -42 9, -44 14 Q -38 15, -34 11" fill="#f43f5e" fillOpacity="0.85" />
+        <circle cx="-35" cy="10" r="1.5" fill="#38bdf8" />
+      </g>
+      {/* Branch 5 */}
+      <g transform="translate(280, 222)">
+        <line x1="0" y1="0" x2="35" y2="10" stroke="#7dd3fc" strokeWidth="1" />
+        <path d="M 35 10 Q 42 13, 40 18 Q 36 21, 33 16" fill="none" stroke="#f8fafc" strokeWidth="1.2" />
+        <path d="M 34 8 Q 42 9, 44 14 Q 38 15, 34 11" fill="#06b6d4" fillOpacity="0.85" />
+        <circle cx="35" cy="10" r="1.5" fill="#38bdf8" />
       </g>
 
-      {/* Chum Cage Label */}
-      <rect x="255" y="255" width="230" height="42" rx="8" className="fill-amber-50 dark:fill-amber-950/40 stroke stroke-amber-300 dark:stroke-amber-800" />
-      <text x="265" y="272" className="text-[11px] font-bold fill-amber-800 dark:fill-amber-300">コマセカゴ + 底オモリ (6〜10号)</text>
-      <text x="265" y="288" className="text-[9px] fill-slate-600 dark:fill-slate-400">アミエビを8分目詰め、シャクって煙幕と同調</text>
-    </svg>
+      <circle cx="280" cy="249" r="2.5" fill="none" stroke="#94a3b8" strokeWidth="1" />
+      <path d="M 280 252 L 280 258" stroke="#94a3b8" strokeWidth="1.5" />
+
+      {/* Chum Cage & Sinker */}
+      <g transform="translate(280, 258)">
+        <rect x="-11" y="0" width="22" height="28" rx="3" fill="#0f172a" stroke="#38bdf8" strokeWidth="1" />
+        <line x1="-11" y1="7" x2="11" y2="7" stroke="#38bdf8" strokeWidth="0.6" strokeOpacity="0.6" />
+        <line x1="-11" y1="14" x2="11" y2="14" stroke="#38bdf8" strokeWidth="0.6" strokeOpacity="0.6" />
+        <line x1="-11" y1="21" x2="11" y2="21" stroke="#38bdf8" strokeWidth="0.6" strokeOpacity="0.6" />
+        <line x1="-4" y1="0" x2="-4" y2="28" stroke="#38bdf8" strokeWidth="0.6" strokeOpacity="0.6" />
+        <line x1="4" y1="0" x2="4" y2="28" stroke="#38bdf8" strokeWidth="0.6" strokeOpacity="0.6" />
+        <polygon points="-11,28 11,28 0,44" fill="#475569" stroke="#94a3b8" strokeWidth="1" />
+        <text x="0" y="37" textAnchor="middle" className="text-[7px] font-bold fill-white">8号</text>
+        <circle cx="-16" cy="10" r="1.2" fill="#fb7185" opacity="0.7" />
+        <circle cx="-19" cy="18" r="1" fill="#fb7185" opacity="0.6" />
+        <circle cx="16" cy="12" r="1.2" fill="#fb7185" opacity="0.7" />
+        <circle cx="19" cy="22" r="1.4" fill="#fb7185" opacity="0.6" />
+      </g>
+
+      <Dimension x1={330} y1={89} x2={330} y2={248} label="仕掛け全長 1.5〜1.8m" offset={10} />
+      <Dimension x1={330} y1={110} x2={330} y2={138} label="間隔 25cm" offset={42} />
+      <Dimension x1={280} y1={110} x2={315} y2={110} label="エダス 3〜5cm" offset={-14} orientation="horizontal" />
+    </BlueprintCanvas>
   );
 }
 
-// 2. ジグ単アジング仕掛け
+// ─────────────────────────────────────────────────────────────
+// 2. ジグ単アジング仕掛け (FIG-02)
+// ─────────────────────────────────────────────────────────────
 function AjingDiagram() {
   return (
-    <svg
-      viewBox="0 0 540 330"
-      className="w-full h-auto max-h-[340px] select-none rounded-2xl bg-gradient-to-b from-slate-900 via-slate-900 to-sky-950/80 border border-slate-800"
+    <BlueprintCanvas
+      figNo="FIG-02"
+      title="ジグ単アジング仕掛け構成図 (ライトゲーム)"
+      subtitle="DWG REF: #AJG-02 / ULTRA-LIGHT JIGHEAD RIG / SCALE: NON-SCALE"
+      targetSpecies="アジ・メバル・カマス・サバ"
+      standardDepth="全層対応 (カウントダウン管理)"
+      mainLineSpec="エステル 0.3〜0.4号 (比重1.38)"
+      styleSpec="ジグヘッド単体 + ピンテールワーム"
     >
-      <defs>
-        <radialGradient id="nightLightGlow" cx="80%" cy="10%" r="60%">
-          <stop offset="0%" stopColor="#38bdf8" stopOpacity="0.3" />
-          <stop offset="100%" stopColor="#0284c7" stopOpacity="0" />
-        </radialGradient>
-      </defs>
+      <SpecBox x={20} y={60} w={154} h={42} num={1} title="メインライン" spec="エステルライン 0.3〜0.4号" note="比重1.38 / 極低伸度で微小アタリ伝達" />
+      <SpecBox x={190} y={55} w={150} h={42} num={2} title="結束部 (ノット)" spec="トリプルエイト / 3.5ノット" note="簡単結束・破断強度80%以上保持" />
+      <SpecBox x={384} y={60} w={154} h={42} num={3} title="ショックリーダー" spec="フロロカーボン 0.8号 (3lb) 40cm" note="エステルの瞬間破断を防止" />
+      <SpecBox x={360} y={242} w={178} h={42} num={4} title="ジグヘッド＆ワーム" spec="0.8〜1.5g + ワーム 1.5〜2.0inch" note="オープンゲイブで上顎即フッキング" />
 
-      {/* Night Light glow background */}
-      <circle cx="460" cy="30" r="140" fill="url(#nightLightGlow)" />
-      <text x="400" y="25" className="text-[10px] font-bold fill-cyan-300">💡 常夜灯の明暗部</text>
+      <LeaderLine points="174,81 210,81 230,95" />
+      <LeaderLine points="265,97 265,115 270,128" />
+      <LeaderLine points="384,81 350,81 330,150" />
+      <LeaderLine points="360,263 320,263 360,225" />
 
-      {/* Rod Tip (Solid Tip) */}
-      <path d="M 20 50 Q 80 45, 140 65" stroke="#94a3b8" strokeWidth="3" strokeLinecap="round" fill="none" />
-      <path d="M 140 65 Q 170 80, 190 100" stroke="#f43f5e" strokeWidth="1.5" strokeLinecap="round" fill="none" />
-      <circle cx="190" cy="100" r="3" fill="#38bdf8" />
-      <text x="20" y="35" className="text-[11px] font-bold fill-slate-200">アジングロッド 5.8〜6.4ft (UL ソリッド穂先)</text>
+      <path d="M 50 60 L 68 70 L 66 73 L 48 63 Z" fill="#64748b" stroke="#94a3b8" strokeWidth="0.8" />
+      <path d="M 68 71 Q 160 110, 270 128" fill="none" stroke="#fbbf24" strokeWidth="1.5" />
+      <text x="140" y="88" className="text-[7.5px] font-bold fill-amber-300">エステル 0.3号</text>
 
-      {/* Ester Line */}
-      <path d="M 190 100 Q 250 140, 310 170" stroke="#a3e635" strokeWidth="1.8" strokeDasharray="3 1.5" fill="none" />
-      <rect x="170" y="125" width="135" height="18" rx="4" fill="#1e293b" stroke="#4d7c0f" strokeWidth="1" />
-      <text x="175" y="138" className="text-[10px] font-bold fill-lime-300">道糸: エステル 0.3〜0.4号</text>
+      <circle cx="270" cy="128" r="4" fill="#0284c7" stroke="#38bdf8" strokeWidth="1" />
+      <text x="270" y="142" textAnchor="middle" className="text-[7.5px] font-mono fill-cyan-300">FG / 3.5KNOT</text>
 
-      {/* Knot Callout */}
-      <circle cx="310" cy="170" r="3.5" fill="#f59e0b" />
-      <text x="320" y="168" className="text-[9px] font-bold fill-amber-300">トリプルエイトノット / 3.5ノット</text>
+      <line x1="270" y1="128" x2="360" y2="200" stroke="#38bdf8" strokeWidth="1.4" strokeDasharray="6 1" />
 
-      {/* Leader */}
-      <line x1="310" y1="170" x2="410" y2="230" stroke="#38bdf8" strokeWidth="1.8" />
-      <rect x="295" y="195" width="145" height="18" rx="4" fill="#0f172a" stroke="#0284c7" strokeWidth="1" />
-      <text x="300" y="208" className="text-[10px] font-bold fill-cyan-300">リーダー: フロロ 0.8号 (30〜50cm)</text>
-
-      {/* Jighead & Worm */}
-      <g transform="translate(410, 230)">
-        {/* Sinker head */}
-        <circle cx="0" cy="0" r="6" fill="#cbd5e1" stroke="#475569" strokeWidth="1.5" />
-        <circle cx="0" cy="0" r="2" fill="#0284c7" />
-        {/* Hook */}
-        <path d="M 0 0 L 16 0 Q 22 0, 22 -6 Q 22 -12, 16 -12 L 14 -10" stroke="#f8fafc" strokeWidth="1.8" fill="none" strokeLinecap="round" />
-        {/* Worm Body (Glow/Translucent) */}
-        <path d="M 4 0 Q 20 4, 38 0 Q 55 -3, 68 0" stroke="#ec4899" strokeWidth="6" strokeLinecap="round" fill="none" opacity="0.9" />
-        <path d="M 68 0 Q 75 1, 82 0" stroke="#ec4899" strokeWidth="2.5" strokeLinecap="round" fill="none" opacity="0.8" />
+      <g transform="translate(360, 200)">
+        <ellipse cx="0" cy="0" rx="3" ry="5" fill="none" stroke="#94a3b8" strokeWidth="1" />
       </g>
 
-      {/* Jighead & Worm Callout */}
-      <rect x="310" y="260" width="210" height="42" rx="8" fill="#1e1b4b" stroke="#6366f1" strokeWidth="1" />
-      <text x="320" y="277" className="text-[11px] font-bold fill-indigo-200">ジグヘッド 0.8〜1.5g (金針/オープン)</text>
-      <text x="320" y="293" className="text-[10px] fill-pink-300">+ ピンテールワーム 1.5〜2.0inch (クリア系)</text>
-    </svg>
+      <g transform="translate(366, 202)">
+        <circle cx="6" cy="6" r="6" fill="#475569" stroke="#94a3b8" strokeWidth="1.2" />
+        <circle cx="6" cy="6" r="2" fill="#0f172a" />
+        <path d="M 6 4 L 28 4 Q 38 4, 38 14 Q 38 20, 32 18" fill="none" stroke="#f8fafc" strokeWidth="1.4" />
+        <path d="M 12 4 Q 35 1, 60 7 Q 85 10, 105 8 Q 85 12, 60 13 Q 35 15, 12 8 Z" fill="#06b6d4" fillOpacity="0.45" stroke="#38bdf8" strokeWidth="1" />
+        <line x1="24" y1="4" x2="24" y2="11" stroke="#38bdf8" strokeWidth="0.6" strokeOpacity="0.8" />
+        <line x1="36" y1="4" x2="36" y2="12" stroke="#38bdf8" strokeWidth="0.6" strokeOpacity="0.8" />
+        <line x1="48" y1="5" x2="48" y2="12" stroke="#38bdf8" strokeWidth="0.6" strokeOpacity="0.8" />
+        <line x1="60" y1="7" x2="60" y2="13" stroke="#38bdf8" strokeWidth="0.6" strokeOpacity="0.8" />
+        <text x="6" y="22" className="text-[7.5px] font-bold fill-sky-200">1.0g タングステン</text>
+      </g>
+
+      <g transform="translate(200, 210)" opacity="0.75">
+        <path d="M 0 0 Q 30 20, 60 30" fill="none" stroke="#38bdf8" strokeWidth="1" strokeDasharray="3 2" markerEnd="url(#arrowEnd)" />
+        <text x="10" y="32" className="text-[7.5px] font-mono fill-cyan-300">TENSION FALL 誘い</text>
+      </g>
+
+      <Dimension x1={270} y1={128} x2={360} y2={200} label="リーダー 30〜50cm" offset={-25} />
+    </BlueprintCanvas>
   );
 }
 
-// 3. ライトショアジギング仕掛け
+// ─────────────────────────────────────────────────────────────
+// 3. ライトショアジギング仕掛け (FIG-03)
+// ─────────────────────────────────────────────────────────────
 function ShoreJiggingDiagram() {
   return (
-    <svg
-      viewBox="0 0 540 330"
-      className="w-full h-auto max-h-[340px] select-none rounded-2xl bg-gradient-to-b from-sky-100/60 via-white to-blue-100/40 dark:from-slate-900 dark:via-slate-900 dark:to-slate-800 border border-slate-200 dark:border-slate-800"
+    <BlueprintCanvas
+      figNo="FIG-03"
+      title="ライトショアジギング仕掛け構成図"
+      subtitle="DWG REF: #LSJ-03 / LIGHT SHORE JIGGING ARCHITECTURE / SCALE: NON-SCALE"
+      targetSpecies="イナダ・サワラ・カンパチ・タチウオ"
+      standardDepth="全層探査 (ボトム着底〜表層)"
+      mainLineSpec="PE 1.0〜1.5号 (8本編み 200m+)"
+      styleSpec="メタルジグ 30〜60g 遠投ワンピッチ"
     >
-      {/* Heavy Rod */}
-      <path d="M 20 30 Q 80 40, 150 70" stroke="#334155" strokeWidth="5" strokeLinecap="round" fill="none" />
-      <circle cx="150" cy="70" r="5" fill="#0284c7" />
-      <text x="25" y="20" className="text-[11px] font-bold fill-slate-800 dark:fill-slate-200">ショアジギングロッド 9.6〜10ft (M〜MH)</text>
+      <SpecBox x={20} y={60} w={154} h={42} num={1} title="道糸 (PEライン)" spec="PE 1.0〜1.5号 200m以上" note="8本編み・遠投性と耐引張強度" />
+      <SpecBox x={190} y={55} w={150} h={42} num={2} title="摩擦系ノット" spec="FGノット / PRノット" note="ガイド抜け良好・結束強度90%以上" />
+      <SpecBox x={20} y={150} w={154} h={42} num={3} title="ショックリーダー" spec="フロロ 4〜6号 (16〜25lb) 1.5m" note="青物の歯ズレ・根ズレをガード" />
+      <SpecBox x={360} y={242} w={178} h={42} num={4} title="メタルジグ＆フック" spec="30〜60g (アシスト+リアトレブル)" note="センターバランス・強フラッシング" />
 
-      {/* PE Main Line */}
-      <path d="M 150 70 Q 230 110, 280 140" stroke="#10b981" strokeWidth="2.5" strokeDasharray="5 2.5" fill="none" />
-      <rect x="155" y="100" width="135" height="18" rx="4" className="fill-emerald-500/10 dark:fill-emerald-500/20 stroke stroke-emerald-500/40" />
-      <text x="160" y="113" className="text-[10px] font-bold fill-emerald-700 dark:fill-emerald-300">PEライン 1.0〜1.5号 (200m+)</text>
+      <LeaderLine points="174,81 210,81 220,105" />
+      <LeaderLine points="265,97 265,115 270,125" />
+      <LeaderLine points="174,171 210,171 290,150" />
+      <LeaderLine points="360,263 320,263 350,225" />
 
-      {/* FG Knot */}
-      <circle cx="280" cy="140" r="4.5" fill="#f59e0b" />
-      <text x="240" y="165" className="text-[10px] font-bold fill-amber-600 dark:fill-amber-400">FGノット (摩擦系ノット)</text>
+      <path d="M 50 65 L 68 75 L 66 78 L 48 68 Z" fill="#64748b" stroke="#94a3b8" strokeWidth="0.8" />
+      <path d="M 68 76 Q 160 105, 270 125" fill="none" stroke="#10b981" strokeWidth="1.8" />
+      <text x="140" y="85" className="text-[7.5px] font-bold fill-emerald-400">PE 1.2号 (8本編み)</text>
 
-      {/* Leader */}
-      <line x1="280" y1="140" x2="380" y2="200" stroke="#0ea5e9" strokeWidth="3" />
-      <rect x="290" y="180" width="155" height="18" rx="4" className="fill-sky-500/10 dark:fill-sky-500/20 stroke stroke-sky-500/40" />
-      <text x="295" y="193" className="text-[10px] font-bold fill-sky-700 dark:fill-sky-300">フロロリーダー 4〜6号 (1.5m)</text>
-
-      {/* Solid & Split Ring */}
-      <circle cx="380" cy="200" r="4" fill="#94a3b8" stroke="#475569" strokeWidth="1.5" />
-      <circle cx="384" cy="204" r="4" fill="none" stroke="#475569" strokeWidth="1.5" />
-
-      {/* Metal Jig (30〜60g) */}
-      <g transform="translate(390, 210) rotate(25)">
-        {/* Jig body */}
-        <polygon points="0,0 70,-4 85,0 70,4" fill="#38bdf8" stroke="#0369a1" strokeWidth="1.5" />
-        <polygon points="15,-2 55,-3 45,0 15,-1" fill="#f43f5e" opacity="0.8" />
-        <circle cx="8" cy="0" r="2.5" fill="#f8fafc" stroke="#0f172a" strokeWidth="1" />
-
-        {/* Front Assist Hook */}
-        <path d="M 0 0 Q -10 -15, -15 -8 Q -18 0, -12 2" stroke="#64748b" strokeWidth="1.8" fill="none" />
-        {/* Tinsel */}
-        <line x1="-12" y1="-8" x2="-22" y2="-12" stroke="#fcd34d" strokeWidth="1" opacity="0.8" />
-        <line x1="-12" y1="-8" x2="-20" y2="-5" stroke="#fcd34d" strokeWidth="1" opacity="0.8" />
-
-        {/* Rear Treble Hook */}
-        <path d="M 85 0 L 95 0 M 95 0 Q 102 6, 98 12 M 95 0 Q 102 -6, 98 -12" stroke="#64748b" strokeWidth="1.6" fill="none" />
+      <g transform="translate(270, 125)">
+        <rect x="-6" y="-3" width="12" height="6" rx="1" fill="#047857" stroke="#34d399" strokeWidth="0.8" />
+        <line x1="-3" y1="-3" x2="3" y2="3" stroke="#f8fafc" strokeWidth="0.6" />
+        <text x="0" y="14" textAnchor="middle" className="text-[7px] font-mono fill-emerald-300">FG KNOT</text>
       </g>
 
-      {/* Jig Callout */}
-      <rect x="300" y="260" width="220" height="42" rx="8" className="fill-cyan-50 dark:fill-cyan-950/40 stroke stroke-cyan-300 dark:stroke-cyan-800" />
-      <text x="310" y="277" className="text-[11px] font-bold fill-cyan-800 dark:fill-cyan-300">メタルジグ 30〜60g</text>
-      <text x="310" y="293" className="text-[10px] fill-slate-600 dark:fill-slate-400">フロントアシスト針 (ティンセル付) + リアトレブル</text>
-    </svg>
+      <line x1="276" y1="125" x2="360" y2="185" stroke="#38bdf8" strokeWidth="1.6" />
+
+      <g transform="translate(360, 185)">
+        <circle cx="0" cy="0" r="3.5" fill="none" stroke="#f8fafc" strokeWidth="1.2" />
+        <circle cx="4" cy="2" r="3.5" fill="none" stroke="#94a3b8" strokeWidth="1" />
+      </g>
+
+      <g transform="translate(365, 188) rotate(20)">
+        <path d="M 0 0 Q -10 -15, -15 -8 Q -20 2, -10 5" fill="none" stroke="#f8fafc" strokeWidth="1.4" />
+        <polygon points="-8,-4 -18,-12 -12,-16" fill="#f43f5e" fillOpacity="0.8" />
+        <polygon points="0,0 80,0 86,5 78,10 0,5" fill="#0284c7" fillOpacity="0.75" stroke="#38bdf8" strokeWidth="1.2" />
+        <line x1="0" y1="5" x2="86" y2="5" stroke="#f8fafc" strokeWidth="0.8" />
+        <line x1="20" y1="0" x2="25" y2="10" stroke="#bae6fd" strokeWidth="0.6" />
+        <line x1="40" y1="0" x2="45" y2="10" stroke="#bae6fd" strokeWidth="0.6" />
+        <line x1="60" y1="0" x2="65" y2="10" stroke="#bae6fd" strokeWidth="0.6" />
+        <circle cx="8" cy="4" r="2.5" fill="#fef08a" stroke="#0f172a" strokeWidth="0.6" />
+        <text x="40" y="8" textAnchor="middle" className="text-[6.5px] font-bold fill-sky-100">40g JIG</text>
+        <g transform="translate(86, 5)">
+          <circle cx="0" cy="0" r="2.5" fill="none" stroke="#94a3b8" strokeWidth="0.8" />
+          <path d="M 3 0 L 10 5 M 3 0 L 10 -5 M 3 0 L 12 0" stroke="#f8fafc" strokeWidth="1.2" />
+        </g>
+      </g>
+
+      <g transform="translate(190, 215)" opacity="0.8">
+        <path d="M 0 25 L 25 5 L 35 15 L 60 -5" fill="none" stroke="#38bdf8" strokeWidth="1.2" markerEnd="url(#arrowEnd)" />
+        <text x="5" y="38" className="text-[7.5px] font-mono fill-cyan-300">ONE-PITCH JERK 軌跡</text>
+      </g>
+
+      <Dimension x1={276} y1={125} x2={360} y2={185} label="リーダー 1.5m (フロロ5号)" offset={-25} />
+    </BlueprintCanvas>
   );
 }
 
-// 4. エギング仕掛け
+// ─────────────────────────────────────────────────────────────
+// 4. エギング仕掛け (FIG-04)
+// ─────────────────────────────────────────────────────────────
 function EgingDiagram() {
   return (
-    <svg
-      viewBox="0 0 540 330"
-      className="w-full h-auto max-h-[340px] select-none rounded-2xl bg-gradient-to-b from-purple-50/60 via-white to-sky-50/50 dark:from-slate-900 dark:via-slate-900 dark:to-slate-800 border border-slate-200 dark:border-slate-800"
+    <BlueprintCanvas
+      figNo="FIG-04"
+      title="エギング仕掛け構成図 (アオリイカ攻略)"
+      subtitle="DWG REF: #EGG-04 / SQUID JIG RIG SPECIFICATION / SCALE: NON-SCALE"
+      targetSpecies="アオリイカ・コウイカ・ヤリイカ"
+      standardDepth="底層〜中層 (カウントフォール)"
+      mainLineSpec="PE 0.6〜0.8号 (150m以上)"
+      styleSpec="エギ 2.5〜3.5号 左右ダート釣法"
     >
-      {/* Rod */}
-      <path d="M 20 40 Q 80 50, 150 75" stroke="#475569" strokeWidth="4" strokeLinecap="round" fill="none" />
-      <text x="25" y="30" className="text-[11px] font-bold fill-slate-800 dark:fill-slate-200">エギングロッド 8.3〜8.6ft (ML〜M)</text>
+      <SpecBox x={20} y={60} w={154} h={42} num={1} title="メインライン" spec="PE 0.6〜0.8号 150m+" note="低伸度・微細なイカパンチ感知" />
+      <SpecBox x={190} y={55} w={150} h={42} num={2} title="結束部" spec="FGノット / ダブルサージェンス" note="結束強度が高くガイド抜けスムーズ" />
+      <SpecBox x={20} y={150} w={154} h={42} num={3} title="ショックリーダー" spec="フロロ 1.75〜2.5号 1.5m" note="海底のシモリ根ズレに強い耐摩耗性" />
+      <SpecBox x={360} y={242} w={178} h={42} num={4} title="エギ (餌木本体)" spec="3.0〜3.5号 (2段傘針カンナ)" note="沈下速度 3〜3.5秒/m でイカを抱かせる" />
 
-      {/* PE Line (Pink/High-vis) */}
-      <path d="M 150 75 Q 230 115, 290 145" stroke="#f43f5e" strokeWidth="2" strokeDasharray="4 2" fill="none" />
-      <rect x="160" y="105" width="130" height="18" rx="4" className="fill-rose-500/10 dark:fill-rose-500/20 stroke stroke-rose-500/40" />
-      <text x="165" y="118" className="text-[10px] font-bold fill-rose-700 dark:fill-rose-300">PEライン 0.6〜0.8号</text>
+      <LeaderLine points="174,81 210,81 220,105" />
+      <LeaderLine points="265,97 265,115 270,125" />
+      <LeaderLine points="174,171 210,171 290,150" />
+      <LeaderLine points="360,263 320,263 350,225" />
 
-      {/* Knot & Leader */}
-      <circle cx="290" cy="145" r="4" fill="#f59e0b" />
-      <line x1="290" y1="145" x2="380" y2="195" stroke="#0ea5e9" strokeWidth="2.5" />
-      <rect x="290" y="175" width="155" height="18" rx="4" className="fill-sky-500/10 dark:fill-sky-500/20 stroke stroke-sky-500/40" />
-      <text x="295" y="188" className="text-[10px] font-bold fill-sky-700 dark:fill-sky-300">フロロリーダー 1.75〜2.5号 (1.5m)</text>
+      <path d="M 50 65 L 68 75 L 66 78 L 48 68 Z" fill="#64748b" stroke="#94a3b8" strokeWidth="0.8" />
+      <path d="M 68 76 Q 160 105, 270 125" fill="none" stroke="#10b981" strokeWidth="1.6" />
+      <text x="140" y="85" className="text-[7.5px] font-bold fill-emerald-400">PE 0.8号</text>
 
-      {/* Quick Snap */}
-      <circle cx="380" cy="195" r="3.5" fill="#64748b" />
-      <text x="345" y="215" className="text-[9px] font-bold fill-slate-600 dark:fill-slate-400">エギ用スナップ</text>
+      <circle cx="270" cy="125" r="3.5" fill="#047857" stroke="#34d399" strokeWidth="1" />
+      <text x="270" y="139" textAnchor="middle" className="text-[7px] font-mono fill-emerald-300">FG KNOT</text>
 
-      {/* Egi (Squid Jig) */}
-      <g transform="translate(390, 200) rotate(18)">
-        {/* Egi Body */}
-        <path d="M 0 0 Q 30 -12, 70 -6 Q 85 -2, 95 0 Q 80 8, 40 10 Q 15 8, 0 0 Z" fill="#f97316" stroke="#c2410c" strokeWidth="1.5" />
-        {/* Belly cloth & eye */}
-        <circle cx="10" cy="0" r="3.5" fill="#fef08a" stroke="#0f172a" strokeWidth="1" />
-        <circle cx="10" cy="0" r="1.5" fill="#0f172a" />
-        {/* Chin Sinker */}
-        <polygon points="12,5 20,18 24,12 18,5" fill="#94a3b8" stroke="#475569" strokeWidth="1" />
-        {/* Feather wing */}
-        <path d="M 28 0 Q 40 8, 50 14" stroke="#f8fafc" strokeWidth="2" strokeLinecap="round" />
-        <path d="M 30 2 Q 42 10, 52 16" stroke="#f8fafc" strokeWidth="2" strokeLinecap="round" />
-        {/* Double Umbrella Barbs (2段カンナ) */}
-        <path d="M 95 0 L 105 0 M 105 0 Q 112 8, 106 14 M 105 0 Q 112 -8, 106 -14 M 110 0 L 118 0 M 118 0 Q 125 7, 120 12 M 118 0 Q 125 -7, 120 -12" stroke="#64748b" strokeWidth="1.6" fill="none" />
+      <line x1="274" y1="125" x2="350" y2="185" stroke="#38bdf8" strokeWidth="1.5" />
+
+      <g transform="translate(350, 185)">
+        <polygon points="0,0 5,-2 8,2 3,4" fill="none" stroke="#94a3b8" strokeWidth="1" />
       </g>
 
-      {/* Callout */}
-      <rect x="290" y="260" width="230" height="42" rx="8" className="fill-orange-50 dark:fill-orange-950/40 stroke stroke-orange-300 dark:stroke-orange-800" />
-      <text x="300" y="277" className="text-[11px] font-bold fill-orange-800 dark:fill-orange-300">餌木 (エギ 2.5〜3.5号)</text>
-      <text x="300" y="293" className="text-[10px] fill-slate-600 dark:fill-slate-400">アゴのオモリ + 羽 + 傘針(2段カンナ)で水平フォール</text>
-    </svg>
+      <g transform="translate(356, 188) rotate(15)">
+        <polygon points="12,12 18,12 14,24" fill="#64748b" stroke="#94a3b8" strokeWidth="1" />
+        <circle cx="14" cy="17" r="1.5" fill="#09111e" />
+        <path d="M 0 4 Q 15 0, 35 5 Q 60 12, 85 8 L 85 4 Q 55 5, 30 -2 Q 10 -4, 0 4 Z" fill="#ec4899" fillOpacity="0.75" stroke="#f43f5e" strokeWidth="1.2" />
+        <line x1="20" y1="-1" x2="24" y2="7" stroke="#fbcfe8" strokeWidth="0.5" strokeOpacity="0.7" />
+        <line x1="35" y1="1" x2="39" y2="9" stroke="#fbcfe8" strokeWidth="0.5" strokeOpacity="0.7" />
+        <line x1="50" y1="4" x2="54" y2="11" stroke="#fbcfe8" strokeWidth="0.5" strokeOpacity="0.7" />
+        <line x1="65" y1="6" x2="69" y2="10" stroke="#fbcfe8" strokeWidth="0.5" strokeOpacity="0.7" />
+        <path d="M 16 6 Q 24 10, 28 8" stroke="#38bdf8" strokeWidth="1.2" fill="none" />
+        <circle cx="6" cy="2" r="2.5" fill="#fef08a" stroke="#0f172a" strokeWidth="0.8" />
+        <circle cx="6" cy="2" r="1" fill="#09111e" />
+        <g transform="translate(85, 6)">
+          <line x1="0" y1="0" x2="6" y2="0" stroke="#e2e8f0" strokeWidth="1.5" />
+          <path d="M 4 -5 L 6 0 L 4 5 M 2 -4 L 6 0 L 2 4" stroke="#f8fafc" strokeWidth="1.2" fill="none" />
+          <line x1="6" y1="0" x2="12" y2="0" stroke="#e2e8f0" strokeWidth="1.5" />
+          <path d="M 10 -6 L 12 0 L 10 6 M 8 -5 L 12 0 L 8 5" stroke="#f8fafc" strokeWidth="1.2" fill="none" />
+        </g>
+        <text x="35" y="18" className="text-[7px] font-bold fill-pink-200">3.5号 沈下姿勢45°</text>
+      </g>
+
+      <g transform="translate(200, 215)" opacity="0.8">
+        <path d="M 0 15 L 20 0 L 40 20 L 60 5" fill="none" stroke="#ec4899" strokeWidth="1.2" markerEnd="url(#arrowEnd)" />
+        <text x="5" y="32" className="text-[7.5px] font-mono fill-pink-300">SHARP DART (左右ダート)</text>
+      </g>
+
+      <Dimension x1={274} y1={125} x2={350} y2={185} label="リーダー 1.2〜1.5m" offset={-25} />
+    </BlueprintCanvas>
   );
 }
 
-// 5. ウキフカセ釣り仕掛け
+// ─────────────────────────────────────────────────────────────
+// 5. ウキフカセ釣り仕掛け (FIG-05)
+// ─────────────────────────────────────────────────────────────
 function FukaseDiagram() {
   return (
-    <svg
-      viewBox="0 0 540 330"
-      className="w-full h-auto max-h-[340px] select-none rounded-2xl bg-gradient-to-b from-sky-100/50 via-white to-blue-100/40 dark:from-slate-900 dark:via-slate-900 dark:to-slate-800 border border-slate-200 dark:border-slate-800"
+    <BlueprintCanvas
+      figNo="FIG-05"
+      title="ウキフカセ釣り仕掛け構成図 (半遊動式)"
+      subtitle="DWG REF: #FKS-05 / FLOAT RIG ARCHITECTURE / SCALE: NON-SCALE"
+      targetSpecies="クロダイ(チヌ)・メジナ(グレ)"
+      standardDepth="2ヒロ〜竿2本 (3〜10m)"
+      mainLineSpec="ナイロン 1.5〜2.0号 (サスペンド)"
+      styleSpec="円錐ウキ遊動式・マキエ同調"
     >
-      {/* Water surface */}
-      <path d="M 0 65 Q 67 60, 135 65 T 270 65 T 405 65 T 540 65" stroke="#38bdf8" strokeWidth="2" strokeDasharray="6 3" fill="none" opacity="0.8" />
-      <text x="14" y="58" className="text-[11px] font-bold fill-sky-600 dark:fill-sky-400">水面 (ウキが浮く)</text>
+      <SpecBox x={20} y={60} w={154} h={42} num={1} title="ウキ止め＆シモリ玉" spec="ウキ止め糸 + 半円シモリ玉" note="狙うタナに合わせて移動調整" />
+      <SpecBox x={384} y={60} w={154} h={42} num={2} title="円錐ウキ (遊動式)" spec="中通し円錐ウキ (0号〜3B)" note="視認性オレンジトップ・感度重視" />
+      <SpecBox x={20} y={150} w={154} h={42} num={3} title="潮受ゴム＆からまん棒" spec="潮受ウキゴム + サルカン" note="潮を掴んで仕掛けをマキエと同調" />
+      <SpecBox x={20} y={242} w={154} h={42} num={4} title="ハリス・ガン玉・針" spec="フロロ 1.5号 3m + チヌ針2号" note="生オキアミを自然に漂わせる" />
 
-      {/* Long Rod Tip (5.3m) */}
-      <path d="M 20 18 Q 80 22, 140 35" stroke="#475569" strokeWidth="3.5" strokeLinecap="round" fill="none" />
-      <text x="25" y="14" className="text-[11px] font-bold fill-slate-800 dark:fill-slate-200">磯竿 1〜1.5号 5.3m (LBリール)</text>
+      <LeaderLine points="174,81 210,81 270,72" />
+      <LeaderLine points="384,81 330,81 292,95" />
+      <LeaderLine points="174,171 220,171 270,145" />
+      <LeaderLine points="174,263 220,263 270,270" />
 
-      {/* Main Line */}
-      <path d="M 140 35 L 220 50 L 220 280" stroke="#f59e0b" strokeWidth="2" fill="none" />
-      <text x="145" y="45" className="text-[10px] font-bold fill-amber-600 dark:fill-amber-400">道糸: ナイロン 1.5〜2号</text>
+      <line x1="280" y1="46" x2="280" y2="160" stroke="#fbbf24" strokeWidth="1.6" />
 
-      {/* Uki Stopper & Shimori Bead */}
-      <rect x="216" y="52" width="8" height="4" fill="#ef4444" rx="2" />
-      <text x="230" y="56" className="text-[9px] font-bold fill-rose-600 dark:fill-rose-400">ウキ止め糸 + シモリ玉</text>
-
-      {/* Conical Float (円錐ウキ) */}
-      <g transform="translate(220, 68)">
-        <polygon points="-8,-10 8,-10 12,12 -12,12" fill="#ea580c" stroke="#9a3412" strokeWidth="1.2" />
-        <polygon points="-12,12 12,12 8,24 -8,24" fill="#facc15" stroke="#ca8a04" strokeWidth="1.2" />
-        <text x="18" y="10" className="text-[11px] font-bold fill-orange-700 dark:fill-orange-400">円錐ウキ (0号〜3B)</text>
+      <g transform="translate(280, 72)">
+        <rect x="-4" y="-2" width="8" height="4" rx="1" fill="#f43f5e" stroke="#fb7185" strokeWidth="0.8" />
+        <text x="10" y="2" className="text-[7px] font-bold fill-rose-300">ウキ止め糸</text>
       </g>
 
-      {/* Karaman Bar / Cushion */}
-      <rect x="217" y="115" width="6" height="14" fill="#10b981" rx="2" />
-      <text x="230" y="126" className="text-[9px] font-semibold fill-emerald-600 dark:fill-emerald-400">からまん棒 / クッション</text>
+      <circle cx="280" cy="80" r="2.5" fill="#fef08a" stroke="#ca8a04" strokeWidth="0.6" />
 
-      {/* Swivel */}
-      <circle cx="220" cy="140" r="3.5" fill="#64748b" />
-
-      {/* Long Harris (フロロ 2ヒロ/3m) */}
-      <line x1="220" y1="140" x2="220" y2="280" stroke="#0ea5e9" strokeWidth="1.8" />
-      <rect x="120" y="170" width="90" height="28" rx="4" className="fill-sky-500/10 dark:fill-sky-500/20 stroke stroke-sky-500/30" />
-      <text x="125" y="183" className="text-[9px] font-bold fill-sky-700 dark:fill-sky-300">ハリス: フロロ 1.2〜1.75号</text>
-      <text x="125" y="194" className="text-[8px] fill-slate-500 dark:fill-slate-400">2ヒロ (約3m)</text>
-
-      {/* Split Shot (ガン玉 G2〜B) */}
-      <circle cx="220" cy="210" r="3.5" fill="#475569" />
-      <text x="230" y="213" className="text-[9px] font-bold fill-slate-600 dark:fill-slate-400">ガン玉 (G2〜B)</text>
-
-      {/* Hook & Krill Bait */}
-      <g transform="translate(220, 280)">
-        <path d="M 0 0 L 0 8 Q 0 16, 8 16 Q 16 16, 16 8 L 14 6" stroke="#475569" strokeWidth="1.8" fill="none" />
-        {/* Krill */}
-        <path d="M 2 4 Q 10 12, 14 6" stroke="#f43f5e" strokeWidth="4" strokeLinecap="round" fill="none" />
+      <g transform="translate(280, 100)">
+        <path d="M 0 -15 Q 12 -12, 12 0 Q 12 12, 0 15 Q -12 12, -12 0 Q -12 -12, 0 -15 Z" fill="#0369a1" stroke="#38bdf8" strokeWidth="1" />
+        <path d="M 0 -15 Q 12 -12, 12 0 L -12 0 Q -12 -12, 0 -15 Z" fill="#f97316" stroke="#fb923c" strokeWidth="0.8" />
+        <line x1="0" y1="-15" x2="0" y2="15" stroke="#f8fafc" strokeWidth="0.8" strokeDasharray="1 1" />
+        <text x="16" y="3" className="text-[7.5px] font-bold fill-sky-200">円錐ウキ B</text>
       </g>
 
-      {/* Bottom Hook Callout */}
-      <rect x="250" y="265" width="220" height="38" rx="8" className="fill-rose-50 dark:fill-rose-950/40 stroke stroke-rose-300 dark:stroke-rose-800" />
-      <text x="260" y="282" className="text-[11px] font-bold fill-rose-800 dark:fill-rose-300">チヌ針 2〜3号 / グレ針 5〜7号</text>
-      <text x="260" y="296" className="text-[9px] fill-slate-600 dark:fill-slate-400">生オキアミをマキエの帯と同調させて流す</text>
-    </svg>
+      <g transform="translate(280, 138)">
+        <ellipse cx="0" cy="-4" rx="3.5" ry="5" fill="#0284c7" stroke="#38bdf8" strokeWidth="0.8" />
+        <line x1="0" y1="-8" x2="0" y2="8" stroke="#facc15" strokeWidth="1.5" />
+        <text x="12" y="3" className="text-[7px] font-bold fill-amber-300">潮受からまん棒</text>
+      </g>
+
+      <circle cx="280" cy="158" r="2.5" fill="none" stroke="#94a3b8" strokeWidth="1" />
+      <rect x="278.5" y="159" width="3" height="5" fill="#475569" stroke="#94a3b8" strokeWidth="0.6" />
+      <circle cx="280" cy="165" r="2.5" fill="none" stroke="#94a3b8" strokeWidth="1" />
+
+      <line x1="280" y1="167" x2="280" y2="285" stroke="#38bdf8" strokeWidth="1.4" />
+
+      <g transform="translate(280, 220)">
+        <circle cx="0" cy="0" r="3.5" fill="#64748b" stroke="#cbd5e1" strokeWidth="0.8" />
+        <line x1="-3.5" y1="0" x2="3.5" y2="0" stroke="#0f172a" strokeWidth="0.8" />
+        <text x="8" y="3" className="text-[7px] font-bold fill-slate-300">ガン玉 B</text>
+      </g>
+
+      <g transform="translate(280, 285)">
+        <path d="M 0 0 L 0 8 Q 0 16, 8 16 Q 16 16, 14 6" fill="none" stroke="#f8fafc" strokeWidth="1.4" />
+        <path d="M 0 4 Q 8 6, 12 12 Q 8 18, 0 16" fill="#fb7185" fillOpacity="0.85" stroke="#f43f5e" strokeWidth="0.8" />
+        <circle cx="2" cy="5" r="0.8" fill="#09111e" />
+        <text x="18" y="12" className="text-[7.5px] font-bold fill-rose-200">生オキアミ</text>
+      </g>
+
+      <g transform="translate(320, 210)" opacity="0.6">
+        <path d="M 30 -30 Q 15 10, -20 70" fill="none" stroke="#fbbf24" strokeWidth="1" strokeDasharray="3 2" markerEnd="url(#arrowEnd)" />
+        <text x="25" y="-10" className="text-[7px] font-mono fill-amber-300">マキエの同調帯</text>
+      </g>
+
+      <Dimension x1={330} y1={167} x2={330} y2={285} label="ハリス 2ヒロ (約3m)" offset={15} />
+      <Dimension x1={330} y1={72} x2={330} y2={138} label="遊動幅 (タナ設定)" offset={15} />
+    </BlueprintCanvas>
   );
 }
 
-// 6. チョイ投げ仕掛け
+// ─────────────────────────────────────────────────────────────
+// 6. チョイ投げ仕掛け (FIG-06)
+// ─────────────────────────────────────────────────────────────
 function ChoinageDiagram() {
   return (
-    <svg
-      viewBox="0 0 540 330"
-      className="w-full h-auto max-h-[340px] select-none rounded-2xl bg-gradient-to-b from-sky-50/60 via-white to-amber-50/60 dark:from-slate-900 dark:via-slate-900 dark:to-slate-800 border border-slate-200 dark:border-slate-800"
+    <BlueprintCanvas
+      figNo="FIG-06"
+      title="チョイ投げ仕掛け構成図 (L型天秤式)"
+      subtitle="DWG REF: #CHN-06 / LIGHT SURF RIG SCHEMATIC / SCALE: NON-SCALE"
+      targetSpecies="シロギス・ハゼ・カレイ・メゴチ"
+      standardDepth="海底ボトム (砂地・砂泥底)"
+      mainLineSpec="ナイロン 2〜3号 / PE 0.8〜1.0号"
+      styleSpec="L型遊動天秤 + 2本針底這わせ"
     >
-      {/* Seabed Sandy Ground */}
-      <path d="M 0 270 Q 150 265, 300 270 T 540 270 L 540 330 L 0 330 Z" fill="#fef3c7" className="dark:fill-amber-950/30" />
-      <line x1="0" y1="270" x2="540" y2="270" stroke="#d97706" strokeWidth="1.5" strokeDasharray="8 4" opacity="0.6" />
-      <text x="14" y="295" className="text-[10px] font-bold fill-amber-700 dark:fill-amber-400">海底 (砂地・シロギスやハゼの生息域)</text>
+      <SpecBox x={20} y={60} w={154} h={42} num={1} title="メインライン" spec="ナイロン 2〜3号 / PE 0.8号" note="力糸なしで30〜50mキャスト可能" />
+      <SpecBox x={190} y={55} w={150} h={42} num={2} title="L型遊動天秤" spec="小型天秤 (6〜10号)" note="底取りが明確でアタリが直接手元へ" />
+      <SpecBox x={20} y={190} w={154} h={42} num={3} title="キス専用2本針" spec="流線キス 6〜7号 (ハリス1号)" note="吸い込み抜群のロングシャンク針" />
+      <SpecBox x={380} y={95} w={160} h={42} num={4} title="虫エサ (青イソメ)" spec="頭部通し刺し・タラシ1〜2cm" note="海底の砂煙で強烈アピール" />
 
-      {/* Rod */}
-      <path d="M 20 40 Q 90 55, 160 85" stroke="#475569" strokeWidth="4" strokeLinecap="round" fill="none" />
-      <text x="25" y="30" className="text-[11px] font-bold fill-slate-800 dark:fill-slate-200">万能竿 / シーバスロッド 2.4〜3.0m</text>
+      <LeaderLine points="174,81 210,81 220,110" />
+      <LeaderLine points="265,97 265,115 250,140" />
+      <LeaderLine points="174,211 220,211 310,250" />
+      <LeaderLine points="380,116 350,116 410,240" />
 
-      {/* Main Line */}
-      <path d="M 160 85 Q 230 140, 270 230" stroke="#f59e0b" strokeWidth="2" strokeDasharray="4 2" fill="none" />
-      <rect x="170" y="130" width="135" height="18" rx="4" className="fill-amber-500/10 dark:fill-amber-500/20 stroke stroke-amber-500/30" />
-      <text x="175" y="143" className="text-[10px] font-bold fill-amber-700 dark:fill-amber-300">道糸: ナイロン 2〜3号 / PE 0.8号</text>
+      <path d="M 50 65 L 68 75 L 66 78 L 48 68 Z" fill="#64748b" stroke="#94a3b8" strokeWidth="0.8" />
+      <path d="M 68 76 Q 140 100, 220 130" fill="none" stroke="#fbbf24" strokeWidth="1.5" />
+      <text x="120" y="85" className="text-[7.5px] font-bold fill-amber-300">ナイロン 2〜3号</text>
 
-      {/* L-shaped / Jet Sinker Tenbin */}
-      <g transform="translate(270, 230)">
-        {/* Heavy Sinker */}
-        <polygon points="0,0 8,35 -8,35" fill="#94a3b8" stroke="#475569" strokeWidth="1.5" />
-        {/* Arm wire */}
-        <path d="M 0 0 L 25 5 L 60 15" stroke="#e2e8f0" strokeWidth="2" fill="none" />
-        <circle cx="60" cy="15" r="3" fill="#64748b" />
+      <g transform="translate(220, 130)">
+        <circle cx="0" cy="0" r="2.5" fill="none" stroke="#94a3b8" strokeWidth="1" />
+        <line x1="0" y1="2.5" x2="0" y2="40" stroke="#cbd5e1" strokeWidth="1.4" />
+        <polygon points="-6,40 6,40 0,60" fill="#475569" stroke="#94a3b8" strokeWidth="1" />
+        <text x="0" y="52" textAnchor="middle" className="text-[7px] font-bold fill-white">8号</text>
+        <line x1="0" y1="40" x2="50" y2="52" stroke="#cbd5e1" strokeWidth="1.4" />
+        <circle cx="50" cy="52" r="2.5" fill="none" stroke="#94a3b8" strokeWidth="1" />
       </g>
-      <text x="210" y="275" className="text-[10px] font-bold fill-slate-700 dark:fill-slate-300">天秤オモリ (5〜10号)</text>
 
-      {/* 2-Hook Kiss Rig on Seabed */}
-      {/* Harris line trailing on sand */}
-      <path d="M 330 245 L 390 260 L 480 265" stroke="#0ea5e9" strokeWidth="1.8" fill="none" />
+      <g transform="translate(270, 182)">
+        <rect x="0" y="-2" width="6" height="4" fill="#475569" stroke="#94a3b8" strokeWidth="0.6" />
+        <line x1="6" y1="0" x2="190" y2="40" stroke="#38bdf8" strokeWidth="1.4" />
 
-      {/* Hook 1 */}
-      <path d="M 390 260 L 415 272" stroke="#0ea5e9" strokeWidth="1.5" />
-      <path d="M 415 272 Q 422 278, 418 284 Q 412 284, 410 278" stroke="#475569" strokeWidth="1.8" fill="none" />
-      {/* Worm Bait */}
-      <path d="M 414 274 Q 425 285, 435 280" stroke="#f43f5e" strokeWidth="3" strokeLinecap="round" fill="none" />
+        <g transform="translate(70, 15)">
+          <line x1="0" y1="0" x2="20" y2="-12" stroke="#7dd3fc" strokeWidth="1" />
+          <path d="M 20 -12 L 28 -14 Q 34 -14, 33 -8 Q 30 -4, 25 -8" fill="none" stroke="#f8fafc" strokeWidth="1.2" />
+          <path d="M 22 -13 Q 32 -13, 42 -10 Q 52 -7, 56 -9" fill="none" stroke="#f43f5e" strokeWidth="2.2" strokeLinecap="round" />
+        </g>
 
-      {/* Hook 2 (End Hook) */}
-      <path d="M 480 265 Q 488 270, 484 276 Q 478 276, 476 270" stroke="#475569" strokeWidth="1.8" fill="none" />
-      {/* Worm Bait */}
-      <path d="M 480 267 Q 495 276, 508 272" stroke="#f43f5e" strokeWidth="3" strokeLinecap="round" fill="none" />
+        <g transform="translate(190, 40)">
+          <circle cx="0" cy="0" r="2" fill="#ef4444" stroke="#f87171" strokeWidth="0.5" />
+          <path d="M 0 0 L 10 2 Q 18 2, 17 8 Q 14 12, 9 8" fill="none" stroke="#f8fafc" strokeWidth="1.2" />
+          <path d="M 2 1 Q 12 1, 24 5 Q 36 8, 45 6" fill="none" stroke="#f43f5e" strokeWidth="2.2" strokeLinecap="round" />
+        </g>
+      </g>
 
-      {/* Rig Callout */}
-      <rect x="310" y="170" width="220" height="42" rx="8" className="fill-blue-50 dark:fill-blue-950/40 stroke stroke-blue-300 dark:stroke-blue-800" />
-      <text x="320" y="187" className="text-[11px] font-bold fill-blue-800 dark:fill-blue-300">2本針仕掛け (キス・流線 6〜7号)</text>
-      <text x="320" y="203" className="text-[10px] fill-slate-600 dark:fill-slate-400">青イソメ/石ゴカイを刺して底を引く</text>
-    </svg>
+      <g transform="translate(360, 245)" opacity="0.75">
+        <path d="M 40 -15 L 0 -15" stroke="#38bdf8" strokeWidth="1" markerEnd="url(#arrowEnd)" />
+        <text x="20" y="-22" textAnchor="middle" className="text-[7px] font-mono fill-cyan-300">SLOW RETRIEVE (ズル引き)</text>
+      </g>
+
+      <Dimension x1={276} y1={182} x2={460} y2={182} label="仕掛け全長 80〜100cm" offset={-22} orientation="horizontal" />
+    </BlueprintCanvas>
   );
 }
 
-// 7. サヨリ専用カゴウキ仕掛け
+// ─────────────────────────────────────────────────────────────
+// 7. サヨリ専用カゴウキ仕掛け (FIG-07)
+// ─────────────────────────────────────────────────────────────
 function SayoriDiagram() {
   return (
-    <svg
-      viewBox="0 0 540 330"
-      className="w-full h-auto max-h-[340px] select-none rounded-2xl bg-gradient-to-b from-sky-50/70 via-white to-blue-50/50 dark:from-slate-900 dark:via-slate-900 dark:to-slate-800 border border-slate-200 dark:border-slate-800"
+    <BlueprintCanvas
+      figNo="FIG-07"
+      title="サヨリ専用カゴウキ仕掛け構成図"
+      subtitle="DWG REF: #SYR-07 / SURFACE FLOAT RIG / SCALE: NON-SCALE"
+      targetSpecies="サヨリ (秋〜春の回遊群)"
+      standardDepth="超表層 (水面直下 0〜20cm)"
+      mainLineSpec="ナイロン 2〜3号 / PE 0.8号"
+      styleSpec="スーパーサヨリカゴ + 連玉シモリ"
     >
-      {/* Surface */}
-      <path d="M 0 55 Q 67 50, 135 55 T 270 55 T 405 55 T 540 55" stroke="#38bdf8" strokeWidth="2" strokeDasharray="6 3" fill="none" opacity="0.8" />
-      <text x="14" y="45" className="text-[11px] font-bold fill-sky-600 dark:fill-sky-400">水面 (サヨリの遊泳層 0〜30cm)</text>
+      <SpecBox x={20} y={90} w={150} h={42} num={1} title="道糸" spec="ナイロン 2〜2.5号 / PE 0.8号" note="水面に浮くフローティング仕様" />
+      <SpecBox x={150} y={145} w={160} h={42} num={2} title="ロケットカゴウキ" spec="スーパーサヨリ遠投カゴ" note="コマセ放出＆引き波で群れを寄せる" />
+      <SpecBox x={20} y={225} w={160} h={42} num={3} title="3〜4連シモリ玉" spec="極小シモリウキ 3〜4玉" note="横走りアタリを水面で即座に視覚化" />
+      <SpecBox x={375} y={145} w={165} h={42} num={4} title="サヨリ専用針＆エサ" spec="サヨリ針 3.5〜4.5号 + アミエビ" note="硬いくちばしを貫通する極小鋭利針" />
 
-      {/* Rod */}
-      <path d="M 20 20 Q 80 25, 140 40" stroke="#475569" strokeWidth="3.5" strokeLinecap="round" fill="none" />
-      <text x="25" y="15" className="text-[11px] font-bold fill-slate-800 dark:fill-slate-200">磯竿 1.5〜2号 / 遠投磯竿</text>
+      <LeaderLine points="170,111 210,111 160,80" />
+      <LeaderLine points="230,145 230,105 210,80" />
+      <LeaderLine points="180,246 250,246 295,85" />
+      <LeaderLine points="375,166 330,166 430,80" />
 
-      {/* Main Line */}
-      <line x1="140" y1="40" x2="220" y2="55" stroke="#f59e0b" strokeWidth="2" strokeDasharray="4 2" />
-      <text x="145" y="32" className="text-[9px] font-bold fill-amber-600 dark:fill-amber-400">道糸: 2〜3号</text>
+      <line x1="50" y1="75" x2="170" y2="80" stroke="#fbbf24" strokeWidth="1.6" />
 
-      {/* Super Sayori Float & Chum Cage */}
-      <g transform="translate(220, 50)">
-        {/* Floating Rocket Body */}
-        <polygon points="-10,-10 25,-10 40,0 25,10 -10,10" fill="#f97316" stroke="#c2410c" strokeWidth="1.5" />
-        {/* Basket mesh under float */}
-        <rect x="0" y="10" width="30" height="20" rx="3" fill="#fef08a" stroke="#ca8a04" strokeWidth="1" />
-        <line x1="10" y1="10" x2="10" y2="30" stroke="#a16207" strokeWidth="1" strokeDasharray="2 2" />
-        <line x1="20" y1="10" x2="20" y2="30" stroke="#a16207" strokeWidth="1" strokeDasharray="2 2" />
-      </g>
-      <text x="180" y="95" className="text-[10px] font-bold fill-orange-700 dark:fill-orange-400">スーパーサヨリカゴ (飛ばしウキ+カゴ)</text>
-
-      {/* Floating Harris with 3 Shimori Beads */}
-      <line x1="260" y1="55" x2="480" y2="70" stroke="#0ea5e9" strokeWidth="1.5" />
-
-      {/* Shimori Bead 1 */}
-      <circle cx="310" cy="58" r="5" fill="#ef4444" stroke="#b91c1c" strokeWidth="1" />
-      {/* Shimori Bead 2 */}
-      <circle cx="350" cy="61" r="5" fill="#eab308" stroke="#a16207" strokeWidth="1" />
-      {/* Shimori Bead 3 */}
-      <circle cx="390" cy="64" r="5" fill="#22c55e" stroke="#15803d" strokeWidth="1" />
-
-      <text x="320" y="45" className="text-[9px] font-bold fill-rose-600 dark:fill-rose-400">連玉シモリウキ (アタリで横に走る)</text>
-
-      {/* Hook & Tiny Krill */}
-      <g transform="translate(480, 70)">
-        <path d="M 0 0 L 10 5 Q 16 10, 12 15 Q 8 16, 6 11" stroke="#475569" strokeWidth="1.5" fill="none" />
-        <ellipse cx="6" cy="8" rx="4" ry="2" fill="#f43f5e" />
+      <g transform="translate(170, 80)">
+        <polygon points="0,0 20,-6 40,-4 40,4 20,6 0,0" fill="#f97316" stroke="#ea580c" strokeWidth="1" />
+        <polygon points="30,-10 40,-4 30,0" fill="#ea580c" />
+        <polygon points="30,10 40,4 30,0" fill="#ea580c" />
+        <rect x="40" y="-5" width="22" height="10" rx="2" fill="#0f172a" stroke="#38bdf8" strokeWidth="0.8" />
+        <line x1="40" y1="0" x2="62" y2="0" stroke="#38bdf8" strokeWidth="0.6" strokeDasharray="1 1" />
+        <line x1="51" y1="-5" x2="51" y2="5" stroke="#38bdf8" strokeWidth="0.6" strokeDasharray="1 1" />
       </g>
 
-      {/* Callout */}
-      <rect x="290" y="235" width="230" height="42" rx="8" className="fill-orange-50 dark:fill-orange-950/40 stroke stroke-orange-300 dark:stroke-orange-800" />
-      <text x="300" y="252" className="text-[11px] font-bold fill-orange-800 dark:fill-orange-300">サヨリ針 3.5〜4.5号 (ハリス0.8号)</text>
-      <text x="300" y="268" className="text-[10px] fill-slate-600 dark:fill-slate-400">ゆっくりリールを巻いて水面に引き波を立てる</text>
-    </svg>
+      <line x1="232" y1="80" x2="430" y2="80" stroke="#38bdf8" strokeWidth="1.2" />
+
+      <g transform="translate(265, 80)">
+        <ellipse cx="0" cy="0" rx="3.5" ry="2.5" fill="#f43f5e" stroke="#fb7185" strokeWidth="0.8" />
+      </g>
+      <g transform="translate(305, 80)">
+        <ellipse cx="0" cy="0" rx="3.5" ry="2.5" fill="#fef08a" stroke="#eab308" strokeWidth="0.8" />
+      </g>
+      <g transform="translate(345, 80)">
+        <ellipse cx="0" cy="0" rx="3.5" ry="2.5" fill="#38bdf8" stroke="#0284c7" strokeWidth="0.8" />
+      </g>
+
+      <g transform="translate(430, 80)">
+        <path d="M 0 0 L 8 0 Q 14 0, 13 5 Q 11 8, 8 6" fill="none" stroke="#f8fafc" strokeWidth="1.2" />
+        <path d="M 2 0 Q 6 3, 10 2 Q 13 4, 11 6" fill="#fb7185" fillOpacity="0.85" stroke="#f43f5e" strokeWidth="0.6" />
+        <text x="16" y="4" className="text-[7.5px] font-bold fill-rose-200">アミエビ 1匹掛け</text>
+      </g>
+
+      <g transform="translate(250, 60)" opacity="0.7">
+        <path d="M 0 0 L 20 -4 M 0 0 L 20 4" stroke="#38bdf8" strokeWidth="0.8" />
+        <text x="30" y="2" className="text-[7px] font-mono fill-cyan-300">PULLING WAKE (引き波アクション)</text>
+      </g>
+
+      <Dimension x1={232} y1={80} x2={430} y2={80} label="ハリス 80cm (水面直下)" offset={25} orientation="horizontal" />
+    </BlueprintCanvas>
   );
 }
 
-// 8. タコエギ仕掛け
+// ─────────────────────────────────────────────────────────────
+// 8. タコエギ仕掛け (FIG-08)
+// ─────────────────────────────────────────────────────────────
 function TakoDiagram() {
   return (
-    <svg
-      viewBox="0 0 540 330"
-      className="w-full h-auto max-h-[340px] select-none rounded-2xl bg-gradient-to-b from-slate-900 via-slate-900 to-indigo-950 border border-slate-800"
+    <BlueprintCanvas
+      figNo="FIG-08"
+      title="タコエギ仕掛け構成図 (マダコ攻略)"
+      subtitle="DWG REF: #TKO-08 / OCTOPUS BOTTOM RIG / SCALE: NON-SCALE"
+      targetSpecies="マダコ・イイダコ"
+      standardDepth="海底ボトム (敷石・岸壁際・捨て石)"
+      mainLineSpec="PE 3.0〜5.0号 (太糸耐摩耗)"
+      styleSpec="3又スナップ + 2連タコエギ + 重オモリ"
     >
-      {/* Seabed Rocks */}
-      <path d="M 0 280 Q 80 265, 160 280 T 320 270 T 540 285 L 540 330 L 0 330 Z" fill="#1e293b" />
-      <text x="14" y="305" className="text-[10px] font-bold fill-slate-400">海底 (敷石・岸壁の捨て石周り)</text>
+      <SpecBox x={20} y={60} w={154} h={42} num={1} title="メインライン" spec="極太PE 3.0〜5.0号" note="張り付いた大タコを海底から引き剥がす" />
+      <SpecBox x={190} y={55} w={150} h={42} num={2} title="先糸リーダー" spec="フロロ 8〜10号 (35lb) 1m" note="荒い敷石やカキ殻擦れに高耐久" />
+      <SpecBox x={20} y={190} w={154} h={42} num={3} title="3又タコスナップ＆オモリ" spec="親子スナップ + ナス型 20〜30号" note="海底から浮かさず定点トントンシェイク" />
+      <SpecBox x={360} y={242} w={178} h={42} num={4} title="タコエギ 2本仕様" spec="3.5号 2本 + 豚背脂ワイヤー巻き" note="太軸バーブレス針でガッチリ貫通" />
 
-      {/* Heavy Rod */}
-      <path d="M 20 30 Q 80 40, 150 70" stroke="#64748b" strokeWidth="5.5" strokeLinecap="round" fill="none" />
-      <text x="25" y="20" className="text-[11px] font-bold fill-slate-200">タコ専用竿 / ジギングロッド (Hパワー)</text>
+      <LeaderLine points="174,81 210,81 220,110" />
+      <LeaderLine points="265,97 265,115 270,125" />
+      <LeaderLine points="174,211 220,211 280,260" />
+      <LeaderLine points="360,263 320,263 350,185" />
 
-      {/* Thick PE Line */}
-      <path d="M 150 70 L 250 140" stroke="#f43f5e" strokeWidth="3.5" fill="none" />
-      <rect x="150" y="95" width="135" height="18" rx="4" fill="#0f172a" stroke="#e11d48" strokeWidth="1" />
-      <text x="155" y="108" className="text-[10px] font-bold fill-rose-300">極太PEライン 3.0〜5.0号</text>
+      <path d="M 50 65 L 68 75 L 66 78 L 48 68 Z" fill="#64748b" stroke="#94a3b8" strokeWidth="0.8" />
+      <path d="M 68 76 Q 140 100, 260 120" fill="none" stroke="#10b981" strokeWidth="2.2" />
+      <text x="120" y="85" className="text-[7.5px] font-bold fill-emerald-400">PE 4号 (引張強度40lb+)</text>
 
-      {/* Heavy Leader */}
-      <line x1="250" y1="140" x2="330" y2="210" stroke="#38bdf8" strokeWidth="3" />
-      <rect x="250" y="170" width="150" height="18" rx="4" fill="#0f172a" stroke="#0284c7" strokeWidth="1" />
-      <text x="255" y="183" className="text-[10px] font-bold fill-cyan-300">フロロリーダー 8〜10号 (1m)</text>
+      <circle cx="260" cy="120" r="3" fill="#047857" stroke="#34d399" strokeWidth="1" />
+      <line x1="260" y1="120" x2="285" y2="170" stroke="#38bdf8" strokeWidth="2" />
 
-      {/* Sinker + Snap */}
-      <g transform="translate(330, 210)">
-        <circle cx="0" cy="0" r="5" fill="#f59e0b" />
-        {/* Big Sinker on Bottom */}
-        <polygon points="0,0 12,45 -12,45" fill="#64748b" stroke="#334155" strokeWidth="1.5" />
-        <text x="18" y="30" className="text-[10px] font-bold fill-amber-300">ナス型オモリ 15〜30号</text>
+      <g transform="translate(285, 170)">
+        <circle cx="0" cy="0" r="4" fill="#0284c7" stroke="#38bdf8" strokeWidth="1" />
+        <line x1="0" y1="4" x2="0" y2="12" stroke="#cbd5e1" strokeWidth="1.5" />
       </g>
 
-      {/* Dual Taco Egi */}
-      <g transform="translate(335, 205) rotate(15)">
-        {/* Egi 1 (Yellow/Glow) */}
-        <path d="M 0 0 Q 30 -10, 60 -5 Q 75 -2, 85 0 Q 70 8, 35 10 Z" fill="#eab308" stroke="#ca8a04" strokeWidth="1.5" />
-        <path d="M 85 0 L 98 0 M 98 0 L 105 -10 M 98 0 L 105 10" stroke="#f8fafc" strokeWidth="2.5" strokeLinecap="round" />
-        {/* Pork belly wrap */}
-        <rect x="25" y="-6" width="16" height="14" rx="2" fill="#fecdd3" opacity="0.9" />
+      <g transform="translate(285, 235)">
+        <line x1="0" y1="-53" x2="0" y2="0" stroke="#cbd5e1" strokeWidth="1.5" />
+        <ellipse cx="0" cy="20" rx="9" ry="20" fill="#475569" stroke="#94a3b8" strokeWidth="1.2" />
+        <text x="0" y="23" textAnchor="middle" className="text-[8px] font-bold fill-white">25号</text>
       </g>
 
-      <g transform="translate(335, 215) rotate(35)">
-        {/* Egi 2 (Pink/Red) */}
-        <path d="M 0 0 Q 30 -10, 60 -5 Q 75 -2, 85 0 Q 70 8, 35 10 Z" fill="#f43f5e" stroke="#be123c" strokeWidth="1.5" />
-        <path d="M 85 0 L 98 0 M 98 0 L 105 -10 M 98 0 L 105 10" stroke="#f8fafc" strokeWidth="2.5" strokeLinecap="round" />
+      {/* Upper Egi */}
+      <g transform="translate(285, 170) rotate(-10)">
+        <line x1="0" y1="0" x2="25" y2="0" stroke="#94a3b8" strokeWidth="1.2" />
+        <g transform="translate(25, 0)">
+          <polygon points="0,0 45,-6 65,0 45,6" fill="#ca8a04" fillOpacity="0.8" stroke="#eab308" strokeWidth="1.2" />
+          <rect x="15" y="-8" width="22" height="4" rx="1" fill="#f8fafc" stroke="#94a3b8" strokeWidth="0.8" />
+          <line x1="20" y1="-8" x2="20" y2="-4" stroke="#e2e8f0" strokeWidth="0.6" />
+          <line x1="30" y1="-8" x2="30" y2="-4" stroke="#e2e8f0" strokeWidth="0.6" />
+          <text x="26" y="-10" textAnchor="middle" className="text-[6.5px] font-bold fill-amber-200">豚背脂巻き</text>
+          <path d="M 65 0 L 72 0 Q 80 -4, 76 -12 M 72 0 Q 76 -2, 74 -8" fill="none" stroke="#f8fafc" strokeWidth="1.8" />
+        </g>
       </g>
 
-      {/* Callout */}
-      <rect x="280" y="260" width="245" height="42" rx="8" fill="#1e1b4b" stroke="#818cf8" strokeWidth="1" />
-      <text x="290" y="277" className="text-[11px] font-bold fill-indigo-200">タコエギ 3.5号 (2本付け・豚バラ巻き)</text>
-      <text x="290" y="293" className="text-[10px] fill-slate-300">底をトントン叩いてシェイクし、一気に鬼アワセ</text>
-    </svg>
+      {/* Lower Egi */}
+      <g transform="translate(285, 185) rotate(15)">
+        <line x1="0" y1="0" x2="25" y2="0" stroke="#94a3b8" strokeWidth="1.2" />
+        <g transform="translate(25, 0)">
+          <polygon points="0,0 45,-6 65,0 45,6" fill="#ec4899" fillOpacity="0.8" stroke="#f43f5e" strokeWidth="1.2" />
+          <path d="M 65 0 L 72 0 Q 80 -4, 76 -12 M 72 0 Q 76 -2, 74 -8" fill="none" stroke="#f8fafc" strokeWidth="1.8" />
+        </g>
+      </g>
+
+      <g transform="translate(250, 275)" opacity="0.8">
+        <path d="M 0 0 L 8 -5 L 16 0 L 24 -5" fill="none" stroke="#38bdf8" strokeWidth="1" />
+        <text x="32" y="-1" className="text-[7.5px] font-mono fill-cyan-300">BOTTOM SHAKE (トントン叩き)</text>
+      </g>
+    </BlueprintCanvas>
   );
 }
 
-// 9. ヘチ・落とし込み仕掛け
+// ─────────────────────────────────────────────────────────────
+// 9. ヘチ・落とし込み仕掛け (FIG-09)
+// ─────────────────────────────────────────────────────────────
 function HechiDiagram() {
   return (
-    <svg
-      viewBox="0 0 540 330"
-      className="w-full h-auto max-h-[340px] select-none rounded-2xl bg-gradient-to-b from-slate-100 via-white to-sky-100/40 dark:from-slate-900 dark:via-slate-900 dark:to-slate-800 border border-slate-200 dark:border-slate-800"
+    <BlueprintCanvas
+      figNo="FIG-09"
+      title="ヘチ・落とし込み仕掛け構成図"
+      subtitle="DWG REF: #HCH-09 / QUAY VERTICAL DROP RIG / SCALE: NON-SCALE"
+      targetSpecies="クロダイ(チヌ)・カサゴ・キジハタ"
+      standardDepth="水面直下〜底層 (岸壁際0〜10cm)"
+      mainLineSpec="フロロ/ナイロン 1.5〜2.0号 (目印付き)"
+      styleSpec="タイコリール・壁際スリット落とし込み"
     >
-      {/* Pier Wall (岸壁) on Left */}
-      <rect x="0" y="0" width="120" height="330" fill="#cbd5e1" className="dark:fill-slate-800" />
-      <line x1="120" y1="0" x2="120" y2="330" stroke="#475569" strokeWidth="3" />
-      {/* Wall Texture / Barnacles */}
-      <circle cx="114" cy="90" r="4" fill="#334155" />
-      <circle cx="112" cy="140" r="5" fill="#334155" />
-      <circle cx="115" cy="200" r="4" fill="#334155" />
-      <circle cx="113" cy="260" r="6" fill="#334155" />
-      <text x="20" y="160" className="text-[12px] font-extrabold fill-slate-600 dark:fill-slate-300" transform="rotate(-90 20 160)">岸壁 (スリット・貝着生)</text>
+      <SpecBox x={115} y={55} w={154} h={42} num={1} title="目印付き道糸" spec="落とし込み用目印 (25cmピッチ)" note="わずかな糸フケ・止まりアタリを即視認" />
+      <SpecBox x={375} y={55} w={160} h={42} num={2} title="専用タイコリール" spec="1:1 ダイレクトドライブ" note="スプールフリーでエサの重みだけで落下" />
+      <SpecBox x={375} y={145} w={160} h={42} num={3} title="ハリス＆ガン玉" spec="フロロ 1.2〜1.5号 + ガン玉 B〜3B" note="壁際10cm以内をスルスル自然沈降" />
+      <SpecBox x={375} y={235} w={160} h={42} num={4} title="チヌ針＆天然エサ" spec="チヌ針 2〜3号 + イソガニ/イガイ" note="カニ横刺し・貝殻1枚掛け" />
 
-      {/* Angler Rod & Taiko Reel on Top Right */}
-      <path d="M 280 20 Q 200 25, 140 40" stroke="#334155" strokeWidth="3.5" strokeLinecap="round" fill="none" />
-      <text x="290" y="24" className="text-[11px] font-bold fill-slate-800 dark:fill-slate-200">ヘチ竿 2.7〜3.1m + タイコリール</text>
+      <LeaderLine points="190,97 190,120 145,130" />
+      <LeaderLine points="375,76 340,76 320,65" />
+      <LeaderLine points="375,166 330,166 160,210" />
+      <LeaderLine points="375,256 330,256 160,270" />
 
-      {/* Marked Line (目印付き道糸) Dropping within 10cm of wall */}
-      <line x1="140" y1="40" x2="140" y2="280" stroke="#f59e0b" strokeWidth="2" />
-      {/* Color Markers */}
-      <rect x="137" y="70" width="6" height="12" fill="#ef4444" />
-      <rect x="137" y="100" width="6" height="12" fill="#22c55e" />
-      <rect x="137" y="130" width="6" height="12" fill="#ef4444" />
-      <rect x="137" y="160" width="6" height="12" fill="#22c55e" />
-      <text x="155" y="110" className="text-[10px] font-bold fill-amber-700 dark:fill-amber-400">目印付き道糸 (1.5〜2号)</text>
-
-      {/* Swivel */}
-      <circle cx="140" cy="180" r="3" fill="#64748b" />
-
-      {/* Harris */}
-      <line x1="140" y1="180" x2="140" y2="280" stroke="#0ea5e9" strokeWidth="1.8" />
-      <text x="155" y="210" className="text-[10px] font-bold fill-sky-700 dark:fill-sky-300">ハリス: フロロ 1.2〜1.5号 (1.5m)</text>
-
-      {/* Split Shot (ガン玉 B〜3B) */}
-      <circle cx="140" cy="245" r="4" fill="#475569" />
-      <text x="155" y="248" className="text-[9px] font-bold fill-slate-600 dark:fill-slate-400">ガン玉 (B〜3B・針上20cm)</text>
-
-      {/* Chinu Hook & Crab Bait */}
-      <g transform="translate(140, 280)">
-        <path d="M 0 0 L 0 10 Q 0 18, 8 18 Q 16 18, 16 10 L 14 8" stroke="#334155" strokeWidth="2" fill="none" />
-        {/* Crab */}
-        <ellipse cx="6" cy="8" rx="7" ry="5" fill="#78350f" stroke="#451a03" strokeWidth="1" />
-        <line x1="0" y1="5" x2="-6" y2="3" stroke="#78350f" strokeWidth="1.5" />
-        <line x1="0" y1="10" x2="-6" y2="12" stroke="#78350f" strokeWidth="1.5" />
-        <line x1="12" y1="5" x2="18" y2="3" stroke="#78350f" strokeWidth="1.5" />
-        <line x1="12" y1="10" x2="18" y2="12" stroke="#78350f" strokeWidth="1.5" />
+      {/* Vertical Pier Quay Wall on left */}
+      <g transform="translate(15, 46)">
+        <rect x="0" y="0" width="75" height="264" fill="#1e293b" stroke="#475569" strokeWidth="1" />
+        <line x1="75" y1="50" x2="65" y2="50" stroke="#38bdf8" strokeWidth="1" />
+        <text x="60" y="52" textAnchor="end" className="text-[7px] font-mono fill-sky-300">1.0m</text>
+        <line x1="75" y1="100" x2="65" y2="100" stroke="#38bdf8" strokeWidth="1" />
+        <text x="60" y="102" textAnchor="end" className="text-[7px] font-mono fill-sky-300">2.0m</text>
+        <line x1="75" y1="150" x2="65" y2="150" stroke="#38bdf8" strokeWidth="1" />
+        <text x="60" y="152" textAnchor="end" className="text-[7px] font-mono fill-sky-300">3.0m</text>
+        <line x1="75" y1="200" x2="65" y2="200" stroke="#38bdf8" strokeWidth="1" />
+        <text x="60" y="202" textAnchor="end" className="text-[7px] font-mono fill-sky-300">4.0m</text>
+        <circle cx="80" cy="65" r="2.5" fill="#0f172a" stroke="#64748b" strokeWidth="0.8" />
+        <circle cx="82" cy="72" r="3" fill="#0f172a" stroke="#64748b" strokeWidth="0.8" />
+        <circle cx="79" cy="80" r="2" fill="#0f172a" stroke="#64748b" strokeWidth="0.8" />
+        <circle cx="81" cy="120" r="2.5" fill="#0f172a" stroke="#64748b" strokeWidth="0.8" />
+        <circle cx="83" cy="128" r="3.5" fill="#0f172a" stroke="#64748b" strokeWidth="0.8" />
       </g>
 
-      {/* Callout */}
-      <rect x="250" y="250" width="240" height="42" rx="8" className="fill-emerald-50 dark:fill-emerald-950/40 stroke stroke-emerald-300 dark:stroke-emerald-800" />
-      <text x="260" y="267" className="text-[11px] font-bold fill-emerald-800 dark:fill-emerald-300">チヌ針 2〜3号 + カニ / カラスガイ</text>
-      <text x="260" y="283" className="text-[10px] fill-slate-600 dark:fill-slate-400">壁際10cm以内をエサの自重でスルスル落とし込む</text>
-    </svg>
+      <g transform="translate(125, 46)">
+        <line x1="-35" y1="30" x2="15" y2="30" stroke="#0ea5e9" strokeWidth="0.6" strokeDasharray="2 2" />
+        <text x="-10" y="26" textAnchor="middle" className="text-[6.5px] font-mono fill-cyan-300">壁際 10cm</text>
+
+        <line x1="15" y1="0" x2="15" y2="140" stroke="#fbbf24" strokeWidth="1.4" />
+        <ellipse cx="15" cy="35" rx="2.5" ry="5" fill="#f97316" stroke="#ea580c" strokeWidth="0.6" />
+        <ellipse cx="15" cy="70" rx="2.5" ry="5" fill="#fef08a" stroke="#ca8a04" strokeWidth="0.6" />
+        <ellipse cx="15" cy="105" rx="2.5" ry="5" fill="#f97316" stroke="#ea580c" strokeWidth="0.6" />
+        <ellipse cx="15" cy="140" rx="2.5" ry="5" fill="#fef08a" stroke="#ca8a04" strokeWidth="0.6" />
+
+        <circle cx="15" cy="150" r="2" fill="none" stroke="#94a3b8" strokeWidth="0.8" />
+        <line x1="15" y1="152" x2="15" y2="235" stroke="#38bdf8" strokeWidth="1.2" />
+        <circle cx="15" cy="225" r="3" fill="#64748b" stroke="#cbd5e1" strokeWidth="0.8" />
+
+        <g transform="translate(15, 235)">
+          <path d="M 0 0 L 0 7 Q 0 14, 7 14 Q 14 14, 12 5" fill="none" stroke="#f8fafc" strokeWidth="1.4" />
+          <ellipse cx="10" cy="10" rx="8" ry="6" fill="#15803d" stroke="#22c55e" strokeWidth="0.8" />
+          <path d="M 18 8 L 24 6 M 18 10 L 25 10 M 18 12 L 24 14" stroke="#22c55e" strokeWidth="0.8" />
+          <path d="M 2 8 L -4 6 M 2 10 L -5 10 M 2 12 L -4 14" stroke="#22c55e" strokeWidth="0.8" />
+          <circle cx="16" cy="5" r="2" fill="#16a34a" />
+          <circle cx="4" cy="5" r="2" fill="#16a34a" />
+          <text x="28" y="12" className="text-[7.5px] font-bold fill-emerald-300">活きイソガニ</text>
+        </g>
+      </g>
+
+      <g transform="translate(220, 240)" opacity="0.65">
+        <path d="M 0 10 Q 25 -5, 55 5 Q 75 12, 90 6 L 85 15 L 90 24 Q 75 18, 55 25 Q 25 35, 0 20 Z" fill="#334155" stroke="#64748b" strokeWidth="1" />
+        <polygon points="50,4 65,-8 68,5" fill="#334155" />
+        <circle cx="15" cy="12" r="2" fill="#fef08a" />
+        <text x="30" y="38" className="text-[7.5px] font-mono fill-slate-300">クロダイ捕食ゾーン</text>
+      </g>
+    </BlueprintCanvas>
   );
 }
 
-// 10. テナガエビ専用仕掛け
+// ─────────────────────────────────────────────────────────────
+// 10. テナガエビ専用仕掛け (FIG-10)
+// ─────────────────────────────────────────────────────────────
 function TenagaebiDiagram() {
   return (
-    <svg
-      viewBox="0 0 540 330"
-      className="w-full h-auto max-h-[340px] select-none rounded-2xl bg-gradient-to-b from-emerald-50/70 via-white to-sky-100/50 dark:from-slate-900 dark:via-slate-900 dark:to-teal-950/60 border border-slate-200 dark:border-slate-800"
+    <BlueprintCanvas
+      figNo="FIG-10"
+      title="テナガエビ専用仕掛け構成図"
+      subtitle="DWG REF: #TNE-10 / MICRO SHIMORI RIG / SCALE: NON-SCALE"
+      targetSpecies="テナガエビ・ハゼ・小魚"
+      standardDepth="テトラ・ゴロタ石の隙間 (底スレスレ)"
+      mainLineSpec="ナイロン 0.8〜1.0号 (のべ竿直結)"
+      styleSpec="4連シモリウキ + 極小エビ針"
     >
-      <defs>
-        <linearGradient id="tenagaWater" x1="0%" y1="0%" x2="0%" y2="100%">
-          <stop offset="0%" stopColor="#0d9488" stopOpacity="0.08" />
-          <stop offset="100%" stopColor="#0284c7" stopOpacity="0.18" />
-        </linearGradient>
-      </defs>
+      <SpecBox x={20} y={60} w={154} h={42} num={1} title="のべ竿直結道糸" spec="ナイロン 0.8〜1.0号 (竿と同寸)" note="リール不要・取り回し抜群の軽量設計" />
+      <SpecBox x={375} y={60} w={160} h={42} num={2} title="4連シモリウキ" spec="超極小シモリ玉 4連" note="斜めに並べてエビの横引きを視覚化" />
+      <SpecBox x={20} y={190} w={154} h={42} num={3} title="微小オモリ (板オモリ)" spec="板オモリ / 割りビシ小" note="シモリ玉1個浮き3個沈む浮力バランス" />
+      <SpecBox x={360} y={235} w={175} h={42} num={4} title="エビ針＆アカムシ" spec="エビ針 2〜3号 + 赤虫通し刺し" note="アタリから15秒待ってゆっくり抜き上げ" />
 
-      {/* Water & Bottom */}
-      <rect x="0" y="55" width="540" height="275" fill="url(#tenagaWater)" />
-      <path d="M 0 55 Q 67 50, 135 55 T 270 55 T 405 55 T 540 55" stroke="#14b8a6" strokeWidth="2" strokeDasharray="6 3" fill="none" opacity="0.8" />
-      <text x="14" y="45" className="text-[11px] font-bold fill-teal-700 dark:fill-teal-400">水面 (河川・汽水域)</text>
+      <LeaderLine points="174,81 210,81 220,105" />
+      <LeaderLine points="375,81 330,81 290,130" />
+      <LeaderLine points="174,211 220,211 250,230" />
+      <LeaderLine points="360,256 320,256 280,270" />
 
-      {/* Tetrapod / Stone Block on Left */}
-      <g transform="translate(10, 150)" opacity="0.85">
-        <polygon points="30,0 60,30 45,70 15,70 0,30" fill="#94a3b8" stroke="#475569" strokeWidth="1.5" className="dark:fill-slate-700 dark:stroke-slate-600" />
-        <polygon points="50,40 90,30 110,65 80,85 45,70" fill="#64748b" stroke="#334155" strokeWidth="1.5" className="dark:fill-slate-800 dark:stroke-slate-700" />
-        <polygon points="10,65 45,70 35,110 -5,100" fill="#475569" stroke="#1e293b" strokeWidth="1.5" className="dark:fill-slate-900 dark:stroke-slate-800" />
-        <text x="25" y="50" className="text-[10px] font-bold fill-white">消波ブロック / 敷石</text>
+      <path d="M 50 65 L 68 75 L 66 78 L 48 68 Z" fill="#64748b" stroke="#94a3b8" strokeWidth="0.8" />
+      <path d="M 68 76 Q 160 100, 240 115" fill="none" stroke="#fbbf24" strokeWidth="1.4" />
+      <text x="130" y="85" className="text-[7.5px] font-bold fill-amber-300">ナイロン 0.8号</text>
+
+      <g transform="translate(240, 115)">
+        <line x1="0" y1="0" x2="35" y2="40" stroke="#38bdf8" strokeWidth="1" />
+        <ellipse cx="6" cy="7" rx="3" ry="2" fill="#f97316" stroke="#ea580c" strokeWidth="0.6" />
+        <ellipse cx="15" cy="17" rx="3" ry="2" fill="#fef08a" stroke="#ca8a04" strokeWidth="0.6" />
+        <ellipse cx="24" cy="27" rx="3" ry="2" fill="#38bdf8" stroke="#0284c7" strokeWidth="0.6" />
+        <ellipse cx="33" cy="37" rx="3" ry="2" fill="#ec4899" stroke="#db2777" strokeWidth="0.6" />
+        <text x="44" y="24" className="text-[7px] font-mono fill-cyan-300">4連シモリウキ</text>
       </g>
 
-      {/* Tenagaebi Shrimp Illustration on Bottom Right */}
-      <g transform="translate(380, 240)">
-        {/* Shrimp Body */}
-        <path d="M 30 10 Q 50 0, 70 12 Q 85 25, 95 28 Q 80 32, 60 22 Q 40 18, 30 10 Z" fill="#b45309" stroke="#78350f" strokeWidth="1.2" opacity="0.8" />
-        {/* Shrimp Tail Fan */}
-        <polygon points="95,28 105,22 108,30 104,36" fill="#d97706" />
-        {/* Legs */}
-        <line x1="45" y1="18" x2="40" y2="28" stroke="#78350f" strokeWidth="1.2" />
-        <line x1="55" y1="20" x2="52" y2="30" stroke="#78350f" strokeWidth="1.2" />
-        <line x1="65" y1="22" x2="64" y2="31" stroke="#78350f" strokeWidth="1.2" />
-        {/* Super Long Arms (Tenaga) */}
-        <path d="M 32 12 Q 10 -5, -15 -8 Q -30 -10, -45 0" stroke="#b45309" strokeWidth="1.8" fill="none" />
-        <path d="M -45 0 L -55 -2 M -45 0 L -53 5" stroke="#b45309" strokeWidth="1.5" strokeLinecap="round" />
-        <path d="M 34 14 Q 15 5, -5 8 Q -20 12, -35 22" stroke="#b45309" strokeWidth="1.8" fill="none" />
-        <path d="M -35 22 L -45 20 M -35 22 L -43 27" stroke="#b45309" strokeWidth="1.5" strokeLinecap="round" />
-        {/* Whiskers */}
-        <path d="M 30 8 Q 10 2, -10 -20" stroke="#d97706" strokeWidth="1" fill="none" opacity="0.7" />
-        {/* Eye */}
-        <circle cx="33" cy="8" r="1.5" fill="#0f172a" />
-        <text x="-35" y="-14" className="text-[10px] font-bold fill-amber-800 dark:fill-amber-400">テナガエビ</text>
+      <line x1="275" y1="155" x2="275" y2="230" stroke="#38bdf8" strokeWidth="1.2" />
+
+      <g transform="translate(275, 230)">
+        <rect x="-3" y="-2" width="6" height="4" rx="1" fill="#64748b" stroke="#cbd5e1" strokeWidth="0.8" />
+        <text x="8" y="2" className="text-[7px] font-bold fill-slate-300">板オモリ</text>
       </g>
 
-      {/* Pole (Nobe-zao) */}
-      <path d="M 20 20 Q 80 22, 160 32" stroke="#334155" strokeWidth="3" strokeLinecap="round" fill="none" />
-      <circle cx="160" cy="32" r="3.5" fill="#0d9488" />
-      <text x="25" y="15" className="text-[11px] font-bold fill-slate-800 dark:fill-slate-200">のべ竿 1.8〜2.4m (軽量・穂先直結リリアン)</text>
+      <line x1="275" y1="234" x2="275" y2="275" stroke="#7dd3fc" strokeWidth="1" />
 
-      {/* Main Line */}
-      <path d="M 160 32 L 230 55 L 230 250" stroke="#f59e0b" strokeWidth="1.8" fill="none" />
-      <rect x="135" y="42" width="90" height="18" rx="4" className="fill-amber-500/10 dark:fill-amber-500/20 stroke stroke-amber-500/30" />
-      <text x="140" y="55" className="text-[10px] font-bold fill-amber-700 dark:fill-amber-300">ナイロン 0.8〜1.0号</text>
-
-      {/* 3-4 Multi Shimori Floats (シモリウキ連玉) */}
-      <g transform="translate(230, 55)">
-        <circle cx="0" cy="5" r="4.5" fill="#ef4444" stroke="#b91c1c" strokeWidth="1" />
-        <circle cx="0" cy="20" r="4.5" fill="#facc15" stroke="#a16207" strokeWidth="1" />
-        <circle cx="0" cy="35" r="4.5" fill="#22c55e" stroke="#15803d" strokeWidth="1" />
-        <circle cx="0" cy="50" r="4.5" fill="#ef4444" stroke="#b91c1c" strokeWidth="1" />
+      <g transform="translate(275, 275)">
+        <path d="M 0 0 L 0 5 Q 0 9, 5 9 Q 9 9, 8 4" fill="none" stroke="#f8fafc" strokeWidth="1.2" />
+        <path d="M 0 2 Q 4 1, 8 4 Q 12 7, 14 5" fill="none" stroke="#ef4444" strokeWidth="1.8" strokeLinecap="round" />
+        <text x="14" y="14" className="text-[7.5px] font-bold fill-rose-300">アカムシ (チョン掛け)</text>
       </g>
-      <rect x="245" y="65" width="155" height="30" rx="6" className="fill-emerald-50 dark:fill-emerald-950/50 stroke stroke-emerald-300 dark:stroke-emerald-800" />
-      <text x="252" y="79" className="text-[10px] font-bold fill-emerald-800 dark:fill-emerald-300">極小シモリウキ 3〜4連</text>
-      <text x="252" y="91" className="text-[8.5px] fill-slate-600 dark:fill-slate-400">エビが引くと水中で斜めにスライド</text>
 
-      {/* Sinker (板オモリ / ガン玉) */}
-      <circle cx="230" cy="180" r="3.5" fill="#64748b" stroke="#334155" strokeWidth="1" />
-      <text x="145" y="184" className="text-[9px] font-bold fill-slate-600 dark:fill-slate-400">極小板オモリ / ガン玉</text>
-
-      {/* Harris */}
-      <line x1="230" y1="180" x2="230" y2="250" stroke="#0ea5e9" strokeWidth="1.4" />
-      <text x="145" y="215" className="text-[9px] font-medium fill-sky-700 dark:fill-sky-400">ハリス 0.4〜0.6号 (15cm)</text>
-
-      {/* Hook & Akamushi (Worm) */}
-      <g transform="translate(230, 250)">
-        <path d="M 0 0 L 0 8 Q 0 14, 6 14 Q 12 14, 12 8 L 10 6" stroke="#475569" strokeWidth="1.5" fill="none" />
-        {/* Akamushi Bait */}
-        <path d="M 2 4 Q 8 16, 18 12 Q 24 8, 28 14" stroke="#dc2626" strokeWidth="3" strokeLinecap="round" fill="none" />
+      <g transform="translate(320, 260)" opacity="0.65">
+        <polygon points="10,20 40,-10 70,20 55,40 25,40" fill="#334155" stroke="#64748b" strokeWidth="1" />
+        <ellipse cx="0" cy="15" rx="14" ry="6" fill="#047857" />
+        <path d="M -10 13 L -35 8 L -45 14" fill="none" stroke="#10b981" strokeWidth="1.2" />
+        <path d="M -10 17 L -32 22 L -42 20" fill="none" stroke="#10b981" strokeWidth="1.2" />
+        <text x="-40" y="32" className="text-[7.5px] font-mono fill-emerald-300">テナガエビの潜み場</text>
       </g>
-      <rect x="150" y="260" width="130" height="28" rx="5" className="fill-rose-50 dark:fill-rose-950/40 stroke stroke-rose-300 dark:stroke-rose-800" />
-      <text x="156" y="273" className="text-[10px] font-bold fill-rose-700 dark:fill-rose-300">エビ針 / タナゴ針 2〜3号</text>
-      <text x="156" y="284" className="text-[8.5px] fill-slate-500 dark:fill-slate-400">+ アカムシ (通し刺し)</text>
 
-      {/* Callout */}
-      <rect x="290" y="130" width="235" height="46" rx="8" className="fill-teal-50 dark:fill-teal-950/40 stroke stroke-teal-300 dark:stroke-teal-800" />
-      <text x="300" y="148" className="text-[11px] font-bold fill-teal-800 dark:fill-teal-300">💡 隙間に落として待つのがコツ</text>
-      <text x="300" y="162" className="text-[9.5px] fill-slate-600 dark:fill-slate-400">ウキが動いても即アワセは禁物！10〜15秒</text>
-      <text x="300" y="172" className="text-[9.5px] fill-slate-600 dark:fill-slate-400">待って口に運ばせてからそっと竿を立てます</text>
-    </svg>
+      <Dimension x1={275} y1={234} x2={275} y2={275} label="ハリス 15〜20cm" offset={-25} />
+    </BlueprintCanvas>
   );
 }
 
-// 11. カワハギ専用胴突き仕掛け
+// ─────────────────────────────────────────────────────────────
+// 11. カワハギ専用胴突き仕掛け (FIG-11)
+// ─────────────────────────────────────────────────────────────
 function KawahagiDiagram() {
   return (
-    <svg
-      viewBox="0 0 540 330"
-      className="w-full h-auto max-h-[340px] select-none rounded-2xl bg-gradient-to-b from-cyan-50/70 via-white to-sky-100/50 dark:from-slate-900 dark:via-slate-900 dark:to-cyan-950/70 border border-slate-200 dark:border-slate-800"
+    <BlueprintCanvas
+      figNo="FIG-11"
+      title="カワハギ専用胴突き仕掛け構成図"
+      subtitle="DWG REF: #KWH-11 / 3-HOOK DROPPER RIG / SCALE: NON-SCALE"
+      targetSpecies="カワハギ・ウマヅラハギ"
+      standardDepth="底層〜底から1m (根・砂泥混じり)"
+      mainLineSpec="PE 0.8〜1.0号 (超高感度)"
+      styleSpec="集魚板 + 中オモリ + 早掛け3本針"
     >
-      <defs>
-        <linearGradient id="flashGlow" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stopColor="#fef08a" />
-          <stop offset="50%" stopColor="#38bdf8" />
-          <stop offset="100%" stopColor="#f472b6" />
-        </linearGradient>
-      </defs>
+      <SpecBox x={20} y={60} w={154} h={42} num={1} title="小型集魚板" spec="ホログラム集魚板" note="光の乱反射とヒラ打ちで群れを寄せる" />
+      <SpecBox x={380} y={60} w={154} h={42} num={2} title="中オモリ (0.5〜1.5号)" spec="仕掛けのテンション調整" note="ハリスをたるませて吸い込ませる" />
+      <SpecBox x={20} y={150} w={154} h={42} num={3} title="早掛け3本針仕様" spec="ハゲ針 4〜5号 / 自動ハリス止め" note="エサ取り名人の口に掛かる極短ハリス" />
+      <SpecBox x={20} y={242} w={154} h={42} num={4} title="底オモリ＆アサリエサ" spec="六角オモリ 20〜25号 + アサリ" note="塩締めアサリを丸く縫い刺し" />
 
-      {/* Seabed Ground */}
-      <path d="M 0 290 Q 150 285, 300 290 T 540 290 L 540 330 L 0 330 Z" fill="#cbd5e1" className="dark:fill-slate-800" />
-      <text x="14" y="315" className="text-[10px] font-bold fill-slate-600 dark:fill-slate-400">海底 (砂地・根回り)</text>
+      <LeaderLine points="174,81 220,81 270,90" />
+      <LeaderLine points="380,81 330,81 290,125" />
+      <LeaderLine points="174,171 220,171 270,165" />
+      <LeaderLine points="174,263 220,263 270,285" />
 
-      {/* Rod Tip (9:1 Super Fast Action) */}
-      <path d="M 20 20 Q 90 22, 150 40" stroke="#334155" strokeWidth="4" strokeLinecap="round" fill="none" />
-      <path d="M 150 40 Q 170 48, 180 60" stroke="#f43f5e" strokeWidth="2" strokeLinecap="round" fill="none" />
-      <circle cx="180" cy="60" r="3.5" fill="#0284c7" />
-      <text x="25" y="15" className="text-[11px] font-bold fill-slate-800 dark:fill-slate-200">カワハギ竿 1.8m (9:1極先調子 高感度カーボン)</text>
+      <line x1="280" y1="46" x2="280" y2="80" stroke="#10b981" strokeWidth="1.6" />
 
-      {/* Main PE & Leader */}
-      <path d="M 180 60 L 230 85" stroke="#10b981" strokeWidth="2" strokeDasharray="4 2" fill="none" />
-      <text x="145" y="78" className="text-[9px] font-bold fill-emerald-700 dark:fill-emerald-400">PE 0.8〜1.0号</text>
-
-      {/* Snap & Flash Attractor Plate (集魚板) */}
-      <g transform="translate(230, 85)">
-        <circle cx="0" cy="0" r="3.5" fill="#64748b" />
-        {/* Hologram Attractor Plates (2連) */}
-        <polygon points="0,5 12,20 0,35 -12,20" fill="url(#flashGlow)" stroke="#ca8a04" strokeWidth="1.2" />
-        <polygon points="0,38 10,50 0,62 -10,50" fill="url(#flashGlow)" stroke="#ca8a04" strokeWidth="1.2" />
-        {/* Sparkle icons */}
-        <path d="M 18 15 L 22 20 L 18 25 L 14 20 Z" fill="#facc15" />
-        <path d="M -16 45 L -12 50 L -16 55 L -20 50 Z" fill="#38bdf8" />
-      </g>
-      <rect x="255" y="95" width="125" height="32" rx="6" className="fill-amber-50 dark:fill-amber-950/50 stroke stroke-amber-300 dark:stroke-amber-800" />
-      <text x="262" y="110" className="text-[10px] font-bold fill-amber-800 dark:fill-amber-300">キラキラ集魚板</text>
-      <text x="262" y="122" className="text-[8.5px] fill-slate-600 dark:fill-slate-400">光の反射と波動で寄せる</text>
-
-      {/* Drop Sinker (中オモリ) */}
-      <circle cx="230" cy="155" r="5" fill="#eab308" stroke="#a16207" strokeWidth="1" />
-      <text x="140" y="158" className="text-[9px] font-bold fill-amber-700 dark:fill-amber-400">中オモリ (1〜2号)</text>
-
-      {/* Main Trunk (幹糸 フロロ3号) */}
-      <line x1="230" y1="160" x2="230" y2="280" stroke="#0ea5e9" strokeWidth="2.5" />
-      <text x="150" y="215" className="text-[9px] font-semibold fill-sky-700 dark:fill-sky-300">幹糸: 3号 (間隔15cm)</text>
-
-      {/* 3-Hook Drop-shot Branches with Asari Clam Bait */}
-      {/* Branch 1 */}
-      <g transform="translate(230, 180)">
-        <line x1="0" y1="0" x2="30" y2="5" stroke="#0ea5e9" strokeWidth="1.5" />
-        <path d="M 30 5 L 42 7 Q 48 9, 46 14 Q 43 17, 38 14" stroke="#475569" strokeWidth="1.5" fill="none" />
-        {/* Asari Clam bait */}
-        <ellipse cx="42" cy="10" rx="6" ry="4" fill="#f97316" stroke="#c2410c" strokeWidth="1" />
-        <circle cx="44" cy="9" r="2" fill="#15803d" />
+      <g transform="translate(280, 92)">
+        <polygon points="0,-12 12,0 0,12 -12,0" fill="#0284c7" fillOpacity="0.8" stroke="#38bdf8" strokeWidth="1.2" />
+        <line x1="-8" y1="-4" x2="8" y2="4" stroke="#f8fafc" strokeWidth="0.8" />
+        <line x1="-8" y1="4" x2="8" y2="-4" stroke="#f8fafc" strokeWidth="0.8" />
+        <circle cx="0" cy="0" r="2" fill="#fef08a" />
+        <text x="18" y="3" className="text-[7.5px] font-bold fill-cyan-200">ホロ集魚板</text>
       </g>
 
-      {/* Branch 2 */}
-      <g transform="translate(230, 215)">
-        <line x1="0" y1="0" x2="30" y2="5" stroke="#0ea5e9" strokeWidth="1.5" />
-        <path d="M 30 5 L 42 7 Q 48 9, 46 14 Q 43 17, 38 14" stroke="#475569" strokeWidth="1.5" fill="none" />
-        {/* Asari Clam bait */}
-        <ellipse cx="42" cy="10" rx="6" ry="4" fill="#f97316" stroke="#c2410c" strokeWidth="1" />
-        <circle cx="44" cy="9" r="2" fill="#15803d" />
+      <line x1="280" y1="104" x2="280" y2="120" stroke="#38bdf8" strokeWidth="1.4" />
+
+      <g transform="translate(280, 125)">
+        <circle cx="0" cy="0" r="4.5" fill="#475569" stroke="#94a3b8" strokeWidth="1" />
+        <text x="12" y="3" className="text-[7px] font-bold fill-slate-300">中オモリ 1号</text>
       </g>
 
-      {/* Branch 3 */}
-      <g transform="translate(230, 250)">
-        <line x1="0" y1="0" x2="30" y2="5" stroke="#0ea5e9" strokeWidth="1.5" />
-        <path d="M 30 5 L 42 7 Q 48 9, 46 14 Q 43 17, 38 14" stroke="#475569" strokeWidth="1.5" fill="none" />
-        {/* Asari Clam bait */}
-        <ellipse cx="42" cy="10" rx="6" ry="4" fill="#f97316" stroke="#c2410c" strokeWidth="1" />
-        <circle cx="44" cy="9" r="2" fill="#15803d" />
+      <line x1="280" y1="130" x2="280" y2="265" stroke="#38bdf8" strokeWidth="1.6" />
+
+      {/* Hook 1 */}
+      <g transform="translate(280, 155)">
+        <circle cx="0" cy="0" r="2.5" fill="#0284c7" stroke="#38bdf8" strokeWidth="0.8" />
+        <line x1="0" y1="0" x2="35" y2="-5" stroke="#7dd3fc" strokeWidth="1.2" />
+        <path d="M 35 -5 L 42 -5 Q 46 -5, 45 0 Q 43 4, 38 2" fill="none" stroke="#f8fafc" strokeWidth="1.4" />
+        <ellipse cx="40" cy="0" rx="5" ry="4" fill="#fb923c" fillOpacity="0.9" stroke="#ea580c" strokeWidth="0.8" />
+        <circle cx="39" cy="-1" r="1.5" fill="#78350f" />
       </g>
 
-      {/* Bottom Sinker (ナス型/舵型オモリ 25号) */}
-      <g transform="translate(230, 280)">
-        <polygon points="0,0 10,25 -10,25" fill="#64748b" stroke="#334155" strokeWidth="1.5" />
-      </g>
-      <text x="135" y="295" className="text-[10px] font-bold fill-slate-700 dark:fill-slate-300">底オモリ (20〜30号)</text>
-
-      {/* Kawahagi Fish Illustration Hovering */}
-      <g transform="translate(350, 185)">
-        {/* Diamond shaped Kawahagi Body */}
-        <path d="M 0 10 Q 30 -15, 65 0 Q 80 15, 65 30 Q 30 45, 0 20 Z" fill="#fed7aa" stroke="#ea580c" strokeWidth="1.5" className="dark:fill-amber-900/60 dark:stroke-amber-500" />
-        {/* Tail fin */}
-        <polygon points="65,15 85,5 82,15 85,25" fill="#0284c7" opacity="0.8" />
-        {/* Horn Spine */}
-        <line x1="25" y1="-3" x2="32" y2="-18" stroke="#c2410c" strokeWidth="2.5" strokeLinecap="round" />
-        {/* Tiny Mouth */}
-        <path d="M 0 10 L -6 13 L 0 16" stroke="#ea580c" strokeWidth="2" fill="#ea580c" />
-        {/* Eye */}
-        <circle cx="22" cy="5" r="3.5" fill="#0284c7" stroke="#0f172a" strokeWidth="1" />
-        <circle cx="23" cy="4" r="1.2" fill="#ffffff" />
-        {/* Blue fin stripes */}
-        <path d="M 35 3 Q 50 2, 60 5" stroke="#0284c7" strokeWidth="1.5" fill="none" />
-        <text x="10" y="55" className="text-[10px] font-bold fill-amber-900 dark:fill-amber-300">エサ取り名人 カワハギ</text>
+      {/* Hook 2 */}
+      <g transform="translate(280, 195)">
+        <circle cx="0" cy="0" r="2.5" fill="#0284c7" stroke="#38bdf8" strokeWidth="0.8" />
+        <line x1="0" y1="0" x2="-35" y2="-5" stroke="#7dd3fc" strokeWidth="1.2" />
+        <path d="M -35 -5 L -42 -5 Q -46 -5, -45 0 Q -43 4, -38 2" fill="none" stroke="#f8fafc" strokeWidth="1.4" />
+        <ellipse cx="-40" cy="0" rx="5" ry="4" fill="#fb923c" fillOpacity="0.9" stroke="#ea580c" strokeWidth="0.8" />
+        <circle cx="-39" cy="-1" r="1.5" fill="#78350f" />
       </g>
 
-      {/* Hooks & Bait Callout */}
-      <rect x="295" y="240" width="230" height="42" rx="8" className="fill-orange-50 dark:fill-orange-950/40 stroke stroke-orange-300 dark:stroke-orange-800" />
-      <text x="305" y="257" className="text-[11px] font-bold fill-orange-800 dark:fill-orange-300">ハゲ針4〜5号 / 吸わせ針5〜6号</text>
-      <text x="305" y="273" className="text-[9.5px] fill-slate-600 dark:fill-slate-400">エダス6cm + 生アサリ (水管・ベロ・肝縫い刺し)</text>
-    </svg>
+      {/* Hook 3 */}
+      <g transform="translate(280, 235)">
+        <circle cx="0" cy="0" r="2.5" fill="#0284c7" stroke="#38bdf8" strokeWidth="0.8" />
+        <line x1="0" y1="0" x2="35" y2="-5" stroke="#7dd3fc" strokeWidth="1.2" />
+        <path d="M 35 -5 L 42 -5 Q 46 -5, 45 0 Q 43 4, 38 2" fill="none" stroke="#f8fafc" strokeWidth="1.4" />
+        <ellipse cx="40" cy="0" rx="5" ry="4" fill="#fb923c" fillOpacity="0.9" stroke="#ea580c" strokeWidth="0.8" />
+        <circle cx="39" cy="-1" r="1.5" fill="#78350f" />
+        <text x="48" y="3" className="text-[7px] font-bold fill-orange-200">塩締めアサリ</text>
+      </g>
+
+      <g transform="translate(280, 265)">
+        <circle cx="0" cy="2" r="2" fill="none" stroke="#94a3b8" strokeWidth="0.8" />
+        <polygon points="-8,8 8,8 12,24 0,32 -12,24" fill="#475569" stroke="#94a3b8" strokeWidth="1.2" />
+        <text x="0" y="22" textAnchor="middle" className="text-[7.5px] font-bold fill-white">25号</text>
+      </g>
+
+      <Dimension x1={330} y1={155} x2={330} y2={195} label="間隔 12〜15cm" offset={15} />
+      <Dimension x1={280} y1={155} x2={315} y2={155} label="ハリス 5〜7cm" offset={-14} orientation="horizontal" />
+    </BlueprintCanvas>
   );
 }
 
-// 12. イシダイ専用底物仕掛け
+// ─────────────────────────────────────────────────────────────
+// 12. イシダイ専用底物仕掛け (FIG-12)
+// ─────────────────────────────────────────────────────────────
 function IshidaiDiagram() {
   return (
-    <svg
-      viewBox="0 0 540 330"
-      className="w-full h-auto max-h-[340px] select-none rounded-2xl bg-gradient-to-b from-slate-100 via-sky-50 to-slate-200/90 dark:from-slate-950 dark:via-slate-900 dark:to-slate-800 border border-slate-300 dark:border-slate-800"
+    <BlueprintCanvas
+      figNo="FIG-12"
+      title="イシダイ専用底物仕掛け構成図"
+      subtitle="DWG REF: #ISD-12 / HEAVY BOTTOM REEF RIG / SCALE: NON-SCALE"
+      targetSpecies="イシダイ・イシガキダイ (磯の王者)"
+      standardDepth="海底深み・根回りカケアガリ (10〜30m)"
+      mainLineSpec="ナイロン 18〜24号 / PE 10〜12号"
+      styleSpec="瀬ズレワイヤー + 捨て糸真空オモリ式"
     >
-      {/* Rocky Seabed & Slit Reef */}
-      <path d="M 0 260 L 80 230 L 150 265 L 240 235 L 340 270 L 440 240 L 540 270 L 540 330 L 0 330 Z" fill="#475569" className="dark:fill-slate-800" />
-      <path d="M 150 265 L 180 330 M 340 270 L 370 330" stroke="#1e293b" strokeWidth="2" strokeDasharray="3 3" opacity="0.6" />
-      <text x="14" y="315" className="text-[10px] font-bold fill-slate-300">荒磯海底 (根・海溝・急峻なスリット)</text>
+      <SpecBox x={20} y={60} w={154} h={42} num={1} title="極太道糸" spec="ナイロン 18〜24号 150m" note="荒磯の根ズレに耐える耐摩耗性" />
+      <SpecBox x={190} y={55} w={150} h={42} num={2} title="瀬ズレワイヤー" spec="ステンレスワイヤー #37 1.5m" note="鋭利な瀬壁での破断を完全阻止" />
+      <SpecBox x={20} y={190} w={154} h={42} num={3} title="捨て糸＆真空オモリ" spec="真空オモリ 25〜35号 (捨て糸3号)" note="根掛かり時はオモリのみ切断回収" />
+      <SpecBox x={365} y={200} w={165} h={42} num={4} title="イシダイ針＆ガンガゼ" spec="イシダイ針 16〜18号 + ウニ" note="ウニ通しで芯刺し・舞い込み即合わせ" />
 
-      {/* Piton & Heavy Ishidai Rod (Left Top) */}
-      <g transform="translate(15, 10)">
-        {/* Metal Piton Base */}
-        <line x1="20" y1="50" x2="20" y2="85" stroke="#94a3b8" strokeWidth="4" />
-        <rect x="12" y="45" width="16" height="10" rx="2" fill="#64748b" />
-        {/* Rod in Piton (Heavy Carbon Ishidai Rod) */}
-        <path d="M 15 50 Q 80 40, 160 55" stroke="#dc2626" strokeWidth="5.5" strokeLinecap="round" fill="none" />
-        <circle cx="160" cy="55" r="4.5" fill="#f59e0b" />
-        <text x="30" y="25" className="text-[11px] font-bold fill-slate-800 dark:fill-slate-200">石鯛並継竿 5.0〜5.4m (ピトン固定)</text>
+      <LeaderLine points="174,81 210,81 220,105" />
+      <LeaderLine points="265,97 265,115 270,125" />
+      <LeaderLine points="174,211 220,211 280,265" />
+      <LeaderLine points="365,221 320,221 350,210" />
+
+      <g transform="translate(45, 65)">
+        <polygon points="-10,25 20,-15 35,-10 5,30" fill="#475569" stroke="#94a3b8" strokeWidth="1" />
+        <rect x="0" y="25" width="10" height="20" fill="#334155" />
+        <text x="-5" y="55" className="text-[7px] font-bold fill-slate-300">磯ピトン固定</text>
       </g>
 
-      {/* Ultra Heavy Nylon Main Line (18〜24号) */}
-      <path d="M 175 65 Q 240 100, 270 140" stroke="#f59e0b" strokeWidth="3" fill="none" />
-      <rect x="165" y="90" width="145" height="18" rx="4" className="fill-amber-500/10 dark:fill-amber-500/20 stroke stroke-amber-500/40" />
-      <text x="170" y="103" className="text-[10px] font-bold fill-amber-700 dark:fill-amber-300">道糸: ナイロン 18〜24号</text>
+      <path d="M 68 76 Q 160 105, 250 120" fill="none" stroke="#fbbf24" strokeWidth="2.4" />
+      <text x="130" y="88" className="text-[7.5px] font-bold fill-amber-300">ナイロン 20号</text>
 
-      {/* Three-way Swivel & Sezure Wire System */}
-      <g transform="translate(270, 140)">
-        {/* Swivel */}
-        <circle cx="0" cy="0" r="4.5" fill="#64748b" stroke="#1e293b" strokeWidth="1.5" />
-        
-        {/* Sezure Wire (瀬ズレワイヤー #37 1.5m) */}
-        <line x1="0" y1="0" x2="70" y2="50" stroke="#94a3b8" strokeWidth="2.5" />
-        
-        {/* Breakaway Sinker Line (捨て糸) */}
-        <line x1="0" y1="0" x2="-20" y2="90" stroke="#0ea5e9" strokeWidth="1.5" strokeDasharray="3 2" />
-        <polygon points="-20,90 -12,120 -28,120" fill="#475569" stroke="#1e293b" strokeWidth="1.5" />
-        <text x="-95" y="105" className="text-[9px] font-bold fill-sky-700 dark:fill-sky-300">捨て糸 4〜6号</text>
-        <text x="-95" y="118" className="text-[9px] font-bold fill-slate-600 dark:fill-slate-400">捨てオモリ 25〜35号</text>
-      </g>
-      <rect x="290" y="135" width="165" height="28" rx="5" className="fill-slate-200 dark:fill-slate-800 stroke stroke-slate-400 dark:stroke-slate-600" />
-      <text x="296" y="148" className="text-[9.5px] font-bold fill-slate-800 dark:fill-slate-200">瀬ズレワイヤー (#37 1.5m)</text>
-      <text x="296" y="158" className="text-[8.5px] fill-slate-600 dark:fill-slate-400">根ズレによるラインブレイクを完全防止</text>
+      <circle cx="250" cy="120" r="3.5" fill="#475569" stroke="#94a3b8" strokeWidth="1.2" />
 
-      {/* Wire Harris & Ishidai Hook */}
-      <g transform="translate(340, 190)">
-        {/* Small Swivel */}
-        <circle cx="0" cy="0" r="3.5" fill="#64748b" />
-        {/* Wire Harris (#38 30〜40cm) */}
-        <line x1="0" y1="0" x2="60" y2="40" stroke="#94a3b8" strokeWidth="2" />
-        <text x="15" y="15" className="text-[9px] font-bold fill-slate-700 dark:fill-slate-300">ワイヤーハリス #38</text>
+      <line x1="253" y1="120" x2="335" y2="185" stroke="#e2e8f0" strokeWidth="2" strokeDasharray="5 1" />
+      <text x="265" y="160" className="text-[7px] font-mono fill-slate-200">瀬ズレワイヤー #37</text>
 
-        {/* Heavy Ishidai Hook 16号 */}
-        <path d="M 60 40 L 72 48 Q 78 54, 73 60 Q 67 62, 63 56" stroke="#1e293b" strokeWidth="2.8" fill="none" />
-
-        {/* Gangaze Sea Urchin Bait (ガンガゼウニ・トゲ付き) */}
-        <g transform="translate(70, 48)">
-          <circle cx="0" cy="0" r="14" fill="#0f172a" stroke="#334155" strokeWidth="1.5" />
-          {/* Spines */}
-          <line x1="0" y1="-14" x2="0" y2="-24" stroke="#0f172a" strokeWidth="1.5" />
-          <line x1="10" y1="-10" x2="18" y2="-18" stroke="#0f172a" strokeWidth="1.5" />
-          <line x1="14" y1="0" x2="25" y2="0" stroke="#0f172a" strokeWidth="1.5" />
-          <line x1="10" y1="10" x2="19" y2="19" stroke="#0f172a" strokeWidth="1.5" />
-          <line x1="0" y1="14" x2="0" y2="24" stroke="#0f172a" strokeWidth="1.5" />
-          <line x1="-10" y1="10" x2="-19" y2="19" stroke="#0f172a" strokeWidth="1.5" />
-          <line x1="-14" y1="0" x2="-24" y2="0" stroke="#0f172a" strokeWidth="1.5" />
-          <line x1="-10" y1="-10" x2="-18" y2="-18" stroke="#0f172a" strokeWidth="1.5" />
-          {/* Core pierce hole */}
-          <circle cx="0" cy="0" r="2.5" fill="#f59e0b" />
-        </g>
+      <g transform="translate(335, 185)">
+        <circle cx="0" cy="0" r="3.5" fill="#f59e0b" stroke="#d97706" strokeWidth="0.8" />
+        <line x1="0" y1="3" x2="-15" y2="50" stroke="#38bdf8" strokeWidth="1" strokeDasharray="3 2" />
+        <ellipse cx="-15" cy="55" rx="8" ry="16" fill="#475569" stroke="#94a3b8" strokeWidth="1.2" />
+        <text x="-15" y="58" textAnchor="middle" className="text-[7.5px] font-bold fill-white">30号</text>
       </g>
 
-      {/* Hook & Bait Callout */}
-      <rect x="260" y="260" width="265" height="42" rx="8" className="fill-red-50 dark:fill-red-950/40 stroke stroke-red-300 dark:stroke-red-800" />
-      <text x="270" y="277" className="text-[11px] font-bold fill-red-800 dark:fill-red-300">石鯛針 15〜18号 + ガンガゼウニ / サザエ</text>
-      <text x="270" y="293" className="text-[9.5px] fill-slate-600 dark:fill-slate-400">ウニ通しで芯に貫通。竿先が海中へ突き刺さる本アタリで大アワセ！</text>
-    </svg>
+      <line x1="338" y1="185" x2="410" y2="215" stroke="#e2e8f0" strokeWidth="1.8" />
+
+      <g transform="translate(410, 215)">
+        <path d="M 0 0 L 12 5 Q 22 10, 18 20 Q 12 25, 6 18" fill="none" stroke="#f8fafc" strokeWidth="2.2" />
+        <circle cx="16" cy="14" r="10" fill="#0f172a" stroke="#334155" strokeWidth="1.5" />
+        <line x1="16" y1="4" x2="16" y2="-6" stroke="#94a3b8" strokeWidth="1.2" />
+        <line x1="24" y1="8" x2="34" y2="0" stroke="#94a3b8" strokeWidth="1.2" />
+        <line x1="26" y1="16" x2="38" y2="16" stroke="#94a3b8" strokeWidth="1.2" />
+        <line x1="22" y1="22" x2="32" y2="30" stroke="#94a3b8" strokeWidth="1.2" />
+        <line x1="14" y1="24" x2="12" y2="34" stroke="#94a3b8" strokeWidth="1.2" />
+        <line x1="8" y1="20" x2="-2" y2="28" stroke="#94a3b8" strokeWidth="1.2" />
+        <line x1="6" y1="12" x2="-4" y2="10" stroke="#94a3b8" strokeWidth="1.2" />
+        <line x1="8" y1="6" x2="0" y2="-2" stroke="#94a3b8" strokeWidth="1.2" />
+        <text x="32" y="28" className="text-[7.5px] font-bold fill-sky-200">生ガンガゼウニ</text>
+      </g>
+
+      <g transform="translate(430, 250)" opacity="0.65">
+        <ellipse cx="25" cy="0" rx="35" ry="20" fill="#334155" stroke="#64748b" strokeWidth="1" />
+        <line x1="10" y1="-18" x2="10" y2="18" stroke="#0f172a" strokeWidth="3" />
+        <line x1="22" y1="-20" x2="22" y2="20" stroke="#0f172a" strokeWidth="3" />
+        <line x1="34" y1="-19" x2="34" y2="19" stroke="#0f172a" strokeWidth="3" />
+        <polygon points="60,0 75,-12 70,0 75,12" fill="#334155" />
+        <circle cx="5" cy="-5" r="2.5" fill="#fef08a" />
+        <text x="15" y="30" className="text-[7.5px] font-bold fill-slate-300">石鯛の本アタリ</text>
+      </g>
+    </BlueprintCanvas>
   );
 }
 
-// 13. サーフフラット＆巨魚キャスティング仕掛け
+// ─────────────────────────────────────────────────────────────
+// 13. サーフフラット＆巨魚仕掛け (FIG-13)
+// ─────────────────────────────────────────────────────────────
 function SurfFlatDiagram() {
   return (
-    <svg
-      viewBox="0 0 540 330"
-      className="w-full h-auto max-h-[340px] select-none rounded-2xl bg-gradient-to-b from-sky-100/70 via-white to-amber-50/70 dark:from-slate-900 dark:via-slate-900 dark:to-amber-950/40 border border-slate-200 dark:border-slate-800"
+    <BlueprintCanvas
+      figNo="FIG-13"
+      title="サーフフラット＆巨魚キャスティング仕掛け"
+      subtitle="DWG REF: #SFF-13 / SURF CASTING ARCHITECTURE / SCALE: NON-SCALE"
+      targetSpecies="ヒラメ・マゴチ・オオニベ・青物"
+      standardDepth="砂底〜底上50cm (離岸流・ブレイク)"
+      mainLineSpec="PE 1.0〜1.5号 (8本編み 200〜300m)"
+      styleSpec="ヘビーシンペン/ジグヘッド 遠投トレース"
     >
-      <defs>
-        <linearGradient id="currentFlow" x1="0%" y1="0%" x2="100%" y2="0%">
-          <stop offset="0%" stopColor="#0284c7" stopOpacity="0.1" />
-          <stop offset="50%" stopColor="#0ea5e9" stopOpacity="0.3" />
-          <stop offset="100%" stopColor="#0284c7" stopOpacity="0.1" />
-        </linearGradient>
-      </defs>
+      <SpecBox x={20} y={60} w={154} h={42} num={1} title="キャスティングPE" spec="PE 1.0〜1.2号 200m+" note="風を切り裂き100m超の遠投性能" />
+      <SpecBox x={190} y={55} w={150} h={42} num={2} title="耐摩耗リーダー" spec="フロロ 5〜7号 (20〜25lb) 1.5m" note="海底の砂擦れに強い高硬度仕様" />
+      <SpecBox x={370} y={65} w={165} h={42} num={3} title="サーフルアー" spec="ヘビーシンペン 30〜40g / ワーム" note="ボトム感知力と遠投性を両立" />
+      <SpecBox x={20} y={230} w={154} h={42} num={4} title="ボトムトレース釣法" spec="底から50cm上をスローリトリーブ" note="離岸流やブレイクの切れ目を横切る" />
 
-      {/* Surf Break & Slope (Sandy Beach to Deep) */}
-      <path d="M 0 250 Q 120 255, 200 270 Q 320 285, 540 285 L 540 330 L 0 330 Z" fill="#fef3c7" className="dark:fill-amber-950/40" />
-      <line x1="0" y1="250" x2="200" y2="270" stroke="#d97706" strokeWidth="1.5" strokeDasharray="6 3" opacity="0.6" />
-      
-      {/* Rip Current (離岸流ゾーン) */}
-      <rect x="250" y="90" width="130" height="195" fill="url(#currentFlow)" rx="10" />
-      <path d="M 315 270 L 315 110" stroke="#0284c7" strokeWidth="1.5" strokeDasharray="5 3" opacity="0.7" />
-      <polygon points="315,100 310,112 320,112" fill="#0284c7" opacity="0.8" />
-      <text x="270" y="105" className="text-[10px] font-bold fill-sky-700 dark:fill-sky-300">🌊 離岸流 (カレント)</text>
+      <LeaderLine points="174,81 210,81 220,105" />
+      <LeaderLine points="265,97 265,115 270,125" />
+      <LeaderLine points="370,86 330,86 360,180" />
+      <LeaderLine points="174,251 220,251 280,250" />
 
-      {/* Flatfish (Hirame) Camouflaged on Sand Bed */}
-      <g transform="translate(420, 260) rotate(-10)">
-        <ellipse cx="0" cy="0" rx="35" ry="18" fill="#a8a29e" stroke="#78716c" strokeWidth="1.2" className="dark:fill-amber-900/40 dark:stroke-amber-700" />
-        <polygon points="35,0 48,-10 46,0 48,10" fill="#78716c" />
-        {/* Two Eyes looking UP */}
-        <circle cx="-12" cy="-4" r="2.5" fill="#fef08a" stroke="#0f172a" strokeWidth="1" />
-        <circle cx="-6" cy="-6" r="2.5" fill="#fef08a" stroke="#0f172a" strokeWidth="1" />
-        <circle cx="-12" cy="-4" r="1" fill="#0f172a" />
-        <circle cx="-6" cy="-6" r="1" fill="#0f172a" />
-        <text x="-25" y="28" className="text-[9.5px] font-bold fill-stone-600 dark:fill-stone-300">潜むヒラメ/マゴチ</text>
+      <g opacity="0.35">
+        <path d="M 20 220 Q 150 250, 260 260 Q 360 230, 440 260 L 540 290" fill="none" stroke="#0284c7" strokeWidth="1" strokeDasharray="3 3" />
+        <text x="350" y="225" className="text-[7.5px] font-mono fill-cyan-300">SAND BAR (浅瀬馬の背)</text>
+        <text x="470" y="275" className="text-[7.5px] font-mono fill-cyan-300">OUTER BREAK (沖ブレイク)</text>
       </g>
 
-      {/* Long Surf Rod (Left Top) */}
-      <path d="M 20 25 Q 90 35, 170 65" stroke="#334155" strokeWidth="4.5" strokeLinecap="round" fill="none" />
-      <circle cx="170" cy="65" r="4" fill="#0ea5e9" />
-      <text x="25" y="16" className="text-[11px] font-bold fill-slate-800 dark:fill-slate-200">サーフロッド 10.6〜11.0ft (超遠投キャスティング)</text>
+      <path d="M 50 65 L 68 75 L 66 78 L 48 68 Z" fill="#64748b" stroke="#94a3b8" strokeWidth="0.8" />
+      <path d="M 68 76 Q 180 95, 280 120" fill="none" stroke="#10b981" strokeWidth="1.8" />
+      <text x="140" y="85" className="text-[7.5px] font-bold fill-emerald-400">PE 1.2号 8本編み</text>
 
-      {/* High-Grade PE Line */}
-      <path d="M 170 65 Q 240 105, 290 135" stroke="#10b981" strokeWidth="2" strokeDasharray="5 2" fill="none" />
-      <rect x="175" y="95" width="135" height="18" rx="4" className="fill-emerald-500/10 dark:fill-emerald-500/20 stroke stroke-emerald-500/40" />
-      <text x="180" y="108" className="text-[10px] font-bold fill-emerald-700 dark:fill-emerald-300">PEライン 1.0〜1.5号 (200m+)</text>
+      <circle cx="280" cy="120" r="3.5" fill="#047857" stroke="#34d399" strokeWidth="1" />
+      <line x1="284" y1="120" x2="360" y2="180" stroke="#38bdf8" strokeWidth="1.6" />
 
-      {/* FG Knot */}
-      <circle cx="290" cy="135" r="4" fill="#f59e0b" />
-      <text x="255" y="155" className="text-[9px] font-bold fill-amber-600 dark:fill-amber-400">FGノット</text>
-
-      {/* Shock Leader */}
-      <line x1="290" y1="135" x2="370" y2="185" stroke="#0ea5e9" strokeWidth="2.5" />
-      <text x="295" y="175" className="text-[9.5px] font-bold fill-sky-700 dark:fill-sky-300">フロロ 5〜7号 (1.5m)</text>
-
-      {/* Heavy Sinking Pencil / Jighead Lure (38g) */}
-      <g transform="translate(370, 185) rotate(12)">
-        {/* Lure Body */}
-        <path d="M 0 0 Q 35 -8, 75 -2 Q 85 0, 75 4 Q 35 8, 0 0 Z" fill="#38bdf8" stroke="#0284c7" strokeWidth="1.5" />
-        <polygon points="15,-4 45,-5 40,0 15,-1" fill="#ec4899" opacity="0.85" />
-        {/* Eye */}
-        <circle cx="8" cy="0" r="3" fill="#fef08a" stroke="#0f172a" strokeWidth="1" />
-        <circle cx="8" cy="0" r="1.5" fill="#0f172a" />
-        {/* Center Treble Hook */}
-        <path d="M 35 5 L 35 15 M 35 15 Q 40 20, 36 24 M 35 15 Q 30 20, 34 24" stroke="#64748b" strokeWidth="1.6" fill="none" />
-        {/* Rear Treble Hook */}
-        <path d="M 75 0 L 85 0 M 85 0 Q 90 6, 86 11 M 85 0 Q 90 -6, 86 -11" stroke="#64748b" strokeWidth="1.6" fill="none" />
+      <g transform="translate(365, 182) rotate(10)">
+        <ellipse cx="35" cy="0" rx="35" ry="6" fill="#0284c7" fillOpacity="0.8" stroke="#38bdf8" strokeWidth="1.2" />
+        <line x1="0" y1="0" x2="70" y2="0" stroke="#f8fafc" strokeWidth="0.8" />
+        <circle cx="8" cy="-1" r="2.5" fill="#fef08a" stroke="#0f172a" strokeWidth="0.6" />
+        <g transform="translate(25, 6)">
+          <path d="M 0 0 L 0 6 L -4 10 M 0 6 L 4 10" stroke="#f8fafc" strokeWidth="1.2" />
+        </g>
+        <g transform="translate(70, 0)">
+          <path d="M 0 0 L 6 0 L 10 -4 M 6 0 L 10 4" stroke="#f8fafc" strokeWidth="1.2" />
+        </g>
+        <text x="35" y="16" textAnchor="middle" className="text-[7px] font-bold fill-sky-200">38g ヘビーシンペン</text>
       </g>
 
-      {/* Trace Path (50cm above seabed) */}
-      <path d="M 230 230 Q 320 220, 420 235" stroke="#ec4899" strokeWidth="1.5" strokeDasharray="4 3" fill="none" />
-      <text x="225" y="222" className="text-[9px] font-bold fill-pink-600 dark:fill-pink-400">底から50cm上をスイミング</text>
+      <g transform="translate(320, 270)" opacity="0.7">
+        <ellipse cx="40" cy="0" rx="45" ry="16" fill="#1e293b" stroke="#475569" strokeWidth="1" />
+        <polygon points="85,0 98,-10 95,0 98,10" fill="#1e293b" />
+        <circle cx="15" cy="-4" r="2" fill="#fef08a" />
+        <circle cx="18" cy="-2" r="2" fill="#fef08a" />
+        <text x="25" y="24" className="text-[7.5px] font-bold fill-slate-300">砂に潜むヒラメ (捕食体勢)</text>
+      </g>
 
-      {/* Callout */}
-      <rect x="250" y="270" width="275" height="42" rx="8" className="fill-sky-50 dark:fill-sky-950/50 stroke stroke-sky-300 dark:stroke-sky-800" />
-      <text x="260" y="287" className="text-[11px] font-bold fill-sky-900 dark:fill-sky-300">ヘビーシンペン 30〜45g / ジグヘッドワーム</text>
-      <text x="260" y="303" className="text-[9.5px] fill-slate-600 dark:fill-slate-400">カケアガリや離岸流をスローに通し、ストップ＆フォールで食わせる！</text>
-    </svg>
+      <path d="M 320 185 Q 360 178, 440 182" fill="none" stroke="#38bdf8" strokeWidth="1" strokeDasharray="3 2" markerEnd="url(#arrowEnd)" />
+    </BlueprintCanvas>
   );
 }
 
-// 14. クエ・大型底物夜釣りぶっこみ仕掛け
+// ─────────────────────────────────────────────────────────────
+// 14. クエ・大型底物磯夜釣りぶっこみ仕掛け (FIG-14)
+// ─────────────────────────────────────────────────────────────
 function KueDiagram() {
   return (
-    <svg
-      viewBox="0 0 540 330"
-      className="w-full h-auto max-h-[340px] select-none rounded-2xl bg-gradient-to-b from-slate-950 via-slate-900 to-indigo-950 border border-slate-800"
+    <BlueprintCanvas
+      figNo="FIG-14"
+      title="クエ・大型底物磯夜釣りぶっこみ仕掛け"
+      subtitle="DWG REF: #KUE-14 / MONSTER GROUPER RIG / SCALE: NON-SCALE"
+      targetSpecies="クエ (モロコ・アラ 30kg超)・タマン"
+      standardDepth="海底巨大岩礁地帯・洞窟スリット (15〜50m)"
+      mainLineSpec="ナイロン 80〜100号 (または PE 30号)"
+      styleSpec="アンカー固定板バネ + ワイロンワイヤー"
     >
-      <defs>
-        <radialGradient id="nightMoonGlow" cx="90%" cy="10%" r="50%">
-          <stop offset="0%" stopColor="#38bdf8" stopOpacity="0.25" />
-          <stop offset="100%" stopColor="#0284c7" stopOpacity="0" />
-        </radialGradient>
-      </defs>
+      <SpecBox x={20} y={60} w={154} h={42} num={1} title="板バネ竿受け" spec="磯岩盤にアンカーボルトで完全固定" note="怪魚の初速100kg超の突進を受け止める" />
+      <SpecBox x={190} y={55} w={150} h={42} num={2} title="超極太道糸" spec="ナイロン 80〜100号" note="絶対に切れない極限の怪魚規格" />
+      <SpecBox x={20} y={190} w={154} h={42} num={3} title="ワイロンワイヤー" spec="#30 1.5m (ステンレス7×7被覆)" note="クエの鋭利な犬歯やエラ洗いをガード" />
+      <SpecBox x={360} y={190} w={172} h={42} num={4} title="クエ針＆丸ごとエサ" spec="クエ針 35〜40号 + サバ丸ごと1匹" note="一撃で根に潜る巨魚を即座に引き離す" />
 
-      {/* Night Atmosphere */}
-      <circle cx="480" cy="30" r="120" fill="url(#nightMoonGlow)" />
-      <text x="420" y="25" className="text-[10px] font-bold fill-cyan-300">🌙 磯夜釣り・月夜</text>
+      <LeaderLine points="174,81 210,81 110,120" />
+      <LeaderLine points="265,97 265,115 230,120" />
+      <LeaderLine points="174,211 220,211 290,165" />
+      <LeaderLine points="360,211 320,211 360,225" />
 
-      {/* Heavy Rocky Seabed & Cavern on Bottom */}
-      <path d="M 0 270 L 70 240 L 140 275 L 260 250 L 360 280 L 540 265 L 540 330 L 0 330 Z" fill="#0f172a" />
-      <path d="M 360 280 Q 420 255, 480 285" stroke="#334155" strokeWidth="2" fill="none" />
-      <text x="14" y="315" className="text-[10px] font-bold fill-slate-400">海底 (巨大岩礁・クエの潜む巣穴)</text>
-
-      {/* Stainless Spring Plate Stand (板バネ竿受け) anchored into rock */}
-      <g transform="translate(10, 15)">
-        {/* Anchor bolts & Base plate */}
-        <rect x="15" y="65" width="25" height="8" fill="#94a3b8" rx="2" />
-        <line x1="20" y1="73" x2="20" y2="88" stroke="#cbd5e1" strokeWidth="3" />
-        <line x1="35" y1="73" x2="35" y2="88" stroke="#cbd5e1" strokeWidth="3" />
-        {/* Spring Plate (板バネ) curved */}
-        <path d="M 25 65 Q 40 45, 55 50" stroke="#cbd5e1" strokeWidth="6" strokeLinecap="round" fill="none" />
-        {/* Giant Kue Rod 80〜100号 */}
-        <path d="M 30 60 Q 90 45, 165 60" stroke="#f59e0b" strokeWidth="6.5" strokeLinecap="round" fill="none" />
-        {/* Huge Lever Drag Reel */}
-        <rect x="60" y="55" width="18" height="20" rx="3" fill="#e2e8f0" stroke="#475569" strokeWidth="1.5" />
-        <circle cx="69" cy="65" r="5" fill="#f59e0b" />
-        <text x="30" y="25" className="text-[11px] font-bold fill-amber-300">クエ竿 80〜100号 + アンカー固定板バネ</text>
+      <g transform="translate(45, 90)">
+        <polygon points="-25,45 40,45 35,25 -25,25" fill="#1e293b" stroke="#475569" strokeWidth="1" />
+        <line x1="-10" y1="25" x2="-10" y2="40" stroke="#f8fafc" strokeWidth="2.5" />
+        <line x1="15" y1="25" x2="15" y2="40" stroke="#f8fafc" strokeWidth="2.5" />
+        <path d="M -15 25 Q 10 20, 25 -10 L 35 -5 Q 20 22, -15 25 Z" fill="#64748b" stroke="#94a3b8" strokeWidth="1.2" />
+        <text x="-15" y="58" className="text-[7px] font-bold fill-slate-300">アンカー固定板バネ</text>
       </g>
 
-      {/* Giant Nylon Main Line (80〜100号) */}
-      <path d="M 175 75 Q 230 110, 260 145" stroke="#fbbf24" strokeWidth="4" fill="none" />
-      <rect x="165" y="98" width="150" height="18" rx="4" fill="#1e293b" stroke="#f59e0b" strokeWidth="1" />
-      <text x="170" y="111" className="text-[10px] font-bold fill-amber-300">道糸: 超極太ナイロン 80〜100号</text>
+      <path d="M 75 80 Q 150 100, 240 120" fill="none" stroke="#fbbf24" strokeWidth="3.2" />
+      <text x="130" y="90" className="text-[7.5px] font-bold fill-amber-300">ナイロン 100号 (破断強度100kg+)</text>
 
-      {/* Heavy Duty Rotary Swivel (大型親子サルカン) */}
-      <g transform="translate(260, 145)">
-        <circle cx="0" cy="0" r="5.5" fill="#64748b" stroke="#94a3b8" strokeWidth="2" />
-        {/* Breakaway Sinker line (捨て糸 14号) */}
-        <line x1="0" y1="0" x2="-25" y2="85" stroke="#ef4444" strokeWidth="2" strokeDasharray="4 2" />
-        {/* Giant Lead Sinker (50〜80号) */}
-        <polygon points="-25,85 -15,120 -35,120" fill="#64748b" stroke="#334155" strokeWidth="2" />
-        <text x="-105" y="98" className="text-[9.5px] font-bold fill-rose-300">捨て糸 12〜16号</text>
-        <text x="-105" y="112" className="text-[9.5px] font-bold fill-slate-300">巨大オモリ 50〜80号</text>
-
-        {/* Wylon Wire Leader (#30〜28 1.5m) */}
-        <line x1="0" y1="0" x2="80" y2="45" stroke="#e2e8f0" strokeWidth="3" />
+      <g transform="translate(240, 120)">
+        <circle cx="0" cy="0" r="5" fill="#334155" stroke="#94a3b8" strokeWidth="1.5" />
+        <circle cx="0" cy="0" r="2" fill="#0f172a" />
       </g>
-      <rect x="290" y="145" width="165" height="28" rx="5" fill="#0f172a" stroke="#94a3b8" strokeWidth="1" />
-      <text x="296" y="158" className="text-[9.5px] font-bold fill-slate-200">ワイロンワイヤー (#30 1.5m)</text>
-      <text x="296" y="168" className="text-[8.5px] fill-slate-400">巨大怪魚の鋭い歯とエラ洗いに耐える</text>
 
-      {/* Giant Kue Hook (35〜40号) & Whole Baitfish (サバ1匹掛け) */}
-      <g transform="translate(340, 190)">
-        {/* Giant Hook */}
-        <path d="M 0 0 L 15 10 Q 24 18, 16 28 Q 6 32, 0 22" stroke="#f8fafc" strokeWidth="3.8" fill="none" />
+      <line x1="245" y1="120" x2="350" y2="185" stroke="#cbd5e1" strokeWidth="2.5" strokeDasharray="6 2" />
+      <text x="260" y="160" className="text-[7px] font-mono fill-slate-200">ワイロンワイヤー #30</text>
 
-        {/* Whole Mackerel/Baitfish (サバ・ムロアジ1匹掛け) */}
-        <g transform="translate(20, 20) rotate(15)">
-          <ellipse cx="25" cy="0" rx="35" ry="12" fill="#0284c7" stroke="#0369a1" strokeWidth="1.5" />
-          <polygon points="58,0 72,-8 68,0 72,8" fill="#0284c7" />
-          <circle cx="5" cy="-2" r="2.5" fill="#fef08a" stroke="#0f172a" strokeWidth="1" />
-          {/* Mackerel back stripes */}
-          <path d="M 15 -10 L 18 -4 M 25 -11 L 28 -4 M 35 -10 L 38 -4" stroke="#082f49" strokeWidth="2" />
-          <text x="-5" y="24" className="text-[9.5px] font-bold fill-sky-200">サバ/ムロアジ 1匹掛け</text>
+      <g transform="translate(240, 125)">
+        <line x1="0" y1="0" x2="-15" y2="110" stroke="#38bdf8" strokeWidth="1.2" strokeDasharray="3 2" />
+        <ellipse cx="-15" cy="120" rx="10" ry="24" fill="#334155" stroke="#94a3b8" strokeWidth="1.5" />
+        <text x="-15" y="123" textAnchor="middle" className="text-[8px] font-bold fill-white">60号</text>
+        <text x="-15" y="150" textAnchor="middle" className="text-[6.5px] font-bold fill-cyan-300">捨て糸 12号</text>
+      </g>
+
+      <g transform="translate(350, 185)">
+        <path d="M 0 0 L 14 6 Q 24 12, 18 24 Q 10 30, 2 20" fill="none" stroke="#f8fafc" strokeWidth="2.8" />
+        <g transform="translate(18, 18) rotate(15)">
+          <ellipse cx="28" cy="0" rx="35" ry="12" fill="#0284c7" stroke="#38bdf8" strokeWidth="1.2" />
+          <polygon points="63,0 75,-8 72,0 75,8" fill="#0284c7" />
+          <circle cx="6" cy="-2" r="2.5" fill="#fef08a" stroke="#0f172a" strokeWidth="0.8" />
+          <line x1="16" y1="-10" x2="20" y2="-3" stroke="#09111e" strokeWidth="1.5" />
+          <line x1="28" y1="-11" x2="32" y2="-3" stroke="#09111e" strokeWidth="1.5" />
+          <line x1="40" y1="-10" x2="44" y2="-3" stroke="#09111e" strokeWidth="1.5" />
+          <text x="0" y="24" className="text-[7.5px] font-bold fill-sky-200">活きサバ 1匹掛け</text>
         </g>
       </g>
 
-      {/* Giant Kue Lurking (Giant Grouper Silhouette) */}
-      <g transform="translate(410, 240)" opacity="0.65">
-        <ellipse cx="40" cy="0" rx="55" ry="24" fill="#334155" stroke="#64748b" strokeWidth="2" />
-        <polygon points="90,0 110,-15 105,0 110,15" fill="#334155" />
+      <g transform="translate(420, 250)" opacity="0.6">
+        <ellipse cx="40" cy="0" rx="55" ry="24" fill="#1e293b" stroke="#475569" strokeWidth="1.5" />
+        <polygon points="95,0 115,-15 110,0 115,15" fill="#1e293b" />
         <circle cx="10" cy="-6" r="3" fill="#facc15" />
-        <text x="15" y="38" className="text-[10px] font-extrabold fill-slate-300">伝説の巨魚 クエ (アラ)</text>
+        <text x="15" y="38" className="text-[8px] font-extrabold fill-slate-300">伝説の巨魚 クエ (30kg超)</text>
       </g>
-
-      {/* Callout */}
-      <rect x="250" y="260" width="275" height="42" rx="8" fill="#1e1b4b" stroke="#818cf8" strokeWidth="1" />
-      <text x="260" y="277" className="text-[11px] font-bold fill-indigo-200">クエ針 35〜45号 + 活きサバ/冷凍ムロアジ</text>
-      <text x="260" y="293" className="text-[9.5px] fill-slate-300">板バネが海面に突き刺さる！一瞬で根から引き離す超絶ファイト</text>
-    </svg>
+    </BlueprintCanvas>
   );
 }
 
-// Default Fallback
+// ─────────────────────────────────────────────────────────────
+// Default Fallback Diagram (FIG-00)
+// ─────────────────────────────────────────────────────────────
 function DefaultRigDiagram({ name }: { name: string }) {
   return (
-    <div className="w-full h-48 rounded-2xl bg-slate-100 dark:bg-slate-800 flex flex-col items-center justify-center text-slate-400 space-y-2 border border-slate-200 dark:border-slate-700">
-      <span className="text-2xl">🎣</span>
-      <span className="text-xs font-bold text-slate-600 dark:text-slate-300">{name} 仕掛け構成図</span>
-    </div>
+    <BlueprintCanvas
+      figNo="FIG-00"
+      title={`${name} 仕掛け構成図`}
+      subtitle="DWG REF: #DFT-00 / STANDARD RIG SCHEMATIC / SCALE: NON-SCALE"
+      targetSpecies="対象魚種全般"
+      standardDepth="表層〜底層 (全層対応)"
+      mainLineSpec="推奨タックルに準拠"
+      styleSpec="標準仕掛け仕様"
+    >
+      <SpecBox x={20} y={60} w={154} h={42} num={1} title="道糸 (メインライン)" spec="標準推奨ライン" note="対象魚に応じた号数をセレクト" />
+      <SpecBox x={380} y={60} w={154} h={42} num={2} title="ハリス / リーダー" spec="フロロカーボン仕様" note="耐摩耗性・根ズレ対策" />
+      <SpecBox x={20} y={190} w={154} h={42} num={3} title="接続金具 / サルカン" spec="ローリングスイベル" note="糸ヨレ解消・スムーズな回転" />
+      <SpecBox x={360} y={230} w={170} h={42} num={4} title="針 / ルアー" spec="専用フックシステム" note="確実なフッキングを実現" />
+
+      <line x1="280" y1="50" x2="280" y2="160" stroke="#fbbf24" strokeWidth="1.6" />
+      <circle cx="280" cy="165" r="3.5" fill="#475569" stroke="#94a3b8" strokeWidth="1" />
+      <line x1="280" y1="170" x2="280" y2="270" stroke="#38bdf8" strokeWidth="1.4" />
+      <circle cx="280" cy="220" r="4" fill="#64748b" stroke="#cbd5e1" strokeWidth="0.8" />
+      <path d="M 280 270 L 280 280 Q 280 288, 288 288 Q 296 288, 294 278" fill="none" stroke="#f8fafc" strokeWidth="1.6" />
+
+      <text x="280" y="140" textAnchor="middle" className="text-[9px] font-mono fill-sky-300">{name}</text>
+    </BlueprintCanvas>
   );
 }
