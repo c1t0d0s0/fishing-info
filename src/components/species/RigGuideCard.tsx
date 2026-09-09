@@ -1,5 +1,5 @@
 import { RigGuide } from "@/types/species";
-import { Anchor, Sparkles, Crosshair } from "lucide-react";
+import { Anchor, Sparkles, Crosshair, ZoomIn } from "lucide-react";
 import RigDiagram from "./RigDiagram";
 
 interface RigGuideCardProps {
@@ -46,8 +46,9 @@ export default function RigGuideCard({ rig }: RigGuideCardProps) {
             <Sparkles className="w-3.5 h-3.5" />
             仕掛け・タックル構成図解
           </span>
-          <span className="text-[11px] font-normal text-slate-400">
-            全体バランス & 接続図
+          <span className="text-[11px] font-medium text-ocean-600 dark:text-ocean-400 flex items-center gap-1 bg-ocean-50 dark:bg-ocean-950/60 px-2 py-0.5 rounded-full border border-ocean-200/60 dark:border-ocean-800/60">
+            <ZoomIn className="w-3 h-3" />
+            クリックで拡大
           </span>
         </div>
         <RigDiagram rigId={id} name={name} />

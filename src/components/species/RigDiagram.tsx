@@ -1,43 +1,271 @@
-import React from "react";
+"use client";
+
+import React, { useState, useEffect, useRef } from "react";
+import { createPortal } from "react-dom";
+import { ZoomIn, ZoomOut, X, RotateCcw } from "lucide-react";
 
 interface RigDiagramProps {
   rigId: string;
   name: string;
 }
 
+const ModalContext = React.createContext<boolean>(false);
+
 export default function RigDiagram({ rigId, name }: RigDiagramProps) {
-  switch (rigId) {
-    case "sabiki":
-      return <SabikiDiagram />;
-    case "ajing":
-      return <AjingDiagram />;
-    case "shore-jigging":
-      return <ShoreJiggingDiagram />;
-    case "eging":
-      return <EgingDiagram />;
-    case "fukase":
-      return <FukaseDiagram />;
-    case "choinage":
-      return <ChoinageDiagram />;
-    case "sayori-rig":
-      return <SayoriDiagram />;
-    case "tako-rig":
-      return <TakoDiagram />;
-    case "hechi-rig":
-      return <HechiDiagram />;
-    case "tenagaebi-rig":
-      return <TenagaebiDiagram />;
-    case "kawahagi-rig":
-      return <KawahagiDiagram />;
-    case "ishidai-rig":
-      return <IshidaiDiagram />;
-    case "surf-flat-rig":
-      return <SurfFlatDiagram />;
-    case "kue-rig":
-      return <KueDiagram />;
-    default:
-      return <DefaultRigDiagram name={name} />;
-  }
+  const [isOpen, setIsOpen] = useState(false);
+  const [zoomLevel, setZoomLevel] = useState(1);
+  const [mounted, setMounted] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [baseWidth, setBaseWidth] = useState(920);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  // Measure container when modal opens or on resize
+  useEffect(() => {
+    if (!isOpen) return;
+
+    const measure = () => {
+      if (containerRef.current) {
+        const cw = containerRef.current.clientWidth;
+        const pad = window.innerWidth < 640 ? 16 : 48;
+        const available = cw - pad;
+        // Cap baseWidth to 950px on desktop so 100% fits nicely, but allow full container on small
+        const b = Math.min(available, 950);
+        setBaseWidth(Math.max(320, b));
+      }
+    };
+
+    // Initial measure after DOM paint
+    const timer = setTimeout(measure, 50);
+    window.addEventListener("resize", measure);
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setIsOpen(false);
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    const prevOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+
+    return () => {
+      clearTimeout(timer);
+      window.removeEventListener("resize", measure);
+      window.removeEventListener("keydown", handleKeyDown);
+      document.body.style.overflow = prevOverflow;
+    };
+  }, [isOpen]);
+
+  const handleWheel = (e: React.WheelEvent) => {
+    if (e.ctrlKey || e.metaKey) {
+      e.preventDefault();
+      if (e.deltaY < 0) {
+        setZoomLevel((z) => Math.min(2.5, Number((z + 0.1).toFixed(2))));
+      } else {
+        setZoomLevel((z) => Math.max(0.8, Number((z - 0.1).toFixed(2))));
+      }
+    }
+  };
+
+  const renderContent = () => {
+    switch (rigId) {
+      case "sabiki":
+        return <SabikiDiagram />;
+      case "ajing":
+        return <AjingDiagram />;
+      case "shore-jigging":
+        return <ShoreJiggingDiagram />;
+      case "eging":
+        return <EgingDiagram />;
+      case "fukase":
+        return <FukaseDiagram />;
+      case "choinage":
+        return <ChoinageDiagram />;
+      case "sayori-rig":
+        return <SayoriDiagram />;
+      case "tako-rig":
+        return <TakoDiagram />;
+      case "hechi-rig":
+        return <HechiDiagram />;
+      case "tenagaebi-rig":
+        return <TenagaebiDiagram />;
+      case "kawahagi-rig":
+        return <KawahagiDiagram />;
+      case "ishidai-rig":
+        return <IshidaiDiagram />;
+      case "surf-flat-rig":
+        return <SurfFlatDiagram />;
+      case "kue-rig":
+        return <KueDiagram />;
+      default:
+        return <DefaultRigDiagram name={name} />;
+    }
+  };
+
+  return (
+    <>
+      {/* Clickable Card Diagram (Thumbnail View) */}
+      <div
+        onClick={() => {
+          setZoomLevel(1);
+          setIsOpen(true);
+        }}
+        className="relative group cursor-zoom-in rounded-xl overflow-hidden focus:outline-none focus:ring-2 focus:ring-sky-500/60 transition-transform duration-200 hover:scale-[1.01]"
+        role="button"
+        tabIndex={0}
+        onKeyDown={(e) => {
+          if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            setZoomLevel(1);
+            setIsOpen(true);
+          }
+        }}
+        title="クリックして仕掛け図を拡大表示"
+      >
+        <ModalContext.Provider value={false}>
+          {renderContent()}
+        </ModalContext.Provider>
+
+        {/* Hover / Corner Badge */}
+        <div className="absolute top-2.5 right-2.5 flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-slate-950/85 hover:bg-sky-600 text-sky-200 hover:text-white border border-sky-500/40 backdrop-blur-md shadow-lg transition-all text-[11px] font-semibold opacity-85 group-hover:opacity-100 group-hover:scale-105 pointer-events-none">
+          <ZoomIn className="w-3.5 h-3.5 text-sky-400 group-hover:text-white" />
+          <span>クリックで拡大</span>
+        </div>
+      </div>
+
+      {/* Lightbox Modal (Enlarged View) */}
+      {isOpen && mounted && createPortal(
+        <div
+          className="fixed inset-0 z-[9999] flex items-center justify-center bg-slate-950/85 backdrop-blur-md p-2 sm:p-4 md:p-6 animate-in fade-in duration-200"
+          onClick={() => setIsOpen(false)}
+        >
+          <div
+            className="relative w-full max-w-6xl bg-slate-900 border border-sky-700/80 rounded-2xl shadow-2xl overflow-hidden flex flex-col h-[92vh]"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Modal Header Toolbar */}
+            <div className="flex items-center justify-between px-3 sm:px-4 py-2.5 sm:py-3 bg-slate-950/90 border-b border-sky-900/60 text-white shrink-0">
+              <div className="flex items-center gap-2 sm:gap-3 min-w-0">
+                <div className="px-2 py-0.5 rounded bg-sky-950/80 border border-sky-600/70 text-[10px] sm:text-xs font-mono font-bold text-sky-300 shrink-0">
+                  CAD BLUEPRINT
+                </div>
+                <h3 className="text-xs sm:text-sm md:text-base font-bold text-slate-100 truncate">
+                  {name} 仕掛け構成図面
+                </h3>
+              </div>
+
+              {/* Controls Toolbar */}
+              <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
+                {/* Stepper Buttons */}
+                <div className="flex items-center bg-slate-800/90 border border-slate-700 rounded-lg p-0.5">
+                  <button
+                    type="button"
+                    onClick={() => setZoomLevel((z) => Math.max(0.8, Number((z - 0.2).toFixed(1))))}
+                    disabled={zoomLevel <= 0.8}
+                    className="p-1 hover:bg-slate-700 disabled:opacity-30 disabled:hover:bg-transparent text-slate-300 hover:text-white rounded transition-colors"
+                    title="縮小 (80%まで)"
+                  >
+                    <ZoomOut className="w-4 h-4" />
+                  </button>
+                  <span className="text-[11px] font-mono px-1.5 sm:px-2 text-slate-200 min-w-[44px] text-center font-bold">
+                    {Math.round(zoomLevel * 100)}%
+                  </span>
+                  <button
+                    type="button"
+                    onClick={() => setZoomLevel((z) => Math.min(2.5, Number((z + 0.2).toFixed(1))))}
+                    disabled={zoomLevel >= 2.5}
+                    className="p-1 hover:bg-slate-700 disabled:opacity-30 disabled:hover:bg-transparent text-slate-300 hover:text-white rounded transition-colors"
+                    title="拡大 (250%まで)"
+                  >
+                    <ZoomIn className="w-4 h-4" />
+                  </button>
+                </div>
+
+                {/* Quick Presets */}
+                <div className="hidden sm:flex items-center gap-1">
+                  {[1.0, 1.5, 2.0].map((preset) => (
+                    <button
+                      key={preset}
+                      type="button"
+                      onClick={() => setZoomLevel(preset)}
+                      className={`px-2 py-1 rounded text-[11px] font-mono transition-all border ${
+                        Math.abs(zoomLevel - preset) < 0.05
+                          ? "bg-sky-600 border-sky-400 text-white font-bold shadow"
+                          : "bg-slate-800/80 border-slate-700 text-slate-300 hover:bg-slate-700 hover:text-white"
+                      }`}
+                      title={`${Math.round(preset * 100)}% に設定`}
+                    >
+                      {Math.round(preset * 100)}%
+                    </button>
+                  ))}
+                </div>
+
+                {/* Reset button if not 1.0 */}
+                {zoomLevel !== 1 && (
+                  <button
+                    type="button"
+                    onClick={() => setZoomLevel(1)}
+                    className="p-1.5 hover:bg-slate-700 text-slate-300 hover:text-white rounded-lg transition-colors border border-slate-700 bg-slate-800/80"
+                    title="倍率を100%にリセット"
+                  >
+                    <RotateCcw className="w-3.5 h-3.5" />
+                  </button>
+                )}
+
+                {/* Close button */}
+                <button
+                  type="button"
+                  onClick={() => setIsOpen(false)}
+                  className="flex items-center gap-1 px-2.5 sm:px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-rose-600 text-slate-200 hover:text-white border border-slate-700 hover:border-rose-500 transition-all text-xs font-bold shadow"
+                  title="閉じる (Esc)"
+                >
+                  <X className="w-4 h-4" />
+                  <span className="hidden sm:inline">閉じる</span>
+                </button>
+              </div>
+            </div>
+
+            {/* Modal Canvas Body (Scrollable with zoom) */}
+            <div
+              ref={containerRef}
+              className="flex-1 overflow-auto p-3 sm:p-6 md:p-8 flex bg-[#070e1a]"
+              onWheel={handleWheel}
+            >
+              <div
+                style={{
+                  width: `${Math.round(baseWidth * zoomLevel)}px`,
+                  minWidth: `${Math.round(baseWidth * zoomLevel)}px`,
+                  maxWidth: "none",
+                  transition: "width 0.2s cubic-bezier(0.2, 0, 0, 1), min-width 0.2s cubic-bezier(0.2, 0, 0, 1)",
+                }}
+                className="m-auto shrink-0 select-none shadow-2xl rounded-xl cursor-default"
+                onDoubleClick={() => setZoomLevel((z) => (z > 1.2 ? 1 : 1.5))}
+                title="ダブルクリックで拡大切替"
+              >
+                <ModalContext.Provider value={true}>
+                  {renderContent()}
+                </ModalContext.Provider>
+              </div>
+            </div>
+
+            {/* Modal Footer Toolbar */}
+            <div className="px-3 sm:px-4 py-2 bg-slate-950/95 border-t border-sky-950/80 flex flex-col sm:flex-row items-center justify-between text-[10px] sm:text-[11px] text-slate-400 gap-1 shrink-0">
+              <span className="flex items-center gap-1.5">
+                <span className="inline-block w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                高解像度ベクター図面（文字・ハリス・寸法線を鮮明に拡大表示中）
+              </span>
+              <span className="text-slate-500">
+                ※ ダブルクリックで拡大切替 / 枠外クリックまたはEscキーで閉じます
+              </span>
+            </div>
+          </div>
+        </div>,
+        document.body
+      )}
+    </>
+  );
 }
 
 // ─────────────────────────────────────────────────────────────
@@ -65,10 +293,14 @@ function BlueprintCanvas({
   styleSpec,
   children,
 }: BlueprintProps) {
+  const inModal = React.useContext(ModalContext);
+
   return (
     <svg
       viewBox="0 0 560 360"
-      className="w-full h-auto max-h-[420px] select-none rounded-xl border border-sky-800/80 shadow-2xl bg-[#09111e] overflow-hidden font-mono"
+      className={`w-full h-auto select-none rounded-xl border border-sky-800/80 shadow-2xl bg-[#09111e] overflow-hidden font-mono block ${
+        inModal ? "" : "max-h-[360px]"
+      }`}
     >
       <defs>
         {/* CAD Fine Grid (20x20) */}
