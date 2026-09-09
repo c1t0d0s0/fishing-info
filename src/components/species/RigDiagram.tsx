@@ -272,6 +272,41 @@ export default function RigDiagram({ rigId, name }: RigDiagramProps) {
 // Common CAD Blueprint Canvas & Engineering Style Components
 // ─────────────────────────────────────────────────────────────
 
+interface FooterSpecCellProps {
+  x: number;
+  w: number;
+  label: string;
+  value: string;
+}
+
+function FooterSpecCell({ x, w, label, value }: FooterSpecCellProps) {
+  const maxTextWidth = w - 12;
+  const charWeight = Array.from(value).reduce(
+    (acc, ch) => acc + (ch.charCodeAt(0) > 127 ? 1 : 0.55),
+    0
+  );
+  const fontSize = charWeight > 17 ? 7.0 : charWeight > 13 ? 7.6 : 8.2;
+  const isOverflowing = charWeight * fontSize > maxTextWidth;
+
+  return (
+    <g transform={`translate(${x}, 0)`}>
+      <text x={6} y={10.5} className="text-[6.8px] fill-sky-400 font-bold tracking-wider font-mono">
+        {label}
+      </text>
+      <text
+        x={6}
+        y={21.5}
+        style={{ fontSize: `${fontSize}px` }}
+        textLength={isOverflowing ? maxTextWidth : undefined}
+        lengthAdjust={isOverflowing ? "spacingAndGlyphs" : undefined}
+        className="fill-slate-100 font-semibold"
+      >
+        {value}
+      </text>
+    </g>
+  );
+}
+
 interface BlueprintProps {
   figNo: string;
   title: string;
@@ -294,6 +329,10 @@ function BlueprintCanvas({
   children,
 }: BlueprintProps) {
   const inModal = React.useContext(ModalContext);
+
+  // Extract drawing code (e.g. #AJG-02 from "DWG REF: #AJG-02 / ...")
+  const dwgMatch = subtitle.match(/#([A-Z0-9-]+)/);
+  const dwgCode = dwgMatch ? `#${dwgMatch[1]}` : figNo;
 
   return (
     <svg
@@ -343,24 +382,49 @@ function BlueprintCanvas({
       <path d="M 545 336 L 545 345 L 536 345" fill="none" stroke="#38bdf8" strokeWidth="1.2" />
       <circle cx="541" cy="341" r="1.5" fill="#38bdf8" />
 
-      {/* Top Header / Title Block */}
-      <g transform="translate(18, 16)">
-        <rect x="0" y="0" width="58" height="18" rx="2" fill="#0369a1" fillOpacity="0.45" stroke="#38bdf8" strokeWidth="1" />
-        <text x="29" y="12.5" textAnchor="middle" className="text-[9px] font-bold fill-sky-200 tracking-wider">
+      {/* Top Header / CAD Title Banner */}
+      <g transform="translate(16, 12)">
+        <rect
+          x="0"
+          y="0"
+          width="528"
+          height="22"
+          rx="2"
+          fill="#031628"
+          fillOpacity="0.92"
+          stroke="#0284c7"
+          strokeWidth="0.8"
+        />
+        {/* FIG badge */}
+        <rect x="2" y="2" width="48" height="18" rx="1.5" fill="#0369a1" fillOpacity="0.7" stroke="#38bdf8" strokeWidth="0.8" />
+        <text x="26" y="14.5" textAnchor="middle" className="text-[9px] font-bold fill-white font-mono tracking-wider">
           {figNo}
         </text>
-        <text x="66" y="13.5" className="text-[12px] font-bold fill-sky-100 tracking-wide">
+
+        {/* Title */}
+        <text x="56" y="15" className="text-[11px] font-bold fill-slate-100 tracking-wide">
           {title}
         </text>
-        <text x="66" y="24" className="text-[8px] fill-sky-400 font-mono tracking-wider opacity-85">
-          {subtitle}
+
+        {/* Right CAD Specification Info */}
+        <line x1="410" y1="0" x2="410" y2="22" stroke="#1e3a5f" strokeWidth="0.8" />
+        <text x="418" y="9" className="text-[6.5px] font-mono fill-sky-400 font-bold tracking-wider">
+          CAD DWG
+        </text>
+        <text x="418" y="18" className="text-[7.5px] font-mono fill-sky-200 font-bold tracking-wider">
+          {dwgCode} / NON-SCALE
         </text>
       </g>
 
       {/* Reference Sea Surface Marker */}
-      <g opacity="0.45">
-        <line x1="20" y1="46" x2="540" y2="46" stroke="#0ea5e9" strokeWidth="0.6" strokeDasharray="5 3" />
-        <text x="24" y="43" className="text-[7.5px] fill-sky-400 font-mono tracking-widest">▲ SEA SURFACE (水面基準線)</text>
+      <g opacity="0.65">
+        <line x1="16" y1="46" x2="544" y2="46" stroke="#0ea5e9" strokeWidth="0.7" strokeDasharray="5 3" />
+        <text x="20" y="42" className="text-[7.2px] fill-sky-400 font-mono font-bold tracking-wider">
+          ▲ SEA SURFACE (水面基準線)
+        </text>
+        <text x="540" y="42" textAnchor="end" className="text-[7px] fill-sky-400/80 font-mono tracking-wider">
+          DATUM: ±0.0m
+        </text>
       </g>
 
       {/* Reference Seabed Marker */}
@@ -377,20 +441,13 @@ function BlueprintCanvas({
       <g transform="translate(16, 318)">
         <rect x="0" y="0" width="528" height="28" rx="2" fill="#031527" fillOpacity="0.9" stroke="#0284c7" strokeWidth="0.8" />
         <line x1="126" y1="0" x2="126" y2="28" stroke="#1e3a5f" strokeWidth="0.8" />
-        <line x1="250" y1="0" x2="250" y2="28" stroke="#1e3a5f" strokeWidth="0.8" />
-        <line x1="390" y1="0" x2="390" y2="28" stroke="#1e3a5f" strokeWidth="0.8" />
+        <line x1="254" y1="0" x2="254" y2="28" stroke="#1e3a5f" strokeWidth="0.8" />
+        <line x1="392" y1="0" x2="392" y2="28" stroke="#1e3a5f" strokeWidth="0.8" />
 
-        <text x="8" y="10.5" className="text-[7px] fill-sky-400 font-bold tracking-wider">TARGET (対象魚)</text>
-        <text x="8" y="21.5" className="text-[8.5px] fill-slate-200 font-semibold">{targetSpecies}</text>
-
-        <text x="134" y="10.5" className="text-[7px] fill-sky-400 font-bold tracking-wider">DEPTH (基準タナ)</text>
-        <text x="134" y="21.5" className="text-[8.5px] fill-slate-200 font-semibold">{standardDepth}</text>
-
-        <text x="258" y="10.5" className="text-[7px] fill-sky-400 font-bold tracking-wider">MAIN LINE (道糸規格)</text>
-        <text x="258" y="21.5" className="text-[8.5px] fill-slate-200 font-semibold">{mainLineSpec}</text>
-
-        <text x="398" y="10.5" className="text-[7px] fill-sky-400 font-bold tracking-wider">TACTIQUE (設計仕様)</text>
-        <text x="398" y="21.5" className="text-[8.5px] fill-slate-200 font-semibold">{styleSpec}</text>
+        <FooterSpecCell x={0} w={126} label="TARGET (対象魚)" value={targetSpecies} />
+        <FooterSpecCell x={126} w={128} label="DEPTH (基準タナ)" value={standardDepth} />
+        <FooterSpecCell x={254} w={138} label="MAIN LINE (道糸規格)" value={mainLineSpec} />
+        <FooterSpecCell x={392} w={136} label="TACTIQUE (設計仕様)" value={styleSpec} />
       </g>
     </svg>
   );
@@ -518,10 +575,10 @@ function SabikiDiagram() {
       figNo="FIG-01"
       title="サビキ釣り仕掛け構成図 (下カゴ式)"
       subtitle="DWG REF: #SBK-01 / MULTI-HOOK SABIKI SYSTEM / SCALE: NON-SCALE"
-      targetSpecies="アジ・イワシ・サバ・サッパ"
+      targetSpecies="アジ・イワシ・サバ・小魚"
       standardDepth="表層〜底層 (5〜15m)"
       mainLineSpec="ナイロン 2〜3号 / PE 0.8号"
-      styleSpec="下カゴ式・多点疑似針展開図"
+      styleSpec="下カゴ式・多点疑似針展開"
     >
       <SpecBox x={20} y={60} w={154} h={42} num={1} title="道糸 (メインライン)" spec="ナイロン 2〜3号 / PE 0.8号" note="適度なしなやかさで糸絡み防止" />
       <SpecBox x={384} y={60} w={154} h={42} num={2} title="幹糸・ハリス" spec="幹糸 1.5〜2号 / ハリス 0.8〜1.5号" note="フロロカーボン仕様" />
@@ -613,10 +670,10 @@ function AjingDiagram() {
       figNo="FIG-02"
       title="ジグ単アジング仕掛け構成図 (ライトゲーム)"
       subtitle="DWG REF: #AJG-02 / ULTRA-LIGHT JIGHEAD RIG / SCALE: NON-SCALE"
-      targetSpecies="アジ・メバル・カマス・サバ"
-      standardDepth="全層対応 (カウントダウン管理)"
-      mainLineSpec="エステル 0.3〜0.4号 (比重1.38)"
-      styleSpec="ジグヘッド単体 + ピンテールワーム"
+      targetSpecies="アジ・メバル・カマス"
+      standardDepth="全層対応 (カウントダウン)"
+      mainLineSpec="エステル 0.3〜0.4号"
+      styleSpec="ジグヘッド単体 + ワーム"
     >
       <SpecBox x={20} y={60} w={154} h={42} num={1} title="メインライン" spec="エステルライン 0.3〜0.4号" note="比重1.38 / 極低伸度で微小アタリ伝達" />
       <SpecBox x={190} y={55} w={150} h={42} num={2} title="結束部 (ノット)" spec="トリプルエイト / 3.5ノット" note="簡単結束・破断強度80%以上保持" />
@@ -672,10 +729,10 @@ function ShoreJiggingDiagram() {
       figNo="FIG-03"
       title="ライトショアジギング仕掛け構成図"
       subtitle="DWG REF: #LSJ-03 / LIGHT SHORE JIGGING ARCHITECTURE / SCALE: NON-SCALE"
-      targetSpecies="イナダ・サワラ・カンパチ・タチウオ"
-      standardDepth="全層探査 (ボトム着底〜表層)"
-      mainLineSpec="PE 1.0〜1.5号 (8本編み 200m+)"
-      styleSpec="メタルジグ 30〜60g 遠投ワンピッチ"
+      targetSpecies="青物 (イナダ・サワラ)・タチウオ"
+      standardDepth="全層探査 (ボトム〜表層)"
+      mainLineSpec="PE 1.0〜1.5号 (200m+)"
+      styleSpec="メタルジグ 30〜60g 遠投"
     >
       <SpecBox x={20} y={60} w={154} h={42} num={1} title="道糸 (PEライン)" spec="PE 1.0〜1.5号 200m以上" note="8本編み・遠投性と耐引張強度" />
       <SpecBox x={190} y={55} w={150} h={42} num={2} title="摩擦系ノット" spec="FGノット / PRノット" note="ガイド抜け良好・結束強度90%以上" />
@@ -739,10 +796,10 @@ function EgingDiagram() {
       figNo="FIG-04"
       title="エギング仕掛け構成図 (アオリイカ攻略)"
       subtitle="DWG REF: #EGG-04 / SQUID JIG RIG SPECIFICATION / SCALE: NON-SCALE"
-      targetSpecies="アオリイカ・コウイカ・ヤリイカ"
+      targetSpecies="アオリイカ・コウイカ"
       standardDepth="底層〜中層 (カウントフォール)"
-      mainLineSpec="PE 0.6〜0.8号 (150m以上)"
-      styleSpec="エギ 2.5〜3.5号 左右ダート釣法"
+      mainLineSpec="PE 0.6〜0.8号 (150m+)"
+      styleSpec="エギ 2.5〜3.5号 左右ダート"
     >
       <SpecBox x={20} y={60} w={154} h={42} num={1} title="メインライン" spec="PE 0.6〜0.8号 150m+" note="低伸度・微細なイカパンチ感知" />
       <SpecBox x={190} y={55} w={150} h={42} num={2} title="結束部" spec="FGノット / ダブルサージェンス" note="結束強度が高くガイド抜けスムーズ" />
@@ -806,9 +863,9 @@ function FukaseDiagram() {
       figNo="FIG-05"
       title="ウキフカセ釣り仕掛け構成図 (半遊動式)"
       subtitle="DWG REF: #FKS-05 / FLOAT RIG ARCHITECTURE / SCALE: NON-SCALE"
-      targetSpecies="クロダイ(チヌ)・メジナ(グレ)"
+      targetSpecies="チヌ(クロダイ)・グレ(メジナ)"
       standardDepth="2ヒロ〜竿2本 (3〜10m)"
-      mainLineSpec="ナイロン 1.5〜2.0号 (サスペンド)"
+      mainLineSpec="ナイロン 1.5〜2号 (サスペンド)"
       styleSpec="円錐ウキ遊動式・マキエ同調"
     >
       <SpecBox x={20} y={60} w={154} h={42} num={1} title="ウキ止め＆シモリ玉" spec="ウキ止め糸 + 半円シモリ玉" note="狙うタナに合わせて移動調整" />
@@ -882,9 +939,9 @@ function ChoinageDiagram() {
       figNo="FIG-06"
       title="チョイ投げ仕掛け構成図 (L型天秤式)"
       subtitle="DWG REF: #CHN-06 / LIGHT SURF RIG SCHEMATIC / SCALE: NON-SCALE"
-      targetSpecies="シロギス・ハゼ・カレイ・メゴチ"
+      targetSpecies="シロギス・ハゼ・カレイ"
       standardDepth="海底ボトム (砂地・砂泥底)"
-      mainLineSpec="ナイロン 2〜3号 / PE 0.8〜1.0号"
+      mainLineSpec="ナイロン 2〜3号 / PE 0.8〜1号"
       styleSpec="L型遊動天秤 + 2本針底這わせ"
     >
       <SpecBox x={20} y={60} w={154} h={42} num={1} title="メインライン" spec="ナイロン 2〜3号 / PE 0.8号" note="力糸なしで30〜50mキャスト可能" />
@@ -1010,9 +1067,9 @@ function TakoDiagram() {
       title="タコエギ仕掛け構成図 (マダコ攻略)"
       subtitle="DWG REF: #TKO-08 / OCTOPUS BOTTOM RIG / SCALE: NON-SCALE"
       targetSpecies="マダコ・イイダコ"
-      standardDepth="海底ボトム (敷石・岸壁際・捨て石)"
-      mainLineSpec="PE 3.0〜5.0号 (太糸耐摩耗)"
-      styleSpec="3又スナップ + 2連タコエギ + 重オモリ"
+      standardDepth="ボトム (敷石・岸壁際・捨て石)"
+      mainLineSpec="PE 3.0〜5.0号 (耐摩耗)"
+      styleSpec="3又スナップ + 2連エギ + オモリ"
     >
       <SpecBox x={20} y={60} w={154} h={42} num={1} title="メインライン" spec="極太PE 3.0〜5.0号" note="張り付いた大タコを海底から引き剥がす" />
       <SpecBox x={190} y={55} w={150} h={42} num={2} title="先糸リーダー" spec="フロロ 8〜10号 (35lb) 1m" note="荒い敷石やカキ殻擦れに高耐久" />
@@ -1081,10 +1138,10 @@ function HechiDiagram() {
       figNo="FIG-09"
       title="ヘチ・落とし込み仕掛け構成図"
       subtitle="DWG REF: #HCH-09 / QUAY VERTICAL DROP RIG / SCALE: NON-SCALE"
-      targetSpecies="クロダイ(チヌ)・カサゴ・キジハタ"
-      standardDepth="水面直下〜底層 (岸壁際0〜10cm)"
-      mainLineSpec="フロロ/ナイロン 1.5〜2.0号 (目印付き)"
-      styleSpec="タイコリール・壁際スリット落とし込み"
+      targetSpecies="チヌ(クロダイ)・根魚全般"
+      standardDepth="水面直下〜底層 (際0〜10cm)"
+      mainLineSpec="フロロ/ナイロン 1.5〜2号(目印)"
+      styleSpec="タイコリール・壁際落とし込み"
     >
       <SpecBox x={115} y={55} w={154} h={42} num={1} title="目印付き道糸" spec="落とし込み用目印 (25cmピッチ)" note="わずかな糸フケ・止まりアタリを即視認" />
       <SpecBox x={375} y={55} w={160} h={42} num={2} title="専用タイコリール" spec="1:1 ダイレクトドライブ" note="スプールフリーでエサの重みだけで落下" />
@@ -1159,8 +1216,8 @@ function TenagaebiDiagram() {
       title="テナガエビ専用仕掛け構成図"
       subtitle="DWG REF: #TNE-10 / MICRO SHIMORI RIG / SCALE: NON-SCALE"
       targetSpecies="テナガエビ・ハゼ・小魚"
-      standardDepth="テトラ・ゴロタ石の隙間 (底スレスレ)"
-      mainLineSpec="ナイロン 0.8〜1.0号 (のべ竿直結)"
+      standardDepth="テトラ・隙間 (底スレスレ)"
+      mainLineSpec="ナイロン 0.8〜1.0号 (直結)"
       styleSpec="4連シモリウキ + 極小エビ針"
     >
       <SpecBox x={20} y={60} w={154} h={42} num={1} title="のべ竿直結道糸" spec="ナイロン 0.8〜1.0号 (竿と同寸)" note="リール不要・取り回し抜群の軽量設計" />
@@ -1224,9 +1281,9 @@ function KawahagiDiagram() {
       title="カワハギ専用胴突き仕掛け構成図"
       subtitle="DWG REF: #KWH-11 / 3-HOOK DROPPER RIG / SCALE: NON-SCALE"
       targetSpecies="カワハギ・ウマヅラハギ"
-      standardDepth="底層〜底から1m (根・砂泥混じり)"
-      mainLineSpec="PE 0.8〜1.0号 (超高感度)"
-      styleSpec="集魚板 + 中オモリ + 早掛け3本針"
+      standardDepth="底層〜底上1m (根・砂泥混じり)"
+      mainLineSpec="PE 0.8〜1.0号 (高感度)"
+      styleSpec="集魚板 + 中オモリ + 3本針"
     >
       <SpecBox x={20} y={60} w={154} h={42} num={1} title="小型集魚板" spec="ホログラム集魚板" note="光の乱反射とヒラ打ちで群れを寄せる" />
       <SpecBox x={380} y={60} w={154} h={42} num={2} title="中オモリ (0.5〜1.5号)" spec="仕掛けのテンション調整" note="ハリスをたるませて吸い込ませる" />
@@ -1306,10 +1363,10 @@ function IshidaiDiagram() {
       figNo="FIG-12"
       title="イシダイ専用底物仕掛け構成図"
       subtitle="DWG REF: #ISD-12 / HEAVY BOTTOM REEF RIG / SCALE: NON-SCALE"
-      targetSpecies="イシダイ・イシガキダイ (磯の王者)"
-      standardDepth="海底深み・根回りカケアガリ (10〜30m)"
-      mainLineSpec="ナイロン 18〜24号 / PE 10〜12号"
-      styleSpec="瀬ズレワイヤー + 捨て糸真空オモリ式"
+      targetSpecies="イシダイ・イシガキダイ"
+      standardDepth="深み・根回り (10〜30m)"
+      mainLineSpec="ナイロン18〜24号 / PE10〜12号"
+      styleSpec="瀬ズレワイヤー + 捨て糸仕掛け"
     >
       <SpecBox x={20} y={60} w={154} h={42} num={1} title="極太道糸" spec="ナイロン 18〜24号 150m" note="荒磯の根ズレに耐える耐摩耗性" />
       <SpecBox x={190} y={55} w={150} h={42} num={2} title="瀬ズレワイヤー" spec="ステンレスワイヤー #37 1.5m" note="鋭利な瀬壁での破断を完全阻止" />
@@ -1380,10 +1437,10 @@ function SurfFlatDiagram() {
       figNo="FIG-13"
       title="サーフフラット＆巨魚キャスティング仕掛け"
       subtitle="DWG REF: #SFF-13 / SURF CASTING ARCHITECTURE / SCALE: NON-SCALE"
-      targetSpecies="ヒラメ・マゴチ・オオニベ・青物"
-      standardDepth="砂底〜底上50cm (離岸流・ブレイク)"
-      mainLineSpec="PE 1.0〜1.5号 (8本編み 200〜300m)"
-      styleSpec="ヘビーシンペン/ジグヘッド 遠投トレース"
+      targetSpecies="ヒラメ・マゴチ・青物"
+      standardDepth="砂底〜底上50cm (ブレイク)"
+      mainLineSpec="PE 1.0〜1.5号 (200〜300m)"
+      styleSpec="シンペン/ジグヘッド 遠投仕様"
     >
       <SpecBox x={20} y={60} w={154} h={42} num={1} title="キャスティングPE" spec="PE 1.0〜1.2号 200m+" note="風を切り裂き100m超の遠投性能" />
       <SpecBox x={190} y={55} w={150} h={42} num={2} title="耐摩耗リーダー" spec="フロロ 5〜7号 (20〜25lb) 1.5m" note="海底の砂擦れに強い高硬度仕様" />
@@ -1443,10 +1500,10 @@ function KueDiagram() {
       figNo="FIG-14"
       title="クエ・大型底物磯夜釣りぶっこみ仕掛け"
       subtitle="DWG REF: #KUE-14 / MONSTER GROUPER RIG / SCALE: NON-SCALE"
-      targetSpecies="クエ (モロコ・アラ 30kg超)・タマン"
-      standardDepth="海底巨大岩礁地帯・洞窟スリット (15〜50m)"
-      mainLineSpec="ナイロン 80〜100号 (または PE 30号)"
-      styleSpec="アンカー固定板バネ + ワイロンワイヤー"
+      targetSpecies="クエ (アラ・モロコ)・タマン"
+      standardDepth="海底岩礁・洞窟 (15〜50m)"
+      mainLineSpec="ナイロン80〜100号 / PE30号"
+      styleSpec="固定板バネ + ワイロンワイヤー"
     >
       <SpecBox x={20} y={60} w={154} h={42} num={1} title="板バネ竿受け" spec="磯岩盤にアンカーボルトで完全固定" note="怪魚の初速100kg超の突進を受け止める" />
       <SpecBox x={190} y={55} w={150} h={42} num={2} title="超極太道糸" spec="ナイロン 80〜100号" note="絶対に切れない極限の怪魚規格" />
