@@ -37,6 +37,9 @@ export const metadata: Metadata = {
     statusBarStyle: "default",
     title: "釣行ナビ",
   },
+  other: {
+    "mobile-web-app-capable": "yes",
+  },
   applicationName: "釣行ナビ",
 };
 
@@ -62,6 +65,7 @@ export default function RootLayout({
         <meta name="apple-mobile-web-app-title" content="釣行ナビ" />
         <meta name="application-name" content="釣行ナビ" />
         <meta name="theme-color" content="#0284c7" />
+        <meta name="mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="default" />
         <script
