@@ -72,6 +72,26 @@ export function degreeToCompass(degree: number): string {
 }
 
 /**
+ * Base daily average fishing score according to Japanese tide cycle
+ */
+export function getDailyBaseFishingScore(tideType: string): number {
+  switch (tideType) {
+    case "大潮":
+      return 84;
+    case "中潮":
+      return 78;
+    case "若潮":
+      return 74;
+    case "小潮":
+      return 66;
+    case "長潮":
+      return 58;
+    default:
+      return 70;
+  }
+}
+
+/**
  * Estimate coastal sea water temperature based on date, latitude, and air temperature
  */
 export function estimateSeaWaterTemperature(
@@ -268,7 +288,7 @@ function processForecastData(
       moonPhaseName: dayTide.moonPhaseName,
       sunrise: dayTide.sunrise,
       sunset: dayTide.sunset,
-      fishingScoreAvg: dayTide.tideType === "大潮" ? 82 : dayTide.tideType === "中潮" ? 75 : 62,
+      fishingScoreAvg: getDailyBaseFishingScore(dayTide.tideType),
     });
   }
 
@@ -371,7 +391,7 @@ export function generateFallbackMarineWeather(
       moonPhaseName: dTide.moonPhaseName,
       sunrise: dTide.sunrise,
       sunset: dTide.sunset,
-      fishingScoreAvg: dTide.tideType === "大潮" ? 85 : 72,
+      fishingScoreAvg: getDailyBaseFishingScore(dTide.tideType),
     });
   }
 

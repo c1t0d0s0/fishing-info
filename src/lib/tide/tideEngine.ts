@@ -172,8 +172,8 @@ export function generateDayTideInfo(
   const dateStr = `${y}-${m}-${d}`;
 
   const moonAge = calculateMoonAge(date);
-  const moonPhaseInfo = getMoonPhaseInfo(moonAge);
-  const tideType = getTideType(moonAge);
+  const tideType = getTideType(date);
+  const moonPhaseInfo = getMoonPhaseInfo(moonAge, tideType);
   const sunTimes = calculateSunTimes(date, lat, lng);
   const mazumeTimes = calculateMazumeTimes(sunTimes.sunrise, sunTimes.sunset);
 

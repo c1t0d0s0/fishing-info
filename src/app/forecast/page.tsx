@@ -153,10 +153,14 @@ export default function ForecastPage() {
                       ? "text-rose-500"
                       : tide.tideType === "中潮"
                       ? "text-sky-500"
-                      : "text-slate-500"
+                      : tide.tideType === "若潮"
+                      ? "text-indigo-500"
+                      : tide.tideType === "小潮"
+                      ? "text-teal-600 dark:text-teal-400"
+                      : "text-amber-600 dark:text-amber-400"
                   }`}
                 >
-                  {dailyWeather?.fishingScoreAvg ?? (isSpringTide ? 85 : 70)}点
+                  {dailyWeather?.fishingScoreAvg ?? 70}点
                 </span>
               </div>
             </div>
