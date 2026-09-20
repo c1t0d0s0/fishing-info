@@ -70,6 +70,8 @@ export default function SpotDetailClient({ spotId }: SpotDetailClientProps) {
         tideType: tideInfo.tideType,
         windSpeed: weatherData?.current.windSpeed ?? 2.5,
         waveHeight: weatherData?.current.waveHeight ?? 0.6,
+        precipitation: weatherData?.current.precipitation ?? 0,
+        weatherCode: weatherData?.current.weatherCode,
       })
     : null;
 

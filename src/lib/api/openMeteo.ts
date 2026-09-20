@@ -231,6 +231,7 @@ function processForecastData(
       windSpeed: hWindSpeed,
       waveHeight: hWaveHeight,
       precipitation: hourlyW.precipitation?.[i] ?? 0,
+      weatherCode: hourlyW.weather_code?.[i] ?? 0,
     });
 
     const tideHeightPoint = tideInfo.hourlyPoints.find(
@@ -316,6 +317,8 @@ export function generateFallbackMarineWeather(
     tideType: tide.tideType,
     windSpeed: 3.2,
     waveHeight: 0.6,
+    precipitation: 0,
+    weatherCode: 1,
   });
 
   const baseSeaTemp = estimateSeaWaterTemperature(now, lat, 22.5);
