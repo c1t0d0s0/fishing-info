@@ -7,6 +7,11 @@ export function generateStaticParams() {
   }));
 }
 
-export default function SpotPage({ params }: { params: { id: string } }) {
-  return <SpotDetailClient spotId={params.id} />;
+export default async function SpotPage({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}) {
+  const { id } = await params;
+  return <SpotDetailClient spotId={id} />;
 }
