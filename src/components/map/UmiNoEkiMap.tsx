@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { UmiNoEki } from "@/types/uminoeki";
 import { Anchor, Fish, Ship, ExternalLink, MapPin } from "lucide-react";
 import "leaflet/dist/leaflet.css";
+import { escapeHtml } from "@/lib/utils/sanitize";
 
 interface UmiNoEkiMapProps {
   stations: UmiNoEki[];
@@ -124,12 +125,12 @@ export default function UmiNoEkiMap({
           : "";
 
         const berthInfo = station.visitorBerth
-          ? `<div style="font-size: 11px; color: #64748b; margin-top: 4px;">ビジターバース: ${station.visitorBerth}</div>`
+          ? `<div style="font-size: 11px; color: #64748b; margin-top: 4px;">ビジターバース: ${escapeHtml(station.visitorBerth)}</div>`
           : "";
 
         const spotLinkHtml =
           station.hasFishing && station.spotId
-            ? `<a href="/spots/${station.spotId}" style="display: inline-block; margin-top: 6px; padding: 4px 10px; background-color: #0284c7; color: white; border-radius: 6px; font-size: 11px; text-decoration: none; font-weight: bold;">🎣 釣り場情報を見る →</a>`
+            ? `<a href="/spots/${encodeURIComponent(station.spotId)}" style="display: inline-block; margin-top: 6px; padding: 4px 10px; background-color: #0284c7; color: white; border-radius: 6px; font-size: 11px; text-decoration: none; font-weight: bold;">🎣 釣り場情報を見る →</a>`
             : "";
 
         const popupContent = `
@@ -138,11 +139,11 @@ export default function UmiNoEkiMap({
               ${fishingBadge}
               ${rentalBadge}
             </div>
-            <div style="font-weight: bold; font-size: 14px; color: #0f172a; line-height: 1.3;">${station.name}</div>
-            <div style="font-size: 11px; color: #64748b; margin-top: 2px;">${station.officialName}</div>
-            <div style="font-size: 11px; color: #334155; margin-top: 4px;">📍 ${station.address}</div>
+            <div style="font-weight: bold; font-size: 14px; color: #0f172a; line-height: 1.3;">${escapeHtml(station.name)}</div>
+            <div style="font-size: 11px; color: #64748b; margin-top: 2px;">${escapeHtml(station.officialName)}</div>
+            <div style="font-size: 11px; color: #334155; margin-top: 4px;">📍 ${escapeHtml(station.address)}</div>
             ${berthInfo}
-            <div style="font-size: 11px; color: #64748b; margin-top: 2px;">🕒 ${station.businessHours || "-"}</div>
+            <div style="font-size: 11px; color: #64748b; margin-top: 2px;">🕒 ${escapeHtml(station.businessHours || "-")}</div>
             ${spotLinkHtml}
           </div>
         `;

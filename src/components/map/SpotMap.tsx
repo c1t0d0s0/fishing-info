@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { FishingSpot, SpotCategory } from "@/types/spot";
 import { MapPin, Filter, Check, ExternalLink, Info } from "lucide-react";
 import "leaflet/dist/leaflet.css";
+import { escapeHtml } from "@/lib/utils/sanitize";
 
 interface SpotMapProps {
   spots: FishingSpot[];
@@ -140,12 +141,24 @@ export default function SpotMap({
         // Popup html
         const popupContent = document.createElement("div");
         popupContent.className = "p-1 space-y-1.5 font-sans text-xs min-w-[200px]";
+        const escapedSpotId = escapeHtml(spot.id);
+        const encodedSpotId = encodeURIComponent(spot.id);
+        const categoryLabel =
+          spot.category === "park"
+            ? "海釣り施設"
+            : spot.category === "port"
+            ? "漁港・防波堤"
+            : spot.category === "surf"
+            ? "サーフ"
+            : "磯場・釣り場";
+        const targetFishList = spot.targetFish.slice(0, 4).map(escapeHtml).join(", ");
+
         popupContent.innerHTML = `
           <div style="font-weight: bold; font-size: 13px; color: #0f172a; margin-bottom: 2px;">
-            ${spot.name}
+            ${escapeHtml(spot.name)}
           </div>
           <div style="font-size: 11px; color: #64748b;">
-            ${spot.prefecture} / ${spot.category === "park" ? "海釣り施設" : spot.category === "port" ? "漁港・防波堤" : spot.category === "surf" ? "サーフ" : "磯場・釣り場"}
+            ${escapeHtml(spot.prefecture)} / ${categoryLabel}
           </div>
           ${isUmigo ? '<div style="margin-top: 4px; display: inline-block; background: #dbeafe; color: #1e40af; border: 1px solid #93c5fd; font-size: 10px; font-weight: 800; padding: 2px 6px; border-radius: 4px;">🎟️ UMIGO（海Go）事前予約</div>' : ""}
           <div style="display: flex; gap: 4px; flex-wrap: wrap; margin-top: 4px;">
@@ -154,9 +167,9 @@ export default function SpotMap({
             ${spot.facilities.hasSafetyFence ? '<span style="background: #dcfce7; color: #15803d; padding: 2px 6px; border-radius: 4px; font-size: 10px;">🛡️ 柵あり</span>' : ""}
           </div>
           <div style="margin-top: 6px; font-size: 11px; color: #334155;">
-            <strong>主な対象魚:</strong> ${spot.targetFish.slice(0, 4).join(", ")}
+            <strong>主な対象魚:</strong> ${targetFishList}
           </div>
-          <a id="btn-detail-${spot.id}" href="/spots/${spot.id}" style="
+          <a id="btn-detail-${escapedSpotId}" href="/spots/${encodedSpotId}" style="
             display: flex;
             align-items: center;
             justify-content: center;
