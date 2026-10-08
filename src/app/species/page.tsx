@@ -92,7 +92,7 @@ export default function SpeciesPage() {
             onClick={() => setActiveTab("species")}
             className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-bold flex items-center gap-1.5 transition-all ${
               activeTab === "species"
-                ? "bg-white dark:bg-slate-900 text-ocean-600 dark:text-ocean-400 shadow-sm"
+                ? "bg-white dark:bg-slate-900 text-ocean-600 dark:text-ocean-400 shadow-xs"
                 : "text-slate-600 dark:text-slate-400 hover:text-slate-900"
             }`}
           >
@@ -103,7 +103,7 @@ export default function SpeciesPage() {
             onClick={() => setActiveTab("rigs")}
             className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-bold flex items-center gap-1.5 transition-all ${
               activeTab === "rigs"
-                ? "bg-white dark:bg-slate-900 text-ocean-600 dark:text-ocean-400 shadow-sm"
+                ? "bg-white dark:bg-slate-900 text-ocean-600 dark:text-ocean-400 shadow-xs"
                 : "text-slate-600 dark:text-slate-400 hover:text-slate-900"
             }`}
           >
@@ -116,7 +116,7 @@ export default function SpeciesPage() {
       {activeTab === "species" ? (
         <>
           {/* Search and Filter Controls */}
-          <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-5 sm:p-6 shadow-sm space-y-4">
+          <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-5 sm:p-6 shadow-xs space-y-4">
             <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
               {/* Search Bar */}
               <div className="relative w-full lg:max-w-md">
@@ -126,7 +126,7 @@ export default function SpeciesPage() {
                   placeholder="魚名、仕掛け、エサ、料理名 (例: アジ, エギング, アジフライ)..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full pl-11 pr-10 py-3 rounded-2xl text-sm sm:text-base bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-ocean-500 shadow-xs transition-all"
+                  className="w-full pl-11 pr-10 py-3 rounded-2xl text-sm sm:text-base bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white placeholder-slate-400 focus:outline-hidden focus:ring-2 focus:ring-ocean-500 shadow-2xs transition-all"
                 />
                 {searchQuery && (
                   <button
@@ -145,7 +145,7 @@ export default function SpeciesPage() {
                   onClick={() => setSelectedCategory("all")}
                   className={`px-3 py-1.5 rounded-xl font-bold transition-colors shrink-0 ${
                     selectedCategory === "all"
-                      ? "bg-ocean-600 text-white shadow-xs"
+                      ? "bg-ocean-600 text-white shadow-2xs"
                       : "bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200"
                   }`}
                 >
@@ -155,7 +155,7 @@ export default function SpeciesPage() {
                   onClick={() => setSelectedCategory("peak_now")}
                   className={`px-3 py-1.5 rounded-xl font-bold transition-colors shrink-0 flex items-center gap-1 ${
                     selectedCategory === "peak_now"
-                      ? "bg-amber-500 text-white shadow-xs"
+                      ? "bg-amber-500 text-white shadow-2xs"
                       : "bg-amber-50 dark:bg-amber-950/40 text-amber-700 dark:text-amber-300 border border-amber-200 dark:border-amber-900"
                   }`}
                 >
@@ -166,7 +166,7 @@ export default function SpeciesPage() {
                   onClick={() => setSelectedCategory("popular_coastal")}
                   className={`px-3 py-1.5 rounded-xl font-bold transition-colors shrink-0 ${
                     selectedCategory === "popular_coastal"
-                      ? "bg-ocean-600 text-white shadow-xs"
+                      ? "bg-ocean-600 text-white shadow-2xs"
                       : "bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200"
                   }`}
                 >
@@ -176,7 +176,7 @@ export default function SpeciesPage() {
                   onClick={() => setSelectedCategory("blue_pelagic")}
                   className={`px-3 py-1.5 rounded-xl font-bold transition-colors shrink-0 ${
                     selectedCategory === "blue_pelagic"
-                      ? "bg-sky-600 text-white shadow-xs"
+                      ? "bg-sky-600 text-white shadow-2xs"
                       : "bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200"
                   }`}
                 >
@@ -186,7 +186,7 @@ export default function SpeciesPage() {
                   onClick={() => setSelectedCategory("bottom_rock")}
                   className={`px-3 py-1.5 rounded-xl font-bold transition-colors shrink-0 ${
                     selectedCategory === "bottom_rock"
-                      ? "bg-teal-600 text-white shadow-xs"
+                      ? "bg-teal-600 text-white shadow-2xs"
                       : "bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200"
                   }`}
                 >
@@ -196,7 +196,7 @@ export default function SpeciesPage() {
                   onClick={() => setSelectedCategory("squid_octopus")}
                   className={`px-3 py-1.5 rounded-xl font-bold transition-colors shrink-0 ${
                     selectedCategory === "squid_octopus"
-                      ? "bg-purple-600 text-white shadow-xs"
+                      ? "bg-purple-600 text-white shadow-2xs"
                       : "bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200"
                   }`}
                 >
@@ -206,7 +206,7 @@ export default function SpeciesPage() {
                   onClick={() => setSelectedCategory("tasty_table")}
                   className={`px-3 py-1.5 rounded-xl font-bold transition-colors shrink-0 ${
                     selectedCategory === "tasty_table"
-                      ? "bg-amber-600 text-white shadow-xs"
+                      ? "bg-amber-600 text-white shadow-2xs"
                       : "bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200"
                   }`}
                 >
@@ -216,7 +216,7 @@ export default function SpeciesPage() {
                   onClick={() => setSelectedCategory("fresh_brackish")}
                   className={`px-3 py-1.5 rounded-xl font-bold transition-colors shrink-0 ${
                     selectedCategory === "fresh_brackish"
-                      ? "bg-emerald-600 text-white shadow-xs"
+                      ? "bg-emerald-600 text-white shadow-2xs"
                       : "bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200"
                   }`}
                 >
@@ -229,7 +229,7 @@ export default function SpeciesPage() {
                   }}
                   className={`px-3 py-1.5 rounded-xl font-bold transition-colors shrink-0 flex items-center gap-1 ${
                     selectedCategory === "dangerous"
-                      ? "bg-rose-600 text-white shadow-xs"
+                      ? "bg-rose-600 text-white shadow-2xs"
                       : "bg-rose-50 dark:bg-rose-950/40 text-rose-700 dark:text-rose-300 border border-rose-200 dark:border-rose-900"
                   }`}
                 >
@@ -251,7 +251,7 @@ export default function SpeciesPage() {
                       onClick={() => setDangerTypeFilter("all")}
                       className={`px-3 py-1.5 rounded-xl font-bold transition-all ${
                         dangerTypeFilter === "all"
-                          ? "bg-slate-900 text-white dark:bg-white dark:text-slate-900 shadow-xs"
+                          ? "bg-slate-900 text-white dark:bg-white dark:text-slate-900 shadow-2xs"
                           : "bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200"
                       }`}
                     >
@@ -261,7 +261,7 @@ export default function SpeciesPage() {
                       onClick={() => setDangerTypeFilter("ingestion_poison")}
                       className={`px-3 py-1.5 rounded-xl font-bold transition-all flex items-center gap-1.5 ${
                         dangerTypeFilter === "ingestion_poison"
-                          ? "bg-red-600 text-white shadow-xs"
+                          ? "bg-red-600 text-white shadow-2xs"
                           : "bg-red-50 dark:bg-red-950/40 text-red-700 dark:text-red-300 border border-red-200 dark:border-red-900 hover:bg-red-100"
                       }`}
                     >
@@ -273,7 +273,7 @@ export default function SpeciesPage() {
                       onClick={() => setDangerTypeFilter("contact_venom")}
                       className={`px-3 py-1.5 rounded-xl font-bold transition-all flex items-center gap-1.5 ${
                         dangerTypeFilter === "contact_venom"
-                          ? "bg-purple-600 text-white shadow-xs"
+                          ? "bg-purple-600 text-white shadow-2xs"
                           : "bg-purple-50 dark:bg-purple-950/40 text-purple-700 dark:text-purple-300 border border-purple-200 dark:border-purple-900 hover:bg-purple-100"
                       }`}
                     >
@@ -285,7 +285,7 @@ export default function SpeciesPage() {
                       onClick={() => setDangerTypeFilter("physical_hazard")}
                       className={`px-3 py-1.5 rounded-xl font-bold transition-all flex items-center gap-1.5 ${
                         dangerTypeFilter === "physical_hazard"
-                          ? "bg-amber-500 text-white shadow-xs"
+                          ? "bg-amber-500 text-white shadow-2xs"
                           : "bg-amber-50 dark:bg-amber-950/40 text-amber-700 dark:text-amber-300 border border-amber-200 dark:border-amber-900 hover:bg-amber-100"
                       }`}
                     >

@@ -112,7 +112,7 @@ export default function RigDiagram({ rigId, name }: RigDiagramProps) {
           setZoomLevel(1);
           setIsOpen(true);
         }}
-        className="relative group cursor-zoom-in rounded-xl overflow-hidden focus:outline-none focus:ring-2 focus:ring-sky-500/60 transition-transform duration-200 hover:scale-[1.01]"
+        className="relative group cursor-zoom-in rounded-xl overflow-hidden focus:outline-hidden focus:ring-2 focus:ring-sky-500/60 transition-transform duration-200 hover:scale-[1.01]"
         role="button"
         tabIndex={0}
         onKeyDown={(e) => {
@@ -138,7 +138,7 @@ export default function RigDiagram({ rigId, name }: RigDiagramProps) {
       {/* Lightbox Modal (Enlarged View) */}
       {isOpen && mounted && createPortal(
         <div
-          className="fixed inset-0 z-[9999] flex items-center justify-center bg-slate-950/85 backdrop-blur-md p-2 sm:p-4 md:p-6 animate-in fade-in duration-200"
+          className="fixed inset-0 z-9999 flex items-center justify-center bg-slate-950/85 backdrop-blur-md p-2 sm:p-4 md:p-6 animate-in fade-in duration-200"
           onClick={() => setIsOpen(false)}
         >
           <div
@@ -148,7 +148,7 @@ export default function RigDiagram({ rigId, name }: RigDiagramProps) {
             {/* Modal Header Toolbar */}
             <div className="flex items-center justify-between px-3 sm:px-4 py-2.5 sm:py-3 bg-slate-950/90 border-b border-sky-900/60 text-white shrink-0">
               <div className="flex items-center gap-2 sm:gap-3 min-w-0">
-                <div className="px-2 py-0.5 rounded bg-sky-950/80 border border-sky-600/70 text-[10px] sm:text-xs font-mono font-bold text-sky-300 shrink-0">
+                <div className="px-2 py-0.5 rounded-sm bg-sky-950/80 border border-sky-600/70 text-[10px] sm:text-xs font-mono font-bold text-sky-300 shrink-0">
                   CAD BLUEPRINT
                 </div>
                 <h3 className="text-xs sm:text-sm md:text-base font-bold text-slate-100 truncate">
@@ -164,7 +164,7 @@ export default function RigDiagram({ rigId, name }: RigDiagramProps) {
                     type="button"
                     onClick={() => setZoomLevel((z) => Math.max(0.8, Number((z - 0.2).toFixed(1))))}
                     disabled={zoomLevel <= 0.8}
-                    className="p-1 hover:bg-slate-700 disabled:opacity-30 disabled:hover:bg-transparent text-slate-300 hover:text-white rounded transition-colors"
+                    className="p-1 hover:bg-slate-700 disabled:opacity-30 disabled:hover:bg-transparent text-slate-300 hover:text-white rounded-sm transition-colors"
                     title="縮小 (80%まで)"
                   >
                     <ZoomOut className="w-4 h-4" />
@@ -176,7 +176,7 @@ export default function RigDiagram({ rigId, name }: RigDiagramProps) {
                     type="button"
                     onClick={() => setZoomLevel((z) => Math.min(2.5, Number((z + 0.2).toFixed(1))))}
                     disabled={zoomLevel >= 2.5}
-                    className="p-1 hover:bg-slate-700 disabled:opacity-30 disabled:hover:bg-transparent text-slate-300 hover:text-white rounded transition-colors"
+                    className="p-1 hover:bg-slate-700 disabled:opacity-30 disabled:hover:bg-transparent text-slate-300 hover:text-white rounded-sm transition-colors"
                     title="拡大 (250%まで)"
                   >
                     <ZoomIn className="w-4 h-4" />
@@ -192,7 +192,7 @@ export default function RigDiagram({ rigId, name }: RigDiagramProps) {
                       onClick={() => setZoomLevel(preset)}
                       className={`px-2 py-1 rounded text-[11px] font-mono transition-all border ${
                         Math.abs(zoomLevel - preset) < 0.05
-                          ? "bg-sky-600 border-sky-400 text-white font-bold shadow"
+                          ? "bg-sky-600 border-sky-400 text-white font-bold shadow-sm"
                           : "bg-slate-800/80 border-slate-700 text-slate-300 hover:bg-slate-700 hover:text-white"
                       }`}
                       title={`${Math.round(preset * 100)}% に設定`}
@@ -218,7 +218,7 @@ export default function RigDiagram({ rigId, name }: RigDiagramProps) {
                 <button
                   type="button"
                   onClick={() => setIsOpen(false)}
-                  className="flex items-center gap-1 px-2.5 sm:px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-rose-600 text-slate-200 hover:text-white border border-slate-700 hover:border-rose-500 transition-all text-xs font-bold shadow"
+                  className="flex items-center gap-1 px-2.5 sm:px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-rose-600 text-slate-200 hover:text-white border border-slate-700 hover:border-rose-500 transition-all text-xs font-bold shadow-sm"
                   title="閉じる (Esc)"
                 >
                   <X className="w-4 h-4" />

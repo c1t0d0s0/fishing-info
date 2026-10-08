@@ -98,7 +98,7 @@ export default function TargetSpeciesCard({ spot }: TargetSpeciesCardProps) {
   const displayedFish = showAll ? sortedTargetFish : sortedTargetFish.slice(0, 6);
 
   return (
-    <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-5 sm:p-6 shadow-sm hover:shadow-md transition-shadow space-y-4">
+    <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-5 sm:p-6 shadow-xs hover:shadow-md transition-shadow space-y-4">
       <div className="flex items-center justify-between gap-2">
         <div className="flex items-center gap-2.5">
           <div className="p-1.5 rounded-lg bg-cyan-500/10 text-cyan-600 dark:text-cyan-400">
@@ -154,7 +154,7 @@ export default function TargetSpeciesCard({ spot }: TargetSpeciesCardProps) {
                 <span className="text-slate-400 dark:text-slate-500 text-[11px] font-medium block">
                   推奨仕掛け:
                 </span>
-                <div className="font-bold text-[11px] text-ocean-700 dark:text-ocean-300 bg-ocean-50/80 dark:bg-ocean-950/60 px-2.5 py-1.5 rounded-xl border border-ocean-200/60 dark:border-ocean-900/50 leading-relaxed break-words">
+                <div className="font-bold text-[11px] text-ocean-700 dark:text-ocean-300 bg-ocean-50/80 dark:bg-ocean-950/60 px-2.5 py-1.5 rounded-xl border border-ocean-200/60 dark:border-ocean-900/50 leading-relaxed wrap-break-word">
                   {sp.recommendedRig}
                 </div>
               </div>

@@ -150,7 +150,7 @@ export default function SpotsPage() {
       </div>
 
       {/* Top Filter and Search Bar */}
-      <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-5 sm:p-6 shadow-sm space-y-4">
+      <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-5 sm:p-6 shadow-xs space-y-4">
         {/* Search bar - Full width for spacious comfortable input on tablet, mobile and desktop */}
         <div className="relative w-full">
           <Search className="w-5 h-5 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
@@ -159,7 +159,7 @@ export default function SpotsPage() {
             placeholder="釣り場名、都道府県、海の駅、魚種、キーワード (UMIGO等)..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full pl-11 pr-10 py-3 rounded-2xl text-sm sm:text-base bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-ocean-500 shadow-xs transition-all"
+            className="w-full pl-11 pr-10 py-3 rounded-2xl text-sm sm:text-base bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white placeholder-slate-400 focus:outline-hidden focus:ring-2 focus:ring-ocean-500 shadow-2xs transition-all"
           />
           {searchQuery && (
             <button
@@ -181,7 +181,7 @@ export default function SpotsPage() {
             onClick={() => setSelectedRegion("all")}
             className={`px-3 py-1.5 rounded-xl font-bold transition-colors shrink-0 ${
               selectedRegion === "all"
-                ? "bg-ocean-600 text-white shadow-xs"
+                ? "bg-ocean-600 text-white shadow-2xs"
                 : "bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200"
             }`}
           >
@@ -193,7 +193,7 @@ export default function SpotsPage() {
               onClick={() => setSelectedRegion(r.id)}
               className={`px-3 py-1.5 rounded-xl font-bold transition-colors shrink-0 ${
                 selectedRegion === r.id
-                  ? "bg-ocean-600 text-white shadow-xs"
+                  ? "bg-ocean-600 text-white shadow-2xs"
                   : "bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200"
               }`}
             >
@@ -221,14 +221,14 @@ export default function SpotsPage() {
               className={`px-2.5 py-1 rounded-xl font-bold transition-colors shrink-0 ${
                 selectedCategory === cat.id
                   ? cat.id === "surf"
-                    ? "bg-amber-600 text-white shadow-xs"
+                    ? "bg-amber-600 text-white shadow-2xs"
                     : cat.id === "rock"
-                    ? "bg-purple-600 text-white shadow-xs"
+                    ? "bg-purple-600 text-white shadow-2xs"
                     : cat.id === "park"
-                    ? "bg-emerald-600 text-white shadow-xs"
+                    ? "bg-emerald-600 text-white shadow-2xs"
                     : cat.id === "port"
-                    ? "bg-sky-600 text-white shadow-xs"
-                    : "bg-ocean-600 text-white shadow-xs"
+                    ? "bg-sky-600 text-white shadow-2xs"
+                    : "bg-ocean-600 text-white shadow-2xs"
                   : "bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200"
               }`}
             >
@@ -312,12 +312,12 @@ export default function SpotsPage() {
 
                     <div className="flex items-center gap-1">
                       {isUmigo && (
-                        <span className="text-[10px] bg-blue-100 dark:bg-blue-950 text-blue-700 dark:text-blue-300 px-1.5 py-0.5 rounded font-extrabold border border-blue-200 dark:border-blue-800">
+                        <span className="text-[10px] bg-blue-100 dark:bg-blue-950 text-blue-700 dark:text-blue-300 px-1.5 py-0.5 rounded-sm font-extrabold border border-blue-200 dark:border-blue-800">
                           🎟️ UMIGO予約
                         </span>
                       )}
                       {spot.facilities.isFamilyFriendly && (
-                        <span className="text-[10px] bg-emerald-100 dark:bg-emerald-950 text-emerald-700 dark:text-emerald-300 px-1.5 py-0.5 rounded font-bold">
+                        <span className="text-[10px] bg-emerald-100 dark:bg-emerald-950 text-emerald-700 dark:text-emerald-300 px-1.5 py-0.5 rounded-sm font-bold">
                           ファミリー向け
                         </span>
                       )}

@@ -131,7 +131,7 @@ export default function ForecastPage() {
 
               {/* Tide Type Badge */}
               <div
-                className={`py-1.5 px-2 rounded-xl text-xs sm:text-sm font-black border text-center shadow-xs ${getTideBadgeColor(
+                className={`py-1.5 px-2 rounded-xl text-xs sm:text-sm font-black border text-center shadow-2xs ${getTideBadgeColor(
                   tide.tideType
                 )}`}
               >
@@ -183,7 +183,7 @@ export default function ForecastPage() {
           <TideGraphCard tideInfo={activeTide} />
 
           {/* Extremes summary for this day */}
-          <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-5 sm:p-6 shadow-sm">
+          <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-5 sm:p-6 shadow-xs">
             <h3 className="font-bold text-slate-900 dark:text-white text-base mb-4 flex items-center gap-2">
               <Waves className="w-5 h-5 text-ocean-500" />
               この日の満潮・干潮 & マズメ時スケジュール

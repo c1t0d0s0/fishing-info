@@ -21,7 +21,7 @@ export default function RigGuideCard({ rig }: RigGuideCardProps) {
   } = rig;
 
   return (
-    <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-5 sm:p-6 shadow-sm hover:border-ocean-300 dark:hover:border-ocean-700 transition-colors space-y-4">
+    <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-5 sm:p-6 shadow-xs hover:border-ocean-300 dark:hover:border-ocean-700 transition-colors space-y-4">
       {/* Header */}
       <div className="flex items-start justify-between gap-3">
         <div>

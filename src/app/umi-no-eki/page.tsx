@@ -164,18 +164,18 @@ export default function UmiNoEkiPage() {
 
         {/* Quick Stats */}
         <div className="flex items-center gap-2 sm:gap-3 shrink-0">
-          <div className="px-3 py-2 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm text-center min-w-[80px]">
+          <div className="px-3 py-2 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-xs text-center min-w-[80px]">
             <div className="text-[10px] text-slate-500 font-semibold">全登録駅</div>
             <div className="text-lg font-black text-slate-900 dark:text-white">{totalCount}</div>
           </div>
-          <div className="px-3 py-2 rounded-2xl bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800 shadow-sm text-center min-w-[80px]">
+          <div className="px-3 py-2 rounded-2xl bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800 shadow-xs text-center min-w-[80px]">
             <div className="text-[10px] text-emerald-700 dark:text-emerald-300 font-semibold flex items-center justify-center gap-1">
               <Fish className="w-3 h-3" />
               釣り可能
             </div>
             <div className="text-lg font-black text-emerald-600 dark:text-emerald-400">{fishingCount}</div>
           </div>
-          <div className="px-3 py-2 rounded-2xl bg-sky-50 dark:bg-sky-950/40 border border-sky-200 dark:border-sky-800 shadow-sm text-center min-w-[80px]">
+          <div className="px-3 py-2 rounded-2xl bg-sky-50 dark:bg-sky-950/40 border border-sky-200 dark:border-sky-800 shadow-xs text-center min-w-[80px]">
             <div className="text-[10px] text-sky-700 dark:text-sky-300 font-semibold flex items-center justify-center gap-1">
               <Ship className="w-3 h-3" />
               ボート
@@ -186,7 +186,7 @@ export default function UmiNoEkiPage() {
       </div>
 
       {/* Filter and Search Bar */}
-      <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-5 sm:p-6 shadow-sm space-y-4">
+      <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-5 sm:p-6 shadow-xs space-y-4">
         <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
           {/* Search bar */}
           <div className="relative w-full lg:max-w-md">
@@ -196,7 +196,7 @@ export default function UmiNoEkiPage() {
               placeholder="駅名、都道府県、施設名、住所、電話番号..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-11 pr-10 py-3 rounded-2xl text-sm sm:text-base bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-cyan-500 shadow-xs transition-all"
+              className="w-full pl-11 pr-10 py-3 rounded-2xl text-sm sm:text-base bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white placeholder-slate-400 focus:outline-hidden focus:ring-2 focus:ring-cyan-500 shadow-2xs transition-all"
             />
             {searchQuery && (
               <button
@@ -215,7 +215,7 @@ export default function UmiNoEkiPage() {
               onClick={() => setFilterFishing(!filterFishing)}
               className={`flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-bold transition-all ${
                 filterFishing
-                  ? "bg-emerald-600 text-white shadow-sm shadow-emerald-600/30"
+                  ? "bg-emerald-600 text-white shadow-xs shadow-emerald-600/30"
                   : "bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700"
               }`}
             >
@@ -227,7 +227,7 @@ export default function UmiNoEkiPage() {
               onClick={() => setFilterRentalBoat(!filterRentalBoat)}
               className={`flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-bold transition-all ${
                 filterRentalBoat
-                  ? "bg-sky-600 text-white shadow-sm shadow-sky-600/30"
+                  ? "bg-sky-600 text-white shadow-xs shadow-sky-600/30"
                   : "bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700"
               }`}
             >
@@ -237,7 +237,7 @@ export default function UmiNoEkiPage() {
 
             <button
               onClick={handleRandomFishingStation}
-              className="flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-bold transition-all bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-300 hover:bg-emerald-100 dark:hover:bg-emerald-900/50 border border-emerald-200/80 dark:border-emerald-800 shadow-sm"
+              className="flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-bold transition-all bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-300 hover:bg-emerald-100 dark:hover:bg-emerald-900/50 border border-emerald-200/80 dark:border-emerald-800 shadow-xs"
               title="釣りができる海の駅をランダムに表示"
             >
               <Dices className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" />
@@ -269,7 +269,7 @@ export default function UmiNoEkiPage() {
                 onClick={() => setSelectedRegion(reg.id)}
                 className={`px-3 py-1.5 rounded-xl text-xs font-bold whitespace-nowrap transition-all flex items-center gap-1.5 ${
                   isSelected
-                    ? "bg-cyan-600 text-white shadow-sm shadow-cyan-600/20"
+                    ? "bg-cyan-600 text-white shadow-xs shadow-cyan-600/20"
                     : "bg-slate-100/80 dark:bg-slate-800/80 text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-700 hover:text-slate-900 dark:hover:text-white"
                 }`}
               >
@@ -304,7 +304,7 @@ export default function UmiNoEkiPage() {
         {/* Detail Panel */}
         <div className="lg:col-span-5">
           {activeStation ? (
-            <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-5 sm:p-6 shadow-sm space-y-5 sticky top-24">
+            <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-5 sm:p-6 shadow-xs space-y-5 sticky top-24">
               {/* Header Badges & Title */}
               <div>
                 <div className="flex items-center justify-between gap-2 flex-wrap mb-2">
@@ -356,7 +356,7 @@ export default function UmiNoEkiPage() {
 
               {/* LINK TO FISHING SPOT MAP IF FISHING ALLOWED */}
               {activeStation.hasFishing && activeStation.spotId && (
-                <div className="bg-gradient-to-br from-emerald-500 to-teal-600 rounded-2xl p-4 text-white shadow-md shadow-emerald-500/20">
+                <div className="bg-linear-to-br from-emerald-500 to-teal-600 rounded-2xl p-4 text-white shadow-md shadow-emerald-500/20">
                   <div className="flex items-start justify-between gap-3">
                     <div>
                       <div className="text-xs font-bold opacity-90 flex items-center gap-1">
@@ -373,7 +373,7 @@ export default function UmiNoEkiPage() {
                   </div>
                   <Link
                     href={`/spots/${activeStation.spotId}`}
-                    className="mt-3.5 inline-flex items-center justify-center gap-2 w-full py-2.5 rounded-xl bg-white text-emerald-800 font-extrabold text-xs sm:text-sm shadow-sm hover:bg-emerald-50 transition-colors"
+                    className="mt-3.5 inline-flex items-center justify-center gap-2 w-full py-2.5 rounded-xl bg-white text-emerald-800 font-extrabold text-xs sm:text-sm shadow-xs hover:bg-emerald-50 transition-colors"
                   >
                     <span>釣り場詳細・タイドグラフを見る</span>
                     <ChevronRight className="w-4 h-4" />
@@ -525,22 +525,22 @@ export default function UmiNoEkiPage() {
                 className={`p-4 rounded-2xl border transition-all cursor-pointer flex flex-col justify-between ${
                   isSelected
                     ? "bg-cyan-50/70 dark:bg-cyan-950/30 border-cyan-500 shadow-md ring-2 ring-cyan-500/20"
-                    : "bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800 hover:border-cyan-300 dark:hover:border-cyan-700 hover:shadow-sm"
+                    : "bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800 hover:border-cyan-300 dark:hover:border-cyan-700 hover:shadow-xs"
                 }`}
               >
                 <div>
                   <div className="flex items-center justify-between gap-2 mb-2">
-                    <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300">
+                    <span className="text-[10px] font-bold px-2 py-0.5 rounded-sm bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300">
                       {station.prefecture}
                     </span>
                     <div className="flex items-center gap-1.5">
                       {station.hasFishing && (
-                        <span className="text-[10px] font-bold px-1.5 py-0.5 rounded bg-emerald-100 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800">
+                        <span className="text-[10px] font-bold px-1.5 py-0.5 rounded-sm bg-emerald-100 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800">
                           🎣 釣り
                         </span>
                       )}
                       {station.hasRentalBoat && (
-                        <span className="text-[10px] font-bold px-1.5 py-0.5 rounded bg-sky-100 dark:bg-sky-950/60 text-sky-700 dark:text-sky-300 border border-sky-200 dark:border-sky-800">
+                        <span className="text-[10px] font-bold px-1.5 py-0.5 rounded-sm bg-sky-100 dark:bg-sky-950/60 text-sky-700 dark:text-sky-300 border border-sky-200 dark:border-sky-800">
                           🛥️ ボート
                         </span>
                       )}

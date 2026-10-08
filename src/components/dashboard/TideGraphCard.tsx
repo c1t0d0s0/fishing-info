@@ -220,7 +220,7 @@ export default function TideGraphCard({
   };
 
   return (
-    <div className={`bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-5 sm:p-6 shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between ${className}`}>
+    <div className={`bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-5 sm:p-6 shadow-xs hover:shadow-md transition-shadow flex flex-col justify-between ${className}`}>
       {/* Top Bar: Title + Tide Type Badge + Moon info */}
       <div className="flex flex-wrap items-center justify-between gap-3 mb-5">
         <div className="flex items-center gap-2.5">
@@ -245,7 +245,7 @@ export default function TideGraphCard({
         <div className="flex items-center gap-2 sm:gap-3">
           {/* Prominent Tide Badge */}
           <div
-            className={`px-4 sm:px-5 py-1.5 sm:py-2 rounded-2xl border flex items-center justify-center shadow-sm transition-transform hover:scale-[1.02] ${getTideBadgeColor(
+            className={`px-4 sm:px-5 py-1.5 sm:py-2 rounded-2xl border flex items-center justify-center shadow-xs transition-transform hover:scale-[1.02] ${getTideBadgeColor(
               tideType
             )}`}
             title={`${tideType}: ${getTideDescription(tideType)}`}
@@ -317,7 +317,7 @@ export default function TideGraphCard({
       </div>
 
       {/* SVG Interactive Tide Chart */}
-      <div className="relative w-full overflow-hidden bg-gradient-to-b from-sky-50/30 via-slate-50/40 to-ocean-50/70 dark:from-slate-950 dark:via-slate-900/50 dark:to-ocean-950/40 rounded-2xl border border-slate-100 dark:border-slate-800/80 p-2 group">
+      <div className="relative w-full overflow-hidden bg-linear-to-b from-sky-50/30 via-slate-50/40 to-ocean-50/70 dark:from-slate-950 dark:via-slate-900/50 dark:to-ocean-950/40 rounded-2xl border border-slate-100 dark:border-slate-800/80 p-2 group">
         <svg
           ref={svgRef}
           viewBox={`0 0 ${svgWidth} ${svgHeight}`}
@@ -443,7 +443,7 @@ export default function TideGraphCard({
                   fill={isHigh ? "#0284c7" : "#f59e0b"}
                   stroke="#ffffff"
                   strokeWidth="2.5"
-                  className="shadow-sm drop-shadow"
+                  className="shadow-xs drop-shadow-sm"
                 />
                 <rect
                   x={cx - 24}

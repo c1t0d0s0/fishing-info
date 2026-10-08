@@ -125,7 +125,7 @@ export default function SafetyPage() {
       </div>
 
       {/* Emergency Hotline Banner */}
-      <div className="p-5 sm:p-6 rounded-3xl bg-gradient-to-r from-rose-600 via-red-500 to-amber-500 text-white shadow-lg flex flex-col md:flex-row md:items-center justify-between gap-4">
+      <div className="p-5 sm:p-6 rounded-3xl bg-linear-to-r from-rose-600 via-red-500 to-amber-500 text-white shadow-lg flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div className="space-y-1">
           <span className="text-xs font-bold uppercase tracking-wider bg-white/20 px-2 py-0.5 rounded-full">
             海難事故・落水時の緊急連絡先
@@ -145,7 +145,7 @@ export default function SafetyPage() {
       </div>
 
       {/* 1. Safety Equipment & Weather Guidelines */}
-      <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-5 sm:p-6 shadow-sm space-y-4">
+      <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-5 sm:p-6 shadow-xs space-y-4">
         <h2 className="font-extrabold text-slate-900 dark:text-white text-lg flex items-center gap-2">
           <LifeBuoy className="w-5 h-5 text-ocean-500" />
           釣り人の命を守る必須安全基準
@@ -185,7 +185,7 @@ export default function SafetyPage() {
       </div>
 
       {/* 2. Poisonous Sea Creatures Guide */}
-      <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-5 sm:p-6 shadow-sm space-y-5">
+      <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-5 sm:p-6 shadow-xs space-y-5">
         <div>
           <h2 className="font-extrabold text-slate-900 dark:text-white text-lg flex items-center gap-2">
             <AlertTriangle className="w-5 h-5 text-rose-500" />
@@ -240,7 +240,7 @@ export default function SafetyPage() {
       </div>
 
       {/* 3. Etiquette & Rules */}
-      <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-5 sm:p-6 shadow-sm space-y-4">
+      <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-5 sm:p-6 shadow-xs space-y-4">
         <h2 className="font-extrabold text-slate-900 dark:text-white text-lg flex items-center gap-2">
           <Trash2 className="w-5 h-5 text-emerald-500" />
           釣り場のマナー・ルールを守ろう

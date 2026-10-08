@@ -84,9 +84,9 @@ function getDangerConfig(species: FishSpecies) {
         badgeClass:
           "bg-red-600 text-white shadow-md shadow-red-600/30 animate-pulse font-black border border-red-400/50",
         cardBorder:
-          "border-red-500/90 dark:border-red-600/90 bg-gradient-to-b from-red-500/10 via-red-500/5 to-transparent hover:border-red-600 shadow-md shadow-red-500/10",
+          "border-red-500/90 dark:border-red-600/90 bg-linear-to-b from-red-500/10 via-red-500/5 to-transparent hover:border-red-600 shadow-md shadow-red-500/10",
         boxClass:
-          "bg-red-500/15 border-red-500/50 text-red-950 dark:text-red-100 shadow-xs",
+          "bg-red-500/15 border-red-500/50 text-red-950 dark:text-red-100 shadow-2xs",
         boxTitleClass: "text-red-700 dark:text-red-400 font-black",
         icon: Skull,
         iconColor: "text-red-600 dark:text-red-400",
@@ -100,9 +100,9 @@ function getDangerConfig(species: FishSpecies) {
         badgeClass:
           "bg-purple-600 text-white shadow-md shadow-purple-600/30 animate-pulse font-black border border-purple-400/50",
         cardBorder:
-          "border-purple-500/90 dark:border-purple-600/90 bg-gradient-to-b from-purple-500/10 via-purple-500/5 to-transparent hover:border-purple-600 shadow-md shadow-purple-500/10",
+          "border-purple-500/90 dark:border-purple-600/90 bg-linear-to-b from-purple-500/10 via-purple-500/5 to-transparent hover:border-purple-600 shadow-md shadow-purple-500/10",
         boxClass:
-          "bg-purple-500/15 border-purple-500/50 text-purple-950 dark:text-purple-100 shadow-xs",
+          "bg-purple-500/15 border-purple-500/50 text-purple-950 dark:text-purple-100 shadow-2xs",
         boxTitleClass: "text-purple-700 dark:text-purple-400 font-black",
         icon: ShieldAlert,
         iconColor: "text-purple-600 dark:text-purple-400",
@@ -115,9 +115,9 @@ function getDangerConfig(species: FishSpecies) {
         shortLabel: "鋭利な歯・骨板",
         headerTitle: "鋭利な牙・骨板注意（フィッシュグリップ・プライヤー必須）",
         badgeClass:
-          "bg-amber-500 text-white shadow-sm shadow-amber-500/20 font-black border border-amber-400/50",
+          "bg-amber-500 text-white shadow-xs shadow-amber-500/20 font-black border border-amber-400/50",
         cardBorder:
-          "border-amber-400/80 dark:border-amber-600/80 bg-gradient-to-b from-amber-500/10 via-amber-500/5 to-transparent hover:border-amber-500 shadow-sm",
+          "border-amber-400/80 dark:border-amber-600/80 bg-linear-to-b from-amber-500/10 via-amber-500/5 to-transparent hover:border-amber-500 shadow-xs",
         boxClass:
           "bg-amber-500/10 border-amber-500/40 text-amber-950 dark:text-amber-100",
         boxTitleClass: "text-amber-700 dark:text-amber-400 font-black",
@@ -163,7 +163,7 @@ export default function SpeciesCard({ species }: SpeciesCardProps) {
 
   return (
     <div
-      className={`bg-white dark:bg-slate-900 border rounded-3xl p-5 sm:p-6 shadow-sm transition-all duration-200 hover:shadow-md ${
+      className={`bg-white dark:bg-slate-900 border rounded-3xl p-5 sm:p-6 shadow-xs transition-all duration-200 hover:shadow-md ${
         dangerConfig
           ? dangerConfig.cardBorder
           : "border-slate-200 dark:border-slate-800 hover:border-ocean-300 dark:hover:border-ocean-700"
@@ -257,7 +257,7 @@ export default function SpeciesCard({ species }: SpeciesCardProps) {
         <div className="bg-slate-50 dark:bg-slate-800/50 p-2.5 rounded-2xl border border-slate-100 dark:border-slate-800">
           <div className="flex items-center justify-between text-[10px] text-slate-400 font-medium mb-0.5">
             <span>遊泳層 (タナ)</span>
-            <span className={`px-1.5 py-0.2 rounded text-[9px] font-bold border ${layerBadge.className}`}>
+            <span className={`px-1.5 py-0.2 rounded-sm text-[9px] font-bold border ${layerBadge.className}`}>
               {layerBadge.icon} {layerBadge.label}
             </span>
           </div>

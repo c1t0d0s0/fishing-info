@@ -2,7 +2,7 @@
 
 [![Next.js](https://img.shields.io/badge/Next.js-14.2-black?style=flat&logo=next.js)](https://nextjs.org/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.4-blue?style=flat&logo=typescript)](https://www.typescriptlang.org/)
-[![TailwindCSS](https://img.shields.io/badge/TailwindCSS-3.4-38bdf8?style=flat&logo=tailwindcss)](https://tailwindcss.com/)
+[![TailwindCSS](https://img.shields.io/badge/TailwindCSS-4.3-38bdf8?style=flat&logo=tailwindcss)](https://tailwindcss.com/)
 [![Open-Meteo](https://img.shields.io/badge/Open--Meteo-API%20Free-0ea5e9)](https://open-meteo.com/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-emerald.svg)](LICENSE)
 
@@ -45,7 +45,7 @@
 |---|---|---|
 | **フロントエンド** | Next.js 14 (App Router) | 高速なSSR/SSG、SEO最適化、モダンなルーティング |
 | **言語** | TypeScript | 完全な型安全性と保守性 |
-| **スタイリング** | Tailwind CSS + Lucide Icons | 軽量、レスポンシブ、ダーク/ライトモード対応 |
+| **スタイリング** | Tailwind CSS 4 + Lucide Icons | CSS ファースト設定、レスポンシブ、ダーク/ライトモード対応 |
 | **気象データ** | Open-Meteo Marine & Weather API | **APIキー不要・完全無料・利用制限フリー** |
 | **潮汐・天文計算** | 自作純粋 TypeScript エンジン | 外部スクレイピング不要で高速・高精度な潮汐・月齢演算 |
 | **マップ** | Leaflet + OpenStreetMap | **APIキー不要・完全無償**の地図描画 |
@@ -121,8 +121,7 @@ fishing-info/
 ├── README.md                 # プロジェクトドキュメント
 ├── package.json
 ├── tsconfig.json
-├── tailwind.config.ts
-├── postcss.config.mjs
+├── postcss.config.mjs        # @tailwindcss/postcss
 ├── next.config.mjs
 ├── .github/
 │   └── workflows/
@@ -133,7 +132,7 @@ fishing-info/
     ├── app/                  # Next.js App Router ルート
     │   ├── layout.tsx        # 共通レイアウト (Header, Footer, メタデータ)
     │   ├── page.tsx          # メインダッシュボード (Top)
-    │   ├── globals.css       # グローバルスタイル (Tailwind CSS)
+    │   ├── globals.css       # Tailwind CSS 4 のテーマ・グローバルスタイル
     │   ├── spots/            # 全国釣り場マップ & スポット一覧
     │   │   ├── page.tsx
     │   │   └── [id]/page.tsx # 釣り場個別詳細

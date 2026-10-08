@@ -58,7 +58,7 @@ export default function HourlyForecast({ hourly }: HourlyForecastProps) {
   });
 
   return (
-    <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-5 sm:p-6 shadow-sm hover:shadow-md transition-shadow">
+    <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-5 sm:p-6 shadow-xs hover:shadow-md transition-shadow">
       <div className="flex items-center justify-between gap-2 mb-4">
         <div className="flex items-center gap-2.5">
           <div className="p-1.5 rounded-lg bg-indigo-500/10 text-indigo-600 dark:text-indigo-400">
@@ -127,7 +127,7 @@ export default function HourlyForecast({ hourly }: HourlyForecastProps) {
                   isCurrent
                     ? "ring-2 ring-indigo-500 dark:ring-indigo-400 bg-indigo-50/70 dark:bg-indigo-950/50 border-indigo-300 dark:border-indigo-700 shadow-md transform -translate-y-0.5"
                     : item.isMazume
-                    ? "bg-amber-50/70 dark:bg-amber-950/30 border-amber-300 dark:border-amber-700/80 shadow-xs"
+                    ? "bg-amber-50/70 dark:bg-amber-950/30 border-amber-300 dark:border-amber-700/80 shadow-2xs"
                     : isScoreHigh
                     ? "bg-ocean-50/50 dark:bg-ocean-950/20 border-ocean-200 dark:border-ocean-800/60"
                     : "bg-slate-50/70 dark:bg-slate-800/40 border-slate-100 dark:border-slate-800/80"
@@ -136,12 +136,12 @@ export default function HourlyForecast({ hourly }: HourlyForecastProps) {
                 {/* Time & Mazume / Current badge */}
                 <div className="space-y-0.5 w-full">
                   {isCurrent ? (
-                    <span className="text-[10px] font-black text-white bg-indigo-600 dark:bg-indigo-500 px-1.5 py-0.5 rounded flex items-center gap-0.5 justify-center shadow-xs animate-pulse">
+                    <span className="text-[10px] font-black text-white bg-indigo-600 dark:bg-indigo-500 px-1.5 py-0.5 rounded-sm flex items-center gap-0.5 justify-center shadow-2xs animate-pulse">
                       <Clock className="w-2.5 h-2.5" />
                       現在
                     </span>
                   ) : item.isMazume ? (
-                    <span className="text-[10px] font-black text-amber-700 dark:text-amber-300 bg-amber-200/70 dark:bg-amber-900/60 px-1.5 py-0.2 rounded flex items-center gap-0.5 justify-center">
+                    <span className="text-[10px] font-black text-amber-700 dark:text-amber-300 bg-amber-200/70 dark:bg-amber-900/60 px-1.5 py-0.2 rounded-sm flex items-center gap-0.5 justify-center">
                       <Sparkles className="w-2.5 h-2.5" />
                       {item.isMazume === "morning" ? "朝マズメ" : "夕マズメ"}
                     </span>

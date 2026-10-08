@@ -209,11 +209,11 @@ export default function UmiNoEkiMap({
   }, [selectedStation, mapInstance]);
 
   return (
-    <div className="relative w-full h-[450px] sm:h-[550px] lg:h-[620px] rounded-3xl overflow-hidden border border-slate-200 dark:border-slate-800 shadow-sm z-0">
+    <div className="relative w-full h-[450px] sm:h-[550px] lg:h-[620px] rounded-3xl overflow-hidden border border-slate-200 dark:border-slate-800 shadow-xs z-0">
       <div id="uminoeki-map" className="w-full h-full" />
 
       {/* Map Legend */}
-      <div className="absolute bottom-4 left-4 z-[400] bg-white/90 dark:bg-slate-900/90 backdrop-blur-md px-3.5 py-2.5 rounded-2xl border border-slate-200/80 dark:border-slate-800/80 shadow-md text-xs space-y-1.5 pointer-events-none">
+      <div className="absolute bottom-4 left-4 z-400 bg-white/90 dark:bg-slate-900/90 backdrop-blur-md px-3.5 py-2.5 rounded-2xl border border-slate-200/80 dark:border-slate-800/80 shadow-md text-xs space-y-1.5 pointer-events-none">
         <div className="font-bold text-slate-800 dark:text-white flex items-center gap-1.5">
           <Anchor className="w-3.5 h-3.5 text-cyan-600 dark:text-cyan-400" />
           <span>ピンの種別</span>

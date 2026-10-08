@@ -268,7 +268,7 @@ export default function SpotMap({
   }, [selectedSpot, mapInstance, L, spots]);
 
   return (
-    <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-5 sm:p-6 shadow-sm space-y-4">
+    <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-5 sm:p-6 shadow-xs space-y-4">
       {/* Map Header & Filter controls */}
       <div className="flex flex-wrap items-center justify-between gap-3">
         <div>
@@ -287,7 +287,7 @@ export default function SpotMap({
             onClick={() => setCategoryFilter("all")}
             className={`px-2.5 py-1 rounded-xl font-semibold transition-colors ${
               categoryFilter === "all"
-                ? "bg-ocean-600 text-white shadow-xs"
+                ? "bg-ocean-600 text-white shadow-2xs"
                 : "bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200"
             }`}
           >
@@ -297,7 +297,7 @@ export default function SpotMap({
             onClick={() => setCategoryFilter("park")}
             className={`px-2.5 py-1 rounded-xl font-semibold transition-colors ${
               categoryFilter === "park"
-                ? "bg-emerald-600 text-white shadow-xs"
+                ? "bg-emerald-600 text-white shadow-2xs"
                 : "bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200"
             }`}
           >
@@ -307,7 +307,7 @@ export default function SpotMap({
             onClick={() => setCategoryFilter("port")}
             className={`px-2.5 py-1 rounded-xl font-semibold transition-colors ${
               categoryFilter === "port"
-                ? "bg-sky-600 text-white shadow-xs"
+                ? "bg-sky-600 text-white shadow-2xs"
                 : "bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200"
             }`}
           >
@@ -317,7 +317,7 @@ export default function SpotMap({
             onClick={() => setCategoryFilter("surf")}
             className={`px-2.5 py-1 rounded-xl font-semibold transition-colors ${
               categoryFilter === "surf"
-                ? "bg-amber-600 text-white shadow-xs"
+                ? "bg-amber-600 text-white shadow-2xs"
                 : "bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200"
             }`}
           >
@@ -327,7 +327,7 @@ export default function SpotMap({
             onClick={() => setCategoryFilter("rock")}
             className={`px-2.5 py-1 rounded-xl font-semibold transition-colors ${
               categoryFilter === "rock"
-                ? "bg-purple-600 text-white shadow-xs"
+                ? "bg-purple-600 text-white shadow-2xs"
                 : "bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200"
             }`}
           >

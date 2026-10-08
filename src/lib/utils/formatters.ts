@@ -27,17 +27,17 @@ export function formatDateTimeJp(isoStr: string): string {
 export function getTideBadgeColor(tideType: string): string {
   switch (tideType) {
     case "大潮":
-      return "bg-rose-600 bg-gradient-to-r from-rose-600 to-red-600 text-white border-rose-500 shadow-xs shadow-rose-500/30";
+      return "bg-rose-600 bg-linear-to-r from-rose-600 to-red-600 text-white border-rose-500 shadow-2xs shadow-rose-500/30";
     case "中潮":
-      return "bg-sky-600 bg-gradient-to-r from-sky-600 to-blue-600 text-white border-sky-500 shadow-xs shadow-sky-500/30";
+      return "bg-sky-600 bg-linear-to-r from-sky-600 to-blue-600 text-white border-sky-500 shadow-2xs shadow-sky-500/30";
     case "小潮":
-      return "bg-emerald-600 bg-gradient-to-r from-emerald-600 to-teal-600 text-white border-emerald-500 shadow-xs shadow-emerald-500/30";
+      return "bg-emerald-600 bg-linear-to-r from-emerald-600 to-teal-600 text-white border-emerald-500 shadow-2xs shadow-emerald-500/30";
     case "長潮":
-      return "bg-amber-600 bg-gradient-to-r from-amber-600 to-orange-600 text-white border-amber-500 shadow-xs shadow-amber-500/30";
+      return "bg-amber-600 bg-linear-to-r from-amber-600 to-orange-600 text-white border-amber-500 shadow-2xs shadow-amber-500/30";
     case "若潮":
-      return "bg-indigo-600 bg-gradient-to-r from-indigo-600 to-violet-600 text-white border-indigo-500 shadow-xs shadow-indigo-500/30";
+      return "bg-indigo-600 bg-linear-to-r from-indigo-600 to-violet-600 text-white border-indigo-500 shadow-2xs shadow-indigo-500/30";
     default:
-      return "bg-slate-700 bg-gradient-to-r from-slate-600 to-slate-700 text-white border-slate-500 shadow-xs";
+      return "bg-slate-700 bg-linear-to-r from-slate-600 to-slate-700 text-white border-slate-500 shadow-2xs";
   }
 }
 

@@ -3,16 +3,16 @@ import { Fish, ShieldCheck, Heart, Waves, Compass, CloudSun, Anchor, Calendar } 
 
 export default function Footer() {
   return (
-    <footer className="border-t border-slate-200 dark:border-slate-800/80 bg-white/70 dark:bg-slate-950/70 backdrop-blur-sm mt-16 transition-colors">
+    <footer className="border-t border-slate-200 dark:border-slate-800/80 bg-white/70 dark:bg-slate-950/70 backdrop-blur-xs mt-16 transition-colors">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Brand & Mission */}
           <div className="md:col-span-2 space-y-3">
             <div className="flex items-center gap-2">
-              <div className="w-8 h-8 rounded-lg bg-gradient-to-tr from-ocean-600 to-cyan-400 flex items-center justify-center text-white shadow-sm">
+              <div className="w-8 h-8 rounded-lg bg-linear-to-tr from-ocean-600 to-cyan-400 flex items-center justify-center text-white shadow-xs">
                 <Fish className="w-5 h-5" />
               </div>
-              <span className="font-bold text-lg bg-gradient-to-r from-ocean-700 to-cyan-600 dark:from-ocean-400 dark:to-cyan-300 bg-clip-text text-transparent">
+              <span className="font-bold text-lg bg-linear-to-r from-ocean-700 to-cyan-600 dark:from-ocean-400 dark:to-cyan-300 bg-clip-text text-transparent">
                 釣行ナビ (Fishing Info Dashboard)
               </span>
             </div>

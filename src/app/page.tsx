@@ -101,7 +101,7 @@ export default function DashboardPage() {
           <button
             onClick={() => loadForecast(selectedSpot)}
             disabled={isLoading}
-            className="p-2.5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-300 hover:text-ocean-600 dark:hover:text-ocean-400 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors shadow-xs flex items-center gap-1.5 text-xs font-semibold"
+            className="p-2.5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-300 hover:text-ocean-600 dark:hover:text-ocean-400 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors shadow-2xs flex items-center gap-1.5 text-xs font-semibold"
             title="最新データに更新"
           >
             <RefreshCw className={`w-4 h-4 ${isLoading ? "animate-spin text-ocean-500" : ""}`} />
@@ -156,7 +156,7 @@ export default function DashboardPage() {
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-2">
         <Link
           href="/spots"
-          className="p-5 rounded-3xl bg-gradient-to-br from-white to-sky-50/50 dark:from-slate-900 dark:to-ocean-950/30 border border-slate-200 dark:border-slate-800 hover:border-ocean-400 dark:hover:border-ocean-600 transition-all group shadow-sm flex items-center justify-between"
+          className="p-5 rounded-3xl bg-linear-to-br from-white to-sky-50/50 dark:from-slate-900 dark:to-ocean-950/30 border border-slate-200 dark:border-slate-800 hover:border-ocean-400 dark:hover:border-ocean-600 transition-all group shadow-xs flex items-center justify-between"
         >
           <div className="space-y-1">
             <span className="text-xs font-bold text-ocean-600 dark:text-ocean-400">
@@ -176,7 +176,7 @@ export default function DashboardPage() {
 
         <Link
           href="/forecast"
-          className="p-5 rounded-3xl bg-gradient-to-br from-white to-teal-50/50 dark:from-slate-900 dark:to-teal-950/30 border border-slate-200 dark:border-slate-800 hover:border-teal-400 dark:hover:border-teal-600 transition-all group shadow-sm flex items-center justify-between"
+          className="p-5 rounded-3xl bg-linear-to-br from-white to-teal-50/50 dark:from-slate-900 dark:to-teal-950/30 border border-slate-200 dark:border-slate-800 hover:border-teal-400 dark:hover:border-teal-600 transition-all group shadow-xs flex items-center justify-between"
         >
           <div className="space-y-1">
             <span className="text-xs font-bold text-teal-600 dark:text-teal-400">
@@ -196,7 +196,7 @@ export default function DashboardPage() {
 
         <Link
           href="/species"
-          className="p-5 rounded-3xl bg-gradient-to-br from-white to-cyan-50/50 dark:from-slate-900 dark:to-cyan-950/30 border border-slate-200 dark:border-slate-800 hover:border-cyan-400 dark:hover:border-cyan-600 transition-all group shadow-sm flex items-center justify-between"
+          className="p-5 rounded-3xl bg-linear-to-br from-white to-cyan-50/50 dark:from-slate-900 dark:to-cyan-950/30 border border-slate-200 dark:border-slate-800 hover:border-cyan-400 dark:hover:border-cyan-600 transition-all group shadow-xs flex items-center justify-between"
         >
           <div className="space-y-1">
             <span className="text-xs font-bold text-cyan-600 dark:text-cyan-400">

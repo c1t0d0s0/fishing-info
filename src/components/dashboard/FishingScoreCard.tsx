@@ -21,7 +21,7 @@ export default function FishingScoreCard({
   const strokeDashoffset = circumference - (score / 100) * circumference;
 
   return (
-    <div className={`relative overflow-hidden bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-5 sm:p-6 shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between ${className}`}>
+    <div className={`relative overflow-hidden bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-5 sm:p-6 shadow-xs hover:shadow-md transition-shadow flex flex-col justify-between ${className}`}>
       {/* Background ambient glow */}
       <div
         className={`absolute -right-16 -top-16 w-48 h-48 rounded-full blur-3xl opacity-20 pointer-events-none ${
@@ -52,7 +52,7 @@ export default function FishingScoreCard({
 
         {/* Grade badge */}
         <div
-          className={`px-3 py-1 rounded-xl font-extrabold text-sm shadow-sm bg-gradient-to-r ${getScoreGradeColor(
+          className={`px-3 py-1 rounded-xl font-extrabold text-sm shadow-xs bg-linear-to-r ${getScoreGradeColor(
             grade
           )} flex items-center gap-1`}
         >

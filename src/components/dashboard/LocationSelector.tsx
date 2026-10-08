@@ -83,7 +83,7 @@ export default function LocationSelector({
   return (
     <div className="relative z-30">
       {/* Current location trigger bar */}
-      <div className="flex flex-wrap items-center gap-3 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-3 rounded-2xl shadow-sm hover:shadow-md transition-shadow">
+      <div className="flex flex-wrap items-center gap-3 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-3 rounded-2xl shadow-xs hover:shadow-md transition-shadow">
         <button
           onClick={() => setIsOpen(!isOpen)}
           className="flex-1 min-w-[200px] flex items-center justify-between gap-3 text-left group"
@@ -166,7 +166,7 @@ export default function LocationSelector({
                   placeholder="釣り場名、都道府県、対象魚、キーワード (UMIGO, 予約等)..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full pl-9 pr-4 py-2 rounded-xl text-sm bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-ocean-500"
+                  className="w-full pl-9 pr-4 py-2 rounded-xl text-sm bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white placeholder-slate-400 focus:outline-hidden focus:ring-2 focus:ring-ocean-500"
                 />
               </div>
 
@@ -176,7 +176,7 @@ export default function LocationSelector({
                   onClick={() => setSelectedRegion("all")}
                   className={`px-2.5 py-1 rounded-lg text-xs font-semibold shrink-0 transition-colors ${
                     selectedRegion === "all"
-                      ? "bg-ocean-600 text-white shadow-sm"
+                      ? "bg-ocean-600 text-white shadow-xs"
                       : "bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-700"
                   }`}
                 >
@@ -188,7 +188,7 @@ export default function LocationSelector({
                     onClick={() => setSelectedRegion(r.id)}
                     className={`px-2.5 py-1 rounded-lg text-xs font-semibold shrink-0 transition-colors ${
                       selectedRegion === r.id
-                        ? "bg-ocean-600 text-white shadow-sm"
+                        ? "bg-ocean-600 text-white shadow-xs"
                         : "bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-700"
                     }`}
                   >
@@ -227,19 +227,19 @@ export default function LocationSelector({
                     >
                       <div className="space-y-1">
                         <div className="flex items-center gap-1.5 flex-wrap">
-                          <span className="text-xs font-bold text-ocean-600 dark:text-ocean-400 bg-ocean-100 dark:bg-ocean-900/60 px-1.5 py-0.5 rounded">
+                          <span className="text-xs font-bold text-ocean-600 dark:text-ocean-400 bg-ocean-100 dark:bg-ocean-900/60 px-1.5 py-0.5 rounded-sm">
                             {spot.prefecture}
                           </span>
                           <span className="font-semibold text-sm text-slate-900 dark:text-white">
                             {spot.name}
                           </span>
                           {isUmigo && (
-                            <span className="text-[10px] bg-blue-100 dark:bg-blue-950 text-blue-700 dark:text-blue-300 px-1.5 py-0.2 rounded font-extrabold border border-blue-200 dark:border-blue-800">
+                            <span className="text-[10px] bg-blue-100 dark:bg-blue-950 text-blue-700 dark:text-blue-300 px-1.5 py-0.2 rounded-sm font-extrabold border border-blue-200 dark:border-blue-800">
                               🎟️ UMIGO予約
                             </span>
                           )}
                           {spot.facilities.isFamilyFriendly && (
-                            <span className="text-[10px] bg-emerald-100 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-300 px-1.5 py-0.2 rounded font-medium">
+                            <span className="text-[10px] bg-emerald-100 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-300 px-1.5 py-0.2 rounded-sm font-medium">
                               ファミリー向け
                             </span>
                           )}
@@ -252,7 +252,7 @@ export default function LocationSelector({
                           {spot.targetFish.slice(0, 5).map((f) => (
                             <span
                               key={f}
-                              className="bg-slate-100 dark:bg-slate-800 px-1.5 py-0.5 rounded text-slate-700 dark:text-slate-300 text-[10px]"
+                              className="bg-slate-100 dark:bg-slate-800 px-1.5 py-0.5 rounded-sm text-slate-700 dark:text-slate-300 text-[10px]"
                             >
                               {f}
                             </span>

@@ -89,7 +89,7 @@ export default function SpotDetailClient({ spotId }: SpotDetailClientProps) {
       </div>
 
       {/* Spot Hero Header */}
-      <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 sm:p-8 shadow-sm space-y-4">
+      <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 sm:p-8 shadow-xs space-y-4">
         <div className="flex flex-wrap items-center justify-between gap-3">
           <div className="flex items-center gap-2">
             <span className="text-xs font-extrabold px-2.5 py-1 rounded-lg bg-ocean-600 text-white">
@@ -172,7 +172,7 @@ export default function SpotDetailClient({ spotId }: SpotDetailClientProps) {
       {/* Row: Local Rules & Parking Details */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {/* 1. Local Rules & Prohibited Actions */}
-        <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-5 sm:p-6 shadow-sm space-y-3.5">
+        <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-5 sm:p-6 shadow-xs space-y-3.5">
           <div className="flex items-center justify-between">
             <h3 className="font-bold text-slate-900 dark:text-white text-base flex items-center gap-2">
               <Ban className="w-5 h-5 text-rose-500" />
@@ -203,7 +203,7 @@ export default function SpotDetailClient({ spotId }: SpotDetailClientProps) {
         </div>
 
         {/* 2. Parking Information */}
-        <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-5 sm:p-6 shadow-sm space-y-3.5">
+        <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-5 sm:p-6 shadow-xs space-y-3.5">
           <div className="flex items-center justify-between">
             <h3 className="font-bold text-slate-900 dark:text-white text-base flex items-center gap-2">
               <ParkingSquare className="w-5 h-5 text-ocean-500" />
@@ -256,7 +256,7 @@ export default function SpotDetailClient({ spotId }: SpotDetailClientProps) {
       {/* Facilities Checklist & Access */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {/* Facilities Checklist */}
-        <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-5 sm:p-6 shadow-sm space-y-3">
+        <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-5 sm:p-6 shadow-xs space-y-3">
           <h3 className="font-bold text-slate-900 dark:text-white text-base flex items-center gap-2">
             <Shield className="w-5 h-5 text-ocean-500" />
             設備・施設インフォメーション
@@ -332,7 +332,7 @@ export default function SpotDetailClient({ spotId }: SpotDetailClientProps) {
         </div>
 
         {/* Access & Address */}
-        <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-5 sm:p-6 shadow-sm space-y-3">
+        <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-5 sm:p-6 shadow-xs space-y-3">
           <h3 className="font-bold text-slate-900 dark:text-white text-base flex items-center gap-2">
             <Car className="w-5 h-5 text-ocean-500" />
             アクセス・所在地
@@ -413,7 +413,7 @@ export default function SpotDetailClient({ spotId }: SpotDetailClientProps) {
         ];
 
         return (
-          <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-5 sm:p-6 shadow-sm space-y-4">
+          <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-5 sm:p-6 shadow-xs space-y-4">
             <h3 className="font-bold text-slate-900 dark:text-white text-base flex items-center gap-2">
               <Clock className="w-5 h-5 text-ocean-500" />
               四季のターゲット魚種カレンダー
@@ -427,7 +427,7 @@ export default function SpotDetailClient({ spotId }: SpotDetailClientProps) {
                     key={season.key}
                     className={`p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/40 space-y-2 transition-all ${
                       isCurrent
-                        ? "border-2 border-ocean-600 dark:border-ocean-400 ring-2 ring-ocean-500/20 shadow-sm"
+                        ? "border-2 border-ocean-600 dark:border-ocean-400 ring-2 ring-ocean-500/20 shadow-xs"
                         : "border border-slate-200 dark:border-slate-800"
                     }`}
                   >

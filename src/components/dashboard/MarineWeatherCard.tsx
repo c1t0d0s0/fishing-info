@@ -92,7 +92,7 @@ export default function MarineWeatherCard({ weather }: MarineWeatherCardProps) {
     : "text-ocean-600 dark:text-ocean-400";
 
   return (
-    <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-5 sm:p-6 shadow-sm hover:shadow-md transition-shadow">
+    <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-5 sm:p-6 shadow-xs hover:shadow-md transition-shadow">
       <div className="flex flex-wrap items-center justify-between gap-2.5 mb-5">
         <div className="flex items-center gap-2.5 min-w-0">
           <div className="p-1.5 rounded-lg bg-teal-500/10 text-teal-600 dark:text-teal-400 shrink-0">
@@ -118,7 +118,7 @@ export default function MarineWeatherCard({ weather }: MarineWeatherCardProps) {
       {/* Main Grid: Wave, Wind, Sea Temp, Pressure */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         {/* 1. Wave Height & Swell */}
-        <div className="p-4 rounded-2xl bg-gradient-to-br from-sky-50 to-blue-50/50 dark:from-sky-950/30 dark:to-blue-950/20 border border-sky-100 dark:border-sky-900/40 relative overflow-hidden">
+        <div className="p-4 rounded-2xl bg-linear-to-br from-sky-50 to-blue-50/50 dark:from-sky-950/30 dark:to-blue-950/20 border border-sky-100 dark:border-sky-900/40 relative overflow-hidden">
           <div className="flex items-center justify-between mb-2">
             <span className="text-xs font-bold text-sky-700 dark:text-sky-300 flex items-center gap-1.5">
               <Waves className="w-4 h-4" />
@@ -156,7 +156,7 @@ export default function MarineWeatherCard({ weather }: MarineWeatherCardProps) {
         </div>
 
         {/* 2. Wind Speed & Direction Compass */}
-        <div className="p-4 rounded-2xl bg-gradient-to-br from-teal-50 to-emerald-50/50 dark:from-teal-950/30 dark:to-emerald-950/20 border border-teal-100 dark:border-teal-900/40 relative overflow-hidden">
+        <div className="p-4 rounded-2xl bg-linear-to-br from-teal-50 to-emerald-50/50 dark:from-teal-950/30 dark:to-emerald-950/20 border border-teal-100 dark:border-teal-900/40 relative overflow-hidden">
           <div className="flex items-center justify-between mb-2">
             <span className="text-xs font-bold text-teal-700 dark:text-teal-300 flex items-center gap-1.5">
               <Wind className="w-4 h-4" />
@@ -203,7 +203,7 @@ export default function MarineWeatherCard({ weather }: MarineWeatherCardProps) {
         </div>
 
         {/* 3. Sea Water Temperature & Air Temp */}
-        <div className="p-4 rounded-2xl bg-gradient-to-br from-cyan-50 to-sky-50/50 dark:from-cyan-950/30 dark:to-sky-950/20 border border-cyan-100 dark:border-cyan-900/40 relative overflow-hidden">
+        <div className="p-4 rounded-2xl bg-linear-to-br from-cyan-50 to-sky-50/50 dark:from-cyan-950/30 dark:to-sky-950/20 border border-cyan-100 dark:border-cyan-900/40 relative overflow-hidden">
           <div className="flex items-center justify-between mb-2">
             <span className="text-xs font-bold text-cyan-700 dark:text-cyan-300 flex items-center gap-1.5">
               <Thermometer className="w-4 h-4" />
@@ -247,7 +247,7 @@ export default function MarineWeatherCard({ weather }: MarineWeatherCardProps) {
         </div>
 
         {/* 4. Atmospheric Pressure & UV */}
-        <div className="p-4 rounded-2xl bg-gradient-to-br from-indigo-50 to-purple-50/50 dark:from-indigo-950/30 dark:to-purple-950/20 border border-indigo-100 dark:border-indigo-900/40 relative overflow-hidden">
+        <div className="p-4 rounded-2xl bg-linear-to-br from-indigo-50 to-purple-50/50 dark:from-indigo-950/30 dark:to-purple-950/20 border border-indigo-100 dark:border-indigo-900/40 relative overflow-hidden">
           <div className="flex items-center justify-between mb-2">
             <span className="text-xs font-bold text-indigo-700 dark:text-indigo-300 flex items-center gap-1.5">
               <Gauge className="w-4 h-4" />
