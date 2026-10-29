@@ -15,11 +15,10 @@ interface UmiNoEkiMapProps {
 
 // Custom Marker Generator
 function createCustomIcon(L: any, station: UmiNoEki, isSelected: boolean) {
-  // If fishing is allowed, use emerald/cyan, otherwise ocean/sky
-  const bgColor = station.hasFishing ? "#059669" : "#0284c7";
+  const bgColor = "#0284c7";
   const size = isSelected ? 36 : 28;
   const border = isSelected ? "3px solid #ec4899" : "2px solid #ffffff";
-  const iconEmoji = station.hasFishing ? "🎣" : "⚓";
+  const iconEmoji = "⚓";
 
   return L.divIcon({
     className: "custom-uminoeki-pin",
@@ -116,10 +115,6 @@ export default function UmiNoEkiMap({
         const marker = L.marker([station.lat, station.lng], { icon });
 
         // Build popup content
-        const fishingBadge = station.hasFishing
-          ? `<span style="background-color: #d1fae5; color: #065f46; font-size: 10px; font-weight: bold; padding: 2px 6px; border-radius: 9999px;">🎣 釣り可能</span>`
-          : `<span style="background-color: #f1f5f9; color: #64748b; font-size: 10px; font-weight: bold; padding: 2px 6px; border-radius: 9999px;">釣り制限あり</span>`;
-
         const rentalBadge = station.hasRentalBoat
           ? `<span style="background-color: #e0f2fe; color: #0369a1; font-size: 10px; font-weight: bold; padding: 2px 6px; border-radius: 9999px;">🛥️ レンタルボート</span>`
           : "";
@@ -128,15 +123,13 @@ export default function UmiNoEkiMap({
           ? `<div style="font-size: 11px; color: #64748b; margin-top: 4px;">ビジターバース: ${escapeHtml(station.visitorBerth)}</div>`
           : "";
 
-        const spotLinkHtml =
-          station.hasFishing && station.spotId
-            ? `<a href="/spots/${encodeURIComponent(station.spotId)}" style="display: inline-block; margin-top: 6px; padding: 4px 10px; background-color: #0284c7; color: white; border-radius: 6px; font-size: 11px; text-decoration: none; font-weight: bold;">🎣 釣り場情報を見る →</a>`
-            : "";
+        const spotLinkHtml = station.spotId
+          ? `<a href="/spots/${encodeURIComponent(station.spotId)}" style="display: inline-block; margin-top: 6px; padding: 4px 10px; background-color: #0284c7; color: white; border-radius: 6px; font-size: 11px; text-decoration: none; font-weight: bold;">🌊 潮汐・海況情報を見る →</a>`
+          : "";
 
         const popupContent = `
           <div style="font-family: sans-serif; min-width: 200px; max-width: 260px;">
             <div style="display: flex; gap: 4px; flex-wrap: wrap; margin-bottom: 4px;">
-              ${fishingBadge}
               ${rentalBadge}
             </div>
             <div style="font-weight: bold; font-size: 14px; color: #0f172a; line-height: 1.3;">${escapeHtml(station.name)}</div>
@@ -217,10 +210,6 @@ export default function UmiNoEkiMap({
         <div className="font-bold text-slate-800 dark:text-white flex items-center gap-1.5">
           <Anchor className="w-3.5 h-3.5 text-cyan-600 dark:text-cyan-400" />
           <span>ピンの種別</span>
-        </div>
-        <div className="flex items-center gap-2">
-          <div className="w-3 h-3 rounded-full bg-emerald-600" />
-          <span className="text-slate-600 dark:text-slate-300">🎣 釣り可能（マリーナ・護岸等）</span>
         </div>
         <div className="flex items-center gap-2">
           <div className="w-3 h-3 rounded-full bg-sky-600" />

@@ -53,30 +53,24 @@ function normalizeText(text: string): string {
 
 export default function UmiNoEkiPage() {
   const [selectedRegion, setSelectedRegion] = useState<RegionId | "all">("all");
-  const [filterFishing, setFilterFishing] = useState(false);
   const [filterRentalBoat, setFilterRentalBoat] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
 
-  // Default initial station to a fishing-capable station
-  const [activeStation, setActiveStation] = useState<UmiNoEki>(() => {
-    return UMI_NO_EKI_LIST.find((s) => s.hasFishing) || UMI_NO_EKI_LIST[0];
-  });
+  const [activeStation, setActiveStation] = useState<UmiNoEki>(() => UMI_NO_EKI_LIST[0]);
 
-  // On client-side mount, pick a random fishing-capable station
+  // On client-side mount, pick a random station
   useEffect(() => {
-    const fishingStations = UMI_NO_EKI_LIST.filter((s) => s.hasFishing);
-    if (fishingStations.length > 0) {
-      const randomIndex = Math.floor(Math.random() * fishingStations.length);
-      setActiveStation(fishingStations[randomIndex]);
+    if (UMI_NO_EKI_LIST.length > 0) {
+      const randomIndex = Math.floor(Math.random() * UMI_NO_EKI_LIST.length);
+      setActiveStation(UMI_NO_EKI_LIST[randomIndex]);
     }
   }, []);
 
-  // Handler to pick another random fishing-capable station
-  const handleRandomFishingStation = () => {
-    const fishingStations = UMI_NO_EKI_LIST.filter((s) => s.hasFishing);
-    if (fishingStations.length > 0) {
-      const candidates = fishingStations.filter((s) => s.id !== activeStation?.id);
-      const pool = candidates.length > 0 ? candidates : fishingStations;
+  // Handler to pick another random station
+  const handleRandomStation = () => {
+    if (UMI_NO_EKI_LIST.length > 0) {
+      const candidates = UMI_NO_EKI_LIST.filter((s) => s.id !== activeStation?.id);
+      const pool = candidates.length > 0 ? candidates : UMI_NO_EKI_LIST;
       const picked = pool[Math.floor(Math.random() * pool.length)];
 
       // Reset any active filters that would exclude the randomly picked station
@@ -98,7 +92,6 @@ export default function UmiNoEkiPage() {
   const filteredStations = useMemo(() => {
     return UMI_NO_EKI_LIST.filter((station) => {
       if (selectedRegion !== "all" && station.region !== selectedRegion) return false;
-      if (filterFishing && !station.hasFishing) return false;
       if (filterRentalBoat && !station.hasRentalBoat) return false;
 
       if (searchQuery) {
@@ -113,7 +106,6 @@ export default function UmiNoEkiPage() {
           station.description,
           station.visitorBerth,
           station.rentalBoatText,
-          station.fishingText,
           station.tel,
         ];
 
@@ -129,7 +121,7 @@ export default function UmiNoEkiPage() {
 
       return true;
     });
-  }, [selectedRegion, filterFishing, filterRentalBoat, searchQuery]);
+  }, [selectedRegion, filterRentalBoat, searchQuery]);
 
   // Keep activeStation valid
   useEffect(() => {
@@ -139,12 +131,15 @@ export default function UmiNoEkiPage() {
   }, [filteredStations, activeStation.id]);
 
   const totalCount = UMI_NO_EKI_LIST.length;
-  const fishingCount = useMemo(() => UMI_NO_EKI_LIST.filter((u) => u.hasFishing).length, []);
   const rentalCount = useMemo(() => UMI_NO_EKI_LIST.filter((u) => u.hasRentalBoat).length, []);
+
+  // Some stations list several numbers (or a FAX) in one field; dial only the first number
+  const firstTel = activeStation?.tel
+    .match(/0\d{1,4}[-－‐]\d{1,4}[-－‐]\d{3,4}/)?.[0]
+    .replace(/[－‐]/g, "-");
 
   const handleResetFilters = () => {
     setSelectedRegion("all");
-    setFilterFishing(false);
     setFilterRentalBoat(false);
     setSearchQuery("");
   };
@@ -158,7 +153,7 @@ export default function UmiNoEkiPage() {
             <span>全国海の駅マップ & マリンステーション情報</span>
           </h1>
           <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-1.5 max-w-3xl leading-relaxed">
-            国土交通省認定の全国181箇所にある「海の駅」を完全網羅。営業時間・ビジターバース（係留設備）・利用料金・レンタルボートの有無・釣行可否・電話番号を掲載。釣りが可能な海の駅は当サイトの「釣り場マップ」とも直結しています。
+            国土交通省認定の全国{totalCount}箇所にある「海の駅」を完全網羅。営業時間・ビジターバース（係留設備）・利用料金・レンタルボートの有無・電話番号を掲載。周辺の潮汐・海況は当サイトの「釣り場マップ」で確認できます（釣りの可否は各施設へお問い合わせください）。
           </p>
         </div>
 
@@ -167,13 +162,6 @@ export default function UmiNoEkiPage() {
           <div className="px-3 py-2 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-xs text-center min-w-[80px]">
             <div className="text-[10px] text-slate-500 font-semibold">全登録駅</div>
             <div className="text-lg font-black text-slate-900 dark:text-white">{totalCount}</div>
-          </div>
-          <div className="px-3 py-2 rounded-2xl bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800 shadow-xs text-center min-w-[80px]">
-            <div className="text-[10px] text-emerald-700 dark:text-emerald-300 font-semibold flex items-center justify-center gap-1">
-              <Fish className="w-3 h-3" />
-              釣り可能
-            </div>
-            <div className="text-lg font-black text-emerald-600 dark:text-emerald-400">{fishingCount}</div>
           </div>
           <div className="px-3 py-2 rounded-2xl bg-sky-50 dark:bg-sky-950/40 border border-sky-200 dark:border-sky-800 shadow-xs text-center min-w-[80px]">
             <div className="text-[10px] text-sky-700 dark:text-sky-300 font-semibold flex items-center justify-center gap-1">
@@ -212,18 +200,6 @@ export default function UmiNoEkiPage() {
           {/* Quick Filter Toggles */}
           <div className="flex items-center gap-2 flex-wrap">
             <button
-              onClick={() => setFilterFishing(!filterFishing)}
-              className={`flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-bold transition-all ${
-                filterFishing
-                  ? "bg-emerald-600 text-white shadow-xs shadow-emerald-600/30"
-                  : "bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700"
-              }`}
-            >
-              <Fish className="w-3.5 h-3.5" />
-              <span>釣り可能のみ ({fishingCount})</span>
-            </button>
-
-            <button
               onClick={() => setFilterRentalBoat(!filterRentalBoat)}
               className={`flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-bold transition-all ${
                 filterRentalBoat
@@ -236,15 +212,15 @@ export default function UmiNoEkiPage() {
             </button>
 
             <button
-              onClick={handleRandomFishingStation}
-              className="flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-bold transition-all bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-300 hover:bg-emerald-100 dark:hover:bg-emerald-900/50 border border-emerald-200/80 dark:border-emerald-800 shadow-xs"
-              title="釣りができる海の駅をランダムに表示"
+              onClick={handleRandomStation}
+              className="flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-bold transition-all bg-cyan-50 dark:bg-cyan-950/40 text-cyan-700 dark:text-cyan-300 hover:bg-cyan-100 dark:hover:bg-cyan-900/50 border border-cyan-200/80 dark:border-cyan-800 shadow-xs"
+              title="海の駅をランダムに表示"
             >
-              <Dices className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" />
-              <span>釣りをランダム選択</span>
+              <Dices className="w-3.5 h-3.5 text-cyan-600 dark:text-cyan-400" />
+              <span>ランダム選択</span>
             </button>
 
-            {(selectedRegion !== "all" || filterFishing || filterRentalBoat || searchQuery) && (
+            {(selectedRegion !== "all" || filterRentalBoat || searchQuery) && (
               <button
                 onClick={handleResetFilters}
                 className="text-xs text-slate-500 hover:text-slate-700 dark:hover:text-slate-300 underline underline-offset-4 ml-1"
@@ -312,16 +288,6 @@ export default function UmiNoEkiPage() {
                     <span className="px-2.5 py-1 rounded-lg text-xs font-bold bg-cyan-100 dark:bg-cyan-950/60 text-cyan-700 dark:text-cyan-300 border border-cyan-200/80 dark:border-cyan-800">
                       {activeStation.prefecture} / {activeStation.regionName}
                     </span>
-                    {activeStation.hasFishing ? (
-                      <span className="px-2.5 py-1 rounded-lg text-xs font-bold bg-emerald-100 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-300 border border-emerald-200/80 dark:border-emerald-800 flex items-center gap-1">
-                        <Fish className="w-3.5 h-3.5" />
-                        釣り可能
-                      </span>
-                    ) : (
-                      <span className="px-2.5 py-1 rounded-lg text-xs font-medium bg-slate-100 dark:bg-slate-800 text-slate-500 border border-slate-200 dark:border-slate-700">
-                        釣り制限あり・要問合せ
-                      </span>
-                    )}
                     {activeStation.hasRentalBoat && (
                       <span className="px-2.5 py-1 rounded-lg text-xs font-bold bg-sky-100 dark:bg-sky-950/60 text-sky-700 dark:text-sky-300 border border-sky-200/80 dark:border-sky-800 flex items-center gap-1">
                         <Ship className="w-3.5 h-3.5" />
@@ -330,11 +296,11 @@ export default function UmiNoEkiPage() {
                     )}
                   </div>
                   <button
-                    onClick={handleRandomFishingStation}
+                    onClick={handleRandomStation}
                     className="flex items-center gap-1 px-2.5 py-1 rounded-lg text-xs font-bold bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors"
-                    title="別の釣りができる海の駅をランダムに表示"
+                    title="別の海の駅をランダムに表示"
                   >
-                    <Dices className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" />
+                    <Dices className="w-3.5 h-3.5 text-cyan-600 dark:text-cyan-400" />
                     <span>ランダム変更</span>
                   </button>
                 </div>
@@ -354,28 +320,28 @@ export default function UmiNoEkiPage() {
                 </p>
               )}
 
-              {/* LINK TO FISHING SPOT MAP IF FISHING ALLOWED */}
-              {activeStation.hasFishing && activeStation.spotId && (
-                <div className="bg-linear-to-br from-emerald-500 to-teal-600 rounded-2xl p-4 text-white shadow-md shadow-emerald-500/20">
+              {/* LINK TO SPOT PAGE (TIDE / MARINE WEATHER) */}
+              {activeStation.spotId && (
+                <div className="bg-linear-to-br from-cyan-500 to-sky-600 rounded-2xl p-4 text-white shadow-md shadow-cyan-500/20">
                   <div className="flex items-start justify-between gap-3">
                     <div>
                       <div className="text-xs font-bold opacity-90 flex items-center gap-1">
-                        <Fish className="w-3.5 h-3.5" />
+                        <Compass className="w-3.5 h-3.5" />
                         <span>釣り場マップ連携スポット</span>
                       </div>
                       <div className="font-bold text-sm sm:text-base mt-0.5">
-                        潮汐グラフ・釣行指数・対象魚種を確認
+                        周辺の潮汐グラフ・海況を確認
                       </div>
                       <p className="text-xs text-white/80 mt-1">
-                        この海の駅および周辺護岸での釣り場詳細・気象予報・仕掛けガイドが閲覧可能です。
+                        この海の駅周辺の潮汐・気象予報が閲覧できます。施設内や周辺での釣りの可否は、必ず事前に施設へご確認ください。
                       </p>
                     </div>
                   </div>
                   <Link
                     href={`/spots/${activeStation.spotId}`}
-                    className="mt-3.5 inline-flex items-center justify-center gap-2 w-full py-2.5 rounded-xl bg-white text-emerald-800 font-extrabold text-xs sm:text-sm shadow-xs hover:bg-emerald-50 transition-colors"
+                    className="mt-3.5 inline-flex items-center justify-center gap-2 w-full py-2.5 rounded-xl bg-white text-cyan-800 font-extrabold text-xs sm:text-sm shadow-xs hover:bg-cyan-50 transition-colors"
                   >
-                    <span>釣り場詳細・タイドグラフを見る</span>
+                    <span>潮汐・海況情報を見る</span>
                     <ChevronRight className="w-4 h-4" />
                   </Link>
                 </div>
@@ -406,9 +372,13 @@ export default function UmiNoEkiPage() {
                     <div className="flex-1">
                       <span className="font-bold text-slate-800 dark:text-slate-200">電話番号:</span>
                       <div className="mt-0.5">
-                        <a href={`tel:${activeStation.tel.replace(/[^0-9-]/g, "")}`} className="hover:underline text-cyan-700 dark:text-cyan-300 font-semibold">
-                          {activeStation.tel}
-                        </a>
+                        {firstTel ? (
+                          <a href={`tel:${firstTel}`} className="hover:underline text-cyan-700 dark:text-cyan-300 font-semibold">
+                            {activeStation.tel}
+                          </a>
+                        ) : (
+                          activeStation.tel
+                        )}
                       </div>
                     </div>
                   </div>
@@ -433,7 +403,7 @@ export default function UmiNoEkiPage() {
                       {activeStation.lat}, {activeStation.lng}
                     </div>
                     {activeStation.seaAccess && (
-                      <div className="text-slate-500 mt-0.5 text-[10px]">海図座標: {activeStation.seaAccess}</div>
+                      <div className="text-slate-500 mt-0.5 text-[10px]">海からのアクセス: {activeStation.seaAccess}</div>
                     )}
                   </div>
                 </div>
@@ -476,7 +446,7 @@ export default function UmiNoEkiPage() {
                   <Fish className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
                   <div className="flex-1">
                     <span className="font-bold text-slate-800 dark:text-slate-200">釣行可否:</span>
-                    <div className="mt-0.5">{activeStation.fishingText}</div>
+                    <div className="mt-0.5">各施設へお問い合わせください（マリーナ・港湾施設内は釣りが禁止されている場合があります）</div>
                   </div>
                 </div>
               </div>
@@ -484,7 +454,7 @@ export default function UmiNoEkiPage() {
               {/* External Website Button */}
               {activeStation.websiteUrl && (
                 <a
-                  href={activeStation.websiteUrl.split(/\s+/)[0]}
+                  href={activeStation.websiteUrl}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center justify-center gap-1.5 w-full py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 text-xs font-bold text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors"
@@ -534,11 +504,6 @@ export default function UmiNoEkiPage() {
                       {station.prefecture}
                     </span>
                     <div className="flex items-center gap-1.5">
-                      {station.hasFishing && (
-                        <span className="text-[10px] font-bold px-1.5 py-0.5 rounded-sm bg-emerald-100 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800">
-                          🎣 釣り
-                        </span>
-                      )}
                       {station.hasRentalBoat && (
                         <span className="text-[10px] font-bold px-1.5 py-0.5 rounded-sm bg-sky-100 dark:bg-sky-950/60 text-sky-700 dark:text-sky-300 border border-sky-200 dark:border-sky-800">
                           🛥️ ボート
@@ -565,13 +530,13 @@ export default function UmiNoEkiPage() {
                   </div>
 
                   <div className="flex items-center gap-2">
-                    {station.hasFishing && station.spotId && (
+                    {station.spotId && (
                       <Link
                         href={`/spots/${station.spotId}`}
                         onClick={(e) => e.stopPropagation()}
-                        className="text-xs font-bold text-emerald-600 dark:text-emerald-400 hover:underline flex items-center gap-0.5"
+                        className="text-xs font-bold text-sky-600 dark:text-sky-400 hover:underline flex items-center gap-0.5"
                       >
-                        <span>釣り場</span>
+                        <span>潮汐・海況</span>
                         <ChevronRight className="w-3 h-3" />
                       </Link>
                     )}

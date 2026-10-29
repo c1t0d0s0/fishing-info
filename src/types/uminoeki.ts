@@ -19,8 +19,6 @@ export interface UmiNoEki {
   visitorFee: string;
   hasRentalBoat: boolean;
   rentalBoatText: string;
-  hasFishing: boolean;
-  fishingText: string;
   spotId?: string | null;
   seaAccess: string;
   landAccess: string;

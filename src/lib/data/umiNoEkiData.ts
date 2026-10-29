@@ -17,10 +17,6 @@ export function getUmiNoEkiByRegion(region: RegionId): UmiNoEki[] {
   return umiNoEkiList.filter((station) => station.region === region);
 }
 
-export function getFishingUmiNoEki(): UmiNoEki[] {
-  return umiNoEkiList.filter((station) => station.hasFishing);
-}
-
 export function getRentalBoatUmiNoEki(): UmiNoEki[] {
   return umiNoEkiList.filter((station) => station.hasRentalBoat);
 }
