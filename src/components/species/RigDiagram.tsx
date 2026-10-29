@@ -690,7 +690,7 @@ function AjingDiagram() {
       <text x="140" y="88" className="text-[7.5px] font-bold fill-amber-300">エステル 0.3号</text>
 
       <circle cx="270" cy="128" r="4" fill="#0284c7" stroke="#38bdf8" strokeWidth="1" />
-      <text x="270" y="142" textAnchor="middle" className="text-[7.5px] font-mono fill-cyan-300">FG / 3.5KNOT</text>
+      <text x="270" y="142" textAnchor="middle" className="text-[7.5px] font-mono fill-cyan-300">TRIPLE 8 / 3.5KNOT</text>
 
       <line x1="270" y1="128" x2="360" y2="200" stroke="#38bdf8" strokeWidth="1.4" strokeDasharray="6 1" />
 
@@ -732,12 +732,12 @@ function ShoreJiggingDiagram() {
       targetSpecies="青物 (イナダ・サワラ)・タチウオ"
       standardDepth="全層探査 (ボトム〜表層)"
       mainLineSpec="PE 1.0〜1.5号 (200m+)"
-      styleSpec="メタルジグ 30〜60g 遠投"
+      styleSpec="メタルジグ 20〜40g 遠投"
     >
       <SpecBox x={20} y={60} w={154} h={42} num={1} title="道糸 (PEライン)" spec="PE 1.0〜1.5号 200m以上" note="8本編み・遠投性と耐引張強度" />
       <SpecBox x={190} y={55} w={150} h={42} num={2} title="摩擦系ノット" spec="FGノット / PRノット" note="ガイド抜け良好・結束強度90%以上" />
       <SpecBox x={20} y={150} w={154} h={42} num={3} title="ショックリーダー" spec="フロロ 4〜6号 (16〜25lb) 1.5m" note="青物の歯ズレ・根ズレをガード" />
-      <SpecBox x={360} y={242} w={178} h={42} num={4} title="メタルジグ＆フック" spec="30〜60g (アシスト+リアトレブル)" note="センターバランス・強フラッシング" />
+      <SpecBox x={360} y={242} w={178} h={42} num={4} title="メタルジグ＆フック" spec="20〜40g (アシスト+リアトレブル)" note="センターバランス・強フラッシング" />
 
       <LeaderLine points="174,81 210,81 220,105" />
       <LeaderLine points="265,97 265,115 270,125" />
@@ -799,12 +799,12 @@ function EgingDiagram() {
       targetSpecies="アオリイカ・コウイカ"
       standardDepth="底層〜中層 (カウントフォール)"
       mainLineSpec="PE 0.6〜0.8号 (150m+)"
-      styleSpec="エギ 2.5〜3.5号 左右ダート"
+      styleSpec="エギ 2.5〜4.0号 左右ダート"
     >
       <SpecBox x={20} y={60} w={154} h={42} num={1} title="メインライン" spec="PE 0.6〜0.8号 150m+" note="低伸度・微細なイカパンチ感知" />
       <SpecBox x={190} y={55} w={150} h={42} num={2} title="結束部" spec="FGノット / ダブルサージェンス" note="結束強度が高くガイド抜けスムーズ" />
       <SpecBox x={20} y={150} w={154} h={42} num={3} title="ショックリーダー" spec="フロロ 1.75〜2.5号 1.5m" note="海底のシモリ根ズレに強い耐摩耗性" />
-      <SpecBox x={360} y={242} w={178} h={42} num={4} title="エギ (餌木本体)" spec="3.0〜3.5号 (2段傘針カンナ)" note="沈下速度 3〜3.5秒/m でイカを抱かせる" />
+      <SpecBox x={360} y={242} w={178} h={42} num={4} title="エギ (餌木本体)" spec="2.5〜4.0号 (2段傘針カンナ)" note="沈下速度 3〜3.5秒/m でイカを抱かせる" />
 
       <LeaderLine points="174,81 210,81 220,105" />
       <LeaderLine points="265,97 265,115 270,125" />
@@ -944,8 +944,8 @@ function ChoinageDiagram() {
       mainLineSpec="ナイロン 2〜3号 / PE 0.8〜1号"
       styleSpec="L型遊動天秤 + 2本針底這わせ"
     >
-      <SpecBox x={20} y={60} w={154} h={42} num={1} title="メインライン" spec="ナイロン 2〜3号 / PE 0.8号" note="力糸なしで30〜50mキャスト可能" />
-      <SpecBox x={190} y={55} w={150} h={42} num={2} title="L型遊動天秤" spec="小型天秤 (6〜10号)" note="底取りが明確でアタリが直接手元へ" />
+      <SpecBox x={20} y={60} w={154} h={42} num={1} title="メインライン" spec="ナイロン 2〜3号 / PE 0.8〜1.0号" note="力糸なしで30〜50mキャスト可能" />
+      <SpecBox x={190} y={55} w={150} h={42} num={2} title="L型遊動天秤" spec="小型天秤 (5〜10号)" note="底取りが明確でアタリが直接手元へ" />
       <SpecBox x={20} y={190} w={154} h={42} num={3} title="キス専用2本針" spec="流線キス 6〜7号 (ハリス1号)" note="吸い込み抜群のロングシャンク針" />
       <SpecBox x={380} y={95} w={160} h={42} num={4} title="虫エサ (青イソメ)" spec="頭部通し刺し・タラシ1〜2cm" note="海底の砂煙で強烈アピール" />
 
@@ -1011,7 +1011,7 @@ function SayoriDiagram() {
       <SpecBox x={20} y={90} w={150} h={42} num={1} title="道糸" spec="ナイロン 2〜2.5号 / PE 0.8号" note="水面に浮くフローティング仕様" />
       <SpecBox x={150} y={145} w={160} h={42} num={2} title="ロケットカゴウキ" spec="スーパーサヨリ遠投カゴ" note="コマセ放出＆引き波で群れを寄せる" />
       <SpecBox x={20} y={225} w={160} h={42} num={3} title="3〜4連シモリ玉" spec="極小シモリウキ 3〜4玉" note="横走りアタリを水面で即座に視覚化" />
-      <SpecBox x={375} y={145} w={165} h={42} num={4} title="サヨリ専用針＆エサ" spec="サヨリ針 3.5〜4.5号 + アミエビ" note="硬いくちばしを貫通する極小鋭利針" />
+      <SpecBox x={375} y={145} w={165} h={42} num={4} title="サヨリ専用針＆エサ" spec="サヨリ針 2〜3号 + アミエビ" note="小さな口に掛かる極小鋭利針" />
 
       <LeaderLine points="170,111 210,111 160,80" />
       <LeaderLine points="230,145 230,105 210,80" />
@@ -1066,7 +1066,7 @@ function TakoDiagram() {
       figNo="FIG-08"
       title="タコエギ仕掛け構成図 (マダコ攻略)"
       subtitle="DWG REF: #TKO-08 / OCTOPUS BOTTOM RIG / SCALE: NON-SCALE"
-      targetSpecies="マダコ・イイダコ"
+      targetSpecies="マダコ"
       standardDepth="ボトム (敷石・岸壁際・捨て石)"
       mainLineSpec="PE 3.0〜5.0号 (耐摩耗)"
       styleSpec="3又スナップ + 2連エギ + オモリ"
@@ -1370,8 +1370,8 @@ function IshidaiDiagram() {
     >
       <SpecBox x={20} y={60} w={154} h={42} num={1} title="極太道糸" spec="ナイロン 18〜24号 150m" note="荒磯の根ズレに耐える耐摩耗性" />
       <SpecBox x={190} y={55} w={150} h={42} num={2} title="瀬ズレワイヤー" spec="ステンレスワイヤー #37 1.5m" note="鋭利な瀬壁での破断を完全阻止" />
-      <SpecBox x={20} y={190} w={154} h={42} num={3} title="捨て糸＆真空オモリ" spec="真空オモリ 25〜35号 (捨て糸3号)" note="根掛かり時はオモリのみ切断回収" />
-      <SpecBox x={365} y={200} w={165} h={42} num={4} title="イシダイ針＆ガンガゼ" spec="イシダイ針 16〜18号 + ウニ" note="ウニ通しで芯刺し・舞い込み即合わせ" />
+      <SpecBox x={20} y={190} w={154} h={42} num={3} title="捨て糸＆捨てオモリ" spec="捨てオモリ 25〜35号 (捨て糸3号)" note="根掛かり時はオモリのみ切断回収" />
+      <SpecBox x={365} y={200} w={165} h={42} num={4} title="イシダイ針＆ガンガゼ" spec="イシダイ針 15〜18号 + ウニ" note="ウニ通しで芯刺し・舞い込み即合わせ" />
 
       <LeaderLine points="174,81 210,81 220,105" />
       <LeaderLine points="265,97 265,115 270,125" />
@@ -1442,9 +1442,9 @@ function SurfFlatDiagram() {
       mainLineSpec="PE 1.0〜1.5号 (200〜300m)"
       styleSpec="シンペン/ジグヘッド 遠投仕様"
     >
-      <SpecBox x={20} y={60} w={154} h={42} num={1} title="キャスティングPE" spec="PE 1.0〜1.2号 200m+" note="風を切り裂き100m超の遠投性能" />
-      <SpecBox x={190} y={55} w={150} h={42} num={2} title="耐摩耗リーダー" spec="フロロ 5〜7号 (20〜25lb) 1.5m" note="海底の砂擦れに強い高硬度仕様" />
-      <SpecBox x={370} y={65} w={165} h={42} num={3} title="サーフルアー" spec="ヘビーシンペン 30〜40g / ワーム" note="ボトム感知力と遠投性を両立" />
+      <SpecBox x={20} y={60} w={154} h={42} num={1} title="キャスティングPE" spec="PE 1.0〜1.5号 200m+" note="風を切り裂き100m超の遠投性能" />
+      <SpecBox x={190} y={55} w={150} h={42} num={2} title="耐摩耗リーダー" spec="フロロ 5〜7号 (20〜30lb) 1.5m" note="海底の砂擦れに強い高硬度仕様" />
+      <SpecBox x={370} y={65} w={165} h={42} num={3} title="サーフルアー" spec="ヘビーシンペン 30〜45g / ワーム" note="ボトム感知力と遠投性を両立" />
       <SpecBox x={20} y={230} w={154} h={42} num={4} title="ボトムトレース釣法" spec="底から50cm上をスローリトリーブ" note="離岸流やブレイクの切れ目を横切る" />
 
       <LeaderLine points="174,81 210,81 220,105" />
@@ -1507,8 +1507,8 @@ function KueDiagram() {
     >
       <SpecBox x={20} y={60} w={154} h={42} num={1} title="板バネ竿受け" spec="磯岩盤にアンカーボルトで完全固定" note="怪魚の初速100kg超の突進を受け止める" />
       <SpecBox x={190} y={55} w={150} h={42} num={2} title="超極太道糸" spec="ナイロン 80〜100号" note="絶対に切れない極限の怪魚規格" />
-      <SpecBox x={20} y={190} w={154} h={42} num={3} title="ワイロンワイヤー" spec="#30 1.5m (ステンレス7×7被覆)" note="クエの鋭利な犬歯やエラ洗いをガード" />
-      <SpecBox x={360} y={190} w={172} h={42} num={4} title="クエ針＆丸ごとエサ" spec="クエ針 35〜40号 + サバ丸ごと1匹" note="一撃で根に潜る巨魚を即座に引き離す" />
+      <SpecBox x={20} y={190} w={154} h={42} num={3} title="ワイロンワイヤー" spec="#28〜24 1.5m (ステンレス7×7被覆)" note="クエの鋭利な犬歯やエラ洗いをガード" />
+      <SpecBox x={360} y={190} w={172} h={42} num={4} title="クエ針＆丸ごとエサ" spec="クエ針 35〜45号 + サバ丸ごと1匹" note="一撃で根に潜る巨魚を即座に引き離す" />
 
       <LeaderLine points="174,81 210,81 110,120" />
       <LeaderLine points="265,97 265,115 230,120" />
@@ -1532,7 +1532,7 @@ function KueDiagram() {
       </g>
 
       <line x1="245" y1="120" x2="350" y2="185" stroke="#cbd5e1" strokeWidth="2.5" strokeDasharray="6 2" />
-      <text x="260" y="160" className="text-[7px] font-mono fill-slate-200">ワイロンワイヤー #30</text>
+      <text x="260" y="160" className="text-[7px] font-mono fill-slate-200">ワイロンワイヤー #26</text>
 
       <g transform="translate(240, 125)">
         <line x1="0" y1="0" x2="-15" y2="110" stroke="#38bdf8" strokeWidth="1.2" strokeDasharray="3 2" />
