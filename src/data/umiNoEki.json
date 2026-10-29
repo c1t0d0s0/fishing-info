@@ -92,7 +92,7 @@
       "https://www.umi-eki.jp/uminoeki/muroran/img04.jpg",
       "https://www.umi-eki.jp/uminoeki/muroran/img05.jpg"
     ],
-    "spotId": "uminoeki-muroran"
+    "spotId": null
   },
   {
     "id": "uminoeki-monbetsu",
@@ -121,7 +121,7 @@
     "photos": [
       "https://www.umi-eki.jp/uminoeki/monbetsu/img02.jpg"
     ],
-    "spotId": "uminoeki-monbetsu"
+    "spotId": null
   },
   {
     "id": "uminoeki-otaru",
@@ -432,7 +432,7 @@
       "https://www.umi-eki.jp/uminoeki/akita/img04.jpg",
       "https://www.umi-eki.jp/uminoeki/akita/img05.jpg"
     ],
-    "spotId": "uminoeki-akita"
+    "spotId": null
   },
   {
     "id": "uminoeki-iwaki",
@@ -996,7 +996,7 @@
       "https://www.umi-eki.jp/uminoeki/shounanzushi/img04.jpg",
       "https://www.umi-eki.jp/uminoeki/shounanzushi/img05.jpg"
     ],
-    "spotId": "uminoeki-shounanzushi"
+    "spotId": null
   },
   {
     "id": "uminoeki-hayamakou",
@@ -1058,7 +1058,7 @@
       "https://www.umi-eki.jp/uminoeki/koajiro_seabonia/img03.jpg",
       "https://www.umi-eki.jp/uminoeki/koajiro_seabonia/img04.jpg"
     ],
-    "spotId": "uminoeki-koajiro_seabonia"
+    "spotId": null
   },
   {
     "id": "uminoeki-uraga",
@@ -1090,7 +1090,7 @@
       "https://www.umi-eki.jp/uminoeki/uraga/img04.jpg",
       "https://www.umi-eki.jp/uminoeki/uraga/img05.jpg"
     ],
-    "spotId": "uminoeki-uraga"
+    "spotId": null
   },
   {
     "id": "uminoeki-nishiuraga",
@@ -1154,7 +1154,7 @@
       "https://www.umi-eki.jp/uminoeki/miura_misaki/img05.jpg",
       "https://www.umi-eki.jp/uminoeki/miura_misaki/img08.jpg"
     ],
-    "spotId": "uminoeki-miura_misaki"
+    "spotId": null
   },
   {
     "id": "uminoeki-hiratsuka",
@@ -1374,7 +1374,7 @@
       "https://www.umi-eki.jp/uminoeki/numadu_enoura/img04.jpg",
       "https://www.umi-eki.jp/uminoeki/numadu_enoura/img05.jpg"
     ],
-    "spotId": "uminoeki-numadu_enoura"
+    "spotId": null
   },
   {
     "id": "uminoeki-numadukou",
@@ -1437,7 +1437,7 @@
       "https://www.umi-eki.jp/uminoeki/numadu_heda/img02.jpg",
       "https://www.umi-eki.jp/uminoeki/numadu_heda/img07.jpg"
     ],
-    "spotId": "uminoeki-numadu_heda"
+    "spotId": null
   },
   {
     "id": "uminoeki-shimizu_miho",
@@ -1532,7 +1532,7 @@
       "https://www.umi-eki.jp/uminoeki/hamanako_mura/img04.jpg",
       "https://www.umi-eki.jp/uminoeki/hamanako_mura/img05.jpg"
     ],
-    "spotId": "uminoeki-hamanako_mura"
+    "spotId": null
   },
   {
     "id": "uminoeki-hamanako_kosai",
@@ -1564,7 +1564,7 @@
       "https://www.umi-eki.jp/uminoeki/hamanako_kosai/img04.jpg",
       "https://www.umi-eki.jp/uminoeki/hamanako_kosai/img05.jpg"
     ],
-    "spotId": "uminoeki-hamanako_kosai"
+    "spotId": null
   },
   {
     "id": "uminoeki-hamanako_arai",
@@ -1596,7 +1596,7 @@
       "https://www.umi-eki.jp/uminoeki/hamanako_arai/img04.jpg",
       "https://www.umi-eki.jp/uminoeki/hamanako_arai/img05.jpg"
     ],
-    "spotId": "uminoeki-hamanako_arai"
+    "spotId": null
   },
   {
     "id": "uminoeki-hamanako_washidu",
@@ -1628,7 +1628,7 @@
       "https://www.umi-eki.jp/uminoeki/hamanako_washidu/img04.jpg",
       "https://www.umi-eki.jp/uminoeki/hamanako_washidu/img05.jpg"
     ],
-    "spotId": "uminoeki-hamanako_washidu"
+    "spotId": null
   },
   {
     "id": "uminoeki-hamanako_mikkabi",
@@ -1786,7 +1786,7 @@
       "https://www.umi-eki.jp/uminoeki/takahama/img04.jpg",
       "https://www.umi-eki.jp/uminoeki/takahama/img05.jpg"
     ],
-    "spotId": "uminoeki-takahama"
+    "spotId": null
   },
   {
     "id": "uminoeki-rinku_tokoname",
@@ -1818,7 +1818,7 @@
       "https://www.umi-eki.jp/uminoeki/rinku_tokoname/img04.jpg",
       "https://www.umi-eki.jp/uminoeki/rinku_tokoname/img05.jpg"
     ],
-    "spotId": "uminoeki-rinku_tokoname"
+    "spotId": null
   },
   {
     "id": "uminoeki-mie_yokkaichi",
@@ -2039,7 +2039,7 @@
       "https://www.umi-eki.jp/uminoeki/kashiwazaki/img04.jpg",
       "https://www.umi-eki.jp/uminoeki/kashiwazaki/img05.jpg"
     ],
-    "spotId": "uminoeki-kashiwazaki"
+    "spotId": null
   },
   {
     "id": "uminoeki-mizuhashi",
@@ -2068,7 +2068,7 @@
     "photos": [
       "https://www.umi-eki.jp/uminoeki/mizuhashi/img02.jpg"
     ],
-    "spotId": "uminoeki-mizuhashi"
+    "spotId": null
   },
   {
     "id": "uminoeki-shinminato",
@@ -2100,7 +2100,7 @@
       "https://www.umi-eki.jp/uminoeki/shinminato/img04.jpg",
       "https://www.umi-eki.jp/uminoeki/shinminato/img05.jpg"
     ],
-    "spotId": "uminoeki-shinminato"
+    "spotId": null
   },
   {
     "id": "uminoeki-uminpia",
@@ -2132,7 +2132,7 @@
       "https://www.umi-eki.jp/uminoeki/uminpia/img04.jpg",
       "https://www.umi-eki.jp/uminoeki/uminpia/img05.jpg"
     ],
-    "spotId": "uminoeki-uminpia"
+    "spotId": null
   },
   {
     "id": "uminoeki-maizuru_central",
@@ -2164,7 +2164,7 @@
       "https://www.umi-eki.jp/uminoeki/maizuru_central/img04.jpg",
       "https://www.umi-eki.jp/uminoeki/maizuru_central/img05.jpg"
     ],
-    "spotId": "uminoeki-maizuru_central"
+    "spotId": null
   },
   {
     "id": "uminoeki-maizuru_ri",
@@ -2225,7 +2225,7 @@
       "https://www.umi-eki.jp/uminoeki/taimiyazu/img03.jpg",
       "https://www.umi-eki.jp/uminoeki/taimiyazu/img04.jpg"
     ],
-    "spotId": "uminoeki-taimiyazu"
+    "spotId": null
   },
   {
     "id": "uminoeki-shinnishinomiya",
@@ -2713,7 +2713,7 @@
       "https://www.umi-eki.jp/uminoeki/izumisanokankumarina/img04.jpg",
       "https://www.umi-eki.jp/uminoeki/izumisanokankumarina/img05.jpg"
     ],
-    "spotId": "uminoeki-izumisanokankumarina"
+    "spotId": null
   },
   {
     "id": "uminoeki-taziri",
@@ -2745,7 +2745,7 @@
       "https://www.umi-eki.jp/uminoeki/taziri/img04.jpg",
       "https://www.umi-eki.jp/uminoeki/taziri/img05.jpg"
     ],
-    "spotId": "uminoeki-taziri"
+    "spotId": null
   },
   {
     "id": "uminoeki-tannowayachtharbor",
@@ -2777,7 +2777,7 @@
       "https://www.umi-eki.jp/uminoeki/tannowayachtharbor/img04.jpg",
       "https://www.umi-eki.jp/uminoeki/tannowayachtharbor/img05.jpg"
     ],
-    "spotId": "uminoeki-tannowayachtharbor"
+    "spotId": null
   },
   {
     "id": "uminoeki-wakayama_marinacity",
@@ -2867,7 +2867,7 @@
     "photos": [
       "https://www.umi-eki.jp/uminoeki/kiiyura/img02.jpg"
     ],
-    "spotId": "uminoeki-kiiyura"
+    "spotId": null
   },
   {
     "id": "uminoeki-tanabe_u",
@@ -3084,7 +3084,7 @@
       "https://www.umi-eki.jp/uminoeki/okayama/img02.jpg",
       "https://www.umi-eki.jp/uminoeki/okayama/img03.jpg"
     ],
-    "spotId": "uminoeki-okayama"
+    "spotId": null
   },
   {
     "id": "uminoeki-tamano_unokou",
@@ -3268,7 +3268,7 @@
       "https://www.umi-eki.jp/uminoeki/sakaigahama/img04.jpg",
       "https://www.umi-eki.jp/uminoeki/sakaigahama/img05.jpg"
     ],
-    "spotId": "uminoeki-sakaigahama"
+    "spotId": null
   },
   {
     "id": "uminoeki-onomichi",
@@ -3422,7 +3422,7 @@
       "https://www.umi-eki.jp/uminoeki/skymarine/img03.jpg",
       "https://www.umi-eki.jp/uminoeki/skymarine/img04.jpg"
     ],
-    "spotId": "uminoeki-skymarine"
+    "spotId": null
   },
   {
     "id": "uminoeki-yutaka",
@@ -3607,7 +3607,7 @@
       "https://www.umi-eki.jp/uminoeki/yoshijima/img04.jpg",
       "https://www.umi-eki.jp/uminoeki/yoshijima/img05.jpg"
     ],
-    "spotId": "uminoeki-yoshijima"
+    "spotId": null
   },
   {
     "id": "uminoeki-hiroshima_kanon",
@@ -3639,7 +3639,7 @@
       "https://www.umi-eki.jp/uminoeki/hiroshima_kanon/img04.jpg",
       "https://www.umi-eki.jp/uminoeki/hiroshima_kanon/img05.jpg"
     ],
-    "spotId": "uminoeki-hiroshima_kanon"
+    "spotId": null
   },
   {
     "id": "uminoeki-hiroshima_itukaichi",
@@ -3733,7 +3733,7 @@
       "https://www.umi-eki.jp/uminoeki/shunan/img03.jpg",
       "https://www.umi-eki.jp/uminoeki/shunan/img04.jpg"
     ],
-    "spotId": "uminoeki-shunan"
+    "spotId": null
   },
   {
     "id": "uminoeki-tokuyama_kudamatsu",
@@ -3916,7 +3916,7 @@
       "https://www.umi-eki.jp/uminoeki/oki_nishinoshima/img02.jpg",
       "https://www.umi-eki.jp/uminoeki/oki_nishinoshima/img03.jpg"
     ],
-    "spotId": "uminoeki-oki_nishinoshima"
+    "spotId": null
   },
   {
     "id": "uminoeki-sakaiminato",
@@ -4038,7 +4038,7 @@
       "https://www.umi-eki.jp/uminoeki/shoudoshima_furusatomura/img03.jpg",
       "https://www.umi-eki.jp/uminoeki/shoudoshima_furusatomura/img04.jpg"
     ],
-    "spotId": "uminoeki-shoudoshima_furusatomura"
+    "spotId": null
   },
   {
     "id": "uminoeki-sanuki_shido",
@@ -4070,7 +4070,7 @@
       "https://www.umi-eki.jp/uminoeki/sanuki_shido/img04.jpg",
       "https://www.umi-eki.jp/uminoeki/sanuki_shido/img05.jpg"
     ],
-    "spotId": "uminoeki-sanuki_shido"
+    "spotId": null
   },
   {
     "id": "uminoeki-kitanada",
@@ -4162,7 +4162,7 @@
       "https://www.umi-eki.jp/uminoeki/takamatsuyashima/img04.jpg",
       "https://www.umi-eki.jp/uminoeki/takamatsuyashima/img05.jpg"
     ],
-    "spotId": "uminoeki-takamatsuyashima"
+    "spotId": null
   },
   {
     "id": "uminoeki-takamatsu_shinzai",
@@ -4192,7 +4192,7 @@
       "https://www.umi-eki.jp/uminoeki/takamatsu_shinzai/img02.jpg",
       "https://www.umi-eki.jp/uminoeki/takamatsu_shinzai/img03.jpg"
     ],
-    "spotId": "uminoeki-takamatsu_shinzai"
+    "spotId": null
   },
   {
     "id": "uminoeki-mitoyonio",
@@ -4251,7 +4251,7 @@
       "https://www.umi-eki.jp/uminoeki/mitoyo_awashima/img02.jpg",
       "https://www.umi-eki.jp/uminoeki/mitoyo_awashima/img03.jpg"
     ],
-    "spotId": "uminoeki-mitoyo_awashima"
+    "spotId": null
   },
   {
     "id": "uminoeki-yuge",
@@ -4372,7 +4372,7 @@
       "https://www.umi-eki.jp/uminoeki/imabari_inokuchi/img02.jpg",
       "https://www.umi-eki.jp/uminoeki/imabari_inokuchi/img03.jpg"
     ],
-    "spotId": "uminoeki-imabari_inokuchi"
+    "spotId": null
   },
   {
     "id": "uminoeki-imabari_miyaura",
@@ -4617,7 +4617,7 @@
       "https://www.umi-eki.jp/uminoeki/tosa_ryoma/img02.jpg",
       "https://www.umi-eki.jp/uminoeki/tosa_ryoma/img03.jpg"
     ],
-    "spotId": "uminoeki-tosa_ryoma"
+    "spotId": null
   },
   {
     "id": "uminoeki-ainankawauso",
@@ -4678,7 +4678,7 @@
       "https://www.umi-eki.jp/uminoeki/susaki_yoshinomarina/img03.jpg",
       "https://www.umi-eki.jp/uminoeki/susaki_yoshinomarina/img04.jpg"
     ],
-    "spotId": "uminoeki-susaki_yoshinomarina"
+    "spotId": null
   },
   {
     "id": "uminoeki-fukuokamarinoa",
@@ -4710,7 +4710,7 @@
       "https://www.umi-eki.jp/uminoeki/fukuokamarinoa/img04.jpg",
       "https://www.umi-eki.jp/uminoeki/fukuokamarinoa/img06.jpg"
     ],
-    "spotId": "uminoeki-fukuokamarinoa"
+    "spotId": null
   },
   {
     "id": "uminoeki-fukuoka_uminonakamichi",
@@ -4771,7 +4771,7 @@
       "https://www.umi-eki.jp/uminoeki/munakata_ooshima/img02.jpg",
       "https://www.umi-eki.jp/uminoeki/munakata_ooshima/img03.jpg"
     ],
-    "spotId": "uminoeki-munakata_ooshima"
+    "spotId": null
   },
   {
     "id": "uminoeki-shinmozi",
@@ -4802,7 +4802,7 @@
       "https://www.umi-eki.jp/uminoeki/shinmozi/img03.jpg",
       "https://www.umi-eki.jp/uminoeki/shinmozi/img04.jpg"
     ],
-    "spotId": "uminoeki-shinmozi"
+    "spotId": null
   },
   {
     "id": "uminoeki-kunisaki_m",
@@ -4831,7 +4831,7 @@
     "photos": [
       "https://www.umi-eki.jp/uminoeki/kunisaki_m/img02.jpg"
     ],
-    "spotId": "uminoeki-kunisaki_m"
+    "spotId": null
   },
   {
     "id": "uminoeki-beppu",
@@ -4986,7 +4986,7 @@
       "https://www.umi-eki.jp/uminoeki/oomurawan/img04.jpg",
       "https://www.umi-eki.jp/uminoeki/oomurawan/img05.jpg"
     ],
-    "spotId": "uminoeki-oomurawan"
+    "spotId": null
   },
   {
     "id": "uminoeki-nagasaki",
@@ -5017,7 +5017,7 @@
       "https://www.umi-eki.jp/uminoeki/nagasaki/img03.jpg",
       "https://www.umi-eki.jp/uminoeki/nagasaki/img04.jpg"
     ],
-    "spotId": "uminoeki-nagasaki"
+    "spotId": null
   },
   {
     "id": "uminoeki-nagasaki_dejima",
@@ -5537,7 +5537,7 @@
       "https://www.umi-eki.jp/uminoeki/setouchi/img02.jpg",
       "https://www.umi-eki.jp/uminoeki/setouchi/img03.jpg"
     ],
-    "spotId": "uminoeki-setouchi"
+    "spotId": null
   },
   {
     "id": "uminoeki-yoronjima",
