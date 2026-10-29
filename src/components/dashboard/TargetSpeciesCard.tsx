@@ -43,23 +43,46 @@ export default function TargetSpeciesCard({ spot }: TargetSpeciesCardProps) {
       .filter((t) => t.length > 0);
   };
 
+  // Pick the most specific encyclopedia entry: exact token matches win over partial matches,
+  // and longer partial matches win over shorter ones (e.g. "マツカワ（王鰈）" -> マツカワ, not カレイ via "鰈";
+  // "ハマダイ・シブダイ" -> シブダイ, not マダイ via "ハマダイ")
+  const findBestSpecies = (tfName: string) => {
+    const tokens = extractTokens(tfName);
+    let best: (typeof FISH_SPECIES_DATA)[number] | undefined;
+    let bestScore = 0;
+
+    for (const sp of FISH_SPECIES_DATA) {
+      const spTokens = extractTokens(sp.name);
+      let score = 0;
+
+      for (const t of tokens) {
+        if (spTokens.includes(t) || sp.id.toLowerCase() === t.toLowerCase()) {
+          score = Math.max(score, 1000 + t.length);
+        } else if (t.length >= 2 && (sp.name.includes(t) || sp.kana.includes(t))) {
+          score = Math.max(score, t.length);
+        }
+      }
+      for (const st of spTokens) {
+        if (st.length >= 2 && tfName.includes(st)) {
+          score = Math.max(score, st.length);
+        }
+      }
+
+      if (score > bestScore) {
+        best = sp;
+        bestScore = score;
+      }
+    }
+
+    return best;
+  };
+
   // Resolve target fish cards (matched from encyclopedia or constructed with spot seasonality)
   const resolvedTargetFish = spot.targetFish
     .map((tfName) => {
       const tokens = extractTokens(tfName);
 
-      const match = FISH_SPECIES_DATA.find((sp) => {
-        const spTokens = extractTokens(sp.name);
-        return (
-          tokens.some(
-            (t) =>
-              sp.name.includes(t) ||
-              sp.kana.includes(t) ||
-              sp.id.toLowerCase() === t.toLowerCase()
-          ) ||
-          spTokens.some((st) => tfName.includes(st))
-        );
-      });
+      const match = findBestSpecies(tfName);
 
       const isSeasonal = seasonalFish.some((sf) =>
         tokens.some((t) => sf.includes(t) || t.includes(sf))

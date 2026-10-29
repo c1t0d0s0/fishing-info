@@ -57,8 +57,8 @@
   {
     "id": "iwashi",
     "name": "マイワシ / カタクチイワシ / ウルメイワシ (鰯)",
-    "kana": "まいわし / かたくちいわし",
-    "scientificName": "Sardinops melanostictus",
+    "kana": "まいわし / かたくちいわし / うるめいわし",
+    "scientificName": "Sardinops melanostictus / Engraulis japonicus / Etrumeus micropus",
     "category": "popular_coastal",
     "description": "海の生態系を支える代表的な大衆魚。春から秋にかけて堤防に巨大な群れで押し寄せ、サビキ釣りで子どもから大人まで誰でも大漁が狙えます。鮮度抜群の刺身や梅煮、フライは絶品。",
     "habitat": "沿岸全域・港湾・堤防・サーフ・沖合",
@@ -615,7 +615,7 @@
       "カマ塩焼き"
     ],
     "recommendedRigs": [
-      "ライトショアジギング (30〜60g)",
+      "ショアジギング (30〜60g)",
       "ショアプラッギング（ポッパー/ダイペン）",
       "泳がせ釣り"
     ],
@@ -715,7 +715,7 @@
       "しゃぶしゃぶ"
     ],
     "recommendedRigs": [
-      "ライトショアジギング (30〜60g)",
+      "ショアジギング (30〜60g)",
       "ショアジグサビキ",
       "泳がせ釣り"
     ],
@@ -729,8 +729,8 @@
   },
   {
     "id": "karei",
-    "name": "マコガレイ / カレイ / クロガシラガレイ / マツカワ (鰈)",
-    "kana": "まこがれい / かれい / くろがしらがれい / まつかわ",
+    "name": "マコガレイ / カレイ / クロガシラガレイ (鰈)",
+    "kana": "まこがれい / かれい / くろがしらがれい",
     "scientificName": "Pseudopleuronectes yokohamae",
     "category": "bottom_rock",
     "description": "冬の投げ釣りの代表格。「左ヒラメに右カレイ」で知られる砂泥底の好ターゲット。産卵前後の「花見カレイ」や晩秋〜冬の「落ちカレイ」は肉厚で甘みのある白身が絶品。",
@@ -1093,7 +1093,7 @@
     "id": "tachiuo",
     "name": "タチウオ (太刀魚)",
     "kana": "たちうお",
-    "scientificName": "Trichiurus lepturus",
+    "scientificName": "Trichiurus japonicus",
     "category": "tasty_table",
     "description": "銀色に輝く刀のような魚体と鋭い歯。夏〜秋の夕暮れから夜にかけて堤防が一気に賑わう大人気ターゲット。",
     "habitat": "水深のある湾内・港湾・堤防・航路筋",
@@ -1250,7 +1250,7 @@
   },
   {
     "id": "aoriika",
-    "name": "アオリイカ / モイカ / ミズイカ (水墨烏賊)",
+    "name": "アオリイカ / モイカ / ミズイカ (障泥烏賊)",
     "kana": "あおりいか / もいか / みずいか",
     "scientificName": "Sepioteuthis lessoniana",
     "category": "squid_octopus",
@@ -1346,53 +1346,6 @@
       "冷凍イワシ"
     ],
     "fishingTips": "底をトントンと小刻みにシェイクしてアピール。ムニュッとした重みが乗ったら一呼吸置いてから一気に鬼アワセ！底に張り付かれないようゴリ巻きします。",
-    "isDangerous": false
-  },
-  {
-    "id": "mameika",
-    "name": "マメイカ / ヤリイカ (ジンドウイカ)",
-    "kana": "まめいか / やりいか",
-    "scientificName": "Loliolus beka",
-    "category": "squid_octopus",
-    "description": "北海道や東北で春と秋に大ブームとなる小型ツツイカ。1.5〜1.8号のライトエギングで手軽に数釣りが楽しめ、柔らかく甘い身は絶品。",
-    "habitat": "港湾・岸壁・常夜灯周り・防波堤",
-    "waterLayer": "middle",
-    "waterLayerText": "表層〜中層（常夜灯の明かりに集まる）",
-    "averageSize": "10cm〜15cm",
-    "recordSize": "20cm",
-    "activeMonths": [
-      5,
-      6,
-      9,
-      10,
-      11,
-      12
-    ],
-    "peakMonths": [
-      5,
-      6,
-      10,
-      11
-    ],
-    "difficulty": 1,
-    "edibleRating": 5,
-    "cookingMethods": [
-      "丸ごと煮付け",
-      "刺身",
-      "沖漬け",
-      "バター醤油炒め"
-    ],
-    "recommendedRigs": [
-      "ライトエギング (1.5〜1.8号エギ)",
-      "スッテ仕掛け",
-      "チカイカ仕掛け"
-    ],
-    "bestTime": "日没後の夜間（常夜灯下・集魚灯周辺）",
-    "favoriteBaits": [
-      "小型エギ (1.5号・夜光/ケイムラ)",
-      "おっぱいスッテ"
-    ],
-    "fishingTips": "常夜灯の明暗部へキャストし、チョンチョンと軽くトゥイッチしてテンションフォール。わずかに重みが乗る繊細なアタリを掛けます。",
     "isDangerous": false
   },
   {
@@ -2174,7 +2127,7 @@
     "kana": "しょうさいふぐ",
     "scientificName": "Takifugu snyderi",
     "category": "tasty_table",
-    "description": "東京湾や常磐、伊勢湾などで「湾フグ」として絶大な人気を誇る中型フグ。背中は褐色に白い斑点、体側下に黄色い縦帯があり、胸ビレ後方の黒斑には白い縁取りがないことでトラフグと区別される。繊細なアタリを掛け合わせるカットウ釣りはゲーム性が極めて高く、白身の刺身（てっさ）や唐揚げ、てっちり鍋はトラフグにも劣らぬ上品な旨みがある。筋肉は無毒（一部海域を除く）だが、肝臓や卵巣に強毒テトロドトキシンを含むため素人調理は絶対厳禁。",
+    "description": "東京湾や常磐、伊勢湾などで「湾フグ」として絶大な人気を誇る中型フグ。背中は褐色に白い斑点、体側下に黄色い縦帯があり、胸ビレ後方の黒斑には白い縁取りがないことでトラフグと区別される。繊細なアタリを掛け合わせるカットウ釣りはゲーム性が極めて高く、白身の刺身（てっさ）や唐揚げ、てっちり鍋はトラフグにも劣らぬ上品な旨みがある。肝臓や卵巣に強毒テトロドトキシンを含み、皮や筋肉にも海域や個体によって弱毒が検出される場合があるため素人調理は絶対厳禁。",
     "habitat": "水深10〜50m前後の沿岸砂泥底・貝殻混じりの砂地・岩礁隣接のフラット",
     "waterLayer": "bottom",
     "waterLayerText": "底層（海底すれすれの底上10〜50cm）",
@@ -2437,7 +2390,7 @@
     "kana": "こまい",
     "scientificName": "Eleginus gracilis",
     "category": "bottom_rock",
-    "description": "氷の下に網を張って獲ることから名付けられた北海道・道東を代表するタラ科の美味魚。30cm以上の大型は「オオマイ」と呼ばれます。真冬の夜釣りブッコミで鈴なりにヒットする人気のターゲット。",
+    "description": "氷の下に網を張って獲ることから名付けられた北海道・道東を代表するタラ科の美味魚。35cm以上の大型は「オオマイ」と呼ばれます。真冬の夜釣りブッコミで鈴なりにヒットする人気のターゲット。",
     "habitat": "北海道東部・オホーツク海・太平洋沿岸の砂泥底・港湾岸壁・汽水湖",
     "waterLayer": "bottom",
     "waterLayerText": "底層（海底の砂泥底に群生）",
@@ -2540,7 +2493,7 @@
     "id": "mejina",
     "name": "メジナ (グレ / クロ / 尾長グレ)",
     "kana": "めじな / ぐれ",
-    "scientificName": "Girella punctata",
+    "scientificName": "Girella punctata / Girella leonina",
     "category": "popular_coastal",
     "description": "磯釣り・堤防ウキフカセ釣りの最高峰にして絶大な人気を誇る好敵手。鋭敏な視力と強烈な突っ込みパワーを持ち、繊細なウキフカセ仕掛けで知恵比べを挑む奥深い釣りの対象魚。冬の「寒グレ」は脂が乗り極上。",
     "habitat": "全国沿岸の潮通しの良い堤防・沖堤防・地磯・沖磯・テトラ帯",
@@ -2698,7 +2651,7 @@
     "id": "hiramasa",
     "name": "ヒラマサ (平政 / 青物の王様)",
     "kana": "ひらまさ",
-    "scientificName": "Seriola lalandi",
+    "scientificName": "Seriola aureovittata",
     "category": "blue_pelagic",
     "description": "ブリ・カンパチと並ぶブリ属御三家の中でも最高峰のスピードとトルクを誇る「磯のダンプカー」。水面を割るダイナミックなトップウォータープラグへのバイトやショアジギングでの圧倒的なパワーファイトは全アングラーの憧れ。",
     "habitat": "潮通し抜群の外海に面した沖磯・地磯・沖堤防・岬の先端",
@@ -2887,8 +2840,8 @@
   },
   {
     "id": "shiriyakeika",
-    "name": "シリヤケイカ / コウイカ (尻焼烏賊 / 墨烏賊)",
-    "kana": "しりやけいか / こういか",
+    "name": "シリヤケイカ (尻焼烏賊)",
+    "kana": "しりやけいか",
     "scientificName": "Sepiella japonica",
     "category": "squid_octopus",
     "description": "胴の先端部から茶褐色の液体を分泌することから「尻焼け」と呼ばれるコウイカの仲間。春（5〜6月）の東京湾や瀬戸内海・内湾の堤防に産卵のため大量接岸し、スッテやエギを海底で引くだけで手軽に釣れる人気ターゲット。",
@@ -3088,16 +3041,16 @@
   },
   {
     "id": "akahata",
-    "name": "アカハタ / オオモンハタ (赤羽太 / 大紋羽太)",
-    "kana": "あかはた / おおもんはた",
+    "name": "アカハタ (赤羽太)",
+    "kana": "あかはた",
     "scientificName": "Epinephelus fasciatus",
     "category": "bottom_rock",
-    "description": "南日本の暖流が当たる岩礁帯や堤防を彩るハタ科の代表格。真紅の美しい魚体のアカハタはボトムに張り付き、オオモンハタは中層のベイトを追うスイミング系の捕食を行う。どちらも引きが強烈で、上品な甘みと弾力ある白身は絶品。",
+    "description": "南日本の暖流が当たる岩礁帯や堤防を彩るハタ科の代表格。真紅の美しい魚体でボトムに張り付き、根周りの甲殻類や小魚を待ち伏せする。引きが強烈で、上品な甘みと弾力ある白身は絶品。",
     "habitat": "磯場・ゴロタ浜・潮通しの良い堤防先端・沖磯",
     "waterLayer": "bottom",
-    "waterLayerText": "底層（アカハタはベタ底、オオモンハタは底〜中層スイミング）",
-    "averageSize": "25cm〜35cm (オオモンハタは50cm超)",
-    "recordSize": "58cm",
+    "waterLayerText": "底層（根周りのベタ底）",
+    "averageSize": "25cm〜35cm (40cm超は大型)",
+    "recordSize": "45cm",
     "activeMonths": [
       5,
       6,
@@ -3125,18 +3078,18 @@
     ],
     "recommendedRigs": [
       "テキサスリグ (14〜28g)",
-      "ジグヘッドスイミング (ブレード付き)",
+      "フリーリグ",
       "スロージギング",
       "活きエビ胴突き"
     ],
     "bestTime": "朝夕マズメ・日中の潮がガンガン流れるタイミング",
     "favoriteBaits": [
-      "シャッドテールワーム (3.5〜4.5inch)",
       "クロー系ワーム",
+      "シャッドテールワーム (3〜4inch)",
       "メタルジグ 20〜40g",
       "活きエビ/キビナゴ"
     ],
-    "fishingTips": "アカハタ狙いはテキサスリグでボトムを叩き、根から離さないように誘います。オオモンハタ狙いはジグヘッド＋シャッドテールワームでボトム着底後に中層までリールを10〜15回ただ巻きし、フォールを繰り返すスイミングメソッドが圧倒的に効果的。",
+    "fishingTips": "テキサスリグでボトムを叩き、根から離さないようにリフト＆フォールやズル引きで誘います。ヒット後は根に潜られないよう、素早く巻き上げて根から引き離すのが鉄則。",
     "isDangerous": false
   },
   {
@@ -3175,7 +3128,7 @@
     "recommendedRigs": [
       "トップウォータープラグ (ポッパー/ペンシル)",
       "ヘビーシンキングミノー",
-      "ライトショアジギング (30〜60g)"
+      "ショアジギング (30〜60g)"
     ],
     "bestTime": "日中（太陽が高く昇った晴天時）・朝夕マズメ",
     "favoriteBaits": [
@@ -3544,7 +3497,7 @@
     "id": "ishigarei",
     "name": "イシガレイ / ナメタガレイ (石鰈 / 滑多鰈 / ババガレイ)",
     "kana": "いしがれい / なめたがれい",
-    "scientificName": "Kareius bicoloratus",
+    "scientificName": "Kareius bicoloratus / Microstomus achne",
     "category": "bottom_rock",
     "description": "背中に石のような骨質板を持つ「イシガレイ」と、厚いヌメリを持ち東北・北海道で正月の祝い魚として珍重される最高級ガレイ「ナメタガレイ（ババガレイ）」。マコガレイと並び、冬〜早春の投げ釣り・船釣りで絶大な人気を誇る。",
     "habitat": "砂泥底・岩礁混じりの砂地・深場・港湾堤防",
@@ -3706,8 +3659,8 @@
     "kana": "くえ / あら / もろこ",
     "scientificName": "Epinephelus bruneus",
     "category": "bottom_rock",
-    "description": "体長1m・体重30kg以上に成長するハタ科の最高峰にして「幻の巨大魚」。九州では「アラ」、伊豆・紀伊半島では「モロコ」と呼ばれる。夜の地磯・沖磯から超ヘビータックルで狙う一世一代の好敵手。コラーゲンと極上の脂に満ちた「クエ鍋」は日本最高の冬の味覚。",
-    "habitat": "外洋に面した断崖絶壁の地磯・深海の海溝・沈み根の洞窟・テトラ帯",
+    "description": "体長1m・体重30kg以上に成長するハタ科の最高峰にして「幻の巨大魚」。九州では「アラ」、関東・伊豆では「モロコ」と呼ばれる。夜の地磯・沖磯から超ヘビータックルで狙う一世一代の好敵手。コラーゲンと極上の脂に満ちた「クエ鍋」は日本最高の冬の味覚。",
+    "habitat": "外洋に面した断崖絶壁の地磯・急深な岩礁帯・沈み根の洞窟・テトラ帯",
     "waterLayer": "bottom",
     "waterLayerText": "完全な底層（海底の洞窟や大岩の隙間に潜伏し夜間に捕食活動）",
     "averageSize": "60cm〜90cm (メーター超え・20〜40kg級のモンスターも)",
@@ -3757,7 +3710,7 @@
     "name": "オオニベ (大長魚 / サーフの巨魚)",
     "kana": "おおにべ",
     "scientificName": "Nibea japonica",
-    "category": "blue_pelagic",
+    "category": "popular_coastal",
     "description": "宮崎県日向灘や静岡県遠州灘・高知県土佐湾の広大サーフを回遊する日本最大のニベ科魚類。体長1.5m・体重30kg超に達し、ショアから狙える最大級のターゲットとして全国のアングラーが冬の冷たい砂浜に集結する。強烈なトルクのファイトと白身の美味が魅力。",
     "habitat": "外洋に面した広大なサーフ・砂浜・河口域・沖合の水深10〜50m",
     "waterLayer": "all",
@@ -3802,8 +3755,8 @@
   },
   {
     "id": "sakuramasu",
-    "name": "サクラマス / 海アメマス (桜鱒 / 降海型トラウト)",
-    "kana": "さくらます / うみあめます",
+    "name": "サクラマス (桜鱒 / 降海型ヤマメ)",
+    "kana": "さくらます",
     "scientificName": "Oncorhynchus masou",
     "category": "blue_pelagic",
     "description": "ヤマメが海へ下り、オホーツク海や日本海・太平洋の大海原で銀ピカに育ったサーモン系最高峰の美魚。春に桜が咲く頃に沿岸サーフや地磯へ接岸。サーモンを超える上品で甘い脂の乗りは「魚類最高の美味」と称される北の憧憬ターゲット。",
@@ -3853,7 +3806,7 @@
     "id": "ishimochi",
     "name": "イシモチ / ニベ / シログチ (石持 / 白愚痴)",
     "kana": "いしもち / にべ / しろぐち",
-    "scientificName": "Pennahia argentata",
+    "scientificName": "Pennahia argentata / Nibea mitsukurii",
     "category": "popular_coastal",
     "description": "頭骨の中に大きな耳石（石）を持つことから「イシモチ」と呼ばれる。釣り上げると浮き袋を伸縮させて「グーグー」と鳴くのが特徴。九十九里浜や外洋サーフ・堤防の濁り潮や夜釣りで大人気。新鮮な個体の塩焼きや昆布締めは上品な白身で絶品。",
     "habitat": "外洋サーフ・砂泥底の海岸・河口域・港湾堤防（水深2〜20m）",
@@ -3953,11 +3906,11 @@
   },
   {
     "id": "korodai",
-    "name": "コロダイ / シブダイ (胡椒鯛 / 白星笛吹 / 夜の怪力魚)",
-    "kana": "ころだい / しぶだい",
+    "name": "コロダイ (胡廬鯛 / 夜の怪力魚)",
+    "kana": "ころだい",
     "scientificName": "Diagramma pictum",
     "category": "tasty_table",
-    "description": "南紀・四国・九州の黒潮洗うサーフや地磯で、夏の夜釣りを熱狂させる怪力白身魚。コロダイは黒い斑点と分厚い唇を持ち、シブダイ（フエダイ/シロテン）は「幻の超高級魚」として白身に霜降り状の極上の脂を蓄える。竿ごと海に引きずり込む激震のアタリが魅力。",
+    "description": "南紀・四国・九州の黒潮洗うサーフや地磯で、夏の夜釣りを熱狂させるイサキ科の怪力魚。灰色の体に散らばる無数の小斑点と分厚い唇が特徴。竿ごと海に引きずり込む激震のアタリと、クセのない上品な白身が魅力。",
     "habitat": "温暖な砂利浜サーフ・岩礁混じりのゴロタ場・地磯の深場（水深3〜20m）",
     "waterLayer": "bottom",
     "waterLayerText": "底層（日中は深場に潜み、夜間に波打ち際の浅瀬までエサを求めて突入）",
@@ -3980,7 +3933,7 @@
     "difficulty": 3,
     "edibleRating": 5,
     "cookingMethods": [
-      "シブダイの刺身（極上脂の霜降り白身）",
+      "刺身・皮霜造り",
       "コロダイのカルパッチョ",
       "ポワレ・ムニエル",
       "塩焼き・兜焼き",
@@ -3998,7 +3951,7 @@
       "青イソメ房掛け",
       "活きエビ"
     ],
-    "fishingTips": "夜間の浅瀬（サーフの波打ち際から数十メートル、地磯の足元）にエサを放り込み、竿受けに尻手ロープを必ず掛けて待ちます。アタリは前触れなく竿が満月に曲がり込むため、即座に竿を立てて根から引き離します。シブダイの刺身は一度食べると忘れられない至高の美味。",
+    "fishingTips": "夜間の浅瀬（サーフの波打ち際から数十メートル、地磯の足元）にエサを放り込み、竿受けに尻手ロープを必ず掛けて待ちます。アタリは前触れなく竿が満月に曲がり込むため、即座に竿を立てて根から引き離します。",
     "isDangerous": false
   },
   {
@@ -4212,7 +4165,7 @@
     "kana": "しろだい",
     "scientificName": "Gymnocranius grandoculis",
     "category": "bottom_rock",
-    "description": "小笠原・南西諸島・黒潮洗う南紀四国を代表する超怪力フエダイ。夜釣りの打ち込み仕掛けで竿をへし折るような猛烈な引きを見せるナイトゲームの王者。",
+    "description": "小笠原・南西諸島・黒潮洗う南紀四国を代表する超怪力フエフキダイ。夜釣りの打ち込み仕掛けで竿をへし折るような猛烈な引きを見せるナイトゲームの王者。",
     "habitat": "小笠原諸島・南西諸島・太平洋暖海域の深場岩礁帯・サンゴ礁・沖堤防",
     "waterLayer": "bottom",
     "waterLayerText": "底層（水深10〜40mの岩礁・砂礫底）",
@@ -4255,7 +4208,7 @@
   },
   {
     "id": "nanyoukaiwari",
-    "name": "ナンヨウカイワリ / カッポレ (南洋甘木)",
+    "name": "ナンヨウカイワリ (南洋貝割)",
     "kana": "なんようかいわり",
     "scientificName": "Carangoides orthogrammus",
     "category": "blue_pelagic",
@@ -4306,7 +4259,7 @@
   {
     "id": "muroaji",
     "name": "ムロアジ / クサヤモロ (室鯵)",
-    "kana": "むろあじ / くさやまろ",
+    "kana": "むろあじ / くさやもろ",
     "scientificName": "Decapterus muroadsi / Decapterus macarellus",
     "category": "popular_coastal",
     "description": "伊豆諸島名産「くさや」の原料として名高い赤身の大型アジ。泳がせ釣りの最強の活きエサ（大物特効エサ）としても欠かせず、釣りたての刺身や塩焼きも美味。",
@@ -4360,7 +4313,7 @@
     "kana": "とかじゃー / にざだい",
     "scientificName": "Prionurus scalprum / Acanthurus dussumieri",
     "category": "bottom_rock",
-    "description": "尾柄部に鋭い骨質板（サンノジ）を持つ超怪力磯魚。沖縄では「トカジャー」と呼ばれフカセ釣りの大人気強烈ターゲット。冬場に適切な血抜きと内臓処理を行えば美味しい。",
+    "description": "尾柄部に3枚の鋭い骨質板を持ち「サンノジ」とも呼ばれる超怪力磯魚。沖縄では「トカジャー」と呼ばれフカセ釣りの大人気強烈ターゲット。冬場に適切な血抜きと内臓処理を行えば美味しい。",
     "habitat": "本州中部以南・四国・九州・沖縄・小笠原の磯・サンゴ礁・テトラ帯",
     "waterLayer": "middle",
     "waterLayerText": "中層〜底層（海藻や岩肌をついばむ）",
@@ -4406,9 +4359,9 @@
   },
   {
     "id": "shibudai",
-    "name": "シブダイ / ハマダイ / フエダイ (白点)",
+    "name": "シブダイ / フエダイ (白点)",
     "kana": "しぶだい / ふえだい",
-    "scientificName": "Lutjanus stellatus / Lutjanus rivulatus",
+    "scientificName": "Lutjanus stellatus",
     "category": "bottom_rock",
     "description": "「夏の夜釣りの王様」と呼ばれる超高級魚（キロ1万円超の市場値）。体側の白点が目印。強烈な引きと、全身に霜降り状に入った濃厚な脂・甘みは魚類最高峰。",
     "habitat": "紀伊半島・四国・九州南部・屋久島・奄美・沖縄の外洋荒磯・深場堤防",
@@ -4502,8 +4455,8 @@
   },
   {
     "id": "kihada",
-    "name": "キハダマグロ / メジ (黄肌鮪)",
-    "kana": "きはだまぐろ / めじ",
+    "name": "キハダマグロ / キメジ (黄肌鮪)",
+    "kana": "きはだまぐろ / きめじ",
     "scientificName": "Thunnus albacares",
     "category": "blue_pelagic",
     "description": "黄色いヒレが特徴のパワフルな大型マグロ。ショアから狙える離島（小笠原・八丈島・沖縄・奄美）では20kg〜40kg超が回遊し、全国のビッグゲームアングラーが挑む究極の夢。",
@@ -4553,10 +4506,10 @@
   },
   {
     "id": "kouika",
-    "name": "コウイカ / スミイカ / カミナリイカ (甲烏賊)",
+    "name": "コウイカ / スミイカ (甲烏賊)",
     "kana": "こういか / すみいか",
     "scientificName": "Sepia esculenta",
-    "category": "popular_coastal",
+    "category": "squid_octopus",
     "description": "背中に硬い甲（貝殻）を持つ愛嬌あるイカ。大量の墨を吐くことから「スミイカ」と呼ばれる。肉厚でモッチリとした歯ごたえと甘みが強く、江戸前寿司の最高級ネタ。",
     "habitat": "内湾・砂泥底の港湾・堤防・海釣り公園・サーフ",
     "waterLayer": "bottom",
@@ -4602,17 +4555,20 @@
   },
   {
     "id": "hiika",
-    "name": "ヒイカ / ジンドウイカ (樋烏賊)",
-    "kana": "ひいか / じんどういか",
-    "scientificName": "Loliolus beka",
-    "category": "popular_coastal",
-    "description": "冬の港湾・ベイエリアに大群で押し寄せる手のひらサイズの可愛いツツイカ。小型エギ（1.5〜1.8号）を使ったライトエギングで連発し、丸ごと煮付けやボイルが最高。",
-    "habitat": "内湾・都市港湾・運河・海釣り公園・常夜灯のある波止",
+    "name": "ヒイカ / マメイカ / ジンドウイカ (樋烏賊)",
+    "kana": "ひいか / まめいか / じんどういか",
+    "scientificName": "Loliolus japonica",
+    "category": "squid_octopus",
+    "description": "手のひらサイズの小型ツツイカ。関東・関西の港湾では冬に「ヒイカ」、北海道・東北では春と秋に「マメイカ」の名で親しまれ、常夜灯周りに大群で集まる。小型エギ（1.5〜1.8号）を使ったライトエギングで手軽に数釣りでき、丸ごと煮付けやボイルが最高。",
+    "habitat": "内湾・都市港湾・運河・海釣り公園・常夜灯のある波止・岸壁",
     "waterLayer": "all",
     "waterLayerText": "全層（常夜灯の明かりの表層から底まで）",
-    "averageSize": "8cm〜14cm (胴長)",
-    "recordSize": "18cm",
+    "averageSize": "胴長8cm〜15cm",
+    "recordSize": "20cm",
     "activeMonths": [
+      5,
+      6,
+      9,
       10,
       11,
       12,
@@ -4620,6 +4576,9 @@
       2
     ],
     "peakMonths": [
+      5,
+      6,
+      10,
       11,
       12,
       1
@@ -4629,30 +4588,32 @@
     "cookingMethods": [
       "丸ごと甘辛煮付け",
       "丸ごとボイルポン酢",
+      "沖漬け",
       "イカ飯",
-      "アヒージョ",
-      "天ぷら"
+      "天ぷら",
+      "アヒージョ"
     ],
     "recommendedRigs": [
       "ナオリー / 小型エギ (1.5〜1.8号)",
       "胴突きスッテ仕掛け",
-      "電気ウキモエビ仕掛け"
+      "電気ウキモエビ仕掛け",
+      "チカイカ仕掛け"
     ],
-    "bestTime": "夜間（常夜灯の明暗部周辺）",
+    "bestTime": "夜間（常夜灯の明暗部・集魚灯周辺）",
     "favoriteBaits": [
+      "小型エギ (1.5号・夜光/ケイムラ)",
       "モエビ (活きエビ)",
-      "小型エギ (1.5号)",
-      "スッテ"
+      "スッテ / おっぱいスッテ"
     ],
     "fishingTips": "アジングロッド等のライトタックルで小型エギをキャスト。軽く2回チョンチョンとシャクって水平フォールさせるとツンッとアタリが出ます。",
     "isDangerous": false
   },
   {
     "id": "kubushimi",
-    "name": "クブシミ / トラフコウイカ (大甲烏賊)",
-    "kana": "くぶしみ / とらふこういか",
+    "name": "クブシミ / コブシメ (大甲烏賊)",
+    "kana": "くぶしみ / こぶしめ",
     "scientificName": "Sepia latimanus",
-    "category": "popular_coastal",
+    "category": "squid_octopus",
     "description": "沖縄・南西諸島・小笠原で獲れる国内最大級の巨大コウイカ（5kg〜10kg超）。トラ柄の模様が美しく、エギングでドラグが唸る大物ファイト。刺身は驚くほど甘く肉厚。",
     "habitat": "沖縄・奄美・小笠原諸島のサンゴ礁リーフ・港湾・急深波止",
     "waterLayer": "bottom",
@@ -4700,8 +4661,8 @@
     "name": "ホタルイカ (蛍烏賊)",
     "kana": "ほたるいか",
     "scientificName": "Watasenia scintillans",
-    "category": "popular_coastal",
-    "description": "富山湾の神秘として国の特別天然記念物にも指定される青白く光る小型イカ。春の深夜〜未明に新月の大潮で砂浜へ大群が身投げ（接岸）し、タモ網での掬いやルアー釣りが春の名物。",
+    "category": "squid_octopus",
+    "description": "富山湾の神秘として知られ、その群遊海面が国の特別天然記念物に指定されている青白く光る小型イカ。春の深夜〜未明に新月の大潮で砂浜へ大群が身投げ（接岸）し、タモ網での掬いやルアー釣りが春の名物。",
     "habitat": "富山湾・日本海の沖合深海（春の産卵期に沿岸サーフ・堤防へ接岸）",
     "waterLayer": "surface",
     "waterLayerText": "夜間に海底深層から波打ち際の超表層へ浮上",
@@ -4788,10 +4749,10 @@
   },
   {
     "id": "sake",
-    "name": "サケ / シロザケ / アキアジ / カラフトマス (鮭)",
+    "name": "サケ / シロザケ / アキアジ (鮭)",
     "kana": "さけ / あきあじ",
-    "scientificName": "Oncorhynchus keta / Oncorhynchus gorbuscha",
-    "category": "bottom_rock",
+    "scientificName": "Oncorhynchus keta",
+    "category": "blue_pelagic",
     "description": "北海道・東北の秋の海岸を熱狂させる「アキアジ」。母なる川へ遡上するために沿岸へ押し寄せる銀ピカの巨体。特大のイクラ（筋子）と豪快なウキルアーフィッシングが大人気。",
     "habitat": "北海道・東北（青森・岩手・宮城）のサーフ・港湾・河口規制外エリア",
     "waterLayer": "surface",
@@ -4836,7 +4797,7 @@
     "name": "スルメイカ / マイカ / 真烏賊 (鯣烏賊)",
     "kana": "するめいか / まいか",
     "scientificName": "Todarodes pacificus",
-    "category": "popular_coastal",
+    "category": "squid_octopus",
     "description": "日本で最も漁獲される国民的ツツイカ。初夏〜秋に沿岸へ回遊し、夜釣りのテーラー仕掛けやライトエギング、イカメタルで強烈なジェット噴射ファイト。イカそうめんや塩辛が最高。",
     "habitat": "日本海・太平洋沿岸の潮通しの良い堤防・沖堤防・沖合",
     "waterLayer": "middle",
