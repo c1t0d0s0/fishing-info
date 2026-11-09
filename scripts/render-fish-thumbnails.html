@@ -1,0 +1,68 @@
+<!doctype html>
+<!-- render-fish-thumbnails.mjs から開く。?id=<魚種id> の魚を横向きに 1 枚描き、window.thumbnail に webp の data URL を入れる。 -->
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <style>
+      html, body { margin: 0; background: transparent; }
+    </style>
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "/node_modules/three/build/three.module.js",
+          "three/addons/": "/node_modules/three/examples/jsm/"
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <script type="module">
+      import * as THREE from "three";
+      import { loadFish, createFish } from "/src/lib/fishModels/fish-kit.js";
+
+      const WIDTH = 640;
+      const HEIGHT = 320;
+      const MARGIN = 1.08;
+
+      const id = new URLSearchParams(location.search).get("id");
+
+      try {
+        const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, preserveDrawingBuffer: true });
+        renderer.setPixelRatio(1);
+        renderer.setSize(WIDTH, HEIGHT);
+        renderer.setClearColor(0x000000, 0);
+        document.body.appendChild(renderer.domElement);
+
+        const scene = new THREE.Scene();
+        scene.add(new THREE.HemisphereLight(0xffffff, 0x6b7f99, 2.2));
+        const sun = new THREE.DirectionalLight(0xffffff, 1.6);
+        sun.position.set(0.3, 1, 1);
+        scene.add(sun);
+
+        await loadFish("/public/fish-models/", [id]);
+        const fish = createFish(id);
+        if (!fish) throw new Error(`model not found: ${id}`);
+        fish.object.rotation.y = -Math.PI / 2; // 頭を左に向ける
+        fish.setMotion(new URLSearchParams(location.search).get("motion") || "hover");
+        scene.add(fish.object);
+        for (let i = 0; i < 90; i++) fish.update(1 / 60);
+
+        // 体の大きさに合わせて、正面から少し見下ろす位置に寄せる
+        const box = new THREE.Box3().setFromObject(fish.object);
+        const size = box.getSize(new THREE.Vector3());
+        const center = box.getCenter(new THREE.Vector3());
+        const camera = new THREE.PerspectiveCamera(20, WIDTH / HEIGHT, 0.01, 100);
+        const halfV = THREE.MathUtils.degToRad(camera.fov / 2);
+        const halfH = Math.atan(Math.tan(halfV) * camera.aspect);
+        const dist = MARGIN * Math.max(size.x / 2 / Math.tan(halfH), size.y / 2 / Math.tan(halfV)) + size.z / 2;
+        camera.position.set(center.x, center.y + dist * 0.12, center.z + dist);
+        camera.lookAt(center);
+
+        renderer.render(scene, camera);
+        window.thumbnail = renderer.domElement.toDataURL("image/webp", 0.9);
+      } catch (e) {
+        window.thumbnailError = String(e?.stack || e);
+      }
+    </script>
+  </body>
+</html>

@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { FishSpecies, FishCategory, WaterLayer } from "@/types/species";
+import FishModelFigure from "./FishModelFigure";
 import {
   Fish,
   AlertTriangle,
@@ -250,6 +251,9 @@ export default function SpeciesCard({ species }: SpeciesCardProps) {
           {scientificName}
         </span>
       </div>
+
+      {/* 3D model thumbnail (魚モデル ギャラリー) */}
+      <FishModelFigure id={id} name={name} />
 
       {/* 3. High-Density Key Specs Grid (Minimal Badges) */}
       <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 mb-3.5">

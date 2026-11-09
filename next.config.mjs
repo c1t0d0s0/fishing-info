@@ -11,6 +11,7 @@ const nextConfig = {
     unoptimized: true,
   },
   env: {
+    NEXT_PUBLIC_BASE_PATH: basePath,
     NEXT_PUBLIC_GTM_ID: process.env.GTM_ID || process.env.NEXT_PUBLIC_GTM_ID || "",
     NEXT_PUBLIC_GA_ID: process.env.GA_ID || process.env.NEXT_PUBLIC_GA_ID || process.env.GA_MEASUREMENT_ID || "",
   },
